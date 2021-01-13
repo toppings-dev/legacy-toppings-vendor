@@ -1,6 +1,8 @@
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
+import logo from './assets/images/logo-white.png';
 import Portal from './pages/Portal';
 
 function App() {
@@ -8,11 +10,18 @@ function App() {
     <div className="wrapper">
       <BrowserRouter>
         <Route exact path="/portal" component={Portal} />
-      </BrowserRouter>
+        
+        <header className="primary">
+          <nav>
+            <span className="heading"><Link className="nav-link" to="/"><img src={logo} /></Link></span>
 
-      <header className="primary">
-        Toppings
-      </header>
+            <ul className="nav-buttons links">
+              <li><Link className="nav-link" to="/">About Us</Link></li>
+              <li><Link className="nav-link" to="/portal">Vendor Portal</Link></li>
+            </ul>
+          </nav>
+        </header>
+      </BrowserRouter>
     </div>
   );
 }
