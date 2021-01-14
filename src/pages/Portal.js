@@ -1,11 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
 function Portal() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const emailInput = useRef();
   const passwordInput = useRef();
 
