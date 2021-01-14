@@ -82,7 +82,12 @@ a.nav-link {
 	opacity: 1;
 }
 
-.portal-container {
+.portal-login-container {
+    width: 100%;
+    height: 100%;
+}
+
+.login-container {
     background-color: #007eff;
     color: #ffffff;
     width: 100%;
@@ -91,7 +96,7 @@ a.nav-link {
     align-items: center;
 }
 
-.login-container {
+.login-panel {
     width: 100%;
     height: 20rem;
     margin: auto;
@@ -121,6 +126,7 @@ a.nav-link {
 }
 
 .login-container input.text-input {
+    outline: none;
     width: 35rem;
     height: 3rem;
     border: none;
@@ -132,6 +138,7 @@ a.nav-link {
 .submit-button {
     border: none;
     border-radius: 5px;
+    outline: none;
     background-color: #ffffff;
     color: #007eff;
     font-size: 1rem;

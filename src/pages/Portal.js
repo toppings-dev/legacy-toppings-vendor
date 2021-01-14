@@ -1,32 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
 function Portal() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const emailInput = useRef();
+  const passwordInput = useRef();
+
   const [error, setError] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   function login(e) {
     e.preventDefault();
-    console.log(error, email, password);
+    console.log(error, emailInput.current.value, passwordInput.current.value);
+    let email = emailInput.current.value;
+    let password = passwordInput.current.value;
+    if (password == "password") {
+      setLoggedIn(true);
+    }
   }
 
   return (
-    <div className="portal-container">
-      <div className="login-container">
-        <h1>
-          Toppings Vendor Portal
-        </h1>
+    <div className="portal-login-container">
+      {!loggedIn ? 
+        <div className="login-container">
+          <div className="login-panel">
+            <h1>
+              Toppings Vendor Portal
+            </h1>
 
-        <form onSubmit={login}>
-          {error ? <span className="error-message">Incorrect username or password.</span> : ""}
-          <label for="email">Email Address</label><input className="text-input" type="email" onChange={(e) => setEmail(e.target.value)} />
-          <label for="password">Password</label><input className="text-input" type="password" onChange={(e) => setPassword(e.target.value)} />
-          <input className="submit-button" type="submit" value="Submit" />
-        </form>
-      </div>
+            <form onSubmit={login}>
+              {error ? <span className="error-message">Incorrect username or password.</span> : ""}
+              <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+              <label for="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
+              <input className="submit-button" type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      :
+        <div className="portal-container">
+          
+        </div>
+      }
     </div>
   );
 }
