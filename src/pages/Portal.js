@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 
 Amplify.configure(awsConfig);
@@ -9,17 +9,23 @@ function Portal() {
   const emailInput = useRef();
   const passwordInput = useRef();
 
-  const [error, setError] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   const [portalSelection, setPortalSelection] = useState("dashboard");
 
   function login(e) {
     e.preventDefault();
-    console.log(error, emailInput.current.value, passwordInput.current.value);
     let email = emailInput.current.value;
     let password = passwordInput.current.value;
-    if (password == "password") {
-      setLoggedIn(true);
+    
+    if (email.length > 0 && password.length > 0) {
+      Auth.signIn({ username: email, password: password }).then(() => {
+        setLoggedIn(true);
+      }).catch((error) => {
+        setErrorMsg(error.message);
+      });
+    } else {
+      setErrorMsg("Login info is incomplete.");
     }
   }
 
@@ -33,7 +39,7 @@ function Portal() {
             </h1>
 
             <form onSubmit={login}>
-              {error ? <span className="error-message">Incorrect username or password.</span> : ""}
+              {errorMsg != "" ? <span className="error-message">{errorMsg}</span> : ""}
               <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
               <label for="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
               <input className="submit-button" type="submit" value="Submit" />

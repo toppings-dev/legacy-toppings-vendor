@@ -1,0 +1,253 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-toppingscustomer-jeffrey-192139-authRole",
+      "UnauthRoleArn": "arn:aws:iam::292597472126:role/amplify-toppingscustomer-jeffrey-192139-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::292597472126:role/amplify-toppingscustomer-jeffrey-192139-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-toppingscustomer-jeffrey-192139-deployment",
+      "UnauthRoleName": "amplify-toppingscustomer-jeffrey-192139-unauthRole",
+      "StackName": "amplify-toppingscustomer-jeffrey-192139",
+      "StackId": "arn:aws:cloudformation:us-east-1:292597472126:stack/amplify-toppingscustomer-jeffrey-192139/83a020c0-41a9-11eb-8de6-0ef364fded49",
+      "AmplifyAppId": "d2pkfsiilmm03"
+    }
+  },
+  "auth": {
+    "toppingscustomer5e5736455e573645": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "toppingscustomer5e5736455e573645PostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "customAuth": false,
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::292597472126:role/sns5e573645192139-jeffrey",
+        "AppClientSecret": "73kq44n7cmus5g10cu1r1or7uetob4lcanak1sgbuhsdmhh0uf0",
+        "UserPoolId": "us-east-1_XaSGQu6oQ",
+        "AppClientIDWeb": "6gp6dibufp0mkvediqrj1tt9ml",
+        "AppClientID": "11h284nkptbvk2kgevug9qnp5t",
+        "IdentityPoolId": "us-east-1:9630e30f-11f1-4274-b92a-b562e6343adf",
+        "IdentityPoolName": "toppingscustomer5e573645_identitypool_5e573645__jeffrey",
+        "UserPoolName": "toppingscustomer5e573645_userpool_5e573645"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.948Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/auth/toppingscustomer5e5736455e573645-cloudformation-template.yml",
+        "logicalId": "authtoppingscustomer5e5736455e573645"
+      }
+    }
+  },
+  "api": {
+    "toppingscustomer": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": ""
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "tl5ugdzlbrajvpatytg3mhwgve",
+        "GraphQLAPIEndpointOutput": "https://7qwexum2mvekpacwwpmpk3zsa4.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-dxdvawlkqzgozegh4gelbl3aqq"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apitoppingscustomer"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:56.023Z",
+      "lastPushDirHash": "wZeGnUchVueHUxs/GtpqDVqdfrY="
+    },
+    "api4813a9bc": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "restaurauntlambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/api/api4813a9bc-cloudformation-template.json",
+        "logicalId": "apiapi4813a9bc"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.952Z",
+      "output": {
+        "ApiName": "api4813a9bc",
+        "RootUrl": "https://auhg3fslca.execute-api.us-east-1.amazonaws.com/jeffrey",
+        "ApiId": "auhg3fslca"
+      },
+      "lastPushDirHash": "zCizknFpW1LdgpPyxUbMMvOzG4k="
+    },
+    "ordersapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "orderslambda",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/api/ordersapi-cloudformation-template.json",
+        "logicalId": "apiordersapi"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.954Z",
+      "output": {
+        "ApiName": "ordersapi",
+        "RootUrl": "https://v1qgdemc89.execute-api.us-east-1.amazonaws.com/jeffrey",
+        "ApiId": "v1qgdemc89"
+      },
+      "lastPushDirHash": "QqYyMNo/+TSOkO4LqsdUH8JxcA8="
+    }
+  },
+  "function": {
+    "toppingscustomer5e5736455e573645PostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:292597472126:function:toppingscustomer5e5736455e573645PostConfirmation-jeffrey",
+        "Name": "toppingscustomer5e5736455e573645PostConfirmation-jeffrey",
+        "LambdaExecutionRole": "toppingscustomer5e5736455e573645PostConfirmation-jeffrey"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.955Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/function/toppingscustomer5e5736455e573645PostConfirmation-cloudformation-template.json",
+        "logicalId": "functiontoppingscustomer5e5736455e573645PostConfirmation"
+      },
+      "lastBuildTimeStamp": "2020-12-31T20:37:37.500Z",
+      "lastPackageTimeStamp": "2020-12-31T20:37:38.185Z",
+      "distZipFilename": "toppingscustomer5e5736455e573645PostConfirmation-62796c5236426a325053-build.zip",
+      "lastPushDirHash": "PKpv6MdTjSaHN+DtMB1y7Dgfc6o="
+    },
+    "restaurauntlambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "restauraunts",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2020-12-31T23:13:33.979Z",
+      "lastPackageTimeStamp": "2020-12-31T23:13:36.436Z",
+      "distZipFilename": "restaurauntlambda-6e306d424d512b646b6e-build.zip",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/function/restaurauntlambda-cloudformation-template.json",
+        "logicalId": "functionrestaurauntlambda"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.956Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:292597472126:function:restaurauntlambda-jeffrey",
+        "Name": "restaurauntlambda-jeffrey",
+        "LambdaExecutionRole": "toppingscustomerLambdaRoled1513ff9-jeffrey"
+      },
+      "lastPushDirHash": "sn58gwMXatGfe90V7jwPhykq+c4="
+    },
+    "orderslambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "orderstable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2020-12-31T20:37:37.497Z",
+      "lastPackageTimeStamp": "2020-12-31T20:37:40.883Z",
+      "distZipFilename": "orderslambda-6d4e5534637a70363636-build.zip",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/function/orderslambda-cloudformation-template.json",
+        "logicalId": "functionorderslambda"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.958Z",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:292597472126:function:orderslambda-jeffrey",
+        "Name": "orderslambda-jeffrey",
+        "LambdaExecutionRole": "toppingscustomerLambdaRolefa126e5c-jeffrey"
+      },
+      "lastPushDirHash": "0dvD6mvEdtNotPNMRmG6HnvCP8s="
+    }
+  },
+  "storage": {
+    "restauraunts": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/storage/restauraunts-cloudformation-template.json",
+        "logicalId": "storagerestauraunts"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.959Z",
+      "output": {
+        "PartitionKeyName": "email",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:292597472126:table/restauraunts-jeffrey",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:292597472126:table/restauraunts-jeffrey/stream/2020-12-31T01:20:10.753",
+        "PartitionKeyType": "S",
+        "Name": "restauraunts-jeffrey"
+      },
+      "lastPushDirHash": "AwrBKxs/+a75o7uVkmuCWLAz5NE="
+    },
+    "orderstable": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/storage/orderstable-cloudformation-template.json",
+        "logicalId": "storageorderstable"
+      },
+      "lastPushTimeStamp": "2021-01-08T03:20:53.960Z",
+      "output": {
+        "PartitionKeyName": "id",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:dynamodb:us-east-1:292597472126:table/orderstable-jeffrey",
+        "StreamArn": "arn:aws:dynamodb:us-east-1:292597472126:table/orderstable-jeffrey/stream/2020-12-31T20:38:47.562",
+        "PartitionKeyType": "S",
+        "Name": "orderstable-jeffrey"
+      },
+      "lastPushDirHash": "sS26a0mMyvXRHbRGtl0xtGJStrg="
+    }
+  }
+}

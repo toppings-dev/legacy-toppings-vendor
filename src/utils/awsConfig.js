@@ -1,4 +1,5 @@
-let awsConfig = {"aws_project_region": "us-east-1",
+let awsConfig = {
+    "aws_project_region": "us-east-1",
     "aws_cognito_identity_pool_id": "us-east-1:9630e30f-11f1-4274-b92a-b562e6343adf",
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_XaSGQu6oQ",
