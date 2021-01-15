@@ -1,11 +1,17 @@
 import React, { useState, useRef } from 'react';
 
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import awsConfig from '../utils/awsConfig';
+
+Amplify.configure(awsConfig);
+
 function Portal() {
   const emailInput = useRef();
   const passwordInput = useRef();
 
   const [error, setError] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [portalSelection, setPortalSelection] = useState("dashboard");
 
   function login(e) {
     e.preventDefault();
@@ -18,9 +24,9 @@ function Portal() {
   }
 
   return (
-    <div className="portal-login-container">
+    <section className="portal-login-container">
       {!loggedIn ? 
-        <div className="login-container">
+        <article className="login-container">
           <div className="login-panel">
             <h1>
               Toppings Vendor Portal
@@ -33,13 +39,25 @@ function Portal() {
               <input className="submit-button" type="submit" value="Submit" />
             </form>
           </div>
-        </div>
+        </article>
       :
-        <div className="portal-container">
-          
-        </div>
+        <article className="portal-container">
+          <nav>
+            <ul className="nav-buttons">
+              <li><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}>Dashboard</span></li>
+              <li><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}>Your Menu</span></li>
+              <li><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}>Active Promotions</span></li>
+              <li><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}>Settings</span></li>
+              <li><span className={portalSelection == "terms" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms")}>Terms of Service</span></li>
+            </ul>
+          </nav>
+
+          <div className="content">
+            STUFF
+          </div>
+        </article>
       }
-    </div>
+    </section>
   );
 }
 

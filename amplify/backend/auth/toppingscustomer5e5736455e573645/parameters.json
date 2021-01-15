@@ -1,0 +1,77 @@
+{
+    "identityPoolName": "toppingscustomer5e573645_identitypool_5e573645",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "toppin5e573645",
+    "userPoolName": "toppingscustomer5e573645_userpool_5e573645",
+    "autoVerifiedAttributes": [
+        "phone_number"
+    ],
+    "mfaConfiguration": "OPTIONAL",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your Toppings authentication code is {####}",
+    "smsVerificationMessage": "Welcome to Toppings! Your verification code is {####}",
+    "emailVerificationSubject": "Your Toppings verification code",
+    "emailVerificationMessage": "Your Toppings verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+        "email",
+        "name",
+        "phone_number"
+    ],
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+        "email"
+    ],
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "userpoolClientLambdaRole": "toppin5e573645_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "5e573645",
+    "resourceName": "toppingscustomer5e5736455e573645",
+    "authSelections": "identityPoolAndUserPool",
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "unauthRoleArn": {
+        "Fn::GetAtt": [
+            "UnauthRole",
+            "Arn"
+        ]
+    },
+    "useDefault": "manual",
+    "thirdPartyAuth": true,
+    "authProviders": [],
+    "usernameAttributes": [
+        "email, phone_number"
+    ],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "hostedUI": false,
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "toppingscustomer5e5736455e573645PostConfirmation",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,256 @@
+type University @model 
+@key(fields: ["name"])
+{
+  name: String!
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  students: [User] @connection
+}
+
+type User @model 
+@key(fields:["email"])
+{
+  email: AWSEmail!
+  university_name: String!
+  university: University @connection(fields: ["university_name"])
+  phone_number: AWSPhone!
+  name: String!
+  rewards: [Reward] @connection(keyName: "byUser", fields: ["email"])
+  friends: [Friendship] @connection(keyName: "byUser", fields:["email"])
+  incomingFriendRequest: [FriendRequest] @connection(keyName: "byReceiver", fields:["email"])
+  outgoingFriendRequest: [FriendRequest] @connection(keyName: "bySender", fields:["email"])
+  groups: [GroupMembership] @connection(keyName: "byUser", fields:["email"])
+  incomingGroupRequest: [GroupRequest] @connection(keyName: "byReceiver", fields:["email"])
+  outgoingGroupRequest: [GroupRequest] @connection(keyName: "bySender", fields:["email"])
+}
+
+type Group @model
+{
+  id: ID!
+  name: String!
+  members: [GroupMembership] @connection
+  outgoingRequests: [GroupRequest] @connection(keyName: "byGroup", fields:["id"])
+}
+
+type GroupMembership @model
+@key(name: "byUser", fields:["userEmail"])
+{
+  userEmail: AWSEmail!
+  user: User! @connection(fields:["userEmail"])
+  groupId: ID!
+  group: Group! @connection(fields:["groupId"])
+}
+
+type Friendship @model 
+@key(name: "byUser", fields:["userEmail"])
+@key(name: "byFriend", fields:["friendEmail"])
+{
+  id: ID!
+  userEmail: AWSEmail!
+  friendEmail: AWSEmail!
+  user: User! @connection(fields:["userEmail"])
+  friend: User! @connection(fields:["friendEmail"])
+}
+type FriendRequest @model 
+@key(name: "bySender", fields:["senderEmail"])
+@key(name: "byReceiver", fields:["receiverEmail"])
+{
+  id: ID!
+  senderEmail: AWSEmail!
+  receiverEmail: AWSEmail!
+  sender: User! @connection(fields:["senderEmail"])
+  receiver: User! @connection(fields:["receiverEmail"])
+  accepted: Boolean!
+}
+
+type GroupRequest @model 
+@key(name: "bySender", fields:["senderEmail"])
+@key(name: "byReceiver", fields:["receiverEmail"])
+@key(name: "byGroup", fields:["groupId"])
+{
+  id: ID!
+  senderEmail: AWSEmail!
+  receiverEmail: AWSEmail!
+  groupId: ID!
+  group: Group! @connection(fields: ["groupId"])
+  sender: User! @connection(fields:["senderEmail"])
+  receiver: User! @connection(fields:["receiverEmail"])
+  accepted: Boolean!
+}
+
+type Restauraunt @model
+{
+  id: ID!
+  name: String!
+  menuCategories: [MenuCategory] @connection(keyName:"categoriesByMenu",fields:["id"])
+  menuItems: [MenuItem] @connection(fields:["id"])
+  foodOptions: [FoodOption] @connection(fields:["id"])
+  joinedItemsOptions: [ItemOptionCatJoin] @connection(keyName: "byMenu", fields:["id"])
+  options: [Option] @connection(fields:["id"])
+  joinedItemOptionsOptions: [ItemOptionOptionJoin] @connection(keyName: "byMenu", fields:["id"])
+  description: String
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  lat: Float
+  long: Float
+  phone_number: AWSPhone
+  email: AWSEmail
+}
+
+type MenuCategory @model 
+@key(name: "byCategoryName", fields: ["menuId", "name"])
+@key(name: "categoriesByMenu", fields: ["menuId"], queryField: "categoriesByMenu")
+{
+  id: ID!
+  name: String!
+  menuId: ID!
+  restauraunt: Restauraunt @connection(fields:["menuId"])
+  menuItems: [MenuItem] @connection(keyName: "byCategory", fields: ["menuId", "name"])
+}
+
+type MenuItem @model 
+@key(name:"byMenu", fields:["menuId"])
+@key(name: "byItemName", fields: ["menuId", "name"])
+@key(name: "byCategory", fields: ["menuId", "menuCategoryName"], queryField: "itemsByCategories")
+{
+  id: ID!
+  name: String!
+  description: String
+  menuId: ID!
+  restauraunt: Restauraunt @connection(fields:["menuId"])
+  menuCategoryName: String!
+  menuCategory: [MenuCategory] @connection(keyName: "byCategoryName",fields: ["menuId", "menuCategoryName"])
+  price: Float!
+  options: [ItemOptionCatJoin] @connection(keyName: "byMenuItem", fields:["menuId", "name"])
+}
+type FoodOption @model 
+@key(fields: ["menuId", "name"])
+{
+  name: String!
+  menuId: ID!
+  restauraunt: Restauraunt @connection(fields:["menuId"])
+  menuItem: [ItemOptionCatJoin] @connection(keyName: "byFoodOptionName", fields:["menuId", "name"])
+  options: [ItemOptionOptionJoin] @connection(keyName: "byFoodOptionName", fields:["menuId", "name"])
+}
+
+type ItemOptionCatJoin @model
+@key(name:"byMenu", fields:["menuId"])
+@key(name:"byMenuItem", fields:["menuId", "menuItemName"])
+@key(name:"byFoodOptionName", fields:["menuId", "foodOptionName"])
+{
+  id: ID!
+  menuId: ID!
+  restauraunt: Restauraunt @connection(fields:["menuId"])
+  foodOptionName: String!
+  menuItemName: String!
+  menuItem: [MenuItem]! @connection(keyName: "byItemName", fields: ["menuId", "menuItemName"])
+  optionCat: FoodOption! @connection(fields: ["menuId", "foodOptionName"])
+  numchoices: Int
+}
+
+type Option @model 
+@key(fields: ["menuId", "name"])
+{
+  menuId: ID!
+  restauraunt: Restauraunt @connection(fields:["menuId"])
+  name: String!
+  price: Float
+  foodoption: [ItemOptionOptionJoin] @connection
+}
+
+type ItemOptionOptionJoin @model
+@key(name:"byMenu", fields:["menuId"])
+@key(name:"byFoodOptionName", fields:["menuId", "foodOptionName"])
+@key(name:"byOptionName", fields:["menuId", "optionName"])
+{
+  id: ID!
+  menuId: ID!
+  restauraunt: Restauraunt @connection(fields:["menuId"])
+  optionName: String!
+  foodOptionName: String!
+  foodOption: FoodOption! @connection(fields: ["menuId", "foodOptionName"])
+  option: Option! @connection(fields:["menuId", "optionName"])
+}
+
+type Pickup @model
+{
+  id: ID!
+  deliverer: User! @connection
+  orders: [Order] @connection(keyName: "byPickupId", fields: ["id"])
+  lat: Float
+  long: Float
+  expdate: AWSTime
+  friends: [User]!
+  groups: [Group]
+  transportation_type: TRANSPORTATION_TYPE!
+}
+
+enum TRANSPORTATION_TYPE {
+  DRIVING,
+  WALKING,
+  BIKING
+}
+
+type Order @model
+@key(name: "byPickupId", fields:["pickupId"])
+{
+    id: ID!
+    restauraunt: Restauraunt! @connection
+    food_ready_time: AWSTimestamp
+    estimated_delivery_time: AWSTimestamp
+    actual_delivery_time: AWSTimestamp
+    delivery_address: String!
+    delivery_lat: Float
+    delivery_long: Float
+    customer: User! @connection
+    comment: String
+    orderItems: [OrderItem] @connection(keyName: "byOrder", fields: ["id"])
+    order_price_before_discount: Float
+    order_price_after_discount: Float
+    discount: Float
+    tax: Float
+    fees: Float
+    tip: Float
+    grandTotal: Float
+    pickupId: ID!
+    pickup: Pickup! @connection(fields:["pickupId"])
+}
+
+type Reward @model
+@key(name: "byUser", fields:["userEmail"])
+@key(name: "byMenu", fields:["menuId"])
+{
+    id: ID!
+    userEmail: AWSEmail!
+    owner: User! @connection(fields:["userEmail"])
+    menuId: ID!
+    itemName: String!
+    menuItem: [MenuItem]! @connection(keyName:"byItemName", fields:["menuId", "itemName"])
+    date_active_from: AWSDate
+    date_active_to: AWSDate
+    discountPercentage: Float
+    discountAmount: Float
+    offer_price: Float
+}
+
+type OrderItem @model
+@key(name: "byOrder", fields: ["orderId"])
+@key(name: "byMenu", fields:["menuId"])
+{
+    id: ID!
+    orderId: ID!
+    menuId: ID!
+    itemName: String!
+    order: Order @connection(fields: ["orderId"])
+    menuItem: [MenuItem]! @connection(keyName:"byItemName", fields:["menuId", "itemName"])
+    price_per_item: Float!
+    price_before_reward: Float!
+    price_after_reward: Float
+    quantity: Int!
+    reward: Reward @connection
+    comment: String
+}

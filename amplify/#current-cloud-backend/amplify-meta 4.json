@@ -1,0 +1,99 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-toppingscustomer-jeffrey-192139-authRole",
+      "UnauthRoleArn": "arn:aws:iam::292597472126:role/amplify-toppingscustomer-jeffrey-192139-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::292597472126:role/amplify-toppingscustomer-jeffrey-192139-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-toppingscustomer-jeffrey-192139-deployment",
+      "UnauthRoleName": "amplify-toppingscustomer-jeffrey-192139-unauthRole",
+      "StackName": "amplify-toppingscustomer-jeffrey-192139",
+      "StackId": "arn:aws:cloudformation:us-east-1:292597472126:stack/amplify-toppingscustomer-jeffrey-192139/83a020c0-41a9-11eb-8de6-0ef364fded49",
+      "AmplifyAppId": "d2pkfsiilmm03"
+    }
+  },
+  "auth": {
+    "toppingscustomer5e5736455e573645": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "toppingscustomer5e5736455e573645PostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "customAuth": false,
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::292597472126:role/sns5e573645192139-jeffrey",
+        "AppClientSecret": "73kq44n7cmus5g10cu1r1or7uetob4lcanak1sgbuhsdmhh0uf0",
+        "UserPoolId": "us-east-1_XaSGQu6oQ",
+        "AppClientIDWeb": "6gp6dibufp0mkvediqrj1tt9ml",
+        "AppClientID": "11h284nkptbvk2kgevug9qnp5t",
+        "IdentityPoolId": "us-east-1:9630e30f-11f1-4274-b92a-b562e6343adf",
+        "IdentityPoolName": "toppingscustomer5e573645_identitypool_5e573645__jeffrey",
+        "UserPoolName": "toppingscustomer5e573645_userpool_5e573645"
+      },
+      "lastPushTimeStamp": "2021-01-11T05:18:02.790Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/auth/toppingscustomer5e5736455e573645-cloudformation-template.yml",
+        "logicalId": "authtoppingscustomer5e5736455e573645"
+      },
+      "lastPushDirHash": "IWRIIRoev7jiUvudsvbl4mk033I="
+    }
+  },
+  "api": {
+    "toppingscustomer": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": ""
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "tl5ugdzlbrajvpatytg3mhwgve",
+        "GraphQLAPIEndpointOutput": "https://7qwexum2mvekpacwwpmpk3zsa4.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-dxdvawlkqzgozegh4gelbl3aqq"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apitoppingscustomer"
+      },
+      "lastPushTimeStamp": "2021-01-11T05:18:05.876Z",
+      "lastPushDirHash": "TO7ylrwemJqop5GGTftRCFocUqQ="
+    }
+  },
+  "function": {
+    "toppingscustomer5e5736455e573645PostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:292597472126:function:toppingscustomer5e5736455e573645PostConfirmation-jeffrey",
+        "Name": "toppingscustomer5e5736455e573645PostConfirmation-jeffrey",
+        "LambdaExecutionRole": "toppingscustomer5e5736455e573645PostConfirmation-jeffrey"
+      },
+      "lastPushTimeStamp": "2021-01-11T05:18:02.795Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-toppingscustomer-jeffrey-192139-deployment/amplify-cfn-templates/function/toppingscustomer5e5736455e573645PostConfirmation-cloudformation-template.json",
+        "logicalId": "functiontoppingscustomer5e5736455e573645PostConfirmation"
+      },
+      "lastBuildTimeStamp": "2021-01-09T00:36:17.986Z",
+      "lastPackageTimeStamp": "2021-01-09T00:36:18.754Z",
+      "distZipFilename": "toppingscustomer5e5736455e573645PostConfirmation-62796c5236426a325053-build.zip",
+      "lastPushDirHash": "Fi3VkjH0IPyL9XNvNNTRvkOJA44="
+    }
+  },
+  "storage": {}
+}

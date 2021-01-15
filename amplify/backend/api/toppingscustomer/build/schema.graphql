@@ -1,0 +1,1386 @@
+type University {
+  name: String!
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  students(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type User {
+  email: AWSEmail!
+  university_name: String!
+  university: University
+  phone_number: AWSPhone!
+  name: String!
+  rewards(filter: ModelRewardFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelRewardConnection
+  friends(filter: ModelFriendshipFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelFriendshipConnection
+  incomingFriendRequest(filter: ModelFriendRequestFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelFriendRequestConnection
+  outgoingFriendRequest(filter: ModelFriendRequestFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelFriendRequestConnection
+  groups(filter: ModelGroupMembershipFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelGroupMembershipConnection
+  incomingGroupRequest(filter: ModelGroupRequestFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelGroupRequestConnection
+  outgoingGroupRequest(filter: ModelGroupRequestFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelGroupRequestConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Group {
+  id: ID!
+  name: String!
+  members(filter: ModelGroupMembershipFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelGroupMembershipConnection
+  outgoingRequests(filter: ModelGroupRequestFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelGroupRequestConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type GroupMembership {
+  id: ID!
+  userEmail: AWSEmail!
+  user: User!
+  groupId: ID!
+  group: Group!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Friendship {
+  id: ID!
+  userEmail: AWSEmail!
+  friendEmail: AWSEmail!
+  user: User!
+  friend: User!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type FriendRequest {
+  id: ID!
+  senderEmail: AWSEmail!
+  receiverEmail: AWSEmail!
+  sender: User!
+  receiver: User!
+  accepted: Boolean!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type GroupRequest {
+  id: ID!
+  senderEmail: AWSEmail!
+  receiverEmail: AWSEmail!
+  groupId: ID!
+  group: Group!
+  sender: User!
+  receiver: User!
+  accepted: Boolean!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Restauraunt {
+  id: ID!
+  name: String!
+  menuCategories(filter: ModelMenuCategoryFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuCategoryConnection
+  menuItems(filter: ModelMenuItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuItemConnection
+  foodOptions(name: ModelStringKeyConditionInput, filter: ModelFoodOptionFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelFoodOptionConnection
+  joinedItemsOptions(filter: ModelItemOptionCatJoinFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemOptionCatJoinConnection
+  options(name: ModelStringKeyConditionInput, filter: ModelOptionFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelOptionConnection
+  joinedItemOptionsOptions(filter: ModelItemOptionOptionJoinFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemOptionOptionJoinConnection
+  description: String
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  lat: Float
+  long: Float
+  phone_number: AWSPhone
+  email: AWSEmail
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type MenuCategory {
+  id: ID!
+  name: String!
+  menuId: ID!
+  restauraunt: Restauraunt
+  menuItems(filter: ModelMenuItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuItemConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type MenuItem {
+  id: ID!
+  name: String!
+  description: String
+  menuId: ID!
+  restauraunt: Restauraunt
+  menuCategoryName: String!
+  menuCategory(filter: ModelMenuCategoryFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuCategoryConnection
+  price: Float!
+  options(filter: ModelItemOptionCatJoinFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemOptionCatJoinConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type FoodOption {
+  name: String!
+  menuId: ID!
+  restauraunt: Restauraunt
+  menuItem(filter: ModelItemOptionCatJoinFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemOptionCatJoinConnection
+  options(filter: ModelItemOptionOptionJoinFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemOptionOptionJoinConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ItemOptionCatJoin {
+  id: ID!
+  menuId: ID!
+  restauraunt: Restauraunt
+  foodOptionName: String!
+  menuItemName: String!
+  menuItem(filter: ModelMenuItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuItemConnection
+  optionCat: FoodOption!
+  numchoices: Int
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Option {
+  menuId: ID!
+  restauraunt: Restauraunt
+  name: String!
+  price: Float
+  foodoption(filter: ModelItemOptionOptionJoinFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemOptionOptionJoinConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ItemOptionOptionJoin {
+  id: ID!
+  menuId: ID!
+  restauraunt: Restauraunt
+  optionName: String!
+  foodOptionName: String!
+  foodOption: FoodOption!
+  option: Option!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Pickup {
+  id: ID!
+  deliverer: User!
+  orders(filter: ModelOrderFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelOrderConnection
+  lat: Float
+  long: Float
+  expdate: AWSTime
+  friends: [User]!
+  groups: [Group]
+  transportation_type: TRANSPORTATION_TYPE!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+enum TRANSPORTATION_TYPE {
+  DRIVING
+  WALKING
+  BIKING
+}
+
+type Order {
+  id: ID!
+  restauraunt: Restauraunt!
+  food_ready_time: AWSTimestamp
+  estimated_delivery_time: AWSTimestamp
+  actual_delivery_time: AWSTimestamp
+  delivery_address: String!
+  delivery_lat: Float
+  delivery_long: Float
+  customer: User!
+  comment: String
+  orderItems(filter: ModelOrderItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelOrderItemConnection
+  order_price_before_discount: Float
+  order_price_after_discount: Float
+  discount: Float
+  tax: Float
+  fees: Float
+  tip: Float
+  grandTotal: Float
+  pickupId: ID!
+  pickup: Pickup!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Reward {
+  id: ID!
+  userEmail: AWSEmail!
+  owner: User!
+  menuId: ID!
+  itemName: String!
+  menuItem(filter: ModelMenuItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuItemConnection
+  date_active_from: AWSDate
+  date_active_to: AWSDate
+  discountPercentage: Float
+  discountAmount: Float
+  offer_price: Float
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type OrderItem {
+  id: ID!
+  orderId: ID!
+  menuId: ID!
+  itemName: String!
+  order: Order
+  menuItem(filter: ModelMenuItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelMenuItemConnection
+  price_per_item: Float!
+  price_before_reward: Float!
+  price_after_reward: Float
+  quantity: Int!
+  reward: Reward
+  comment: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUniversityConnection {
+  items: [University]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelUniversityFilterInput {
+  name: ModelStringInput
+  address: ModelStringInput
+  zip_code: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  and: [ModelUniversityFilterInput]
+  or: [ModelUniversityFilterInput]
+  not: ModelUniversityFilterInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Query {
+  getUniversity(name: String!): University
+  listUniversitys(name: String, filter: ModelUniversityFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelUniversityConnection
+  getUser(email: AWSEmail!): User
+  listUsers(email: AWSEmail, filter: ModelUserFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelUserConnection
+  getGroup(id: ID!): Group
+  listGroups(filter: ModelGroupFilterInput, limit: Int, nextToken: String): ModelGroupConnection
+  getGroupMembership(id: ID!): GroupMembership
+  listGroupMemberships(filter: ModelGroupMembershipFilterInput, limit: Int, nextToken: String): ModelGroupMembershipConnection
+  getFriendship(id: ID!): Friendship
+  listFriendships(filter: ModelFriendshipFilterInput, limit: Int, nextToken: String): ModelFriendshipConnection
+  getFriendRequest(id: ID!): FriendRequest
+  listFriendRequests(filter: ModelFriendRequestFilterInput, limit: Int, nextToken: String): ModelFriendRequestConnection
+  getGroupRequest(id: ID!): GroupRequest
+  listGroupRequests(filter: ModelGroupRequestFilterInput, limit: Int, nextToken: String): ModelGroupRequestConnection
+  getRestauraunt(id: ID!): Restauraunt
+  listRestauraunts(filter: ModelRestaurauntFilterInput, limit: Int, nextToken: String): ModelRestaurauntConnection
+  getMenuCategory(id: ID!): MenuCategory
+  listMenuCategorys(filter: ModelMenuCategoryFilterInput, limit: Int, nextToken: String): ModelMenuCategoryConnection
+  getMenuItem(id: ID!): MenuItem
+  listMenuItems(filter: ModelMenuItemFilterInput, limit: Int, nextToken: String): ModelMenuItemConnection
+  getFoodOption(menuId: ID!, name: String!): FoodOption
+  listFoodOptions(menuId: ID, name: ModelStringKeyConditionInput, filter: ModelFoodOptionFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelFoodOptionConnection
+  getItemOptionCatJoin(id: ID!): ItemOptionCatJoin
+  listItemOptionCatJoins(filter: ModelItemOptionCatJoinFilterInput, limit: Int, nextToken: String): ModelItemOptionCatJoinConnection
+  getOption(menuId: ID!, name: String!): Option
+  listOptions(menuId: ID, name: ModelStringKeyConditionInput, filter: ModelOptionFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelOptionConnection
+  getItemOptionOptionJoin(id: ID!): ItemOptionOptionJoin
+  listItemOptionOptionJoins(filter: ModelItemOptionOptionJoinFilterInput, limit: Int, nextToken: String): ModelItemOptionOptionJoinConnection
+  getPickup(id: ID!): Pickup
+  listPickups(filter: ModelPickupFilterInput, limit: Int, nextToken: String): ModelPickupConnection
+  getOrder(id: ID!): Order
+  listOrders(filter: ModelOrderFilterInput, limit: Int, nextToken: String): ModelOrderConnection
+  getReward(id: ID!): Reward
+  listRewards(filter: ModelRewardFilterInput, limit: Int, nextToken: String): ModelRewardConnection
+  getOrderItem(id: ID!): OrderItem
+  listOrderItems(filter: ModelOrderItemFilterInput, limit: Int, nextToken: String): ModelOrderItemConnection
+  categoriesByMenu(menuId: ID, sortDirection: ModelSortDirection, filter: ModelMenuCategoryFilterInput, limit: Int, nextToken: String): ModelMenuCategoryConnection
+  itemsByCategories(menuId: ID, menuCategoryName: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelMenuItemFilterInput, limit: Int, nextToken: String): ModelMenuItemConnection
+}
+
+input CreateUniversityInput {
+  name: String!
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+}
+
+input UpdateUniversityInput {
+  name: String!
+  address: String
+  zip_code: String
+  city: String
+  state: String
+}
+
+input DeleteUniversityInput {
+  name: String!
+}
+
+type Mutation {
+  createUniversity(input: CreateUniversityInput!, condition: ModelUniversityConditionInput): University
+  updateUniversity(input: UpdateUniversityInput!, condition: ModelUniversityConditionInput): University
+  deleteUniversity(input: DeleteUniversityInput!, condition: ModelUniversityConditionInput): University
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createGroup(input: CreateGroupInput!, condition: ModelGroupConditionInput): Group
+  updateGroup(input: UpdateGroupInput!, condition: ModelGroupConditionInput): Group
+  deleteGroup(input: DeleteGroupInput!, condition: ModelGroupConditionInput): Group
+  createGroupMembership(input: CreateGroupMembershipInput!, condition: ModelGroupMembershipConditionInput): GroupMembership
+  updateGroupMembership(input: UpdateGroupMembershipInput!, condition: ModelGroupMembershipConditionInput): GroupMembership
+  deleteGroupMembership(input: DeleteGroupMembershipInput!, condition: ModelGroupMembershipConditionInput): GroupMembership
+  createFriendship(input: CreateFriendshipInput!, condition: ModelFriendshipConditionInput): Friendship
+  updateFriendship(input: UpdateFriendshipInput!, condition: ModelFriendshipConditionInput): Friendship
+  deleteFriendship(input: DeleteFriendshipInput!, condition: ModelFriendshipConditionInput): Friendship
+  createFriendRequest(input: CreateFriendRequestInput!, condition: ModelFriendRequestConditionInput): FriendRequest
+  updateFriendRequest(input: UpdateFriendRequestInput!, condition: ModelFriendRequestConditionInput): FriendRequest
+  deleteFriendRequest(input: DeleteFriendRequestInput!, condition: ModelFriendRequestConditionInput): FriendRequest
+  createGroupRequest(input: CreateGroupRequestInput!, condition: ModelGroupRequestConditionInput): GroupRequest
+  updateGroupRequest(input: UpdateGroupRequestInput!, condition: ModelGroupRequestConditionInput): GroupRequest
+  deleteGroupRequest(input: DeleteGroupRequestInput!, condition: ModelGroupRequestConditionInput): GroupRequest
+  createRestauraunt(input: CreateRestaurauntInput!, condition: ModelRestaurauntConditionInput): Restauraunt
+  updateRestauraunt(input: UpdateRestaurauntInput!, condition: ModelRestaurauntConditionInput): Restauraunt
+  deleteRestauraunt(input: DeleteRestaurauntInput!, condition: ModelRestaurauntConditionInput): Restauraunt
+  createMenuCategory(input: CreateMenuCategoryInput!, condition: ModelMenuCategoryConditionInput): MenuCategory
+  updateMenuCategory(input: UpdateMenuCategoryInput!, condition: ModelMenuCategoryConditionInput): MenuCategory
+  deleteMenuCategory(input: DeleteMenuCategoryInput!, condition: ModelMenuCategoryConditionInput): MenuCategory
+  createMenuItem(input: CreateMenuItemInput!, condition: ModelMenuItemConditionInput): MenuItem
+  updateMenuItem(input: UpdateMenuItemInput!, condition: ModelMenuItemConditionInput): MenuItem
+  deleteMenuItem(input: DeleteMenuItemInput!, condition: ModelMenuItemConditionInput): MenuItem
+  createFoodOption(input: CreateFoodOptionInput!, condition: ModelFoodOptionConditionInput): FoodOption
+  updateFoodOption(input: UpdateFoodOptionInput!, condition: ModelFoodOptionConditionInput): FoodOption
+  deleteFoodOption(input: DeleteFoodOptionInput!, condition: ModelFoodOptionConditionInput): FoodOption
+  createItemOptionCatJoin(input: CreateItemOptionCatJoinInput!, condition: ModelItemOptionCatJoinConditionInput): ItemOptionCatJoin
+  updateItemOptionCatJoin(input: UpdateItemOptionCatJoinInput!, condition: ModelItemOptionCatJoinConditionInput): ItemOptionCatJoin
+  deleteItemOptionCatJoin(input: DeleteItemOptionCatJoinInput!, condition: ModelItemOptionCatJoinConditionInput): ItemOptionCatJoin
+  createOption(input: CreateOptionInput!, condition: ModelOptionConditionInput): Option
+  updateOption(input: UpdateOptionInput!, condition: ModelOptionConditionInput): Option
+  deleteOption(input: DeleteOptionInput!, condition: ModelOptionConditionInput): Option
+  createItemOptionOptionJoin(input: CreateItemOptionOptionJoinInput!, condition: ModelItemOptionOptionJoinConditionInput): ItemOptionOptionJoin
+  updateItemOptionOptionJoin(input: UpdateItemOptionOptionJoinInput!, condition: ModelItemOptionOptionJoinConditionInput): ItemOptionOptionJoin
+  deleteItemOptionOptionJoin(input: DeleteItemOptionOptionJoinInput!, condition: ModelItemOptionOptionJoinConditionInput): ItemOptionOptionJoin
+  createPickup(input: CreatePickupInput!, condition: ModelPickupConditionInput): Pickup
+  updatePickup(input: UpdatePickupInput!, condition: ModelPickupConditionInput): Pickup
+  deletePickup(input: DeletePickupInput!, condition: ModelPickupConditionInput): Pickup
+  createOrder(input: CreateOrderInput!, condition: ModelOrderConditionInput): Order
+  updateOrder(input: UpdateOrderInput!, condition: ModelOrderConditionInput): Order
+  deleteOrder(input: DeleteOrderInput!, condition: ModelOrderConditionInput): Order
+  createReward(input: CreateRewardInput!, condition: ModelRewardConditionInput): Reward
+  updateReward(input: UpdateRewardInput!, condition: ModelRewardConditionInput): Reward
+  deleteReward(input: DeleteRewardInput!, condition: ModelRewardConditionInput): Reward
+  createOrderItem(input: CreateOrderItemInput!, condition: ModelOrderItemConditionInput): OrderItem
+  updateOrderItem(input: UpdateOrderItemInput!, condition: ModelOrderItemConditionInput): OrderItem
+  deleteOrderItem(input: DeleteOrderItemInput!, condition: ModelOrderItemConditionInput): OrderItem
+}
+
+input ModelUniversityConditionInput {
+  address: ModelStringInput
+  zip_code: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  and: [ModelUniversityConditionInput]
+  or: [ModelUniversityConditionInput]
+  not: ModelUniversityConditionInput
+}
+
+type Subscription {
+  onCreateUniversity: University @aws_subscribe(mutations: ["createUniversity"])
+  onUpdateUniversity: University @aws_subscribe(mutations: ["updateUniversity"])
+  onDeleteUniversity: University @aws_subscribe(mutations: ["deleteUniversity"])
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateGroup: Group @aws_subscribe(mutations: ["createGroup"])
+  onUpdateGroup: Group @aws_subscribe(mutations: ["updateGroup"])
+  onDeleteGroup: Group @aws_subscribe(mutations: ["deleteGroup"])
+  onCreateGroupMembership: GroupMembership @aws_subscribe(mutations: ["createGroupMembership"])
+  onUpdateGroupMembership: GroupMembership @aws_subscribe(mutations: ["updateGroupMembership"])
+  onDeleteGroupMembership: GroupMembership @aws_subscribe(mutations: ["deleteGroupMembership"])
+  onCreateFriendship: Friendship @aws_subscribe(mutations: ["createFriendship"])
+  onUpdateFriendship: Friendship @aws_subscribe(mutations: ["updateFriendship"])
+  onDeleteFriendship: Friendship @aws_subscribe(mutations: ["deleteFriendship"])
+  onCreateFriendRequest: FriendRequest @aws_subscribe(mutations: ["createFriendRequest"])
+  onUpdateFriendRequest: FriendRequest @aws_subscribe(mutations: ["updateFriendRequest"])
+  onDeleteFriendRequest: FriendRequest @aws_subscribe(mutations: ["deleteFriendRequest"])
+  onCreateGroupRequest: GroupRequest @aws_subscribe(mutations: ["createGroupRequest"])
+  onUpdateGroupRequest: GroupRequest @aws_subscribe(mutations: ["updateGroupRequest"])
+  onDeleteGroupRequest: GroupRequest @aws_subscribe(mutations: ["deleteGroupRequest"])
+  onCreateRestauraunt: Restauraunt @aws_subscribe(mutations: ["createRestauraunt"])
+  onUpdateRestauraunt: Restauraunt @aws_subscribe(mutations: ["updateRestauraunt"])
+  onDeleteRestauraunt: Restauraunt @aws_subscribe(mutations: ["deleteRestauraunt"])
+  onCreateMenuCategory: MenuCategory @aws_subscribe(mutations: ["createMenuCategory"])
+  onUpdateMenuCategory: MenuCategory @aws_subscribe(mutations: ["updateMenuCategory"])
+  onDeleteMenuCategory: MenuCategory @aws_subscribe(mutations: ["deleteMenuCategory"])
+  onCreateMenuItem: MenuItem @aws_subscribe(mutations: ["createMenuItem"])
+  onUpdateMenuItem: MenuItem @aws_subscribe(mutations: ["updateMenuItem"])
+  onDeleteMenuItem: MenuItem @aws_subscribe(mutations: ["deleteMenuItem"])
+  onCreateFoodOption: FoodOption @aws_subscribe(mutations: ["createFoodOption"])
+  onUpdateFoodOption: FoodOption @aws_subscribe(mutations: ["updateFoodOption"])
+  onDeleteFoodOption: FoodOption @aws_subscribe(mutations: ["deleteFoodOption"])
+  onCreateItemOptionCatJoin: ItemOptionCatJoin @aws_subscribe(mutations: ["createItemOptionCatJoin"])
+  onUpdateItemOptionCatJoin: ItemOptionCatJoin @aws_subscribe(mutations: ["updateItemOptionCatJoin"])
+  onDeleteItemOptionCatJoin: ItemOptionCatJoin @aws_subscribe(mutations: ["deleteItemOptionCatJoin"])
+  onCreateOption: Option @aws_subscribe(mutations: ["createOption"])
+  onUpdateOption: Option @aws_subscribe(mutations: ["updateOption"])
+  onDeleteOption: Option @aws_subscribe(mutations: ["deleteOption"])
+  onCreateItemOptionOptionJoin: ItemOptionOptionJoin @aws_subscribe(mutations: ["createItemOptionOptionJoin"])
+  onUpdateItemOptionOptionJoin: ItemOptionOptionJoin @aws_subscribe(mutations: ["updateItemOptionOptionJoin"])
+  onDeleteItemOptionOptionJoin: ItemOptionOptionJoin @aws_subscribe(mutations: ["deleteItemOptionOptionJoin"])
+  onCreatePickup: Pickup @aws_subscribe(mutations: ["createPickup"])
+  onUpdatePickup: Pickup @aws_subscribe(mutations: ["updatePickup"])
+  onDeletePickup: Pickup @aws_subscribe(mutations: ["deletePickup"])
+  onCreateOrder: Order @aws_subscribe(mutations: ["createOrder"])
+  onUpdateOrder: Order @aws_subscribe(mutations: ["updateOrder"])
+  onDeleteOrder: Order @aws_subscribe(mutations: ["deleteOrder"])
+  onCreateReward: Reward @aws_subscribe(mutations: ["createReward"])
+  onUpdateReward: Reward @aws_subscribe(mutations: ["updateReward"])
+  onDeleteReward: Reward @aws_subscribe(mutations: ["deleteReward"])
+  onCreateOrderItem: OrderItem @aws_subscribe(mutations: ["createOrderItem"])
+  onUpdateOrderItem: OrderItem @aws_subscribe(mutations: ["updateOrderItem"])
+  onDeleteOrderItem: OrderItem @aws_subscribe(mutations: ["deleteOrderItem"])
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  email: ModelStringInput
+  university_name: ModelStringInput
+  phone_number: ModelStringInput
+  name: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+input CreateUserInput {
+  email: AWSEmail!
+  university_name: String!
+  phone_number: AWSPhone!
+  name: String!
+  universityStudentsId: ID
+}
+
+input UpdateUserInput {
+  email: AWSEmail!
+  university_name: String
+  phone_number: AWSPhone
+  name: String
+  universityStudentsId: ID
+}
+
+input DeleteUserInput {
+  email: AWSEmail!
+}
+
+input ModelUserConditionInput {
+  university_name: ModelStringInput
+  phone_number: ModelStringInput
+  name: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+type ModelGroupConnection {
+  items: [Group]
+  nextToken: String
+}
+
+input ModelGroupFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  and: [ModelGroupFilterInput]
+  or: [ModelGroupFilterInput]
+  not: ModelGroupFilterInput
+}
+
+input CreateGroupInput {
+  id: ID
+  name: String!
+}
+
+input UpdateGroupInput {
+  id: ID!
+  name: String
+}
+
+input DeleteGroupInput {
+  id: ID
+}
+
+input ModelGroupConditionInput {
+  name: ModelStringInput
+  and: [ModelGroupConditionInput]
+  or: [ModelGroupConditionInput]
+  not: ModelGroupConditionInput
+}
+
+type ModelGroupMembershipConnection {
+  items: [GroupMembership]
+  nextToken: String
+}
+
+input ModelGroupMembershipFilterInput {
+  userEmail: ModelStringInput
+  groupId: ModelIDInput
+  and: [ModelGroupMembershipFilterInput]
+  or: [ModelGroupMembershipFilterInput]
+  not: ModelGroupMembershipFilterInput
+}
+
+input CreateGroupMembershipInput {
+  id: ID
+  userEmail: AWSEmail!
+  groupId: ID!
+  groupMembersId: ID
+}
+
+input UpdateGroupMembershipInput {
+  userEmail: AWSEmail
+  groupId: ID
+  groupMembersId: ID
+}
+
+input DeleteGroupMembershipInput {
+  id: ID
+}
+
+input ModelGroupMembershipConditionInput {
+  userEmail: ModelStringInput
+  groupId: ModelIDInput
+  and: [ModelGroupMembershipConditionInput]
+  or: [ModelGroupMembershipConditionInput]
+  not: ModelGroupMembershipConditionInput
+}
+
+type ModelFriendshipConnection {
+  items: [Friendship]
+  nextToken: String
+}
+
+input ModelFriendshipFilterInput {
+  id: ModelIDInput
+  userEmail: ModelStringInput
+  friendEmail: ModelStringInput
+  and: [ModelFriendshipFilterInput]
+  or: [ModelFriendshipFilterInput]
+  not: ModelFriendshipFilterInput
+}
+
+input CreateFriendshipInput {
+  id: ID
+  userEmail: AWSEmail!
+  friendEmail: AWSEmail!
+}
+
+input UpdateFriendshipInput {
+  id: ID!
+  userEmail: AWSEmail
+  friendEmail: AWSEmail
+}
+
+input DeleteFriendshipInput {
+  id: ID
+}
+
+input ModelFriendshipConditionInput {
+  userEmail: ModelStringInput
+  friendEmail: ModelStringInput
+  and: [ModelFriendshipConditionInput]
+  or: [ModelFriendshipConditionInput]
+  not: ModelFriendshipConditionInput
+}
+
+type ModelFriendRequestConnection {
+  items: [FriendRequest]
+  nextToken: String
+}
+
+input ModelFriendRequestFilterInput {
+  id: ModelIDInput
+  senderEmail: ModelStringInput
+  receiverEmail: ModelStringInput
+  accepted: ModelBooleanInput
+  and: [ModelFriendRequestFilterInput]
+  or: [ModelFriendRequestFilterInput]
+  not: ModelFriendRequestFilterInput
+}
+
+input CreateFriendRequestInput {
+  id: ID
+  senderEmail: AWSEmail!
+  receiverEmail: AWSEmail!
+  accepted: Boolean!
+}
+
+input UpdateFriendRequestInput {
+  id: ID!
+  senderEmail: AWSEmail
+  receiverEmail: AWSEmail
+  accepted: Boolean
+}
+
+input DeleteFriendRequestInput {
+  id: ID
+}
+
+input ModelFriendRequestConditionInput {
+  senderEmail: ModelStringInput
+  receiverEmail: ModelStringInput
+  accepted: ModelBooleanInput
+  and: [ModelFriendRequestConditionInput]
+  or: [ModelFriendRequestConditionInput]
+  not: ModelFriendRequestConditionInput
+}
+
+type ModelGroupRequestConnection {
+  items: [GroupRequest]
+  nextToken: String
+}
+
+input ModelGroupRequestFilterInput {
+  id: ModelIDInput
+  senderEmail: ModelStringInput
+  receiverEmail: ModelStringInput
+  groupId: ModelIDInput
+  accepted: ModelBooleanInput
+  and: [ModelGroupRequestFilterInput]
+  or: [ModelGroupRequestFilterInput]
+  not: ModelGroupRequestFilterInput
+}
+
+input CreateGroupRequestInput {
+  id: ID
+  senderEmail: AWSEmail!
+  receiverEmail: AWSEmail!
+  groupId: ID!
+  accepted: Boolean!
+}
+
+input UpdateGroupRequestInput {
+  id: ID!
+  senderEmail: AWSEmail
+  receiverEmail: AWSEmail
+  groupId: ID
+  accepted: Boolean
+}
+
+input DeleteGroupRequestInput {
+  id: ID
+}
+
+input ModelGroupRequestConditionInput {
+  senderEmail: ModelStringInput
+  receiverEmail: ModelStringInput
+  groupId: ModelIDInput
+  accepted: ModelBooleanInput
+  and: [ModelGroupRequestConditionInput]
+  or: [ModelGroupRequestConditionInput]
+  not: ModelGroupRequestConditionInput
+}
+
+type ModelRestaurauntConnection {
+  items: [Restauraunt]
+  nextToken: String
+}
+
+input ModelRestaurauntFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  description: ModelStringInput
+  address: ModelStringInput
+  zip_code: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  lat: ModelFloatInput
+  long: ModelFloatInput
+  phone_number: ModelStringInput
+  email: ModelStringInput
+  and: [ModelRestaurauntFilterInput]
+  or: [ModelRestaurauntFilterInput]
+  not: ModelRestaurauntFilterInput
+}
+
+input CreateRestaurauntInput {
+  id: ID
+  name: String!
+  description: String
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  lat: Float
+  long: Float
+  phone_number: AWSPhone
+  email: AWSEmail
+}
+
+input UpdateRestaurauntInput {
+  id: ID!
+  name: String
+  description: String
+  address: String
+  zip_code: String
+  city: String
+  state: String
+  lat: Float
+  long: Float
+  phone_number: AWSPhone
+  email: AWSEmail
+}
+
+input DeleteRestaurauntInput {
+  id: ID
+}
+
+input ModelRestaurauntConditionInput {
+  name: ModelStringInput
+  description: ModelStringInput
+  address: ModelStringInput
+  zip_code: ModelStringInput
+  city: ModelStringInput
+  state: ModelStringInput
+  lat: ModelFloatInput
+  long: ModelFloatInput
+  phone_number: ModelStringInput
+  email: ModelStringInput
+  and: [ModelRestaurauntConditionInput]
+  or: [ModelRestaurauntConditionInput]
+  not: ModelRestaurauntConditionInput
+}
+
+type ModelMenuCategoryConnection {
+  items: [MenuCategory]
+  nextToken: String
+}
+
+input ModelMenuCategoryFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  menuId: ModelIDInput
+  and: [ModelMenuCategoryFilterInput]
+  or: [ModelMenuCategoryFilterInput]
+  not: ModelMenuCategoryFilterInput
+}
+
+input CreateMenuCategoryInput {
+  id: ID
+  name: String!
+  menuId: ID!
+}
+
+input UpdateMenuCategoryInput {
+  id: ID!
+  name: String
+  menuId: ID
+}
+
+input DeleteMenuCategoryInput {
+  id: ID
+}
+
+input ModelMenuCategoryConditionInput {
+  name: ModelStringInput
+  menuId: ModelIDInput
+  and: [ModelMenuCategoryConditionInput]
+  or: [ModelMenuCategoryConditionInput]
+  not: ModelMenuCategoryConditionInput
+}
+
+type ModelMenuItemConnection {
+  items: [MenuItem]
+  nextToken: String
+}
+
+input ModelMenuItemFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  description: ModelStringInput
+  menuId: ModelIDInput
+  menuCategoryName: ModelStringInput
+  price: ModelFloatInput
+  and: [ModelMenuItemFilterInput]
+  or: [ModelMenuItemFilterInput]
+  not: ModelMenuItemFilterInput
+}
+
+input CreateMenuItemInput {
+  id: ID
+  name: String!
+  description: String
+  menuId: ID!
+  menuCategoryName: String!
+  price: Float!
+}
+
+input UpdateMenuItemInput {
+  id: ID!
+  name: String
+  description: String
+  menuId: ID
+  menuCategoryName: String
+  price: Float
+}
+
+input DeleteMenuItemInput {
+  id: ID
+}
+
+input ModelMenuItemConditionInput {
+  name: ModelStringInput
+  description: ModelStringInput
+  menuId: ModelIDInput
+  menuCategoryName: ModelStringInput
+  price: ModelFloatInput
+  and: [ModelMenuItemConditionInput]
+  or: [ModelMenuItemConditionInput]
+  not: ModelMenuItemConditionInput
+}
+
+type ModelFoodOptionConnection {
+  items: [FoodOption]
+  nextToken: String
+}
+
+input ModelFoodOptionFilterInput {
+  name: ModelStringInput
+  menuId: ModelIDInput
+  and: [ModelFoodOptionFilterInput]
+  or: [ModelFoodOptionFilterInput]
+  not: ModelFoodOptionFilterInput
+}
+
+input CreateFoodOptionInput {
+  name: String!
+  menuId: ID!
+}
+
+input UpdateFoodOptionInput {
+  name: String!
+  menuId: ID!
+}
+
+input DeleteFoodOptionInput {
+  menuId: ID!
+  name: String!
+}
+
+input ModelFoodOptionConditionInput {
+  and: [ModelFoodOptionConditionInput]
+  or: [ModelFoodOptionConditionInput]
+  not: ModelFoodOptionConditionInput
+}
+
+type ModelItemOptionCatJoinConnection {
+  items: [ItemOptionCatJoin]
+  nextToken: String
+}
+
+input ModelItemOptionCatJoinFilterInput {
+  id: ModelIDInput
+  menuId: ModelIDInput
+  foodOptionName: ModelStringInput
+  menuItemName: ModelStringInput
+  numchoices: ModelIntInput
+  and: [ModelItemOptionCatJoinFilterInput]
+  or: [ModelItemOptionCatJoinFilterInput]
+  not: ModelItemOptionCatJoinFilterInput
+}
+
+input CreateItemOptionCatJoinInput {
+  id: ID
+  menuId: ID!
+  foodOptionName: String!
+  menuItemName: String!
+  numchoices: Int
+}
+
+input UpdateItemOptionCatJoinInput {
+  id: ID!
+  menuId: ID
+  foodOptionName: String
+  menuItemName: String
+  numchoices: Int
+}
+
+input DeleteItemOptionCatJoinInput {
+  id: ID
+}
+
+input ModelItemOptionCatJoinConditionInput {
+  menuId: ModelIDInput
+  foodOptionName: ModelStringInput
+  menuItemName: ModelStringInput
+  numchoices: ModelIntInput
+  and: [ModelItemOptionCatJoinConditionInput]
+  or: [ModelItemOptionCatJoinConditionInput]
+  not: ModelItemOptionCatJoinConditionInput
+}
+
+type ModelOptionConnection {
+  items: [Option]
+  nextToken: String
+}
+
+input ModelOptionFilterInput {
+  menuId: ModelIDInput
+  name: ModelStringInput
+  price: ModelFloatInput
+  and: [ModelOptionFilterInput]
+  or: [ModelOptionFilterInput]
+  not: ModelOptionFilterInput
+}
+
+input CreateOptionInput {
+  menuId: ID!
+  name: String!
+  price: Float
+}
+
+input UpdateOptionInput {
+  menuId: ID!
+  name: String!
+  price: Float
+}
+
+input DeleteOptionInput {
+  menuId: ID!
+  name: String!
+}
+
+input ModelOptionConditionInput {
+  price: ModelFloatInput
+  and: [ModelOptionConditionInput]
+  or: [ModelOptionConditionInput]
+  not: ModelOptionConditionInput
+}
+
+type ModelItemOptionOptionJoinConnection {
+  items: [ItemOptionOptionJoin]
+  nextToken: String
+}
+
+input ModelItemOptionOptionJoinFilterInput {
+  id: ModelIDInput
+  menuId: ModelIDInput
+  optionName: ModelStringInput
+  foodOptionName: ModelStringInput
+  and: [ModelItemOptionOptionJoinFilterInput]
+  or: [ModelItemOptionOptionJoinFilterInput]
+  not: ModelItemOptionOptionJoinFilterInput
+}
+
+input CreateItemOptionOptionJoinInput {
+  id: ID
+  menuId: ID!
+  optionName: String!
+  foodOptionName: String!
+  optionFoodoptionId: ID
+}
+
+input UpdateItemOptionOptionJoinInput {
+  id: ID!
+  menuId: ID
+  optionName: String
+  foodOptionName: String
+  optionFoodoptionId: ID
+}
+
+input DeleteItemOptionOptionJoinInput {
+  id: ID
+}
+
+input ModelItemOptionOptionJoinConditionInput {
+  menuId: ModelIDInput
+  optionName: ModelStringInput
+  foodOptionName: ModelStringInput
+  and: [ModelItemOptionOptionJoinConditionInput]
+  or: [ModelItemOptionOptionJoinConditionInput]
+  not: ModelItemOptionOptionJoinConditionInput
+}
+
+type ModelPickupConnection {
+  items: [Pickup]
+  nextToken: String
+}
+
+input ModelTRANSPORTATION_TYPEInput {
+  eq: TRANSPORTATION_TYPE
+  ne: TRANSPORTATION_TYPE
+}
+
+input ModelPickupFilterInput {
+  id: ModelIDInput
+  lat: ModelFloatInput
+  long: ModelFloatInput
+  expdate: ModelStringInput
+  transportation_type: ModelTRANSPORTATION_TYPEInput
+  and: [ModelPickupFilterInput]
+  or: [ModelPickupFilterInput]
+  not: ModelPickupFilterInput
+}
+
+input CreatePickupInput {
+  id: ID
+  lat: Float
+  long: Float
+  expdate: AWSTime
+  transportation_type: TRANSPORTATION_TYPE!
+  pickupDelivererId: ID!
+}
+
+input UpdatePickupInput {
+  id: ID!
+  lat: Float
+  long: Float
+  expdate: AWSTime
+  transportation_type: TRANSPORTATION_TYPE
+  pickupDelivererId: ID
+}
+
+input DeletePickupInput {
+  id: ID
+}
+
+input ModelPickupConditionInput {
+  lat: ModelFloatInput
+  long: ModelFloatInput
+  expdate: ModelStringInput
+  transportation_type: ModelTRANSPORTATION_TYPEInput
+  and: [ModelPickupConditionInput]
+  or: [ModelPickupConditionInput]
+  not: ModelPickupConditionInput
+}
+
+type ModelOrderConnection {
+  items: [Order]
+  nextToken: String
+}
+
+input ModelOrderFilterInput {
+  id: ModelIDInput
+  food_ready_time: ModelIntInput
+  estimated_delivery_time: ModelIntInput
+  actual_delivery_time: ModelIntInput
+  delivery_address: ModelStringInput
+  delivery_lat: ModelFloatInput
+  delivery_long: ModelFloatInput
+  comment: ModelStringInput
+  order_price_before_discount: ModelFloatInput
+  order_price_after_discount: ModelFloatInput
+  discount: ModelFloatInput
+  tax: ModelFloatInput
+  fees: ModelFloatInput
+  tip: ModelFloatInput
+  grandTotal: ModelFloatInput
+  pickupId: ModelIDInput
+  and: [ModelOrderFilterInput]
+  or: [ModelOrderFilterInput]
+  not: ModelOrderFilterInput
+}
+
+input CreateOrderInput {
+  id: ID
+  food_ready_time: AWSTimestamp
+  estimated_delivery_time: AWSTimestamp
+  actual_delivery_time: AWSTimestamp
+  delivery_address: String!
+  delivery_lat: Float
+  delivery_long: Float
+  comment: String
+  order_price_before_discount: Float
+  order_price_after_discount: Float
+  discount: Float
+  tax: Float
+  fees: Float
+  tip: Float
+  grandTotal: Float
+  pickupId: ID!
+  orderRestaurauntId: ID!
+  orderCustomerId: ID!
+}
+
+input UpdateOrderInput {
+  id: ID!
+  food_ready_time: AWSTimestamp
+  estimated_delivery_time: AWSTimestamp
+  actual_delivery_time: AWSTimestamp
+  delivery_address: String
+  delivery_lat: Float
+  delivery_long: Float
+  comment: String
+  order_price_before_discount: Float
+  order_price_after_discount: Float
+  discount: Float
+  tax: Float
+  fees: Float
+  tip: Float
+  grandTotal: Float
+  pickupId: ID
+  orderRestaurauntId: ID
+  orderCustomerId: ID
+}
+
+input DeleteOrderInput {
+  id: ID
+}
+
+input ModelOrderConditionInput {
+  food_ready_time: ModelIntInput
+  estimated_delivery_time: ModelIntInput
+  actual_delivery_time: ModelIntInput
+  delivery_address: ModelStringInput
+  delivery_lat: ModelFloatInput
+  delivery_long: ModelFloatInput
+  comment: ModelStringInput
+  order_price_before_discount: ModelFloatInput
+  order_price_after_discount: ModelFloatInput
+  discount: ModelFloatInput
+  tax: ModelFloatInput
+  fees: ModelFloatInput
+  tip: ModelFloatInput
+  grandTotal: ModelFloatInput
+  pickupId: ModelIDInput
+  and: [ModelOrderConditionInput]
+  or: [ModelOrderConditionInput]
+  not: ModelOrderConditionInput
+}
+
+type ModelRewardConnection {
+  items: [Reward]
+  nextToken: String
+}
+
+input ModelRewardFilterInput {
+  id: ModelIDInput
+  userEmail: ModelStringInput
+  menuId: ModelIDInput
+  itemName: ModelStringInput
+  date_active_from: ModelStringInput
+  date_active_to: ModelStringInput
+  discountPercentage: ModelFloatInput
+  discountAmount: ModelFloatInput
+  offer_price: ModelFloatInput
+  and: [ModelRewardFilterInput]
+  or: [ModelRewardFilterInput]
+  not: ModelRewardFilterInput
+}
+
+input CreateRewardInput {
+  id: ID
+  userEmail: AWSEmail!
+  menuId: ID!
+  itemName: String!
+  date_active_from: AWSDate
+  date_active_to: AWSDate
+  discountPercentage: Float
+  discountAmount: Float
+  offer_price: Float
+}
+
+input UpdateRewardInput {
+  id: ID!
+  userEmail: AWSEmail
+  menuId: ID
+  itemName: String
+  date_active_from: AWSDate
+  date_active_to: AWSDate
+  discountPercentage: Float
+  discountAmount: Float
+  offer_price: Float
+}
+
+input DeleteRewardInput {
+  id: ID
+}
+
+input ModelRewardConditionInput {
+  userEmail: ModelStringInput
+  menuId: ModelIDInput
+  itemName: ModelStringInput
+  date_active_from: ModelStringInput
+  date_active_to: ModelStringInput
+  discountPercentage: ModelFloatInput
+  discountAmount: ModelFloatInput
+  offer_price: ModelFloatInput
+  and: [ModelRewardConditionInput]
+  or: [ModelRewardConditionInput]
+  not: ModelRewardConditionInput
+}
+
+type ModelOrderItemConnection {
+  items: [OrderItem]
+  nextToken: String
+}
+
+input ModelOrderItemFilterInput {
+  id: ModelIDInput
+  orderId: ModelIDInput
+  menuId: ModelIDInput
+  itemName: ModelStringInput
+  price_per_item: ModelFloatInput
+  price_before_reward: ModelFloatInput
+  price_after_reward: ModelFloatInput
+  quantity: ModelIntInput
+  comment: ModelStringInput
+  and: [ModelOrderItemFilterInput]
+  or: [ModelOrderItemFilterInput]
+  not: ModelOrderItemFilterInput
+}
+
+input CreateOrderItemInput {
+  id: ID
+  orderId: ID!
+  menuId: ID!
+  itemName: String!
+  price_per_item: Float!
+  price_before_reward: Float!
+  price_after_reward: Float
+  quantity: Int!
+  comment: String
+  orderItemRewardId: ID
+}
+
+input UpdateOrderItemInput {
+  id: ID!
+  orderId: ID
+  menuId: ID
+  itemName: String
+  price_per_item: Float
+  price_before_reward: Float
+  price_after_reward: Float
+  quantity: Int
+  comment: String
+  orderItemRewardId: ID
+}
+
+input DeleteOrderItemInput {
+  id: ID
+}
+
+input ModelOrderItemConditionInput {
+  orderId: ModelIDInput
+  menuId: ModelIDInput
+  itemName: ModelStringInput
+  price_per_item: ModelFloatInput
+  price_before_reward: ModelFloatInput
+  price_after_reward: ModelFloatInput
+  quantity: ModelIntInput
+  comment: ModelStringInput
+  and: [ModelOrderItemConditionInput]
+  or: [ModelOrderItemConditionInput]
+  not: ModelOrderItemConditionInput
+}
+
+input ModelStringKeyConditionInput {
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  between: [String]
+  beginsWith: String
+}

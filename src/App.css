@@ -149,3 +149,46 @@ a.nav-link {
     margin: 1rem auto;
     cursor: pointer;
 }
+
+.portal-container {
+    text-align: center;
+}
+
+.portal-container nav {
+    background-color: #eeeeee;
+    float: left;
+    padding: 8rem 0rem;
+    text-align: left;
+}
+
+.portal-container ul {
+    padding: 0;
+}
+
+.portal-container ul li {
+    display: block;
+    margin: 0;
+}
+
+.portal-nav-option {
+    border: none;
+    width: 100%;
+    display: block;
+    padding: 0.5rem 2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.125s ease-in-out;
+}
+
+.portal-nav-option:hover {
+    color: #ff5200;
+}
+
+.portal-nav-option.active {
+    /* background-color: #ffffff; */
+    color: #ff5200;
+}
+
+.portal-container div.content {
+    padding: 8rem;
+}
