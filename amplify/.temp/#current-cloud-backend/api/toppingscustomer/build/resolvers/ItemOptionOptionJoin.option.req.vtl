@@ -1,8 +1,0 @@
-{
-  "version": "2018-05-29",
-  "operation": "GetItem",
-  "key": {
-      "menuId": $util.dynamodb.toDynamoDBJson($util.defaultIfNullOrBlank($ctx.source.menuId, "___xamznone____")),
-      "name": $util.dynamodb.toDynamoDBJson($util.defaultIfNullOrBlank($ctx.source.optionName, "___xamznone____"))
-  }
-}

@@ -1,5 +1,0 @@
-{
-    "tableName": "orderstable",
-    "partitionKeyName": "id",
-    "partitionKeyType": "S"
-}

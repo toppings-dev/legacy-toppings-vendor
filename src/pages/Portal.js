@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
@@ -10,6 +11,7 @@ function Portal() {
   const passwordInput = useRef();
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState(window.location.href.indexOf("?account-created") > -1 ? "Account created, please sign in." : "");
   const [loggedIn, setLoggedIn] = useState(false);
   const [portalSelection, setPortalSelection] = useState("dashboard");
 
@@ -35,15 +37,18 @@ function Portal() {
         <article className="login-container">
           <div className="login-panel">
             <h1>
-              Toppings Vendor Portal
+              Vendor Portal
             </h1>
 
             <form onSubmit={login}>
-              {errorMsg != "" ? <span className="error-message">{errorMsg}</span> : ""}
+              {errorMsg == "" && successMsg != "" ? <span className="login-message success">{successMsg}</span> : ""}
+              {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
               <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
               <label for="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
               <input className="submit-button" type="submit" value="Submit" />
             </form>
+
+            <span>Don't have an account? <Link to="/portal-sign-up">Sign Up</Link></span>
           </div>
         </article>
       :
