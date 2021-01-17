@@ -59,9 +59,9 @@ function PortalSignUp() {
         setSignedUp(true);
       }).catch((error) => {
         setErrorMsg(error.message);
-        // if (error.message.indexOf("Current status is CONFIRMED") > -1) {
-        //   setConfirmed(true);
-        // }
+        if (error.message.indexOf("Current status is CONFIRMED") > -1) {
+          setConfirmed(true);
+        }
       });
     } else {
       setErrorMsg("Account info is incomplete.");

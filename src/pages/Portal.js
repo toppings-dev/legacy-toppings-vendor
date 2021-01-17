@@ -6,9 +6,14 @@ import awsConfig from '../utils/awsConfig';
 
 Amplify.configure(awsConfig);
 
-function Portal() {
+function Portal(props) {
   const emailInput = useRef();
   const passwordInput = useRef();
+  const settingsNameInput = useRef();
+  const settingsEmailInput = useRef();
+  const settingsPhoneInput = useRef();
+  const settingsBusinessNameInput = useRef();
+  const settingsAddressInput = useRef();
 
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState(window.location.href.indexOf("?account-created") > -1 ? "Account created, please sign in." : "");
@@ -23,12 +28,22 @@ function Portal() {
     if (email.length > 0 && password.length > 0) {
       Auth.signIn({ username: email, password: password }).then(() => {
         setLoggedIn(true);
+        props.toggleShowHeader(false);
       }).catch((error) => {
         setErrorMsg(error.message);
       });
     } else {
       setErrorMsg("Login info is incomplete.");
     }
+  }
+
+  function logout() {
+    Auth.signOut().then(() => {
+      setLoggedIn(false);
+      props.toggleShowHeader(true);
+    }).catch((error) => {
+      console.log("Error signing out", error);
+    });
   }
 
   return (
@@ -56,15 +71,43 @@ function Portal() {
           <nav>
             <ul className="nav-buttons">
               <li><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}>Dashboard</span></li>
-              <li><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}>Your Menu</span></li>
-              <li><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}>Active Promotions</span></li>
-              <li><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}>Settings</span></li>
               <li><span className={portalSelection == "terms" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms")}>Terms of Service</span></li>
+              <li><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}>Your Menu</span></li>
+              <li><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}>Your Active Promotions</span></li>
+              <li><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}>Account Settings</span></li>
+              <li><span className="portal-nav-option" onClick={logout}>Log Out</span></li>
             </ul>
           </nav>
 
           <div className="content">
-            STUFF
+            {portalSelection == "dashboard" ? 
+              <div className="portal-dashboard-container">Dashboard</div>
+            : portalSelection == "menu" ? 
+              <div className="portal-menu-container">
+                <h3>Your Menu Items</h3>
+
+                <button>Add Item</button>
+              </div>
+            : portalSelection == "promotions" ? 
+              <div className="portal-promotions-container">
+                <h3>Your Active Promotions</h3>
+
+                <button>Add Promotion</button>
+              </div>
+            : portalSelection == "settings" ? 
+              <div className="portal-settings-container">
+                <h3>Account Settings</h3>
+
+                <label for="name">Name</label><input className="text-input" type="text" ref={nameInput} />
+                <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                <label for="phone">Phone Number</label><input className="text-input" type="tel" ref={phoneNumberInput} />
+                <label for="business-name">Business Name</label><input className="text-input" type="text" ref={phoneNumberInput} />
+                <label for="address">Business Address</label><input className="text-input" type="text" ref={passwordInput} />
+                <button>Edit</button>
+              </div>
+            : portalSelection == "terms" ? 
+              <div className="portal-terms-container">Terms</div>
+            : ""}
           </div>
         </article>
       }
