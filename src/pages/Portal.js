@@ -1,8 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
+import { getCurrentUser, setupSession, clearSession } from '../utils/session';
 
 Amplify.configure(awsConfig);
 
@@ -20,15 +23,29 @@ function Portal(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [portalSelection, setPortalSelection] = useState("dashboard");
 
+  useEffect(() => {
+    let user = getCurrentUser();
+    if (user != null) {
+      emailInput.current.value = user.username;
+      passwordInput.current.value = user.password;
+      login(null);
+    }
+  }, []);
+
   function login(e) {
-    e.preventDefault();
+    if (e != null) {
+      e.preventDefault();
+    }
+
     let email = emailInput.current.value;
     let password = passwordInput.current.value;
     
     if (email.length > 0 && password.length > 0) {
       Auth.signIn({ username: email, password: password }).then(() => {
         setLoggedIn(true);
+        setupSession({ username: email, password: password });
         props.toggleShowHeader(false);
+        getData();
       }).catch((error) => {
         setErrorMsg(error.message);
       });
@@ -40,9 +57,18 @@ function Portal(props) {
   function logout() {
     Auth.signOut().then(() => {
       setLoggedIn(false);
+      clearSession("user");
       props.toggleShowHeader(true);
     }).catch((error) => {
       console.log("Error signing out", error);
+    });
+  }
+
+  function getData() {
+    API.graphql({ query: queries.listUsers }).then(({ data: { listUsers } }) => {
+      console.log(listUsers.items);
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
@@ -82,6 +108,8 @@ function Portal(props) {
           <div className="content">
             {portalSelection == "dashboard" ? 
               <div className="portal-dashboard-container">Dashboard</div>
+            : portalSelection == "terms" ? 
+              <div className="portal-terms-container">Terms</div>
             : portalSelection == "menu" ? 
               <div className="portal-menu-container">
                 <h3>Your Menu Items</h3>
@@ -98,15 +126,13 @@ function Portal(props) {
               <div className="portal-settings-container">
                 <h3>Account Settings</h3>
 
-                <label for="name">Name</label><input className="text-input" type="text" ref={nameInput} />
-                <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
-                <label for="phone">Phone Number</label><input className="text-input" type="tel" ref={phoneNumberInput} />
-                <label for="business-name">Business Name</label><input className="text-input" type="text" ref={phoneNumberInput} />
-                <label for="address">Business Address</label><input className="text-input" type="text" ref={passwordInput} />
+                <label for="name">Name</label><input className="text-input" type="text" ref={settingsNameInput} />
+                <label for="email">Email Address</label><input className="text-input" type="email" ref={settingsEmailInput} />
+                <label for="phone">Phone Number</label><input className="text-input" type="tel" ref={settingsPhoneInput} />
+                <label for="business-name">Business Name</label><input className="text-input" type="text" ref={settingsBusinessNameInput} />
+                <label for="address">Business Address</label><input className="text-input" type="text" ref={settingsAddressInput} />
                 <button>Edit</button>
               </div>
-            : portalSelection == "terms" ? 
-              <div className="portal-terms-container">Terms</div>
             : ""}
           </div>
         </article>
