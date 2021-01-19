@@ -65,8 +65,8 @@ function Portal(props) {
   }
 
   function getData() {
-    API.graphql({ query: queries.listUsers }).then(({ data: { listUsers } }) => {
-      console.log(listUsers.items);
+  API.graphql({ query: queries.listMenuCategorys/*, variables: { id: "78b35763-384b-4adb-9139-1a6f57819514" }*/ }).then(({ data: { listMenuCategorys } }) => {
+      console.log(listMenuCategorys);
     }).catch((error) => {
       console.log(error);
     });
