@@ -72,7 +72,7 @@ a.nav-link {
 	margin: 0.5em 1.25em;
 }
 
-.nav-buttons li a.nav-link{
+.nav-buttons li a.nav-link {
 	color: #fff9fa;
     font-size: 1.75rem;
     font-weight: bold;
@@ -170,42 +170,68 @@ a.nav-link {
 }
 
 .portal-container {
+    background-color: #ffffff;
+    background: url("assets/images/toppings-print-white-gradient.png") no-repeat center;
+    background-size: cover;
     text-align: center;
+    height: 100%;
 }
 
 .portal-container nav {
-    background-color: #eeeeee;
+    border-radius: 30px;
+    background-color: #007eff;
+    background: url("assets/images/toppings-print-blue-gradient.PNG") no-repeat center;
+    background-size: cover;
+    color: #ffffff;
+    height: 100%;
     float: left;
-    padding: 8rem 0rem;
+    margin-left: -30px;
+    padding: 30vh 1.75rem 1rem 0rem;
     text-align: left;
 }
 
-.portal-container ul {
+.portal-container .portal-toppings-logo {
+    height: 4.5rem;
+    margin: 1rem 0rem 1rem 50px;
+}
+
+.portal-container ul.nav-buttons {
     padding: 0;
 }
 
-.portal-container ul li {
+.portal-container ul.nav-buttons li {
     display: block;
     margin: 0;
 }
 
 .portal-nav-option {
+    border-radius: 30px;
     border: none;
-    width: 100%;
+    width: 101%;
+    height: 2rem;
     display: block;
-    padding: 0.5rem 2rem;
-    font-size: 1.5rem;
+    margin: 1.25rem 0rem;
+    padding: 0.25rem 1rem 0.25rem 5rem;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: 0.125s ease-in-out;
+    vertical-align: middle;
 }
 
-.portal-nav-option:hover {
-    color: #ff5200;
+.portal-nav-option img {
+    height: 1.25rem;
+    margin-top: -2px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+.portal-container ul.nav-buttons li:nth-of-type(1) img {
+    height: 1.5rem;
 }
 
 .portal-nav-option.active {
-    /* background-color: #ffffff; */
-    color: #ff5200;
+    border: 1px solid #ffffff;
+    margin-left: -1px;
 }
 
 .portal-container div.content {

@@ -2,10 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import { getCurrentUser, setupSession, clearSession } from '../utils/session';
+import logo from '../assets/images/logo-white.png';
+import dashboardIcon from '../assets/images/portal-dashboard-icon.svg';
+import termsServiceIcon from '../assets/images/portal-terms-service-icon.svg';
+import menuIcon from '../assets/images/portal-menu-icon.svg';
+import promotionsIcon from '../assets/images/portal-promotions-icon.svg';
+import settingsIcon from '../assets/images/portal-settings-icon.svg';
+import logoutIcon from '../assets/images/portal-logout-icon.svg';
 
 Amplify.configure(awsConfig);
 
@@ -45,6 +53,7 @@ function Portal(props) {
         setLoggedIn(true);
         setupSession({ username: email, password: password });
         props.toggleShowHeader(false);
+        setPortalSelection("dashboard");
         getData();
       }).catch((error) => {
         setErrorMsg(error.message);
@@ -65,7 +74,12 @@ function Portal(props) {
   }
 
   function getData() {
-  API.graphql({ query: queries.listMenuCategorys/*, variables: { id: "78b35763-384b-4adb-9139-1a6f57819514" }*/ }).then(({ data: { listMenuCategorys } }) => {
+    const menu = {
+      name: "Papaya",
+      menuId: "1"
+    };
+
+    API.graphql({ query: queries.listMenuCategorys/*, variables: { input: menu }*/ }).then(({ data: { listMenuCategorys } }) => {
       console.log(listMenuCategorys);
     }).catch((error) => {
       console.log(error);
@@ -95,13 +109,15 @@ function Portal(props) {
       :
         <article className="portal-container">
           <nav>
+            <img className="portal-toppings-logo" src={logo} />
+
             <ul className="nav-buttons">
-              <li><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}>Dashboard</span></li>
-              <li><span className={portalSelection == "terms" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms")}>Terms of Service</span></li>
-              <li><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}>Your Menu</span></li>
-              <li><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}>Your Active Promotions</span></li>
-              <li><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}>Account Settings</span></li>
-              <li><span className="portal-nav-option" onClick={logout}>Log Out</span></li>
+              <li><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}><img src={dashboardIcon} /> Dashboard</span></li>
+              <li><span className={portalSelection == "terms" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms")}><img src={termsServiceIcon} /> Terms of Service</span></li>
+              <li><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}><img src={menuIcon} /> Your Menu</span></li>
+              <li><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}><img src={promotionsIcon} /> Your Active Promotions</span></li>
+              <li><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}><img src={settingsIcon} /> Account Settings</span></li>
+              <li><span className="portal-nav-option" onClick={logout}><img src={logoutIcon} /> Log Out</span></li>
             </ul>
           </nav>
 
