@@ -15,7 +15,7 @@ function PortalTermsService(props) {
           <p>Tellus pellentesque eu tincidunt tortor aliquam. At urna condimentum mattis pellentesque id. Cras fermentum odio eu feugiat pretium nibh ipsum consequat. Vitae congue eu consequat ac. Et ultrices neque ornare aenean euismod elementum nisi quis. Congue mauris rhoncus aenean vel. Nam at lectus urna duis. Volutpat odio facilisis mauris sit amet massa vitae tortor. Diam sit amet nisl suscipit adipiscing bibendum est. At tellus at urna condimentum mattis pellentesque id nibh tortor. Lectus arcu bibendum at varius vel pharetra vel turpis. Faucibus in ornare quam viverra orci sagittis eu. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin. Id consectetur purus ut faucibus pulvinar elementum integer enim. Mi quis hendrerit dolor magna eget est lorem ipsum dolor. Urna nec tincidunt praesent semper feugiat nibh.</p>
         </div>
 
-        <button className="blue">Export as PDF</button>
+        <button>Export as PDF</button>
       </div>
     </article>
   );

@@ -24,12 +24,6 @@ import logoutIcon from '../assets/images/portal-logout-icon.svg';
 Amplify.configure(awsConfig);
 
 function Portal(props) {
-  const settingsNameInput = useRef();
-  const settingsEmailInput = useRef();
-  const settingsPhoneInput = useRef();
-  const settingsBusinessNameInput = useRef();
-  const settingsAddressInput = useRef();
-
   const [portalSelection, setPortalSelection] = useState(window.location.href.slice(window.location.href.indexOf("/portal/") + "/portal/".length));
   const [loggedIn, setLoggedIn] = useState(getCurrentUser() != null);
 

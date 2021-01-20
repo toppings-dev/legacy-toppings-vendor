@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 function PortalSettings(props) {
+  const settingsNameInput = useRef();
+  const settingsEmailInput = useRef();
+  const settingsPhoneInput = useRef();
+  const settingsBusinessNameInput = useRef();
+  const settingsAddressInput = useRef();
+  
   return (
     <article className="portal-settings-container">
       <h3>Account Settings</h3>

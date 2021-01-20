@@ -213,7 +213,7 @@ a.nav-link {
 
 .portal-nav-option {
     border-radius: 30px;
-    border: none;
+    border: 1px solid transparent;
     width: 101%;
     height: 2rem;
     display: block;
@@ -223,6 +223,10 @@ a.nav-link {
     font-weight: bold;
     cursor: pointer;
     vertical-align: middle;
+}
+
+.portal-nav-option.active {
+    border: 1px solid #ffffff;
 }
 
 .portal-nav-option img {
@@ -240,18 +244,16 @@ a.nav-link {
     height: 1.5rem;
 }
 
-.portal-nav-option.active {
-    border: 1px solid #ffffff;
-    margin-left: -1px;
+.portal-container main {
+    display: flex;
+    text-align: center;
+    align-items: center;
 }
 
 .portal-container article {
+    width: 100%;
     padding: 4rem;
     padding-bottom: 0rem;
-    text-align: center;
-}
-
-.portal-container {
     text-align: center;
 }
 
@@ -265,14 +267,50 @@ a.nav-link {
     overflow-y: scroll;
 }
 
-.portal-container button {
+.portal-terms-container button, .portal-promotions-container button {
     margin: 3rem auto;
+}
+
+.portal-menu-container img {
+    height: 18.5rem;
+}
+
+.portal-menu-container button {
+    display: inline-block;
+    margin: 2rem 1rem;
+}
+
+.portal-menu-item-form-container span.orange-heading, .portal-menu-category-form-container span.orange-heading {
+    text-align: left;
+}
+
+.portal-promotions-container img {
+    height: 18.5rem;
+}
+
+article span.orange-heading {
+    color: #ff5200;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0.5rem;
+    text-align: center;
+    display: block;
 }
 
 article span.heading {
     font-size: 2rem;
     font-weight: bold;
+    margin: 0.5rem;
     text-align: center;
+    display: block;
+}
+
+article span.subheading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem;
+    text-align: center;
+    display: block;
 }
 
 div.content {
@@ -284,19 +322,6 @@ a {
 }
 
 button {
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background-color: #ff5200;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 0.75rem;
-    display: block;
-    cursor: pointer;
-}
-
-button.blue {
     border: none;
     border-radius: 30px;
     outline: none;
