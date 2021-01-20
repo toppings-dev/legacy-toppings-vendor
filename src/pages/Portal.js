@@ -65,7 +65,7 @@ function Portal(props) {
       {loggedIn ?
         <article className="portal-container">
           <nav>
-            <img className="portal-toppings-logo" src={logo} />
+            <Link to="/"><img className="portal-toppings-logo" src={logo} /></Link>
 
             <ul className="nav-buttons">
               <li><Link to="/portal/dashboard"><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}><img src={dashboardIcon} /> Dashboard</span></Link></li>
