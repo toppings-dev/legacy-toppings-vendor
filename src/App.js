@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import logo from './assets/images/logo-white.png';
 import Portal from './pages/Portal';
-import PortalSignUp from './pages/PortalSignUp';
+import PortalAuthentication from './pages/PortalAuthentication';
 
 function App() {
   const [showHeader, toggleShowHeader] = useState(true);
@@ -13,8 +13,8 @@ function App() {
   return (
     <div className="wrapper">
       <BrowserRouter>
-        <Route exact path="/portal" render={() => <Portal toggleShowHeader={toggleShowHeader} />} />
-        <Route exact path="/portal-sign-up" render={() => <PortalSignUp />} />
+        <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} />} />
+        <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} />} />
         
         {showHeader ?
           <header className="primary">
@@ -23,7 +23,7 @@ function App() {
 
               <ul className="nav-buttons links">
                 <li><Link className="nav-link" to="/">About Us</Link></li>
-                <li><Link className="nav-link" to="/portal">Vendor Portal</Link></li>
+                <li><Link className="nav-link" to="/portal-auth/sign-in">Vendor Portal</Link></li>
               </ul>
             </nav>
           </header>

@@ -2,7 +2,11 @@
     font-family: "FatFrank";
     src: url("./assets/fonts/FatFrank/FatFrank-Regular.otf") format("opentype");
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -171,10 +175,13 @@ a.nav-link {
 
 .portal-container {
     background-color: #ffffff;
+    color: #8d8e8e;
     background: url("assets/images/toppings-print-white-gradient.png") no-repeat center;
     background-size: cover;
-    text-align: center;
     height: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 4.5fr;
 }
 
 .portal-container nav {
@@ -225,6 +232,10 @@ a.nav-link {
     vertical-align: middle;
 }
 
+.portal-container ul.nav-buttons li a {
+    text-decoration: none;
+}
+
 .portal-container ul.nav-buttons li:nth-of-type(1) img {
     height: 1.5rem;
 }
@@ -234,8 +245,38 @@ a.nav-link {
     margin-left: -1px;
 }
 
-.portal-container div.content {
-    padding: 8rem;
+.portal-container article {
+    padding: 4rem;
+    padding-bottom: 0rem;
+    text-align: center;
+}
+
+.portal-container {
+    text-align: center;
+}
+
+.portal-terms-container .terms-of-service-container {
+    border: 2px solid #e1e1e1;
+    border-radius: 20px;
+    width: 95%;
+    height: 60vh;
+    margin: 1rem auto;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+
+.portal-container button {
+    margin: 3rem auto;
+}
+
+article span.heading {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.content {
+    font-weight: 400;
 }
 
 a {
@@ -251,6 +292,19 @@ button {
     font-size: 1rem;
     font-weight: bold;
     padding: 0.75rem;
+    display: block;
+    cursor: pointer;
+}
+
+button.blue {
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background-color: #0082ff;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem 3rem;
     display: block;
     cursor: pointer;
 }
