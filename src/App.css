@@ -174,14 +174,15 @@ a.nav-link {
 }
 
 .portal-container {
-    background-color: #ffffff;
     color: #8d8e8e;
-    background: url("assets/images/toppings-print-white-gradient.png") no-repeat center;
+    background: url("assets/images/toppings-print-white-gradient-transparent.PNG") no-repeat center;
     background-size: cover;
     height: 100%;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 4.5fr;
+    display: block;
+    position: relative;
 }
 
 .portal-container nav {
@@ -195,6 +196,7 @@ a.nav-link {
     margin-left: -30px;
     padding: 30vh 1.75rem 1rem 0rem;
     text-align: left;
+    z-index: 100;
 }
 
 .portal-container .portal-toppings-logo {
@@ -257,6 +259,27 @@ a.nav-link {
     text-align: center;
 }
 
+.portal-container input.text-input, .portal-container textarea.text-input {
+    outline: none;
+    border-radius: 30px;
+    border: none;
+    box-shadow: 0px 1px 4px #979797;
+    color: #979797;
+    padding: 0.5rem 0.875rem;
+    resize: none;
+    font-family: Roboto;
+}
+
+.portal-container form input.text-input, .portal-container form textarea.text-input {
+    width: 100%;
+}
+
+.portal-container form label {
+    font-size: 1.5rem;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
 .portal-terms-container .terms-of-service-container {
     border: 2px solid #e1e1e1;
     border-radius: 20px;
@@ -280,8 +303,116 @@ a.nav-link {
     margin: 2rem 1rem;
 }
 
-.portal-menu-item-form-container span.orange-heading, .portal-menu-category-form-container span.orange-heading {
+.portal-menu-item-form-container, .portal-menu-category-form-container {
     text-align: left;
+    padding: 0rem 5rem;
+}
+
+.portal-menu-item-form-container span.subheading, .portal-menu-category-form-container span.subheading {
+    margin-top: 2rem;
+}
+
+.portal-menu-item-form {
+    padding: 0rem 1rem 1rem 0.1rem;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-column-gap: 5rem;
+    grid-template-areas: "type type"
+                         "name price"
+                         "description description"
+                         "tags image"
+                         "toppings toppings";
+    height: 65vh;
+    overflow-y: scroll;
+}
+
+.portal-menu-item-form-type-section {
+    grid-area: type;
+}
+
+.potal-menu-item-form-name-section {
+    grid-area: name;
+}
+
+.portal-menu-item-form-price-section {
+    grid-area: price;
+    display: grid;
+    grid-template-columns: 1fr 20fr;
+    grid-template-areas: "heading heading"
+                         "label input";
+}
+
+.portal-menu-item-form-price-section span.subheading {
+    grid-area: heading;
+}
+
+.portal-menu-item-form-price-section label {
+    grid-area: label;
+}
+
+#menu-item-price-input {
+    width: 100%;
+    grid-area: input;
+}
+
+.portal-menu-item-form-description-section {
+    grid-area: description;
+}
+
+.portal-menu-item-form-tags-section {
+    grid-area: tags;
+}
+
+.portal-menu-item-form-image-section {
+    grid-area: image;
+}
+
+.portal-menu-item-form-toppings-section {
+    grid-area: toppings;
+    display: flex;
+    gap: 2rem;
+}
+
+.portal-menu-item-form-toppings-container img {
+    height: 1rem;
+    margin: 0rem 0.25rem;
+    cursor: pointer;
+}
+
+.portal-menu-item-form-toppings-container {
+    display: inline-block;
+    flex-grow: 1;
+}
+
+.portal-menu-item-form-toppings-options-container span.subheading {
+    font-size: 1.375rem;
+    margin-bottom: 0rem;
+}
+
+.portal-menu-item-form-toppings-options-container input.text-input {
+    margin: 0.75rem 0rem;
+    display: block;
+}
+
+.portal-menu-item-form-toppings-options-container button.blue-text {
+    margin: 0.75rem 0rem;
+    padding: 0rem;
+    display: block;
+}
+
+.portal-menu-item-form-toppings-options-container button.blue-text span {
+    font-size: 1.25rem;
+    vertical-align: middle;
+    font-weight: 700;
+}
+
+.portal-menu-item-form-submit-section {
+    /* grid-area: submit; */
+    text-align: right;
+}
+
+.portal-menu-item-form-submit-section button {
+    margin: 3rem 0rem;
 }
 
 .portal-promotions-container img {
@@ -292,24 +423,21 @@ article span.orange-heading {
     color: #ff5200;
     font-size: 2.5em;
     font-weight: bold;
-    margin: 0.5rem;
-    text-align: center;
+    margin: 0.5rem 0rem;
     display: block;
 }
 
 article span.heading {
     font-size: 2rem;
     font-weight: bold;
-    margin: 0.5rem;
-    text-align: center;
+    margin: 0.5rem 0rem;
     display: block;
 }
 
 article span.subheading {
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 0.5rem;
-    text-align: center;
+    margin: 0.5rem 0rem;
     display: block;
 }
 
@@ -329,7 +457,49 @@ button {
     color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
-    padding: 0.75rem 3rem;
+    padding: 0.5rem 3rem;
     display: block;
     cursor: pointer;
+}
+
+button.orange {
+    background-color: #ff5200;
+}
+
+button.orange-text {
+    background-color: transparent;
+    color: #ff5200;
+    padding: 0.5rem 2rem;
+}
+
+button.blue-text {
+    background-color: transparent;
+    color: #0082ff;
+    padding: 0.5rem 2rem;
+}
+
+.radio-button .radio-button-option {
+    box-shadow: 0px 1px 4px rgba(0, 10, 102, 0.46);
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background-color: #ffffff;
+    color: #979797;
+    min-width: 11rem;
+    margin-right: -2rem;
+    padding: 0.5rem 3rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-button .radio-button-option.active {
+    border-radius: 30px;
+    border-bottom: 1px solid #0082ff;
+    background-color: #0082ff;
+    color: #ffffff;
+    z-index: 10;
 }
