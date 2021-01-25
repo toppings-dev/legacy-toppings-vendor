@@ -8,6 +8,7 @@ import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import { getCurrentUser, setupSession, clearSession } from '../utils/session';
 import PortalDashboard from './PortalDashboard';
+import PortalOrders from './PortalOrders';
 import PortalTermsService from './PortalTermsService';
 import PortalMenu from './PortalMenu';
 import PortalPromotions from './PortalPromotions';
@@ -15,6 +16,7 @@ import PortalSettings from './PortalSettings';
 
 import logo from '../assets/images/logo-white.png';
 import dashboardIcon from '../assets/images/portal-dashboard-icon.svg';
+import ordersIcon from '../assets/images/portal-orders-icon.svg';
 import termsServiceIcon from '../assets/images/portal-terms-service-icon.svg';
 import menuIcon from '../assets/images/portal-menu-icon.svg';
 import promotionsIcon from '../assets/images/portal-promotions-icon.svg';
@@ -63,6 +65,7 @@ function Portal(props) {
 
             <ul className="nav-buttons">
               <li><Link to="/portal/dashboard"><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}><img src={dashboardIcon} /> Dashboard</span></Link></li>
+              <li><Link to="/portal/orders"><span className={portalSelection == "orders" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("orders")}><img src={ordersIcon} /> Orders</span></Link></li>
               <li><Link to="/portal/terms-of-service"><span className={portalSelection == "terms-of-service" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms-of-service")}><img src={termsServiceIcon} /> Terms of Service</span></Link></li>
               <li><Link to="/portal/menu"><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}><img src={menuIcon} /> Your Menu</span></Link></li>
               <li><Link to="/portal/promotions"><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}><img src={promotionsIcon} /> Your Active Rewards</span></Link></li>
@@ -74,6 +77,7 @@ function Portal(props) {
           <main>
             <Switch>
               <Route path="/portal/dashboard" component={PortalDashboard} />
+              <Route path="/portal/orders" component={PortalOrders} />
               <Route path="/portal/terms-of-service" component={PortalTermsService} />
               <Route path="/portal/menu" component={PortalMenu} />
               <Route path="/portal/promotions" component={PortalPromotions} />

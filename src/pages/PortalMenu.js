@@ -7,8 +7,16 @@ import plusButtonIcon from '../assets/images/portal-menu-plus-button.svg';
 function PortalMenu(props) {
   const addItemName = useRef();
 
-  const [mode, changeMode] = useState("addItem");
+  const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
+  const [selectedMenuItem, selectMenuItem] = useState(null);
+  const [menuItems, setMenuItems] = useState({
+    "Appetizers": [{id: 1, name: "Barnacle Loaf", price: "1.30", description: "Ground-up barnacles in a loaf."}, 
+                   {id: 2, name: "Fried Oyster Skins", price: "0.99", description: "Oyster skins that are fried."}],
+    "Entrees": [{id: 3, name: "Krabby Patty", price: "2.99", description: "The signature of the Krusty Krab, a juicy burger with secret ingredients."}, 
+                {id: 4, name: "Jelly Patty", price: "3.99", description: "A Krabby Patty with jellyfish jelly."}],
+    "Desserts": [{id: 5, name: "Seanut Brittle", price: "2.43", description: "Hard sugar candy pieces with seanuts inside."}]
+  });
 
   return (
     <article className="portal-menu-container">
@@ -37,7 +45,7 @@ function PortalMenu(props) {
               
               <div className="portal-menu-item-form-description-section">
                 <span className="subheading">Item Description</span>
-                <textarea className="text-input" type="text" placeholder="A Krabby Patty is a hamburger sold by the Krusty Krab." ref={addItemName} />
+                <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={addItemName} />
               </div>
               
               <div className="portal-menu-item-form-tags-section">
@@ -47,34 +55,37 @@ function PortalMenu(props) {
               
               <div className="portal-menu-item-form-image-section">
                 <span className="subheading">Upload Image</span>
-                <input className="text-input" type="file" ref={addItemName} />
+                <div className="image-input-wrapper">
+                  <label htmlFor="portal-menu-item-form-image-input" className="image-upload">Upload an Image</label>
+                  <input id="portal-menu-item-form-image-input" className="image-input" type="file" ref={addItemName} hidden />
+                </div>
               </div>
 
               {addItemType == "Customizable" ? 
-              <div className="portal-menu-item-form-toppings-section">
-                <div className="portal-menu-item-form-toppings-container">
-                  <span className="subheading">Toppings Name</span>
-                  <input className="text-input" type="text" placeholder="Patty Type" ref={addItemName} />
+                <div className="portal-menu-item-form-toppings-section">
+                  <div className="portal-menu-item-form-toppings-container">
+                    <span className="subheading">Toppings Name</span>
+                    <input className="text-input" type="text" placeholder="Patty Type" ref={addItemName} />
 
-                  <div className="portal-menu-item-form-toppings-options-container">
-                    <span className="subheading">Options <img src={plusButtonIcon} /></span>
-                    <input className="text-input" type="text" placeholder="Crab Patty" ref={addItemName} />
-                    <input className="text-input" type="text" placeholder="Fish Patty" ref={addItemName} />
+                    <div className="portal-menu-item-form-toppings-options-container">
+                      <span className="subheading">Options <img src={plusButtonIcon} /></span>
+                      <input className="text-input" type="text" placeholder="Crab Patty" ref={addItemName} />
+                      <input className="text-input" type="text" placeholder="Fish Patty" ref={addItemName} />
+                    </div>
+                  </div>
+
+                  <div className="portal-menu-item-form-toppings-container">
+                    <span className="subheading">Toppings Name</span>
+                    <input className="text-input" type="text" placeholder="Patty Type" ref={addItemName} />
+
+                    <div className="portal-menu-item-form-toppings-options-container">
+                      <span className="subheading">Options <img src={plusButtonIcon} /></span>
+                      <input className="text-input" type="text" placeholder="Crab Patty" ref={addItemName} />
+                      <input className="text-input" type="text" placeholder="Fish Patty" ref={addItemName} />
+                      <button className="blue-text"><span>+</span> Add Category</button>
+                    </div>
                   </div>
                 </div>
-
-                <div className="portal-menu-item-form-toppings-container">
-                  <span className="subheading">Toppings Name</span>
-                  <input className="text-input" type="text" placeholder="Patty Type" ref={addItemName} />
-
-                  <div className="portal-menu-item-form-toppings-options-container">
-                    <span className="subheading">Options <img src={plusButtonIcon} /></span>
-                    <input className="text-input" type="text" placeholder="Crab Patty" ref={addItemName} />
-                    <input className="text-input" type="text" placeholder="Fish Patty" ref={addItemName} />
-                    <button className="blue-text"><span>+</span> Add Category</button>
-                  </div>
-                </div>
-              </div>
               : ""}
             </form>
             
@@ -91,7 +102,45 @@ function PortalMenu(props) {
             <span className="orange-heading">New Menu Category</span>
           </header>
         </div>
-      :
+      : Object.keys(menuItems).length > 0 ? 
+        <div className="portal-menu-list-container">
+          <header>
+            <span className="orange-heading">Your Menu</span>
+          </header>
+
+          <div className="content">
+            <div className="portal-menu-list">
+              {Object.keys(menuItems).map((category =>
+                <div className="menu-category-container">
+                  <span className="blue-heading">{category}</span>
+
+                  {menuItems[category].map(item => 
+                    <div key={item.id} className={selectedMenuItem == item ? "menu-item-container active" : "menu-item-container"} onClick={() => selectMenuItem(item)}>
+                      <span className="subheading">{item.name}</span>
+                      <span className="subheading">${item.price}</span>
+                      <div className="menu-item-description">{item.description}</div>
+                    </div>
+                  )}
+                </div> 
+              ))}
+            </div>
+            <div className="portal-menu-view">
+              {selectedMenuItem != null ? 
+              <div>
+                <span className="orange-heading">{selectedMenuItem.name}</span>
+                <span className="blue-heading">${selectedMenuItem.price}</span>
+                <span className="subheading">Description</span>
+                <div className="menu-item-description">{selectedMenuItem.description}</div>
+              </div>
+              : ""}
+            </div>
+            <div>
+              <button onClick={() => changeMode("addItem")}>Add Menu Item</button>
+              <button onClick={() => changeMode("addCategory")}>Create Category</button>
+            </div>
+          </div>
+        </div>
+      : 
         <div>
           <header>
             <img src={bubbleIcon} />

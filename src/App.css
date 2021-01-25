@@ -254,9 +254,15 @@ a.nav-link {
 
 .portal-container article {
     width: 100%;
-    padding: 4rem;
+    padding: 0rem 4rem;
     padding-bottom: 0rem;
     text-align: center;
+}
+
+.portal-container main {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .portal-container input.text-input, .portal-container textarea.text-input {
@@ -274,7 +280,7 @@ a.nav-link {
     width: 100%;
 }
 
-.portal-container form label {
+.portal-container form label:not(.image-upload) {
     font-size: 1.5rem;
     font-weight: 500;
     vertical-align: middle;
@@ -313,7 +319,7 @@ a.nav-link {
 }
 
 .portal-menu-item-form {
-    padding: 0rem 1rem 1rem 0.1rem;
+    padding: 0rem 1rem 7rem 0.1rem;
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-column-gap: 5rem;
@@ -415,6 +421,47 @@ a.nav-link {
     margin: 3rem 0rem;
 }
 
+.portal-menu-list-container {
+    text-align: left;
+}
+
+.portal-menu-list-container .blue-heading {
+    color: #0082ff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: block;
+}
+
+.portal-menu-list-container .menu-item-container {
+    margin: 0.5rem;
+    margin-left: -1rem;
+    padding: 0rem 1rem 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    cursor: pointer;
+}
+
+.portal-menu-list-container .menu-item-container.active {
+    border-radius: 20px;
+    background-color: #0082ff;
+    color: #ffffff;
+}
+
+.portal-menu-list-container .menu-item-container span.subheading:nth-of-type(2) {
+    text-align: right;
+}
+
+.portal-menu-list-container div.content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-column-gap: 5rem;
+}
+
+.portal-menu-view {
+    display: flex;
+    align-items: center;
+}
+
 .portal-promotions-container img {
     height: 18.5rem;
 }
@@ -449,6 +496,28 @@ a {
     color: #ffffff;
 }
 
+input.image-input {
+    /* opacity: 0; */
+    outline: none;
+    position: relative;
+    left: 0;
+    top: 0rem;
+}
+
+label.image-upload {
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background-color: #0082ff;
+    color: #ffffff;
+    width: 14rem;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 3rem;
+    display: block;
+    cursor: pointer;
+}
+
 button {
     border: none;
     border-radius: 30px;
@@ -476,6 +545,10 @@ button.blue-text {
     background-color: transparent;
     color: #0082ff;
     padding: 0.5rem 2rem;
+}
+
+button.image-upload {
+    margin: 0;
 }
 
 .radio-button .radio-button-option {
