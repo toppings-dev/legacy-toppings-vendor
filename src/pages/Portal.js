@@ -23,6 +23,13 @@ import promotionsIcon from '../assets/images/portal-promotions-icon.svg';
 import settingsIcon from '../assets/images/portal-settings-icon.svg';
 import logoutIcon from '../assets/images/portal-logout-icon.svg';
 
+/*
+  PRIORITY LIST:
+  Orders and Terms by Wednesday
+  Rewards by Next Week
+  Dashboard and Menu Later
+*/
+
 Amplify.configure(awsConfig);
 
 function Portal(props) {

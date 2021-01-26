@@ -6,7 +6,7 @@ function PortalPromotions(props) {
   return (
     <article className="portal-promotions-container">
       <header>
-        <img src={bubbleIcon} />
+        <img className="portal-empty-image" src={bubbleIcon} />
         <span className="subheading">You have no active promotions.</span>
         <b>Get users excited by adding promotions + <br /> reward opportunities!</b>
       </header>

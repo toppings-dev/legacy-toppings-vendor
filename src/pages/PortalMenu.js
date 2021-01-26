@@ -11,11 +11,11 @@ function PortalMenu(props) {
   const [addItemType, setAddItemType] = useState("Regular");
   const [selectedMenuItem, selectMenuItem] = useState(null);
   const [menuItems, setMenuItems] = useState({
-    "Appetizers": [{id: 1, name: "Barnacle Loaf", price: "1.30", description: "Ground-up barnacles in a loaf."}, 
+    Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
                    {id: 2, name: "Fried Oyster Skins", price: "0.99", description: "Oyster skins that are fried."}],
-    "Entrees": [{id: 3, name: "Krabby Patty", price: "2.99", description: "The signature of the Krusty Krab, a juicy burger with secret ingredients."}, 
+    Entrees: [{id: 3, name: "Krabby Patty", price: "2.99", description: "The signature of the Krusty Krab, a juicy burger with secret ingredients."}, 
                 {id: 4, name: "Jelly Patty", price: "3.99", description: "A Krabby Patty with jellyfish jelly."}],
-    "Desserts": [{id: 5, name: "Seanut Brittle", price: "2.43", description: "Hard sugar candy pieces with seanuts inside."}]
+    Desserts: [{id: 5, name: "Seanut Brittle", price: "2.43", description: "Hard sugar candy pieces with seanuts inside."}]
   });
 
   return (
@@ -122,7 +122,7 @@ function PortalMenu(props) {
                     </div>
                   )}
                 </div> 
-              ))}
+              ))} 
             </div>
             <div className="portal-menu-view">
               {selectedMenuItem != null ? 
@@ -143,7 +143,7 @@ function PortalMenu(props) {
       : 
         <div>
           <header>
-            <img src={bubbleIcon} />
+            <img className="portal-empty-image" src={bubbleIcon} />
             <span className="subheading">You have no items in your menu.</span>
             <b>Start adding your menu items by clicking the buttons <br /> below!</b>
           </header>
