@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { HashRouter, Route, Link } from 'react-router-dom';
 
 import logo from './assets/images/logo-white.png';
 import Portal from './pages/Portal';
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <BrowserRouter>
+      <HashRouter basename = "/">
         <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} />} />
         <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} />} />
         
@@ -28,7 +28,7 @@ function App() {
             </nav>
           </header>
         : ""}
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
