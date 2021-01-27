@@ -96,8 +96,6 @@ function PortalSignUp(props) {
       Auth.signIn({ username: email, password: password }).then(() => {
         setLoggedIn(true);
         setupSession({ username: email, password: password });
-        setPortalSelection("dashboard");
-        getData();
       }).catch((error) => {
         setErrorMsg(error.message);
       });
