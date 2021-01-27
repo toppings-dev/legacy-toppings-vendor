@@ -286,6 +286,10 @@ a.nav-link {
     vertical-align: middle;
 }
 
+.portal-dashboard-container img {
+    height: 99vh;
+}
+
 .portal-orders-subcontainer {
     height: 100vh;
     margin: 0rem -4rem;
@@ -429,8 +433,9 @@ hr.short {
     border-radius: 20px;
     width: 95%;
     height: 60vh;
+    text-align: left;
     margin: 1rem auto;
-    padding: 1rem;
+    padding: 1rem 2rem;
     overflow-y: scroll;
 }
 
@@ -575,7 +580,7 @@ hr.short {
     margin-left: -1rem;
     padding: 0rem 1rem 0.5rem 1rem;
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 5fr 2fr;
     cursor: pointer;
 }
 

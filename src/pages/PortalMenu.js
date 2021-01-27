@@ -95,8 +95,7 @@ function PortalMenu(props) {
               </div>
           </div>
         </div>
-      :
-      mode == "addCategory" ? 
+      : mode == "addCategory" ? 
         <div className="portal-menu-category-form-container">
           <header>
             <span className="orange-heading">New Menu Category</span>
