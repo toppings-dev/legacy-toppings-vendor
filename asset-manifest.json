@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/toppings-dev/static/css/main.5e865647.chunk.css",
+    "main.js": "/toppings-dev/static/js/main.a19f1dc6.chunk.js",
+    "main.js.map": "/toppings-dev/static/js/main.a19f1dc6.chunk.js.map",
+    "runtime-main.js": "/toppings-dev/static/js/runtime-main.d39df269.js",
+    "runtime-main.js.map": "/toppings-dev/static/js/runtime-main.d39df269.js.map",
+    "static/js/2.82852c8e.chunk.js": "/toppings-dev/static/js/2.82852c8e.chunk.js",
+    "static/js/2.82852c8e.chunk.js.map": "/toppings-dev/static/js/2.82852c8e.chunk.js.map",
+    "index.html": "/toppings-dev/index.html",
+    "static/css/main.5e865647.chunk.css.map": "/toppings-dev/static/css/main.5e865647.chunk.css.map",
+    "static/js/2.82852c8e.chunk.js.LICENSE.txt": "/toppings-dev/static/js/2.82852c8e.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/toppings-dev/static/media/toppings-print-white-gradient-transparent.d5b9d08c.PNG",
+    "static/media/bubble-icon-1.2de73295.svg": "/toppings-dev/static/media/bubble-icon-1.2de73295.svg",
+    "static/media/bubble-icon-2.7af7e509.svg": "/toppings-dev/static/media/bubble-icon-2.7af7e509.svg",
+    "static/media/dashboard-design.b466fc61.PNG": "/toppings-dev/static/media/dashboard-design.b466fc61.PNG",
+    "static/media/gray-checkmark.71c4b762.svg": "/toppings-dev/static/media/gray-checkmark.71c4b762.svg",
+    "static/media/logo-white.f74b3cfc.png": "/toppings-dev/static/media/logo-white.f74b3cfc.png",
+    "static/media/portal-dashboard-icon.d5b04d4b.svg": "/toppings-dev/static/media/portal-dashboard-icon.d5b04d4b.svg",
+    "static/media/portal-logout-icon.f830b84e.svg": "/toppings-dev/static/media/portal-logout-icon.f830b84e.svg",
+    "static/media/portal-menu-icon.57e711b2.svg": "/toppings-dev/static/media/portal-menu-icon.57e711b2.svg",
+    "static/media/portal-menu-plus-button.38658435.svg": "/toppings-dev/static/media/portal-menu-plus-button.38658435.svg",
+    "static/media/portal-orders-icon.a3f15950.svg": "/toppings-dev/static/media/portal-orders-icon.a3f15950.svg",
+    "static/media/portal-promotions-icon.519c4dd9.svg": "/toppings-dev/static/media/portal-promotions-icon.519c4dd9.svg",
+    "static/media/portal-settings-icon.8bf3502e.svg": "/toppings-dev/static/media/portal-settings-icon.8bf3502e.svg",
+    "static/media/portal-terms-service-icon.aa4f9980.svg": "/toppings-dev/static/media/portal-terms-service-icon.aa4f9980.svg",
+    "static/media/settings-design.972557d8.PNG": "/toppings-dev/static/media/settings-design.972557d8.PNG",
+    "static/media/white-checkmark.7ae308e4.svg": "/toppings-dev/static/media/white-checkmark.7ae308e4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d39df269.js",
+    "static/js/2.82852c8e.chunk.js",
+    "static/css/main.5e865647.chunk.css",
+    "static/js/main.a19f1dc6.chunk.js"
+  ]
+}
