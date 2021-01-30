@@ -11,7 +11,7 @@ import PortalDashboard from './PortalDashboard';
 import PortalOrders from './PortalOrders';
 import PortalTermsService from './PortalTermsService';
 import PortalMenu from './PortalMenu';
-import PortalPromotions from './PortalPromotions';
+import PortalRewards from './PortalRewards';
 import PortalSettings from './PortalSettings';
 
 import logo from '../assets/images/logo-white.png';
@@ -19,7 +19,7 @@ import dashboardIcon from '../assets/images/portal-dashboard-icon.svg';
 import ordersIcon from '../assets/images/portal-orders-icon.svg';
 import termsServiceIcon from '../assets/images/portal-terms-service-icon.svg';
 import menuIcon from '../assets/images/portal-menu-icon.svg';
-import promotionsIcon from '../assets/images/portal-promotions-icon.svg';
+import rewardsIcon from '../assets/images/portal-rewards-icon.svg';
 import settingsIcon from '../assets/images/portal-settings-icon.svg';
 import logoutIcon from '../assets/images/portal-logout-icon.svg';
 
@@ -28,6 +28,11 @@ import logoutIcon from '../assets/images/portal-logout-icon.svg';
   Orders and Terms by Wednesday
   Rewards by Next Week
   Dashboard and Menu Later
+
+  DEV STUFF:
+  Websockets?
+  Hosting?
+  Database Schema?
 */
 
 Amplify.configure(awsConfig);
@@ -75,7 +80,7 @@ function Portal(props) {
               <li><Link to="/portal/orders"><span className={portalSelection == "orders" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("orders")}><img src={ordersIcon} /> Orders</span></Link></li>
               <li><Link to="/portal/terms-of-service"><span className={portalSelection == "terms-of-service" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms-of-service")}><img src={termsServiceIcon} /> Terms of Service</span></Link></li>
               <li><Link to="/portal/menu"><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}><img src={menuIcon} /> Your Menu</span></Link></li>
-              <li><Link to="/portal/promotions"><span className={portalSelection == "promotions" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("promotions")}><img src={promotionsIcon} /> Your Active Rewards</span></Link></li>
+              <li><Link to="/portal/rewards"><span className={portalSelection == "rewards" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("rewards")}><img src={rewardsIcon} /> Your Active Rewards</span></Link></li>
               <li><Link to="/portal/settings"><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}><img src={settingsIcon} /> Account Settings</span></Link></li>
               <li><span className="portal-nav-option" onClick={logout}><img src={logoutIcon} /> Log Out</span></li>
             </ul>
@@ -87,7 +92,7 @@ function Portal(props) {
               <Route path="/portal/orders" component={PortalOrders} />
               <Route path="/portal/terms-of-service" component={PortalTermsService} />
               <Route path="/portal/menu" component={PortalMenu} />
-              <Route path="/portal/promotions" component={PortalPromotions} />
+              <Route path="/portal/rewards" component={PortalRewards} />
               <Route path="/portal/settings" component={PortalSettings} />
             </Switch>
           </main>

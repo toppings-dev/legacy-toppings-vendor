@@ -49,7 +49,6 @@ export const getUser = /* GraphQL */ `
   query GetUser($email: AWSEmail!) {
     getUser(email: $email) {
       email
-      university_name
       university {
         name
         address
@@ -59,8 +58,10 @@ export const getUser = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      phone_number
       name
+      restuaraunt {
+        nextToken
+      }
       rewards {
         nextToken
       }
@@ -104,8 +105,6 @@ export const listUsers = /* GraphQL */ `
     ) {
       items {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -154,8 +153,6 @@ export const getGroupMembership = /* GraphQL */ `
       userEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -202,16 +199,12 @@ export const getFriendship = /* GraphQL */ `
       friendEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       friend {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -247,16 +240,12 @@ export const getFriendRequest = /* GraphQL */ `
       receiverEmail
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -301,16 +290,12 @@ export const getGroupRequest = /* GraphQL */ `
       }
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -346,6 +331,12 @@ export const getRestauraunt = /* GraphQL */ `
     getRestauraunt(id: $id) {
       id
       name
+      owner {
+        email
+        name
+        createdAt
+        updatedAt
+      }
       menuCategories {
         nextToken
       }
@@ -752,8 +743,6 @@ export const getPickup = /* GraphQL */ `
       id
       deliverer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -766,8 +755,6 @@ export const getPickup = /* GraphQL */ `
       expdate
       friends {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -831,8 +818,6 @@ export const getOrder = /* GraphQL */ `
       delivery_long
       customer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -901,8 +886,6 @@ export const getReward = /* GraphQL */ `
       userEmail
       owner {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt

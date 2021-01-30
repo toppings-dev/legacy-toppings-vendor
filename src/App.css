@@ -447,21 +447,21 @@ hr.short {
     height: 18.5rem;
 }
 
-.portal-menu-container button {
+.portal-menu-container button, .portal-rewards-container button {
     display: inline-block;
     margin: 2rem 1rem;
 }
 
-.portal-menu-item-form-container, .portal-menu-category-form-container {
+.portal-menu-item-form-container, .portal-menu-category-form-container, .portal-rewards-form-container {
     text-align: left;
     padding: 0rem 5rem;
 }
 
-.portal-menu-item-form-container span.subheading, .portal-menu-category-form-container span.subheading {
+.portal-menu-item-form-container span.subheading, .portal-menu-category-form-container span.subheading, .portal-rewards-form-container span.subheading {
     margin-top: 2rem;
 }
 
-.portal-menu-item-form {
+.portal-menu-item-form, .portal-rewards-form {
     padding: 0rem 1rem 7rem 0.1rem;
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -555,27 +555,56 @@ hr.short {
     font-weight: 700;
 }
 
-.portal-menu-item-form-submit-section {
+.portal-menu-item-form-submit-section, .portal-rewards-form-submit-section {
     /* grid-area: submit; */
     text-align: right;
 }
 
-.portal-menu-item-form-submit-section button {
+.portal-menu-item-form-submit-section button, .portal-rewards-form-submit-section button {
     margin: 3rem 0rem;
 }
 
-.portal-menu-list-container {
+.portal-category-form-container {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #979797;
+    border-radius: 30px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    padding: 1rem 3rem 2rem 3rem;
+}
+
+.portal-category-form {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 2fr 1fr;
+}
+
+.portal-category-form input, .portal-category-form button {
+    margin: 0.25rem 0rem;
+}
+
+.portal-category-form-container button.close {
+    position: absolute;
+    top: 0.5rem;
+    left: 1.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.portal-menu-list-container, .portal-rewards-list-container {
     text-align: left;
 }
 
-.portal-menu-list-container .blue-heading {
+.portal-menu-list-container .blue-heading, .portal-rewards-list-container .blue-heading {
     color: #0082ff;
     font-size: 1.8rem;
     font-weight: 700;
     display: block;
 }
 
-.portal-menu-list-container .menu-item-container {
+.portal-menu-list-container .menu-item-container, .portal-rewards-list-container .reward-container {
     margin: 0.5rem;
     margin-left: -1rem;
     padding: 0rem 1rem 0.5rem 1rem;
@@ -584,25 +613,46 @@ hr.short {
     cursor: pointer;
 }
 
-.portal-menu-list-container .menu-item-container.active {
+.portal-menu-list-container .menu-item-container.active, .portal-rewards-list-container .reward-container.active {
     border-radius: 20px;
     background-color: #0082ff;
     color: #ffffff;
 }
 
-.portal-menu-list-container .menu-item-container span.subheading:nth-of-type(2) {
+.portal-menu-list-container .menu-item-container span.subheading:nth-of-type(2), .portal-rewards-list-container .reward-container span.subheading:nth-of-type(2) {
     text-align: right;
 }
 
-.portal-menu-list-container div.content {
+.portal-menu-list-container div.content, .portal-rewards-list-container div.content {
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-column-gap: 5rem;
 }
 
-.portal-menu-view {
+.portal-menu-view, .portal-rewards-view {
     display: flex;
     align-items: center;
+}
+
+.portal-rewards-form {
+    height: auto;
+    padding-bottom: 0rem;
+    grid-template-columns: 3fr 2fr;
+    grid-template-areas: "name points"
+                         "description description";
+    overflow-y: hidden;
+}
+
+.portal-rewards-form-name-section {
+    grid-area: name;
+}
+
+.portal-rewards-form-points-section {
+    grid-area: points;
+}
+
+.portal-rewards-form-description-section {
+    grid-area: description;
 }
 
 article span.orange-heading {
@@ -705,6 +755,13 @@ button.blue-text {
 
 button.image-upload {
     margin: 0;
+}
+
+button.close {
+    background-color: transparent;
+    color: #8d8e8e;
+    margin: 0rem;
+    padding: 0rem;
 }
 
 .radio-button .radio-button-option {

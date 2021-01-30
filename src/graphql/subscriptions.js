@@ -53,7 +53,6 @@ export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
       email
-      university_name
       university {
         name
         address
@@ -63,8 +62,10 @@ export const onCreateUser = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      phone_number
       name
+      restuaraunt {
+        nextToken
+      }
       rewards {
         nextToken
       }
@@ -95,7 +96,6 @@ export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
       email
-      university_name
       university {
         name
         address
@@ -105,8 +105,10 @@ export const onUpdateUser = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      phone_number
       name
+      restuaraunt {
+        nextToken
+      }
       rewards {
         nextToken
       }
@@ -137,7 +139,6 @@ export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
       email
-      university_name
       university {
         name
         address
@@ -147,8 +148,10 @@ export const onDeleteUser = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      phone_number
       name
+      restuaraunt {
+        nextToken
+      }
       rewards {
         nextToken
       }
@@ -230,8 +233,6 @@ export const onCreateGroupMembership = /* GraphQL */ `
       userEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -255,8 +256,6 @@ export const onUpdateGroupMembership = /* GraphQL */ `
       userEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -280,8 +279,6 @@ export const onDeleteGroupMembership = /* GraphQL */ `
       userEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -306,16 +303,12 @@ export const onCreateFriendship = /* GraphQL */ `
       friendEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       friend {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -333,16 +326,12 @@ export const onUpdateFriendship = /* GraphQL */ `
       friendEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       friend {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -360,16 +349,12 @@ export const onDeleteFriendship = /* GraphQL */ `
       friendEmail
       user {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       friend {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -387,16 +372,12 @@ export const onCreateFriendRequest = /* GraphQL */ `
       receiverEmail
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -415,16 +396,12 @@ export const onUpdateFriendRequest = /* GraphQL */ `
       receiverEmail
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -443,16 +420,12 @@ export const onDeleteFriendRequest = /* GraphQL */ `
       receiverEmail
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -478,16 +451,12 @@ export const onCreateGroupRequest = /* GraphQL */ `
       }
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -513,16 +482,12 @@ export const onUpdateGroupRequest = /* GraphQL */ `
       }
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -548,16 +513,12 @@ export const onDeleteGroupRequest = /* GraphQL */ `
       }
       sender {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
       }
       receiver {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -573,6 +534,12 @@ export const onCreateRestauraunt = /* GraphQL */ `
     onCreateRestauraunt {
       id
       name
+      owner {
+        email
+        name
+        createdAt
+        updatedAt
+      }
       menuCategories {
         nextToken
       }
@@ -610,6 +577,12 @@ export const onUpdateRestauraunt = /* GraphQL */ `
     onUpdateRestauraunt {
       id
       name
+      owner {
+        email
+        name
+        createdAt
+        updatedAt
+      }
       menuCategories {
         nextToken
       }
@@ -647,6 +620,12 @@ export const onDeleteRestauraunt = /* GraphQL */ `
     onDeleteRestauraunt {
       id
       name
+      owner {
+        email
+        name
+        createdAt
+        updatedAt
+      }
       menuCategories {
         nextToken
       }
@@ -1288,8 +1267,6 @@ export const onCreatePickup = /* GraphQL */ `
       id
       deliverer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1302,8 +1279,6 @@ export const onCreatePickup = /* GraphQL */ `
       expdate
       friends {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1326,8 +1301,6 @@ export const onUpdatePickup = /* GraphQL */ `
       id
       deliverer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1340,8 +1313,6 @@ export const onUpdatePickup = /* GraphQL */ `
       expdate
       friends {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1364,8 +1335,6 @@ export const onDeletePickup = /* GraphQL */ `
       id
       deliverer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1378,8 +1347,6 @@ export const onDeletePickup = /* GraphQL */ `
       expdate
       friends {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1423,8 +1390,6 @@ export const onCreateOrder = /* GraphQL */ `
       delivery_long
       customer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1482,8 +1447,6 @@ export const onUpdateOrder = /* GraphQL */ `
       delivery_long
       customer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1541,8 +1504,6 @@ export const onDeleteOrder = /* GraphQL */ `
       delivery_long
       customer {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1580,8 +1541,6 @@ export const onCreateReward = /* GraphQL */ `
       userEmail
       owner {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1608,8 +1567,6 @@ export const onUpdateReward = /* GraphQL */ `
       userEmail
       owner {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt
@@ -1636,8 +1593,6 @@ export const onDeleteReward = /* GraphQL */ `
       userEmail
       owner {
         email
-        university_name
-        phone_number
         name
         createdAt
         updatedAt

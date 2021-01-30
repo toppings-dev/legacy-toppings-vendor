@@ -95,12 +95,6 @@ function PortalMenu(props) {
               </div>
           </div>
         </div>
-      : mode == "addCategory" ? 
-        <div className="portal-menu-category-form-container">
-          <header>
-            <span className="orange-heading">New Menu Category</span>
-          </header>
-        </div>
       : Object.keys(menuItems).length > 0 ? 
         <div className="portal-menu-list-container">
           <header>
@@ -134,10 +128,21 @@ function PortalMenu(props) {
               : ""}
             </div>
             <div>
-              <button onClick={() => changeMode("addItem")}>Add Menu Item</button>
-              <button onClick={() => changeMode("addCategory")}>Create Category</button>
+              <button className="orange" onClick={() => changeMode("addItem")}>Add Menu Item</button>
+              <button className="orange" onClick={() => changeMode("addCategory")}>Create Category</button>
             </div>
           </div>
+
+          {mode == "addCategory" ?
+            <div className="portal-category-form-container">
+              <button className="close" onClick={() => changeMode("")}>&#10005;</button>
+              <span className="subheading">Category Name</span>
+              <form className="portal-category-form">
+                  <input className="text-input" type="text" placeholder="Category" ref={addItemName} />
+                  <button>Create Category</button>
+              </form>
+            </div>
+          : ""}
         </div>
       : 
         <div>
