@@ -38,7 +38,7 @@ function PortalOrders(props) {
           <div className="orders-list">
             <header>
               <span className="orange-subheading">1/27/21</span>
-              <button className="orange">Receiving New Orders <img className="checkmark" src={whiteCheckmark} /></button>
+              <button className="tag">Receiving New Orders <img className="checkmark" src={whiteCheckmark} /></button>
             </header>
             {Object.keys(orders).map((category =>
                 <div key={category} className="menu-category-container">
