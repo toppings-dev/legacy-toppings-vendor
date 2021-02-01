@@ -22,15 +22,32 @@ function PortalSettings(props) {
     phoneNumber: "430-390-4092",
     email: "eugene.krabs@krustykrab.com",
     hours: {
-      "Sunday": ["7:00 AM", "12:00 AM"],
-      "Monday": ["7:00 AM", "2:00 AM"],
-      "Tuesday": ["7:00 AM", "2:00 AM"],
-      "Wednesday": ["7:00 AM", "2:00 AM"],
-      "Thursday": ["7:00 AM", "2:00 AM"],
-      "Friday": ["7:00 AM", "2:00 AM"],
-      "Saturday": ["7:00 AM", "12:00 AM"],
+      Sunday: ["7:00 AM", "12:00 AM"],
+      Monday: ["7:00 AM", "2:00 AM"],
+      Tuesday: ["7:00 AM", "2:00 AM"],
+      Wednesday: ["7:00 AM", "2:00 AM"],
+      Thursday: ["7:00 AM", "2:00 AM"],
+      Friday: ["7:00 AM", "2:00 AM"],
+      Saturday: ["7:00 AM", "12:00 AM"],
     }
   });
+  const [vendorForm, setVendorForm] = useState({
+    hours: {
+      Sunday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Monday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Tuesday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Wednesday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Thursday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Friday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Saturday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+    }
+  });
+
+  function changeVendorFormHoursPeriod(day, periodType, period) {
+    const vendorFormHours = vendorForm.hours;
+    vendorForm.hours[day][periodType] = period;
+    setVendorForm({...vendorForm, vendorFormHours});
+  }
   
   return (
     <article className="portal-settings-container">
@@ -50,27 +67,77 @@ function PortalSettings(props) {
           </header>
 
           <div className="content">
-            <form className="portal-rewards-form">
-              <div className="portal-rewards-form-name-section">
-                <span className="subheading">Reward Name</span>
-                <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={settingsNameInput} />
+            <form className="portal-vendor-info-form">
+              <div id="portal-settings-form-name-section">
+                <span className="subheading">Name</span>
+                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
               </div>
               
-              <div className="portal-rewards-form-points-section">
-                <span className="subheading">Point Value</span>
-                <input className="text-input" type="text" placeholder="5" ref={settingsNameInput} />
-              </div>
-              
-              <div className="portal-rewards-form-description-section">
-                <span className="subheading">Reward Description</span>
+              <div id="portal-settings-form-description-section">
+                <span className="subheading">Description</span>
                 <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={settingsNameInput} />
+              </div>
+              
+              <div id="portal-settings-form-tags-section">
+                <span className="subheading">Tags</span>
+                <input className="text-input" type="text" placeholder="Fast Food, Outdoor Dining" ref={settingsNameInput} />
+              </div>
+              
+              <div id="portal-settings-form-address-section">
+                <span className="subheading">Address</span>
+                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+              </div>
+              
+              <div id="portal-settings-form-contact-section">
+                <span className="subheading">Point of Contact</span>
+                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+              </div>
+
+              <div id="portal-settings-form-phone-section">
+                <span className="subheading">Phone Number</span>
+                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+              </div>
+
+              <div id="portal-settings-form-email-section">
+                <span className="subheading">Email Address</span>
+                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+              </div>
+
+              <div id="portal-settings-form-hours-section">
+                <span className="subheading">Hours of Operations</span>
+                {Object.keys(vendor.hours).map((day => 
+                  <div>
+                    <span>{day}:</span>
+                    <span>
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      :
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <div className="am-pm-radio">
+                        <span className={vendorForm.hours[day].startPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "startPeriod", "AM")}>AM</span>
+                        <span className={vendorForm.hours[day].startPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "startPeriod", "PM")}>PM</span>
+                      </div>
+                      <span className="hyphen">-</span>
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      :
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <div className="am-pm-radio">
+                      <span className={vendorForm.hours[day].endPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "endPeriod", "AM")}>AM</span>
+                        <span className={vendorForm.hours[day].endPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "endPeriod", "PM")}>PM</span>
+                      </div>
+                    </span>
+                  </div>
+                ))}
               </div>
             </form>
             
-            <div className="portal-rewards-form-submit-section">
-                <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange">Add Reward</button>
-              </div>
+            <div id="portal-settings-form-submit-section">
+              <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
+              <button className="orange">Update Information</button>
+            </div>
           </div>
         </div>
       :

@@ -40,9 +40,9 @@ function PortalRewards(props) {
             </form>
             
             <div className="portal-rewards-form-submit-section">
-                <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange">Add Reward</button>
-              </div>
+              <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
+              <button className="orange">Add Reward</button>
+            </div>
           </div>
         </div>
       : Object.keys(rewardItems).length > 0 ? 
