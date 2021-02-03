@@ -3,6 +3,8 @@ import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
 
 import { getCurrentUser, setupSession, clearSession } from '../utils/session';
 
@@ -77,6 +79,40 @@ function PortalSignUp(props) {
           setConfirmed(true);
           setErrorMsg("");
           setSuccessMsg("Account confirmed, please sign in.");
+
+          // const restaurant = {
+          //   id: "2",
+          //   name: "The Krusty Krab",
+          //   email: "eugene.krabs@krustykrab.com",
+          //   name: "Mr. Krabs",
+          //   address: "831 Bottom Feeder Lane",
+          //   city: "Bikini Bottom",
+          //   description: null,
+          //   lat: null,
+          //   long: null,
+          //   phone_number: "430-390-4092",
+          //   state: "Pacific Ocean",
+          //   zip_code: "12403",
+          // };
+
+          const restaurant = {
+            name: "Your Restaurant Name",
+            email: email,
+            address: "Your Address",
+            city: "Your City",
+            description: null,
+            lat: null,
+            long: null,
+            phone_number: null,
+            state: "Your State",
+            zip_code: "Your Zip Code",
+          };
+
+          API.graphql({ query: mutations.createRestauraunt , variables: { input: restaurant } }).then(({ data: { createRestauraunt } }) => {
+            console.log(createRestauraunt);
+          }).catch((error) => {
+            console.log(error);
+          });
         }
       });
     } else {

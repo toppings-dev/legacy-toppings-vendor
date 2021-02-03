@@ -43,16 +43,80 @@ function Portal(props) {
 
   useEffect(() => {
     props.toggleShowHeader(false);
+    getData();
   }, []);
 
   function getData() {
-    const menu = {
-      name: "Papaya",
-      menuId: "1"
+    // const menu = {
+    //   name: "Orange",
+    //   menuId: "69"
+    // };
+
+    // const restaurant = {
+    //   // id: "3", 
+    //   name: "Ding",
+    //   email: "ding@gmail.com",
+    //   address: "My Address",
+    //   city: "My City",
+    //   description: null,
+    //   lat: null,
+    //   long: null,
+    //   phone_number: null,
+    //   state: "My State",
+    //   zip_code: "My Zip Code",
+    // };
+
+    // const user = {
+    //   name: "Cat",
+    //   email: "cat@gmail.com",
+    //   restaurant: {
+    //     name: "Ding",
+    //     email: "ding@gmail.com",
+    //     address: "My Address",
+    //     city: "My City",
+    //     description: null,
+    //     lat: null,
+    //     long: null,
+    //     phone_number: null,
+    //     state: "My State",
+    //     zip_code: "My Zip Code",
+    //   }
+    // }
+
+    const sampleMenuItem = {
+      createdAt: "2021-01-06T09:05:34.471Z",
+      description: null,
+      id: "120d203d-341b-4f4e-b96d-5df3efdce33f",
+      menuCategoryName: "Tacos, Bowls, and Burritos",
+      menuId: "1",
+      name: "Burrito",
+      price: 8.95,
+      updatedAt: "2021-01-06T09:05:34.471Z",
     };
 
-    API.graphql({ query: queries.listMenuCategorys/*, variables: { input: menu }*/ }).then(({ data: { listMenuCategorys } }) => {
-      console.log(listMenuCategorys);
+    const reward = {
+      userEmail: "dog@gmail.com",
+      owner: {
+        email: "cat@gmail.com",
+        name: "Cat"
+      },
+      menuId: "69",
+      itemName: "Mouse",
+      date_active_from: "2/2/21",
+      date_active_to: "2/3/21",
+      discountPercentage: 10,
+      discountAmount: 10,
+      offer_price: 10,
+    };
+
+    API.graphql({ query: mutations.createReward , variables: { input: reward } }).then(({ data: { createReward } }) => {
+      console.log(createReward);
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    API.graphql({ query: queries.listRestauraunts /*, variables: { input: menu }*/ }).then(({ data: { listRestauraunts } }) => {
+      console.log(listRestauraunts);
     }).catch((error) => {
       console.log(error);
     });

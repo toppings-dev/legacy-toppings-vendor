@@ -119,15 +119,16 @@ function PortalMenu(props) {
             </div>
             <div className="portal-menu-view">
               {selectedMenuItem != null ? 
-              <div>
-                <span className="orange-heading">{selectedMenuItem.name}</span>
-                <span className="blue-heading">${selectedMenuItem.price}</span>
-                <span className="subheading">Description</span>
-                <div className="menu-item-description">{selectedMenuItem.description}</div>
-              </div>
+                <div>
+                  <span className="orange-heading">{selectedMenuItem.name}</span>
+                  <span className="blue-heading">${selectedMenuItem.price}</span>
+                  <span className="subheading">Description</span>
+                  <div className="menu-item-description">{selectedMenuItem.description}</div>
+                  <button className="orange" onClick={() => changeMode("addItem")}>Edit Menu Item</button>
+                </div>
               : ""}
             </div>
-            <div>
+            <div className="portal-menu-view-buttons">
               <button className="orange" onClick={() => changeMode("addItem")}>Add Menu Item</button>
               <button className="orange" onClick={() => changeMode("addCategory")}>Create Category</button>
             </div>

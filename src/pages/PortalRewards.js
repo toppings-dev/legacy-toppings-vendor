@@ -13,6 +13,23 @@ function PortalRewards(props) {
               {id: 3, name: "Seanut Superstar", price: 10, description: "Buy one get one free Seanut Brittle."},]
   });
 
+  useEffect(() => {
+    const menu = {
+      name: "Papaya",
+      menuId: "1"
+    };
+
+    API.graphql({ query: queries.listMenuCategorys/*, variables: { input: menu }*/ }).then(({ data: { listMenuCategorys } }) => {
+      console.log(listMenuCategorys);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
+
+  function getData() {
+
+  }  
+
   return (
     <article className="portal-rewards-container">
       {mode == "addReward" ? 
@@ -74,10 +91,11 @@ function PortalRewards(props) {
                 <span className="blue-heading">{selectedRewardItem.price} points</span>
                 <span className="subheading">Description</span>
                 <div className="rewards-item-description">{selectedRewardItem.description}</div>
+                <button className="orange" onClick={() => changeMode("addReward")}>Edit Reward</button>
               </div>
               : ""}
             </div>
-            <div>
+            <div className="portal-rewards-view-buttons">
               <button className="orange" onClick={() => changeMode("addReward")}>Add Reward</button>
             </div>
           </div>

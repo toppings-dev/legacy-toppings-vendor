@@ -634,6 +634,14 @@ hr.short {
     align-items: center;
 }
 
+.portal-menu-view-buttons, .portal-rewards-view-buttons {
+    text-align: center;
+}
+
+.portal-menu-view button, .portal-rewards-view button {
+    margin-left : 0rem;
+}
+
 .portal-rewards-form {
     height: auto;
     padding-bottom: 0rem;
