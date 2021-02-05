@@ -14,13 +14,18 @@ function PortalSettings(props) {
 
   const [mode, changeMode] = useState("");
   const [vendor, setVendor] = useState({
-    name: "The Krusty Krab",
-    description: "The most popular restaurant in the Bikini Bottom and the home of the famous Krabby Patty!",
+    name: props.restaurant.name != null && props.restaurant.name.length > 0 ? props.restaurant.name : "Your Restaurant Name",
+    description: props.restaurant.description != null && props.restaurant.description.length > 0 ? props.restaurant.description : "Your Restaurant Description",
     tags: ["Fast Food", "Outdoor Dining"],
-    address: "831 Bottom Feeder Lane, Bikini Bottom, Pacific Ocean 12403",
+    address: props.restaurant.address != null && props.restaurant.address.length > 0 && 
+             props.restaurant.city != null && props.restaurant.city.length > 0 && 
+             props.restaurant.state != null && props.restaurant.state.length > 0 && 
+             props.restaurant.zip_code != null && props.restaurant.zip_code.length > 0 ?
+             `${props.restaurant.address}, ${props.restaurant.city}, ${props.restaurant.state} ${props.restaurant.zip_code}`
+             : "Your Address, Your City, Your State Your Zip Code",
     contact: "Eugene H. Krabs",
-    phoneNumber: "430-390-4092",
-    email: "eugene.krabs@krustykrab.com",
+    phoneNumber: props.restaurant.phone_number != null && props.restaurant.phone_number.length > 0 ? props.restaurant.phone_number : "Your Restaurant Phone Number",
+    email: props.restaurant.email != null && props.restaurant.email.length > 0 ? props.restaurant.email : "Your Restaurant Email",
     hours: {
       Sunday: ["7:00 AM", "12:00 AM"],
       Monday: ["7:00 AM", "2:00 AM"],
