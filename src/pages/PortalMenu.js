@@ -90,9 +90,14 @@ function PortalMenu(props) {
             </form>
             
             <div className="portal-menu-item-form-submit-section">
+              <div>
+                <button className="red-text">Delete</button>
+              </div>
+              <div>
                 <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
                 <button className="orange">Add Menu Item</button>
               </div>
+            </div>
           </div>
         </div>
       : Object.keys(menuItems).length > 0 ? 

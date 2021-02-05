@@ -105,11 +105,22 @@ function PortalSignUp(props) {
             long: null,
             phone_number: null,
             state: "Your State",
-            zip_code: "Your Zip Code",
+            zip_code: "Your Zip Code"
           };
 
           API.graphql({ query: mutations.createRestauraunt , variables: { input: restaurant } }).then(({ data: { createRestauraunt } }) => {
-            console.log(createRestauraunt);
+            console.log("Create Restaurant", createRestauraunt);
+          }).catch((error) => {
+            console.log(error);
+          });
+
+          const user = {
+            name: name,
+            email: email
+          }
+
+          API.graphql({ query: mutations.createUser , variables: { input: user } }).then(({ data: { createUser } }) => {
+            console.log("Create User", createUser);
           }).catch((error) => {
             console.log(error);
           });

@@ -40,6 +40,7 @@ Amplify.configure(awsConfig);
 function Portal(props) {
   const [portalSelection, setPortalSelection] = useState(window.location.href.slice(window.location.href.indexOf("/portal/") + "/portal/".length));
   const [loggedIn, setLoggedIn] = useState(getCurrentUser() != null);
+  const [restaurant, setRestaurant] = useState({});
 
   useEffect(() => {
     props.toggleShowHeader(false);
@@ -83,43 +84,57 @@ function Portal(props) {
     //   }
     // }
 
-    const sampleMenuItem = {
-      createdAt: "2021-01-06T09:05:34.471Z",
-      description: null,
-      id: "120d203d-341b-4f4e-b96d-5df3efdce33f",
-      menuCategoryName: "Tacos, Bowls, and Burritos",
-      menuId: "1",
-      name: "Burrito",
-      price: 8.95,
-      updatedAt: "2021-01-06T09:05:34.471Z",
-    };
+    // const sampleMenuItem = {
+    //   createdAt: "2021-01-06T09:05:34.471Z",
+    //   description: null,
+    //   id: "120d203d-341b-4f4e-b96d-5df3efdce33f",
+    //   menuCategoryName: "Tacos, Bowls, and Burritos",
+    //   menuId: "1",
+    //   name: "Burrito",
+    //   price: 8.95,
+    //   updatedAt: "2021-01-06T09:05:34.471Z",
+    // };
 
-    const reward = {
-      userEmail: "dog@gmail.com",
-      owner: {
-        email: "cat@gmail.com",
-        name: "Cat"
-      },
-      menuId: "69",
-      itemName: "Mouse",
-      date_active_from: "2/2/21",
-      date_active_to: "2/3/21",
-      discountPercentage: 10,
-      discountAmount: 10,
-      offer_price: 10,
-    };
+    // const reward = {
+    //   userEmail: "dog@gmail.com",
+    //   owner: {
+    //     email: "cat@gmail.com",
+    //     name: "Cat"
+    //   },
+    //   menuId: "69",
+    //   itemName: "Mouse",
+    //   date_active_from: "2/2/21",
+    //   date_active_to: "2/3/21",
+    //   discountPercentage: 10,
+    //   discountAmount: 10,
+    //   offer_price: 10,
+    // };
 
-    API.graphql({ query: mutations.createReward , variables: { input: reward } }).then(({ data: { createReward } }) => {
-      console.log(createReward);
-    }).catch((error) => {
-      console.log(error);
-    });
+    // API.graphql({ query: mutations.createReward , variables: { input: reward } }).then(({ data: { createReward } }) => {
+    //   console.log(createReward);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
 
     API.graphql({ query: queries.listRestauraunts /*, variables: { input: menu }*/ }).then(({ data: { listRestauraunts } }) => {
       console.log(listRestauraunts);
     }).catch((error) => {
       console.log(error);
     });
+
+    API.graphql({ query: queries.listUsers /*, variables: { input: menu }*/ }).then(({ data: { listUsers } }) => {
+      console.log(listUsers);
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    // let email = getCurrentUser().username;
+
+    // API.graphql({ query: queries.listUs, variables: { email: email } }).then(({ data: { getUser } }) => {
+    //   console.log(email, getUser);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   function logout() {

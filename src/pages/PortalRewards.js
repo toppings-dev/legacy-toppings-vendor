@@ -13,22 +13,22 @@ function PortalRewards(props) {
               {id: 3, name: "Seanut Superstar", price: 10, description: "Buy one get one free Seanut Brittle."},]
   });
 
-  useEffect(() => {
-    const menu = {
-      name: "Papaya",
-      menuId: "1"
-    };
+  // useEffect(() => {
+  //   const menu = {
+  //     name: "Papaya",
+  //     menuId: "1"
+  //   };
 
-    API.graphql({ query: queries.listMenuCategorys/*, variables: { input: menu }*/ }).then(({ data: { listMenuCategorys } }) => {
-      console.log(listMenuCategorys);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }, []);
+  //   API.graphql({ query: queries.listMenuCategorys/*, variables: { input: menu }*/ }).then(({ data: { listMenuCategorys } }) => {
+  //     console.log(listMenuCategorys);
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   });
+  // }, []);
 
-  function getData() {
+  // function getData() {
 
-  }  
+  // }  
 
   return (
     <article className="portal-rewards-container">
@@ -57,8 +57,13 @@ function PortalRewards(props) {
             </form>
             
             <div className="portal-rewards-form-submit-section">
-              <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-              <button className="orange">Add Reward</button>
+              <div>
+                <button className="red-text">Delete</button>
+              </div>
+              <div>
+                <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
+                <button className="orange">Add Reward</button>
+              </div>
             </div>
           </div>
         </div>

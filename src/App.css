@@ -555,13 +555,26 @@ hr.short {
     font-weight: 700;
 }
 
-.portal-menu-item-form-submit-section, .portal-rewards-form-submit-section, #vendor-info-button-section, #portal-settings-form-submit-section {
+#vendor-info-button-section, #portal-settings-form-submit-section {
     /* grid-area: submit; */
     text-align: right;
 }
 
 .portal-menu-item-form-submit-section button, .portal-rewards-form-submit-section button, #portal-settings-form-submit-section button {
     margin: 3rem 0rem;
+}
+
+.portal-menu-item-form-submit-section, .portal-rewards-form-submit-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.portal-menu-item-form-submit-section div:nth-of-type(2), .portal-rewards-form-submit-section div:nth-of-type(2) {
+    text-align: right;
+    padding-left: 30%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: right;
 }
 
 .portal-category-form-container {
@@ -911,13 +924,19 @@ button.gray {
 button.orange-text {
     background-color: transparent;
     color: #ff5200;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0rem;
 }
 
 button.blue-text {
     background-color: transparent;
     color: #0082ff;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0rem;
+}
+
+button.red-text {
+    background-color: transparent;
+    color: #ff004c;
+    padding: 0.5rem 0rem;
 }
 
 button.tag {
