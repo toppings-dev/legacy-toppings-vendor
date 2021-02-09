@@ -109,12 +109,12 @@ function PortalSettings(props) {
             <form className="portal-vendor-info-form">
               <div id="portal-settings-form-name-section">
                 <span className="subheading">Name</span>
-                <input className="text-input" type="text" placeholder="The Krusty Krab" defaultValue={vendor.name} ref={nameInput} />
+                <input className="text-input" type="text" placeholder="Vendor Name" defaultValue={vendor.name} ref={nameInput} />
               </div>
               
               <div id="portal-settings-form-description-section">
                 <span className="subheading">Description</span>
-                <textarea className="text-input" type="text" placeholder="The most popular restaurant in the Bikini Bottom." defaultValue={vendor.description} ref={descriptionInput} />
+                <textarea className="text-input" type="text" placeholder="Vendor Description" defaultValue={vendor.description} ref={descriptionInput} />
               </div>
               
               <div id="portal-settings-form-tags-section">
@@ -124,22 +124,22 @@ function PortalSettings(props) {
               
               <div id="portal-settings-form-address-section">
                 <span className="subheading">Address</span>
-                <input className="text-input" type="text" placeholder="831 Bottom Feeder Lane, The Bikini Bottom, Pacific Ocean 21345" defaultValue={vendor.address} ref={addressInput} />
+                <input className="text-input" type="text" placeholder="Vendor Address" defaultValue={vendor.address} ref={addressInput} />
               </div>
               
               <div id="portal-settings-form-contact-section">
                 <span className="subheading">Point of Contact</span>
-                <input className="text-input" type="text" placeholder="Eugene H. Krabs" defaultValue={vendor.contact} ref={contactInput} />
+                <input className="text-input" type="text" placeholder="Vendor Point of Contact" defaultValue={vendor.contact} ref={contactInput} />
               </div>
 
               <div id="portal-settings-form-phone-section">
                 <span className="subheading">Phone Number</span>
-                <input className="text-input" type="text" placeholder="332-314-5729" defaultValue={vendor.phoneNumber} ref={phoneNumberInput} />
+                <input className="text-input" type="text" placeholder="123-456-7890" defaultValue={vendor.phoneNumber} ref={phoneNumberInput} />
               </div>
 
               <div id="portal-settings-form-email-section">
                 <span className="subheading">Email Address</span>
-                <input className="text-input" type="text" placeholder="eugene.krabs@krustykrab.com" defaultValue={vendor.email} ref={emailInput} />
+                <input className="text-input" type="text" placeholder="Vendor Email" defaultValue={vendor.email} ref={emailInput} />
               </div>
 
               <div id="portal-settings-form-hours-section">

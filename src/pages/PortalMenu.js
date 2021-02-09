@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+
+import awsConfig from '../utils/awsConfig';
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
+
 import RadioButton from '../components/RadioButton';
 import bubbleIcon from '../assets/images/bubble-icon-1.svg';
 import plusButtonIcon from '../assets/images/portal-menu-plus-button.svg';
@@ -10,13 +16,34 @@ function PortalMenu(props) {
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
   const [selectedMenuItem, selectMenuItem] = useState(null);
-  const [menuItems, setMenuItems] = useState({
-    Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
-                   {id: 2, name: "Fried Oyster Skins", price: "0.99", description: "Oyster skins that are fried."}],
-    Entrees: [{id: 3, name: "Krabby Patty", price: "2.99", description: "The signature of the Krusty Krab, a juicy burger with secret ingredients."}, 
-                {id: 4, name: "Jelly Patty", price: "3.99", description: "A Krabby Patty with jellyfish jelly."}],
-    Desserts: [{id: 5, name: "Seanut Brittle", price: "2.43", description: "Hard sugar candy pieces with seanuts inside."}]
-  });
+  // const [menuItems, setMenuItems] = useState({
+  //   Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
+  //                  {id: 2, name: "Fried Oyster Skins", price: "0.99", description: "Oyster skins that are fried."}],
+  //   Entrees: [{id: 3, name: "Krabby Patty", price: "2.99", description: "The signature of the Krusty Krab, a juicy burger with secret ingredients."}, 
+  //               {id: 4, name: "Jelly Patty", price: "3.99", description: "A Krabby Patty with jellyfish jelly."}],
+  //   Desserts: [{id: 5, name: "Seanut Brittle", price: "2.43", description: "Hard sugar candy pieces with seanuts inside."}]
+  // });
+  const [menuItems, setMenuItems] = useState({});
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  function getData() {
+    API.graphql({ query: queries.listMenuCategorys }).then(({ data: { listMenuCategorys } }) => {
+      // console.log("Categories", listMenuCategorys.items);
+      const menu = {};
+      listMenuCategorys.items.forEach(item => {
+        setMenuItems(oldMenuItems => ({
+          ...oldMenuItems,
+          [item.name]: [item]
+        }));
+        console.log("D", item.name, item);
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   return (
     <article className="portal-menu-container">

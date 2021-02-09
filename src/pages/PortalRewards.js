@@ -1,9 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+
+import awsConfig from '../utils/awsConfig';
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
+
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 
 function PortalRewards(props) {
-  const addRewardName = useRef();
+  const nameInput = useRef();
+  const pointInput = useRef();
+  const descriptionInput = useRef();
 
   const [mode, changeMode] = useState("");
   const [selectedRewardItem, selectRewardItem] = useState(null);
@@ -13,22 +21,31 @@ function PortalRewards(props) {
               {id: 3, name: "Seanut Superstar", price: 10, description: "Buy one get one free Seanut Brittle."},]
   });
 
-  // useEffect(() => {
-  //   const menu = {
-  //     name: "Papaya",
-  //     menuId: "1"
-  //   };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  //   API.graphql({ query: queries.listMenuCategorys/*, variables: { input: menu }*/ }).then(({ data: { listMenuCategorys } }) => {
-  //     console.log(listMenuCategorys);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }, []);
+  function getData() {
+    API.graphql({ query: queries.listRewards }).then(({ data: { listRewards } }) => {
+      console.log("Rewards", listRewards);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
-  // function getData() {
+  function addReward() {
+    const newReward = {
+      itemName: nameInput.current.value,
+      userEmail: props.restaurant.email,
+      
+    };
 
-  // }  
+    API.graphql({ query: mutations.createReward, variables: { input: newReward } }).then(({ data: { createReward } }) => {
+      console.log("Create Reward", createReward);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   return (
     <article className="portal-rewards-container">
@@ -42,17 +59,17 @@ function PortalRewards(props) {
             <form className="portal-rewards-form">
               <div className="portal-rewards-form-name-section">
                 <span className="subheading">Reward Name</span>
-                <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={addRewardName} />
+                <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={nameInput} />
               </div>
               
               <div className="portal-rewards-form-points-section">
                 <span className="subheading">Point Value</span>
-                <input className="text-input" type="text" placeholder="5" ref={addRewardName} />
+                <input className="text-input" type="text" placeholder="5" ref={pointInput} />
               </div>
               
               <div className="portal-rewards-form-description-section">
                 <span className="subheading">Reward Description</span>
-                <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={addRewardName} />
+                <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={descriptionInput} />
               </div>
             </form>
             
@@ -62,7 +79,7 @@ function PortalRewards(props) {
               </div>
               <div>
                 <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange">Add Reward</button>
+                <button className="orange" onCilck={() => addReward()}>Add Reward</button>
               </div>
             </div>
           </div>
