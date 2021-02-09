@@ -1,19 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+
+import awsConfig from '../utils/awsConfig';
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
+
 import settingsDesign from '../assets/images/settings-design.PNG';
 import locationIcon from '../assets/images/location-icon.svg';
 import phoneIcon from '../assets/images/phone-icon.svg';
 import clockIcon from '../assets/images/clock-icon.svg';
 
 function PortalSettings(props) {
-  const settingsNameInput = useRef();
-  const settingsEmailInput = useRef();
-  const settingsPhoneInput = useRef();
-  const settingsBusinessNameInput = useRef();
-  const settingsAddressInput = useRef();
+  const nameInput = useRef();
+  const tagInput = useRef();
+  const descriptionInput = useRef();
+  const addressInput = useRef();
+  const phoneNumberInput = useRef();
+  const contactInput = useRef();
+  const emailInput = useRef();
+  const timeInput = useRef();
 
   const [mode, changeMode] = useState("");
   const [vendor, setVendor] = useState({
+    id: props.restaurant.id,
     name: props.restaurant.name != null && props.restaurant.name.length > 0 ? props.restaurant.name : "Your Restaurant Name",
     description: props.restaurant.description != null && props.restaurant.description.length > 0 ? props.restaurant.description : "Your Restaurant Description",
     tags: ["Fast Food", "Outdoor Dining"],
@@ -53,18 +63,42 @@ function PortalSettings(props) {
     vendorForm.hours[day][periodType] = period;
     setVendorForm({...vendorForm, vendorFormHours});
   }
+
+  function updateVendor() {
+    const address = addressInput.current.value.split(", ")[0];
+    const city = addressInput.current.value.split(", ")[1];
+    const state = addressInput.current.value.split(", ")[2].slice(0, -6);
+    const zipCode = addressInput.current.value.split(", ")[2].slice(-5);
+    let phoneNumber = phoneNumberInput.current.value.replaceAll(/-/g, "").replaceAll(/\s/g, "");
+    if (phoneNumber.charAt(0) != "+") {
+        phoneNumber = "+" + (phoneNumber.length == 10 ? "1" : "") + phoneNumber;
+    }
+
+    const updatedVendor = {
+      id: vendor.id,
+      name: nameInput.current.value,
+      description: descriptionInput.current.value,
+      phone_number: phoneNumber,
+      email: emailInput.current.value,
+      address: address,
+      city: city,
+      state: state,
+      zip_code: zipCode
+    };
+    
+    console.log(updatedVendor);
+
+    API.graphql({ query: mutations.updateRestauraunt, variables: { input: updatedVendor } }).then(({ data: { updateRestauraunt } }) => {
+      console.log("UPDATE", updateRestauraunt);
+      props.getData();
+      changeMode("")
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
   
   return (
     <article className="portal-settings-container">
-      {/*<img src={settingsDesign} />*/}
-      {/*<h3>Account Settings</h3>
-
-      <label for="name">Name</label><input className="text-input" type="text" ref={settingsNameInput} />
-      <label for="email">Email Address</label><input className="text-input" type="email" ref={settingsEmailInput} />
-      <label for="phone">Phone Number</label><input className="text-input" type="tel" ref={settingsPhoneInput} />
-      <label for="business-name">Business Name</label><input className="text-input" type="text" ref={settingsBusinessNameInput} />
-      <label for="address">Business Address</label><input className="text-input" type="text" ref={settingsAddressInput} />
-      <button>Edit</button>*/}
       {mode == "edit" ?
         <div className="portal-settings-form-container">
           <header>
@@ -75,60 +109,60 @@ function PortalSettings(props) {
             <form className="portal-vendor-info-form">
               <div id="portal-settings-form-name-section">
                 <span className="subheading">Name</span>
-                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+                <input className="text-input" type="text" placeholder="The Krusty Krab" defaultValue={vendor.name} ref={nameInput} />
               </div>
               
               <div id="portal-settings-form-description-section">
                 <span className="subheading">Description</span>
-                <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={settingsNameInput} />
+                <textarea className="text-input" type="text" placeholder="The most popular restaurant in the Bikini Bottom." defaultValue={vendor.description} ref={descriptionInput} />
               </div>
               
               <div id="portal-settings-form-tags-section">
                 <span className="subheading">Tags</span>
-                <input className="text-input" type="text" placeholder="Fast Food, Outdoor Dining" ref={settingsNameInput} />
+                <input className="text-input" type="text" placeholder="Fast Food, Outdoor Dining" ref={tagInput} />
               </div>
               
               <div id="portal-settings-form-address-section">
                 <span className="subheading">Address</span>
-                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+                <input className="text-input" type="text" placeholder="831 Bottom Feeder Lane, The Bikini Bottom, Pacific Ocean 21345" defaultValue={vendor.address} ref={addressInput} />
               </div>
               
               <div id="portal-settings-form-contact-section">
                 <span className="subheading">Point of Contact</span>
-                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+                <input className="text-input" type="text" placeholder="Eugene H. Krabs" defaultValue={vendor.contact} ref={contactInput} />
               </div>
 
               <div id="portal-settings-form-phone-section">
                 <span className="subheading">Phone Number</span>
-                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+                <input className="text-input" type="text" placeholder="332-314-5729" defaultValue={vendor.phoneNumber} ref={phoneNumberInput} />
               </div>
 
               <div id="portal-settings-form-email-section">
                 <span className="subheading">Email Address</span>
-                <input className="text-input" type="text" placeholder="The Krusty Krab" ref={settingsNameInput} />
+                <input className="text-input" type="text" placeholder="eugene.krabs@krustykrab.com" defaultValue={vendor.email} ref={emailInput} />
               </div>
 
               <div id="portal-settings-form-hours-section">
                 <span className="subheading">Hours of Operations</span>
                 {Object.keys(vendor.hours).map((day => 
-                  <div>
+                  <div key={day}>
                     <span>{day}:</span>
                     <span>
-                      <input className="number-input" type="text" ref={settingsNameInput} />
-                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
                       :
-                      <input className="number-input" type="text" ref={settingsNameInput} />
-                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
                       <div className="am-pm-radio">
                         <span className={vendorForm.hours[day].startPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "startPeriod", "AM")}>AM</span>
                         <span className={vendorForm.hours[day].startPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "startPeriod", "PM")}>PM</span>
                       </div>
                       <span className="hyphen">-</span>
-                      <input className="number-input" type="text" ref={settingsNameInput} />
-                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
                       :
-                      <input className="number-input" type="text" ref={settingsNameInput} />
-                      <input className="number-input" type="text" ref={settingsNameInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" ref={timeInput} />
                       <div className="am-pm-radio">
                       <span className={vendorForm.hours[day].endPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "endPeriod", "AM")}>AM</span>
                         <span className={vendorForm.hours[day].endPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "endPeriod", "PM")}>PM</span>
@@ -141,7 +175,7 @@ function PortalSettings(props) {
             
             <div id="portal-settings-form-submit-section">
               <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-              <button className="orange">Update Information</button>
+              <button className="orange" onClick={() => updateVendor()}>Update Information</button>
             </div>
           </div>
         </div>

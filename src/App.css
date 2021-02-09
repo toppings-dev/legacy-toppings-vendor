@@ -729,7 +729,11 @@ hr.short {
 }
 
 .portal-settings-form-container {
+    max-height: 95vh;
+    padding-left: 2px;
+    padding-right: 3rem;
     text-align: left;
+    overflow-y: scroll;
 }
 
 .portal-vendor-info-form {
@@ -826,6 +830,10 @@ hr.short {
 
 #portal-settings-form-email-section {
     grid-area: email;
+}
+
+#portal-settings-form-submit-section button.orange-text {
+    margin: 3rem 2rem;
 }
 
 article span.orange-heading {

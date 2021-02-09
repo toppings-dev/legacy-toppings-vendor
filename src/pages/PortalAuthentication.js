@@ -67,6 +67,7 @@ function PortalSignUp(props) {
 
   function confirmSignUp(e) {
     e.preventDefault();
+    let name = nameInput.current.value;
     let email = emailInput.current.value;
     let code = codeInput.current.value;
 
@@ -80,20 +81,16 @@ function PortalSignUp(props) {
           setErrorMsg("");
           setSuccessMsg("Account confirmed, please sign in.");
 
-          // const restaurant = {
-          //   id: "2",
-          //   name: "The Krusty Krab",
-          //   email: "eugene.krabs@krustykrab.com",
-          //   name: "Mr. Krabs",
-          //   address: "831 Bottom Feeder Lane",
-          //   city: "Bikini Bottom",
-          //   description: null,
-          //   lat: null,
-          //   long: null,
-          //   phone_number: "430-390-4092",
-          //   state: "Pacific Ocean",
-          //   zip_code: "12403",
-          // };
+          const user = {
+            name: name,
+            email: email
+          }
+
+          API.graphql({ query: mutations.createUser, variables: { input: user } }).then(({ data: { createUser } }) => {
+            console.log("Create User", createUser);
+          }).catch((error) => {
+            console.log(error);
+          });
 
           const restaurant = {
             name: "Your Restaurant Name",
@@ -108,19 +105,8 @@ function PortalSignUp(props) {
             zip_code: "Your Zip Code"
           };
 
-          API.graphql({ query: mutations.createRestauraunt , variables: { input: restaurant } }).then(({ data: { createRestauraunt } }) => {
+          API.graphql({ query: mutations.createRestauraunt, variables: { input: restaurant } }).then(({ data: { createRestauraunt } }) => {
             console.log("Create Restaurant", createRestauraunt);
-          }).catch((error) => {
-            console.log(error);
-          });
-
-          const user = {
-            name: name,
-            email: email
-          }
-
-          API.graphql({ query: mutations.createUser , variables: { input: user } }).then(({ data: { createUser } }) => {
-            console.log("Create User", createUser);
           }).catch((error) => {
             console.log(error);
           });

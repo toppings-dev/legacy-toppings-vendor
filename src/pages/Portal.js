@@ -49,11 +49,17 @@ function Portal(props) {
 
   function getData() {
     API.graphql({ query: queries.listRestauraunts }).then(({ data: { listRestauraunts } }) => {
-      // console.log(listRestauraunts.items);
+      console.log(listRestauraunts.items);
       let email = getCurrentUser().username;
       const myRestaurant = listRestauraunts.items.find(restaurant => restaurant.email == email);
       setRestaurant(myRestaurant);
       console.log(email, myRestaurant);
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    API.graphql({ query: queries.listUsers }).then(({ data: { listUsers } }) => {
+      console.log(listUsers.items);
     }).catch((error) => {
       console.log(error);
     });
@@ -94,7 +100,7 @@ function Portal(props) {
               <Route path="/portal/terms-of-service" component={() => <PortalTermsService restaurant={restaurant} />} />
               <Route path="/portal/menu" component={() => <PortalMenu restaurant={restaurant} />} />
               <Route path="/portal/rewards" component={() => <PortalRewards restaurant={restaurant} />} />
-              <Route path="/portal/settings" component={() => <PortalSettings restaurant={restaurant} />} />
+              <Route path="/portal/settings" component={() => <PortalSettings restaurant={restaurant} getData={getData} />} />
             </Switch>
           </main>
         </article>
