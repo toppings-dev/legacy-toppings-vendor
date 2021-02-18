@@ -48,21 +48,18 @@ function Portal(props) {
   }, []);
 
   function getData() {
-    API.graphql({ query: queries.listRestauraunts }).then(({ data: { listRestauraunts } }) => {
-      console.log(listRestauraunts.items);
+    console.log("GET DATA")
+    API.graphql({ query: queries.listRestaurants }).then(({ data: { listRestaurants } }) => {
+      console.log("RESTAURANTS", listRestaurants.items);
       let email = getCurrentUser().username;
-      const myRestaurant = listRestauraunts.items.find(restaurant => restaurant.email == email);
+      const myRestaurant = listRestaurants.items.find(restaurant => restaurant.email == email);
       setRestaurant(myRestaurant);
       console.log(email, myRestaurant);
     }).catch((error) => {
       console.log(error);
     });
 
-    API.graphql({ query: queries.listUsers }).then(({ data: { listUsers } }) => {
-      console.log(listUsers.items);
-    }).catch((error) => {
-      console.log(error);
-    });
+    console.log("RESTAURANT", restaurant);
   }
 
   function logout() {

@@ -10,6 +10,104 @@ export const getUniversity = /* GraphQL */ `
       city
       state
       students {
+        items {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -38,6 +136,48 @@ export const listUniversitys = /* GraphQL */ `
         zip_code
         city
         state
+        students {
+          items {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -49,40 +189,675 @@ export const getUser = /* GraphQL */ `
   query GetUser($email: AWSEmail!) {
     getUser(email: $email) {
       email
+      university_name
       university {
         name
         address
         zip_code
         city
         state
+        students {
+          items {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
+      phone_number
       name
-      restuaraunt {
-        nextToken
-      }
       rewards {
+        items {
+          id
+          userEmail
+          owner {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          menuId
+          points
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       friends {
+        items {
+          id
+          userEmail
+          friendEmail
+          user {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          friend {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       incomingFriendRequest {
+        items {
+          id
+          senderEmail
+          receiverEmail
+          sender {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          receiver {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          accepted
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       outgoingFriendRequest {
+        items {
+          id
+          senderEmail
+          receiverEmail
+          sender {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          receiver {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          accepted
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       groups {
+        items {
+          id
+          userEmail
+          user {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          groupId
+          group {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       incomingGroupRequest {
+        items {
+          id
+          senderEmail
+          receiverEmail
+          groupId
+          group {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sender {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          receiver {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          accepted
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       outgoingGroupRequest {
+        items {
+          id
+          senderEmail
+          receiverEmail
+          groupId
+          group {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sender {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          receiver {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          accepted
+          createdAt
+          updatedAt
+        }
         nextToken
       }
+      deviceToken
       createdAt
       updatedAt
     }
@@ -105,7 +880,249 @@ export const listUsers = /* GraphQL */ `
     ) {
       items {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
@@ -119,9 +1136,166 @@ export const getGroup = /* GraphQL */ `
       id
       name
       members {
+        items {
+          id
+          userEmail
+          user {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          groupId
+          group {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       outgoingRequests {
+        items {
+          id
+          senderEmail
+          receiverEmail
+          groupId
+          group {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          sender {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          receiver {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          accepted
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -139,6 +1313,67 @@ export const listGroups = /* GraphQL */ `
       items {
         id
         name
+        members {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingRequests {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -153,7 +1388,249 @@ export const getGroupMembership = /* GraphQL */ `
       userEmail
       user {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
@@ -161,6 +1638,67 @@ export const getGroupMembership = /* GraphQL */ `
       group {
         id
         name
+        members {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingRequests {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -183,7 +1721,133 @@ export const listGroupMemberships = /* GraphQL */ `
       items {
         id
         userEmail
+        user {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         groupId
+        group {
+          id
+          name
+          members {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingRequests {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -199,13 +1863,497 @@ export const getFriendship = /* GraphQL */ `
       friendEmail
       user {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       friend {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
@@ -225,6 +2373,202 @@ export const listFriendships = /* GraphQL */ `
         id
         userEmail
         friendEmail
+        user {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        friend {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -240,13 +2584,497 @@ export const getFriendRequest = /* GraphQL */ `
       receiverEmail
       sender {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       receiver {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
@@ -267,6 +3095,202 @@ export const listFriendRequests = /* GraphQL */ `
         id
         senderEmail
         receiverEmail
+        sender {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        receiver {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         accepted
         createdAt
         updatedAt
@@ -285,18 +3309,563 @@ export const getGroupRequest = /* GraphQL */ `
       group {
         id
         name
+        members {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingRequests {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
       sender {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       receiver {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
@@ -318,6 +3887,230 @@ export const listGroupRequests = /* GraphQL */ `
         senderEmail
         receiverEmail
         groupId
+        group {
+          id
+          name
+          members {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingRequests {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        sender {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        receiver {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         accepted
         createdAt
         updatedAt
@@ -326,33 +4119,433 @@ export const listGroupRequests = /* GraphQL */ `
     }
   }
 `;
-export const getRestauraunt = /* GraphQL */ `
-  query GetRestauraunt($id: ID!) {
-    getRestauraunt(id: $id) {
+export const getRestaurant = /* GraphQL */ `
+  query GetRestaurant($id: ID!) {
+    getRestaurant(id: $id) {
       id
       name
-      owner {
-        email
-        name
-        createdAt
-        updatedAt
-      }
       menuCategories {
+        items {
+          id
+          name
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       menuItems {
+        items {
+          id
+          name
+          description
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuCategoryName
+          menuCategory {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          price
+          options {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       foodOptions {
+        items {
+          name
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuItem {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       joinedItemsOptions {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          foodOptionName
+          menuItemName
+          menuItem {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          optionCat {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          numchoices
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       options {
+        items {
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          name
+          price
+          foodoption {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       joinedItemOptionsOptions {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          optionName
+          foodOptionName
+          foodOption {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          option {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       description
@@ -369,16 +4562,211 @@ export const getRestauraunt = /* GraphQL */ `
     }
   }
 `;
-export const listRestauraunts = /* GraphQL */ `
-  query ListRestauraunts(
-    $filter: ModelRestaurauntFilterInput
+export const listRestaurants = /* GraphQL */ `
+  query ListRestaurants(
+    $filter: ModelRestaurantFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listRestauraunts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listRestaurants(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -401,9 +4789,204 @@ export const getMenuCategory = /* GraphQL */ `
       id
       name
       menuId
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -417,6 +5000,71 @@ export const getMenuCategory = /* GraphQL */ `
         updatedAt
       }
       menuItems {
+        items {
+          id
+          name
+          description
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuCategoryName
+          menuCategory {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          price
+          options {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -435,6 +5083,120 @@ export const listMenuCategorys = /* GraphQL */ `
         id
         name
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -449,9 +5211,204 @@ export const getMenuItem = /* GraphQL */ `
       name
       description
       menuId
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -466,10 +5423,145 @@ export const getMenuItem = /* GraphQL */ `
       }
       menuCategoryName
       menuCategory {
+        items {
+          id
+          name
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       price
       options {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          foodOptionName
+          menuItemName
+          menuItem {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          optionCat {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          numchoices
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -489,8 +5581,152 @@ export const listMenuItems = /* GraphQL */ `
         name
         description
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         menuCategoryName
+        menuCategory {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         price
+        options {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -503,9 +5739,204 @@ export const getFoodOption = /* GraphQL */ `
     getFoodOption(menuId: $menuId, name: $name) {
       name
       menuId
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -519,9 +5950,184 @@ export const getFoodOption = /* GraphQL */ `
         updatedAt
       }
       menuItem {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          foodOptionName
+          menuItemName
+          menuItem {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          optionCat {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          numchoices
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       options {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          optionName
+          foodOptionName
+          foodOption {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          option {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -549,6 +6155,161 @@ export const listFoodOptions = /* GraphQL */ `
       items {
         name
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
+        menuItem {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -561,9 +6322,204 @@ export const getItemOptionCatJoin = /* GraphQL */ `
     getItemOptionCatJoin(id: $id) {
       id
       menuId
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -579,11 +6535,231 @@ export const getItemOptionCatJoin = /* GraphQL */ `
       foodOptionName
       menuItemName
       menuItem {
+        items {
+          id
+          name
+          description
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuCategoryName
+          menuCategory {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          price
+          options {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       optionCat {
         name
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
+        menuItem {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -607,8 +6783,184 @@ export const listItemOptionCatJoins = /* GraphQL */ `
       items {
         id
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         foodOptionName
         menuItemName
+        menuItem {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        optionCat {
+          name
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuItem {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         numchoices
         createdAt
         updatedAt
@@ -621,9 +6973,204 @@ export const getOption = /* GraphQL */ `
   query GetOption($menuId: ID!, $name: String!) {
     getOption(menuId: $menuId, name: $name) {
       menuId
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -639,6 +7186,99 @@ export const getOption = /* GraphQL */ `
       name
       price
       foodoption {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          optionName
+          foodOptionName
+          foodOption {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          option {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -665,8 +7305,127 @@ export const listOptions = /* GraphQL */ `
     ) {
       items {
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         name
         price
+        foodoption {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -679,9 +7438,204 @@ export const getItemOptionOptionJoin = /* GraphQL */ `
     getItemOptionOptionJoin(id: $id) {
       id
       menuId
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -699,13 +7653,287 @@ export const getItemOptionOptionJoin = /* GraphQL */ `
       foodOption {
         name
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
+        menuItem {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
       option {
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         name
         price
+        foodoption {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -728,8 +7956,201 @@ export const listItemOptionOptionJoins = /* GraphQL */ `
       items {
         id
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         optionName
         foodOptionName
+        foodOption {
+          name
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuItem {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        option {
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          name
+          price
+          foodoption {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -743,11 +8164,398 @@ export const getPickup = /* GraphQL */ `
       id
       deliverer {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       orders {
+        items {
+          id
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          food_ready_time
+          estimated_delivery_time
+          actual_delivery_time
+          delivery_address
+          delivery_lat
+          delivery_long
+          customer {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          comment
+          orderItems {
+            items {
+              id
+              orderId
+              menuId
+              itemName
+              price_per_item
+              price_before_reward
+              price_after_reward
+              quantity
+              comment
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          order_price_before_discount
+          order_price_after_discount
+          discount
+          tax
+          fees
+          tip
+          grandTotal
+          pickupId
+          pickup {
+            id
+            deliverer {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            orders {
+              nextToken
+            }
+            lat
+            long
+            expdate
+            friends {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groups {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            transportation_type
+            apiResponse
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       lat
@@ -755,17 +8563,321 @@ export const getPickup = /* GraphQL */ `
       expdate
       friends {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       groups {
         id
         name
+        members {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingRequests {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
       transportation_type
+      apiResponse
       createdAt
       updatedAt
     }
@@ -780,10 +8892,295 @@ export const listPickups = /* GraphQL */ `
     listPickups(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        deliverer {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        orders {
+          items {
+            id
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            food_ready_time
+            estimated_delivery_time
+            actual_delivery_time
+            delivery_address
+            delivery_lat
+            delivery_long
+            customer {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            comment
+            orderItems {
+              nextToken
+            }
+            order_price_before_discount
+            order_price_after_discount
+            discount
+            tax
+            fees
+            tip
+            grandTotal
+            pickupId
+            pickup {
+              id
+              lat
+              long
+              expdate
+              transportation_type
+              apiResponse
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         lat
         long
         expdate
+        friends {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        groups {
+          id
+          name
+          members {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingRequests {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         transportation_type
+        apiResponse
         createdAt
         updatedAt
       }
@@ -795,9 +9192,204 @@ export const getOrder = /* GraphQL */ `
   query GetOrder($id: ID!) {
     getOrder(id: $id) {
       id
-      restauraunt {
+      restaurant {
         id
         name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         description
         address
         zip_code
@@ -818,12 +9410,369 @@ export const getOrder = /* GraphQL */ `
       delivery_long
       customer {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       comment
       orderItems {
+        items {
+          id
+          orderId
+          menuId
+          itemName
+          order {
+            id
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            food_ready_time
+            estimated_delivery_time
+            actual_delivery_time
+            delivery_address
+            delivery_lat
+            delivery_long
+            customer {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            comment
+            orderItems {
+              nextToken
+            }
+            order_price_before_discount
+            order_price_after_discount
+            discount
+            tax
+            fees
+            tip
+            grandTotal
+            pickupId
+            pickup {
+              id
+              lat
+              long
+              expdate
+              transportation_type
+              apiResponse
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          menuItem {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          price_per_item
+          price_before_reward
+          price_after_reward
+          quantity
+          reward {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          comment
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       order_price_before_discount
@@ -836,10 +9785,295 @@ export const getOrder = /* GraphQL */ `
       pickupId
       pickup {
         id
+        deliverer {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        orders {
+          items {
+            id
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            food_ready_time
+            estimated_delivery_time
+            actual_delivery_time
+            delivery_address
+            delivery_lat
+            delivery_long
+            customer {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            comment
+            orderItems {
+              nextToken
+            }
+            order_price_before_discount
+            order_price_after_discount
+            discount
+            tax
+            fees
+            tip
+            grandTotal
+            pickupId
+            pickup {
+              id
+              lat
+              long
+              expdate
+              transportation_type
+              apiResponse
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         lat
         long
         expdate
+        friends {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
+        groups {
+          id
+          name
+          members {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingRequests {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         transportation_type
+        apiResponse
         createdAt
         updatedAt
       }
@@ -857,13 +10091,238 @@ export const listOrders = /* GraphQL */ `
     listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         food_ready_time
         estimated_delivery_time
         actual_delivery_time
         delivery_address
         delivery_lat
         delivery_long
+        customer {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         comment
+        orderItems {
+          items {
+            id
+            orderId
+            menuId
+            itemName
+            order {
+              id
+              food_ready_time
+              estimated_delivery_time
+              actual_delivery_time
+              delivery_address
+              delivery_lat
+              delivery_long
+              comment
+              order_price_before_discount
+              order_price_after_discount
+              discount
+              tax
+              fees
+              tip
+              grandTotal
+              pickupId
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            price_per_item
+            price_before_reward
+            price_after_reward
+            quantity
+            reward {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            comment
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         order_price_before_discount
         order_price_after_discount
         discount
@@ -872,6 +10331,129 @@ export const listOrders = /* GraphQL */ `
         tip
         grandTotal
         pickupId
+        pickup {
+          id
+          deliverer {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          orders {
+            items {
+              id
+              food_ready_time
+              estimated_delivery_time
+              actual_delivery_time
+              delivery_address
+              delivery_lat
+              delivery_long
+              comment
+              order_price_before_discount
+              order_price_after_discount
+              discount
+              tax
+              fees
+              tip
+              grandTotal
+              pickupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          lat
+          long
+          expdate
+          friends {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          groups {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          transportation_type
+          apiResponse
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -886,20 +10468,464 @@ export const getReward = /* GraphQL */ `
       userEmail
       owner {
         email
+        university_name
+        university {
+          name
+          address
+          zip_code
+          city
+          state
+          students {
+            items {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        phone_number
         name
+        rewards {
+          items {
+            id
+            userEmail
+            owner {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            menuId
+            points
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        friends {
+          items {
+            id
+            userEmail
+            friendEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            friend {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingFriendRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        groups {
+          items {
+            id
+            userEmail
+            user {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        incomingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        outgoingGroupRequest {
+          items {
+            id
+            senderEmail
+            receiverEmail
+            groupId
+            group {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            sender {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            receiver {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            accepted
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        deviceToken
         createdAt
         updatedAt
       }
       menuId
-      itemName
-      menuItem {
-        nextToken
+      points
+      restaurant {
+        id
+        name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        description
+        address
+        zip_code
+        city
+        state
+        lat
+        long
+        phone_number
+        email
+        createdAt
+        updatedAt
       }
-      date_active_from
-      date_active_to
-      discountPercentage
-      discountAmount
-      offer_price
       createdAt
       updatedAt
     }
@@ -915,13 +10941,515 @@ export const listRewards = /* GraphQL */ `
       items {
         id
         userEmail
+        owner {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         menuId
-        itemName
+        points
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getVendorReward = /* GraphQL */ `
+  query GetVendorReward($id: ID!) {
+    getVendorReward(id: $id) {
+      id
+      date_active_from
+      date_active_to
+      discountPercentage
+      discountAmount
+      itemName
+      menuId
+      points
+      restaurant {
+        id
+        name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        description
+        address
+        zip_code
+        city
+        state
+        lat
+        long
+        phone_number
+        email
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listVendorRewards = /* GraphQL */ `
+  query ListVendorRewards(
+    $filter: ModelVendorRewardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listVendorRewards(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
         date_active_from
         date_active_to
         discountPercentage
         discountAmount
-        offer_price
+        itemName
+        menuId
+        points
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -938,13 +11466,238 @@ export const getOrderItem = /* GraphQL */ `
       itemName
       order {
         id
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         food_ready_time
         estimated_delivery_time
         actual_delivery_time
         delivery_address
         delivery_lat
         delivery_long
+        customer {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         comment
+        orderItems {
+          items {
+            id
+            orderId
+            menuId
+            itemName
+            order {
+              id
+              food_ready_time
+              estimated_delivery_time
+              actual_delivery_time
+              delivery_address
+              delivery_lat
+              delivery_long
+              comment
+              order_price_before_discount
+              order_price_after_discount
+              discount
+              tax
+              fees
+              tip
+              grandTotal
+              pickupId
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            price_per_item
+            price_before_reward
+            price_after_reward
+            quantity
+            reward {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            comment
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         order_price_before_discount
         order_price_after_discount
         discount
@@ -953,10 +11706,198 @@ export const getOrderItem = /* GraphQL */ `
         tip
         grandTotal
         pickupId
+        pickup {
+          id
+          deliverer {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          orders {
+            items {
+              id
+              food_ready_time
+              estimated_delivery_time
+              actual_delivery_time
+              delivery_address
+              delivery_lat
+              delivery_long
+              comment
+              order_price_before_discount
+              order_price_after_discount
+              discount
+              tax
+              fees
+              tip
+              grandTotal
+              pickupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          lat
+          long
+          expdate
+          friends {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          groups {
+            id
+            name
+            members {
+              nextToken
+            }
+            outgoingRequests {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          transportation_type
+          apiResponse
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
       menuItem {
+        items {
+          id
+          name
+          description
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          menuCategoryName
+          menuCategory {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          price
+          options {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       price_per_item
@@ -966,13 +11907,186 @@ export const getOrderItem = /* GraphQL */ `
       reward {
         id
         userEmail
+        owner {
+          email
+          university_name
+          university {
+            name
+            address
+            zip_code
+            city
+            state
+            students {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          phone_number
+          name
+          rewards {
+            items {
+              id
+              userEmail
+              menuId
+              points
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          friends {
+            items {
+              id
+              userEmail
+              friendEmail
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingFriendRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          groups {
+            items {
+              id
+              userEmail
+              groupId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          incomingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          outgoingGroupRequest {
+            items {
+              id
+              senderEmail
+              receiverEmail
+              groupId
+              accepted
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          deviceToken
+          createdAt
+          updatedAt
+        }
         menuId
-        itemName
-        date_active_from
-        date_active_to
-        discountPercentage
-        discountAmount
-        offer_price
+        points
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -994,10 +12108,269 @@ export const listOrderItems = /* GraphQL */ `
         orderId
         menuId
         itemName
+        order {
+          id
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          food_ready_time
+          estimated_delivery_time
+          actual_delivery_time
+          delivery_address
+          delivery_lat
+          delivery_long
+          customer {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          comment
+          orderItems {
+            items {
+              id
+              orderId
+              menuId
+              itemName
+              price_per_item
+              price_before_reward
+              price_after_reward
+              quantity
+              comment
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          order_price_before_discount
+          order_price_after_discount
+          discount
+          tax
+          fees
+          tip
+          grandTotal
+          pickupId
+          pickup {
+            id
+            deliverer {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            orders {
+              nextToken
+            }
+            lat
+            long
+            expdate
+            friends {
+              email
+              university_name
+              phone_number
+              name
+              deviceToken
+              createdAt
+              updatedAt
+            }
+            groups {
+              id
+              name
+              createdAt
+              updatedAt
+            }
+            transportation_type
+            apiResponse
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        menuItem {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         price_per_item
         price_before_reward
         price_after_reward
         quantity
+        reward {
+          id
+          userEmail
+          owner {
+            email
+            university_name
+            university {
+              name
+              address
+              zip_code
+              city
+              state
+              createdAt
+              updatedAt
+            }
+            phone_number
+            name
+            rewards {
+              nextToken
+            }
+            friends {
+              nextToken
+            }
+            incomingFriendRequest {
+              nextToken
+            }
+            outgoingFriendRequest {
+              nextToken
+            }
+            groups {
+              nextToken
+            }
+            incomingGroupRequest {
+              nextToken
+            }
+            outgoingGroupRequest {
+              nextToken
+            }
+            deviceToken
+            createdAt
+            updatedAt
+          }
+          menuId
+          points
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         comment
         createdAt
         updatedAt
@@ -1025,6 +12398,120 @@ export const categoriesByMenu = /* GraphQL */ `
         id
         name
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1054,8 +12541,152 @@ export const itemsByCategories = /* GraphQL */ `
         name
         description
         menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          createdAt
+          updatedAt
+        }
         menuCategoryName
+        menuCategory {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         price
+        options {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }

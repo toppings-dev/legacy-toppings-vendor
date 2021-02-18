@@ -11,11 +11,17 @@ import bubbleIcon from '../assets/images/bubble-icon-1.svg';
 import plusButtonIcon from '../assets/images/portal-menu-plus-button.svg';
 
 function PortalMenu(props) {
-  const addItemName = useRef();
+  const categoryNameInput = useRef();
+  const itemNameInput = useRef();
+  const itemPriceInput = useRef();
+  const itemDescriptionInput = useRef();
+  const itemTagsInput = useRef();
+  const itemImageInput = useRef();
 
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
   const [selectedMenuItem, selectMenuItem] = useState(null);
+  const [selectedCategory, selectCategory] = useState(null);
   // const [menuItems, setMenuItems] = useState({
   //   Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
   //                  {id: 2, name: "Fried Oyster Skins", price: "0.99", description: "Oyster skins that are fried."}],
@@ -31,15 +37,54 @@ function PortalMenu(props) {
 
   function getData() {
     API.graphql({ query: queries.listMenuCategorys }).then(({ data: { listMenuCategorys } }) => {
-      // console.log("Categories", listMenuCategorys.items);
-      const menu = {};
-      listMenuCategorys.items.forEach(item => {
-        setMenuItems(oldMenuItems => ({
-          ...oldMenuItems,
-          [item.name]: [item]
-        }));
-        console.log("D", item.name, item);
+      let restaurantMenuCategories = listMenuCategorys.items.filter(category => category.menuId == props.restaurant.id);
+      restaurantMenuCategories.forEach(category => {
+        let restaurantMenuItems = [];
+        API.graphql({ query: queries.listMenuItems }).then(({ data: { listMenuItems } }) => {
+          restaurantMenuItems = listMenuItems.items.filter(item => item.menuId == props.restaurant.id && item.menuCategoryName == category.name);
+          setMenuItems(oldMenuCategories => ({
+            ...oldMenuCategories,
+            [category.name]: restaurantMenuItems
+          }));
+        }).catch((error) => {
+          console.log(error);
+        });
       });
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function addCategory(e) {
+    e.preventDefault();
+    const menuCategory = {
+      menuId: props.restaurant.id,
+      name: categoryNameInput.current.value,
+    };
+
+    API.graphql({ query: mutations.createMenuCategory, variables: { input: menuCategory } }).then(({ data: { createMenuCategory } }) => {
+      console.log("Create Menu Category", createMenuCategory);
+      getData();
+      changeMode("");
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function addItem(e) {
+    e.preventDefault();
+    const menuItem = {
+      menuId: props.restaurant.id,
+      menuCategoryName: selectedCategory,
+      name: itemNameInput.current.value,
+      description: itemDescriptionInput.current.value,
+      price: itemPriceInput.current.value,
+    };
+
+    API.graphql({ query: mutations.createMenuItem, variables: { input: menuItem } }).then(({ data: { createMenuItem } }) => {
+      console.log("Create Menu Category", createMenuItem);
+      getData();
+      changeMode("");
     }).catch((error) => {
       console.log(error);
     });
@@ -62,29 +107,29 @@ function PortalMenu(props) {
               
               <div className="portal-menu-item-form-name-section">
                 <span className="subheading">Item Name</span>
-                <input className="text-input" type="text" placeholder="Krabby Patties" ref={addItemName} />
+                <input className="text-input" type="text" placeholder="Krabby Patties" ref={itemNameInput} />
               </div>
               
               <div className="portal-menu-item-form-price-section">
                 <span className="subheading">Item Price</span>
-                <label for="price">$</label><input id="menu-item-price-input" className="text-input" type="text" placeholder="2.99" ref={addItemName} />
+                <label for="price">$</label><input id="menu-item-price-input" className="text-input" type="text" placeholder="2.99" ref={itemPriceInput} />
               </div>
               
               <div className="portal-menu-item-form-description-section">
                 <span className="subheading">Item Description</span>
-                <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={addItemName} />
+                <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={itemDescriptionInput} />
               </div>
               
               <div className="portal-menu-item-form-tags-section">
                 <span className="subheading">Item Tags</span>
-                <input className="text-input" type="text" placeholder="Seafood" ref={addItemName} />
+                <input className="text-input" type="text" placeholder="Seafood" ref={itemTagsInput} />
               </div>
               
               <div className="portal-menu-item-form-image-section">
                 <span className="subheading">Upload Image</span>
                 <div className="image-input-wrapper">
                   <label htmlFor="portal-menu-item-form-image-input" className="image-upload">Upload an Image</label>
-                  <input id="portal-menu-item-form-image-input" className="image-input" type="file" ref={addItemName} hidden />
+                  <input id="portal-menu-item-form-image-input" className="image-input" type="file" ref={itemImageInput} hidden />
                 </div>
               </div>
 
@@ -122,7 +167,7 @@ function PortalMenu(props) {
               </div>
               <div>
                 <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange">Add Menu Item</button>
+                <button className="orange" onClick={addItem}>Add Menu Item</button>
               </div>
             </div>
           </div>
@@ -137,12 +182,12 @@ function PortalMenu(props) {
             <div className="portal-menu-list">
               {Object.keys(menuItems).map((category =>
                 <div className="menu-category-container">
-                  <span className="blue-heading">{category}</span>
+                  <span className="blue-heading"><span>{category}</span><span><button className="blue-plus"><img onClick={() => {changeMode("addItem"); selectCategory(category)}} src={plusButtonIcon} /></button></span></span>
 
                   {menuItems[category].map(item => 
                     <div key={item.id} className={selectedMenuItem == item ? "menu-item-container active" : "menu-item-container"} onClick={() => selectMenuItem(item)}>
                       <span className="subheading">{item.name}</span>
-                      <span className="subheading">${item.price}</span>
+                      <span className="subheading">${item.price.toFixed(2)}</span>
                       <div className="menu-item-description">{item.description}</div>
                     </div>
                   )}
@@ -153,7 +198,7 @@ function PortalMenu(props) {
               {selectedMenuItem != null ? 
                 <div>
                   <span className="orange-heading">{selectedMenuItem.name}</span>
-                  <span className="blue-heading">${selectedMenuItem.price}</span>
+                  <span className="blue-heading">${selectedMenuItem.price.toFixed(2)}</span>
                   <span className="subheading">Description</span>
                   <div className="menu-item-description">{selectedMenuItem.description}</div>
                   <button className="orange" onClick={() => changeMode("addItem")}>Edit Menu Item</button>
@@ -161,7 +206,7 @@ function PortalMenu(props) {
               : ""}
             </div>
             <div className="portal-menu-view-buttons">
-              <button className="orange" onClick={() => changeMode("addItem")}>Add Menu Item</button>
+              {/*<button className="orange" onClick={() => changeMode("addItem")}>Add Menu Item</button>*/}
               <button className="orange" onClick={() => changeMode("addCategory")}>Create Category</button>
             </div>
           </div>
@@ -171,14 +216,25 @@ function PortalMenu(props) {
               <button className="close" onClick={() => changeMode("")}>&#10005;</button>
               <span className="subheading">Category Name</span>
               <form className="portal-category-form">
-                  <input className="text-input" type="text" placeholder="Category" ref={addItemName} />
-                  <button>Create Category</button>
+                  <input className="text-input" type="text" placeholder="Category" ref={categoryNameInput} />
+                  <button onClick={addCategory}>Create Category</button>
               </form>
             </div>
           : ""}
         </div>
       : 
         <div>
+          {mode == "addCategory" ?
+            <div className="portal-category-form-container">
+              <button className="close" onClick={() => changeMode("")}>&#10005;</button>
+              <span className="subheading">Category Name</span>
+              <form className="portal-category-form">
+                  <input className="text-input" type="text" placeholder="Category" ref={categoryNameInput} />
+                  <button onClick={addCategory}>Create Category</button>
+              </form>
+            </div>
+          : ""}
+
           <header>
             <img className="portal-empty-image" src={bubbleIcon} />
             <span className="subheading">You have no items in your menu.</span>
@@ -186,8 +242,8 @@ function PortalMenu(props) {
           </header>
 
           <div className="content">
-            <button onClick={() => changeMode("addItem")}>Add Menu Item</button>
-            <button onClick={() => changeMode("addCategory")}>Create Category</button>
+            {/*<button onClick={() => changeMode("addItem")}>Add Menu Item</button>*/}
+            <button onClick={() => changeMode("addCategory")}>Create Menu Category</button>
           </div>
         </div>
       }

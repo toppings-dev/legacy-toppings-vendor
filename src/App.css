@@ -617,6 +617,15 @@ hr.short {
     display: block;
 }
 
+.portal-menu-list-container .blue-heading {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.portal-menu-list-container .blue-heading span:nth-of-type(2) {
+    text-align: right;
+}
+
 .portal-menu-list-container .menu-item-container, .portal-rewards-list-container .reward-container {
     margin: 0.5rem;
     margin-left: -1rem;
@@ -955,6 +964,18 @@ button.tag {
 
 button.image-upload {
     margin: 0;
+}
+
+button.blue-plus {
+    background-color: transparent;
+    width: 1rem;
+    height: 1rem;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+button.blue-plus img {
+    height: 1.5rem;
 }
 
 button.close {

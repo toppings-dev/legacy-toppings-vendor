@@ -88,8 +88,8 @@ function PortalSettings(props) {
     
     console.log(updatedVendor);
 
-    API.graphql({ query: mutations.updateRestauraunt, variables: { input: updatedVendor } }).then(({ data: { updateRestauraunt } }) => {
-      console.log("UPDATE", updateRestauraunt);
+    API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
+      console.log("UPDATE", updateRestaurant);
       props.getData();
       changeMode("")
     }).catch((error) => {

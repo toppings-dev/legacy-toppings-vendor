@@ -22,6 +22,7 @@ function PortalSignUp(props) {
   const [signedUp, setSignedUp] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userName, setUserName] = useState(false);
 
   useEffect(() => {
     props.toggleShowHeader(true);
@@ -57,6 +58,7 @@ function PortalSignUp(props) {
       }).then(() => {
         setSignedUp(true);
         setSuccessMsg("Account created, please enter the confirmation code.");
+        setUserName(name);
       }).catch((error) => {
         setErrorMsg(error.message);
       });
@@ -67,7 +69,7 @@ function PortalSignUp(props) {
 
   function confirmSignUp(e) {
     e.preventDefault();
-    let name = nameInput.current.value;
+    let name = userName;
     let email = emailInput.current.value;
     let code = codeInput.current.value;
 
@@ -86,11 +88,11 @@ function PortalSignUp(props) {
             email: email
           }
 
-          API.graphql({ query: mutations.createUser, variables: { input: user } }).then(({ data: { createUser } }) => {
-            console.log("Create User", createUser);
-          }).catch((error) => {
-            console.log(error);
-          });
+          // API.graphql({ query: mutations.createUser, variables: { input: user } }).then(({ data: { createUser } }) => {
+          //   console.log("Create User", createUser);
+          // }).catch((error) => {
+          //   console.log(error);
+          // });
 
           const restaurant = {
             name: "Your Restaurant Name",
@@ -105,8 +107,9 @@ function PortalSignUp(props) {
             zip_code: "Your Zip Code"
           };
 
-          API.graphql({ query: mutations.createRestauraunt, variables: { input: restaurant } }).then(({ data: { createRestauraunt } }) => {
-            console.log("Create Restaurant", createRestauraunt);
+          API.graphql({ query: mutations.createRestaurant, variables: { input: restaurant } }).then(({ data: { createRestaurant } }) => {
+            console.log("Create Restaurant", createRestaurant);
+            setErrorMsg("");
           }).catch((error) => {
             console.log(error);
           });
