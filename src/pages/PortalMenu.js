@@ -137,23 +137,23 @@ function PortalMenu(props) {
                 <div className="portal-menu-item-form-toppings-section">
                   <div className="portal-menu-item-form-toppings-container">
                     <span className="subheading">Toppings Name</span>
-                    <input className="text-input" type="text" placeholder="Patty Type" ref={addItemName} />
+                    <input className="text-input" type="text" placeholder="Patty Type" ref={itemNameInput} />
 
                     <div className="portal-menu-item-form-toppings-options-container">
                       <span className="subheading">Options <img src={plusButtonIcon} /></span>
-                      <input className="text-input" type="text" placeholder="Crab Patty" ref={addItemName} />
-                      <input className="text-input" type="text" placeholder="Fish Patty" ref={addItemName} />
+                      <input className="text-input" type="text" placeholder="Crab Patty" ref={itemNameInput} />
+                      <input className="text-input" type="text" placeholder="Fish Patty" ref={itemNameInput} />
                     </div>
                   </div>
 
                   <div className="portal-menu-item-form-toppings-container">
                     <span className="subheading">Toppings Name</span>
-                    <input className="text-input" type="text" placeholder="Patty Type" ref={addItemName} />
+                    <input className="text-input" type="text" placeholder="Patty Type" ref={itemNameInput} />
 
                     <div className="portal-menu-item-form-toppings-options-container">
                       <span className="subheading">Options <img src={plusButtonIcon} /></span>
-                      <input className="text-input" type="text" placeholder="Crab Patty" ref={addItemName} />
-                      <input className="text-input" type="text" placeholder="Fish Patty" ref={addItemName} />
+                      <input className="text-input" type="text" placeholder="Crab Patty" ref={itemNameInput} />
+                      <input className="text-input" type="text" placeholder="Fish Patty" ref={itemNameInput} />
                       <button className="blue-text"><span>+</span> Add Category</button>
                     </div>
                   </div>
