@@ -615,6 +615,7 @@ hr.short {
     font-size: 1.8rem;
     font-weight: 700;
     display: block;
+    padding-right: 1rem;
 }
 
 .portal-menu-list-container .blue-heading {
@@ -649,6 +650,13 @@ hr.short {
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-column-gap: 5rem;
+}
+
+.portal-menu-list, .portal-rewards-list {
+    height: 30rem;
+    padding-left: 1rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .portal-menu-view, .portal-rewards-view {

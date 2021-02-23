@@ -9,12 +9,17 @@ import * as mutations from '../graphql/mutations';
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 
 function PortalRewards(props) {
+  const defaultReward = {
+    name: "Jelly Joy", 
+    points: 5, 
+    description: "10% discount on all jelly patties"
+  };
   const nameInput = useRef();
   const pointsInput = useRef();
   const descriptionInput = useRef();
 
   const [mode, changeMode] = useState("");
-  const [selectedRewardItem, selectRewardItem] = useState(null);
+  const [selectedRewardItem, selectRewardItem] = useState(defaultReward);
   const [rewardItems, setRewardItems] = useState({
     // Rewards: [{id: 1, name: "Jelly Joy", price: 5, description: "10% discount on all jelly patties."}, 
     //           {id: 2, name: "Krabby Patty Happy Hour", price: 5, description: "10% discount on all Krabby Patties between 12PM and 3PM."},
@@ -28,22 +33,11 @@ function PortalRewards(props) {
 
   function getData() {
     API.graphql({ query: queries.listVendorRewards }).then(({ data: { listVendorRewards } }) => {
+      console.log(listVendorRewards)
       let restaurantRewards = listVendorRewards.items.filter(reward => reward.menuId == props.restaurant.id);
       restaurantRewards.forEach(reward => {
-        API.graphql({ query: queries.listMenuItems }).then(({ data: { listMenuItems } }) => {
-          console.log(listMenuItems)
-          let restaurantMenuItem = listMenuItems.items.filter(item => item.menuId == props.restaurant.id && item.name == reward.itemName);
-          setRewardItems({
-            Rewards: [...rewardItems.Rewards, {
-              ...reward,
-              description: restaurantMenuItem[0].description
-            }]
-          });
-        }).catch((error) => {
-          console.log(error);
-        });
+        reward.description = reward.itemName;
       });
-      console.log(restaurantRewards)
       setRewardItems({
         Rewards: restaurantRewards
       });
@@ -68,6 +62,43 @@ function PortalRewards(props) {
       console.log("Create Reward", createVendorReward);
       changeMode("");
       getData();
+      selectRewardItem(defaultReward);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function editReward() {
+    const reward = {
+      id: selectedRewardItem.id,
+      itemName: nameInput.current.value,
+      menuId: props.restaurant.id,
+      points: parseInt(pointsInput.current.value),
+      // description: descriptionInput.current.value,
+    };
+
+    console.log(selectedRewardItem.id);
+    API.graphql({ query: mutations.updateVendorReward, variables: { input: reward } }).then(({ data: { updateVendorReward } }) => {
+      console.log("Update Reward", updateVendorReward);
+      changeMode("");
+      getData();
+      selectRewardItem(defaultReward);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function deleteReward() {
+    const reward = {
+      id: selectedRewardItem.id,
+    }
+
+    console.log(selectedRewardItem.id);
+    API.graphql({ query: mutations.deleteVendorReward, variables: { input: reward } }).then(({ data: { deleteVendorReward } }) => {
+      console.log("Delete Reward", deleteVendorReward);
+      changeMode("");
+      getData();
+      selectRewardItem(defaultReward);
     }).catch((error) => {
       console.log(error);
     });
@@ -75,7 +106,7 @@ function PortalRewards(props) {
 
   return (
     <article className="portal-rewards-container">
-      {mode == "addReward" ? 
+      {mode == "addReward" || mode == "editReward" ? 
         <div className="portal-rewards-form-container">
           <header>
             <span className="orange-heading">New Reward</span>
@@ -85,27 +116,27 @@ function PortalRewards(props) {
             <form className="portal-rewards-form">
               <div className="portal-rewards-form-name-section">
                 <span className="subheading">Reward Name</span>
-                <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={nameInput} />
+                <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={nameInput} defaultValue={mode == "editReward" ? selectedRewardItem.itemName : ""}/>
               </div>
               
               <div className="portal-rewards-form-points-section">
                 <span className="subheading">Point Value</span>
-                <input className="text-input" type="number" placeholder="5" ref={pointsInput} />
+                <input className="text-input" type="number" placeholder="5" ref={pointsInput} defaultValue={mode == "editReward" ? selectedRewardItem.points : ""}/>
               </div>
               
               <div className="portal-rewards-form-description-section">
                 <span className="subheading">Reward Description</span>
-                <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={descriptionInput} />
+                <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={descriptionInput} defaultValue={mode == "editReward" ? selectedRewardItem.description : ""}/>
               </div>
             </form>
             
             <div className="portal-rewards-form-submit-section">
               <div>
-                <button className="red-text">Delete</button>
+                <button className="red-text" onClick={deleteReward}>Delete</button>
               </div>
               <div>
                 <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange" onClick={() => addReward()}>Add Reward</button>
+                <button className="orange" onClick={mode == "addReward" ? addReward : editReward}>{mode == "addReward" ? "Add" : "Save"} Reward</button>
               </div>
             </div>
           </div>
@@ -133,13 +164,13 @@ function PortalRewards(props) {
               ))} 
             </div>
             <div className="portal-rewards-view">
-              {selectedRewardItem != null ? 
+              {selectedRewardItem != null && selectedRewardItem.name != defaultReward.name ? 
               <div>
                 <span className="orange-heading">{selectedRewardItem.itemName}</span>
                 <span className="blue-heading">{selectedRewardItem.points} points</span>
                 <span className="subheading">Description</span>
                 <div className="rewards-item-description">{selectedRewardItem.description}</div>
-                <button className="orange" onClick={() => changeMode("addReward")}>Edit Reward</button>
+                <button className="orange" onClick={() => changeMode("editReward")}>Edit Reward</button>
               </div>
               : ""}
             </div>

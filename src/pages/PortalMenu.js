@@ -11,6 +11,11 @@ import bubbleIcon from '../assets/images/bubble-icon-1.svg';
 import plusButtonIcon from '../assets/images/portal-menu-plus-button.svg';
 
 function PortalMenu(props) {
+  const defaultMenuItem = {
+    name: "Krabby Patty",
+    price: 2.99,
+    description: "The signature of the Krusty Krab, a juicy burger with secret ingredients.",
+  };
   const categoryNameInput = useRef();
   const itemNameInput = useRef();
   const itemPriceInput = useRef();
@@ -20,7 +25,7 @@ function PortalMenu(props) {
 
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
-  const [selectedMenuItem, selectMenuItem] = useState(null);
+  const [selectedMenuItem, selectMenuItem] = useState(defaultMenuItem);
   const [selectedCategory, selectCategory] = useState(null);
   // const [menuItems, setMenuItems] = useState({
   //   Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
@@ -66,6 +71,7 @@ function PortalMenu(props) {
       console.log("Create Menu Category", createMenuCategory);
       getData();
       changeMode("");
+      selectMenuItem(defaultMenuItem);
     }).catch((error) => {
       console.log(error);
     });
@@ -82,9 +88,47 @@ function PortalMenu(props) {
     };
 
     API.graphql({ query: mutations.createMenuItem, variables: { input: menuItem } }).then(({ data: { createMenuItem } }) => {
-      console.log("Create Menu Category", createMenuItem);
+      console.log("Create Menu Item", createMenuItem);
       getData();
       changeMode("");
+      selectMenuItem(defaultMenuItem);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  function editItem(e) {
+    e.preventDefault();
+    const menuItem = {
+      id: selectedMenuItem.id,
+      menuId: props.restaurant.id,
+      menuCategoryName: selectedCategory,
+      name: itemNameInput.current.value,
+      description: itemDescriptionInput.current.value,
+      price: itemPriceInput.current.value,
+    };
+
+    API.graphql({ query: mutations.updateMenuItem, variables: { input: menuItem } }).then(({ data: { updateMenuItem } }) => {
+      console.log("Update Menu Item", updateMenuItem);
+      getData();
+      changeMode("");
+      selectMenuItem(defaultMenuItem);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  
+  function deleteItem(e) {
+    e.preventDefault();
+    const menuItem = {
+      id: selectedMenuItem.id
+    };
+
+    API.graphql({ query: mutations.deleteMenuItem, variables: { input: menuItem } }).then(({ data: { deleteMenuItem } }) => {
+      console.log("Delete Menu Item", deleteMenuItem);
+      getData();
+      changeMode("");
+      selectMenuItem(defaultMenuItem)
     }).catch((error) => {
       console.log(error);
     });
@@ -92,7 +136,7 @@ function PortalMenu(props) {
 
   return (
     <article className="portal-menu-container">
-      {mode == "addItem" ?
+      {mode == "addItem" || mode == "editItem" ?
         <div className="portal-menu-item-form-container">
           <header>
             <span className="orange-heading">New Menu Item</span>
@@ -107,17 +151,17 @@ function PortalMenu(props) {
               
               <div className="portal-menu-item-form-name-section">
                 <span className="subheading">Item Name</span>
-                <input className="text-input" type="text" placeholder="Krabby Patties" ref={itemNameInput} />
+                <input className="text-input" type="text" placeholder="Krabby Patties" ref={itemNameInput} defaultValue={mode == "editItem" ? selectedMenuItem.name : ""} />
               </div>
               
               <div className="portal-menu-item-form-price-section">
                 <span className="subheading">Item Price</span>
-                <label for="price">$</label><input id="menu-item-price-input" className="text-input" type="text" placeholder="2.99" ref={itemPriceInput} />
+                <label for="price">$</label><input id="menu-item-price-input" className="text-input" type="text" placeholder="2.99" ref={itemPriceInput} defaultValue={mode == "editItem" ? selectedMenuItem.price.toFixed(2) : ""} />
               </div>
               
               <div className="portal-menu-item-form-description-section">
                 <span className="subheading">Item Description</span>
-                <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={itemDescriptionInput} />
+                <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={itemDescriptionInput} defaultValue={mode == "editItem" ? selectedMenuItem.description : ""} />
               </div>
               
               <div className="portal-menu-item-form-tags-section">
@@ -163,11 +207,13 @@ function PortalMenu(props) {
             
             <div className="portal-menu-item-form-submit-section">
               <div>
-                <button className="red-text">Delete</button>
+                {mode == "editItem" ? 
+                  <button className="red-text" onClick={deleteItem}>Delete</button>
+                : ""}
               </div>
               <div>
                 <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange" onClick={addItem}>Add Menu Item</button>
+                <button className="orange" onClick={mode == "addItem" ? addItem : editItem}>{mode == "addItem" ? "Add" : "Save"} Menu Item</button>
               </div>
             </div>
           </div>
@@ -195,13 +241,13 @@ function PortalMenu(props) {
               ))} 
             </div>
             <div className="portal-menu-view">
-              {selectedMenuItem != null ? 
+              {selectedMenuItem != null && selectedMenuItem.name != defaultMenuItem.name ? 
                 <div>
                   <span className="orange-heading">{selectedMenuItem.name}</span>
                   <span className="blue-heading">${selectedMenuItem.price.toFixed(2)}</span>
                   <span className="subheading">Description</span>
                   <div className="menu-item-description">{selectedMenuItem.description}</div>
-                  <button className="orange" onClick={() => changeMode("addItem")}>Edit Menu Item</button>
+                  <button className="orange" onClick={() => changeMode("editItem")}>Edit Menu Item</button>
                 </div>
               : ""}
             </div>
