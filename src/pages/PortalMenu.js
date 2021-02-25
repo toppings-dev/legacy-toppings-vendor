@@ -15,6 +15,9 @@ function PortalMenu(props) {
     name: "Krabby Patty",
     price: 2.99,
     description: "The signature of the Krusty Krab, a juicy burger with secret ingredients.",
+    toppings: [
+      { name: "Patty Type", options: ["Crab Patty", "Fish Patty"] }
+    ],
   };
   const categoryNameInput = useRef();
   const itemNameInput = useRef();
@@ -22,7 +25,15 @@ function PortalMenu(props) {
   const itemDescriptionInput = useRef();
   const itemTagsInput = useRef();
   const itemImageInput = useRef();
-
+  const toppings1NameInput = useRef();
+  const toppings1Option1Input = useRef();
+  const toppings1Option2Input = useRef();
+  const toppings1Option3Input = useRef();
+  const toppings2NameInput = useRef();
+  const toppings2Option1Input = useRef();
+  const toppings2Option2Input = useRef();
+  const toppings2Option3Input = useRef();
+  
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
   const [selectedMenuItem, selectMenuItem] = useState(defaultMenuItem);
@@ -41,16 +52,30 @@ function PortalMenu(props) {
   }, []);
 
   function getData() {
-    API.graphql({ query: queries.listMenuCategorys }).then(({ data: { listMenuCategorys } }) => {
-      let restaurantMenuCategories = listMenuCategorys.items.filter(category => category.menuId == props.restaurant.id);
-      restaurantMenuCategories.forEach(category => {
-        let restaurantMenuItems = [];
-        API.graphql({ query: queries.listMenuItems }).then(({ data: { listMenuItems } }) => {
-          restaurantMenuItems = listMenuItems.items.filter(item => item.menuId == props.restaurant.id && item.menuCategoryName == category.name);
-          setMenuItems(oldMenuCategories => ({
-            ...oldMenuCategories,
-            [category.name]: restaurantMenuItems
-          }));
+    let menu = {};
+    API.graphql(graphqlOperation(queries.listMenuCategorys, { filter: { menuId: { eq: props.restaurant.id } } })).then(({ data: { listMenuCategorys } }) => {
+      listMenuCategorys.items.forEach(category => {
+        menu[category.name] = [];
+        API.graphql(graphqlOperation(queries.listMenuItems, { filter: { menuId: { eq: props.restaurant.id }, menuCategoryName: { eq: category.name } } })).then(({ data: { listMenuItems } }) => {
+          if (listMenuItems.items.length <= 0) {
+            setMenuItems({
+              [category.name]: []
+            });
+          }
+          
+          listMenuItems.items.forEach(item => {
+            let menuItem = item;
+            menuItem.toppings = {};
+            item.options.items.forEach(topping => {
+              menuItem.toppings[topping.foodOptionName] = topping.optionCat.options.items.map(option => option.optionName);
+            });
+            menu[category.name].push(menuItem);
+            
+            setMenuItems(oldMenuItems => ({
+              ...oldMenuItems,
+              [category.name]: oldMenuItems.hasOwnProperty(category.name) ? [...oldMenuItems[category.name], menuItem] : [menuItem]
+            }));
+          });
         }).catch((error) => {
           console.log(error);
         });
@@ -69,6 +94,7 @@ function PortalMenu(props) {
 
     API.graphql({ query: mutations.createMenuCategory, variables: { input: menuCategory } }).then(({ data: { createMenuCategory } }) => {
       console.log("Create Menu Category", createMenuCategory);
+      setMenuItems({});
       getData();
       changeMode("");
       selectMenuItem(defaultMenuItem);
@@ -79,6 +105,7 @@ function PortalMenu(props) {
 
   function addItem(e) {
     e.preventDefault();
+
     const menuItem = {
       menuId: props.restaurant.id,
       menuCategoryName: selectedCategory,
@@ -89,6 +116,7 @@ function PortalMenu(props) {
 
     API.graphql({ query: mutations.createMenuItem, variables: { input: menuItem } }).then(({ data: { createMenuItem } }) => {
       console.log("Create Menu Item", createMenuItem);
+      setMenuItems({});
       getData();
       changeMode("");
       selectMenuItem(defaultMenuItem);
@@ -99,6 +127,61 @@ function PortalMenu(props) {
 
   function editItem(e) {
     e.preventDefault();
+
+    if (addItemType == "Customizable") {
+      const toppingsCategoryJoiners = [{ menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, menuItemName: itemNameInput.current.value, numchoices: 3 },
+                                       { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, menuItemName: itemNameInput.current.value, numchoices: 3 }];
+      const toppingsCategories = [{ menuId: props.restaurant.id, name: toppings1NameInput.current.value }, 
+                                  { menuId: props.restaurant.id, name: toppings2NameInput.current.value }];
+
+      const toppingsOptionJoiners = [{ menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, optionName: toppings1Option1Input.current.value },
+                                    { menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, optionName: toppings1Option2Input.current.value },
+                                    { menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, optionName: toppings1Option3Input.current.value },
+                                    { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, optionName: toppings2Option1Input.current.value },
+                                    { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, optionName: toppings2Option2Input.current.value },
+                                    { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, optionName: toppings2Option3Input.current.value }];
+
+      const toppingsOptions = [{ menuId: props.restaurant.id, name: toppings1Option1Input.current.value },
+                              { menuId: props.restaurant.id, name: toppings1Option2Input.current.value },
+                              { menuId: props.restaurant.id, name: toppings1Option3Input.current.value },
+                              { menuId: props.restaurant.id, name: toppings2Option1Input.current.value },
+                              { menuId: props.restaurant.id, name: toppings2Option2Input.current.value },
+                              { menuId: props.restaurant.id, name: toppings2Option3Input.current.value }];
+
+      API.graphql({ query: mutations.createFoodOption, variables: { input: toppingsCategories[0] } }).then(({ data: { createFoodOption } }) => {
+      API.graphql({ query: mutations.createFoodOption, variables: { input: toppingsCategories[1] } }).then(({ data: { createFoodOption } }) => {
+        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[0] } }).then(({ data: { createOption } }) => {
+        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[1] } }).then(({ data: { createOption } }) => {
+        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[2] } }).then(({ data: { createOption } }) => {
+        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[3] } }).then(({ data: { createOption } }) => {
+        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[4] } }).then(({ data: { createOption } }) => {
+        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[5] } }).then(({ data: { createOption } }) => {
+          API.graphql({ query: mutations.createItemOptionCatJoin, variables: { input: toppingsCategoryJoiners[0] } }).then(({ data: { createItemOptionCatJoin } }) => {
+          API.graphql({ query: mutations.createItemOptionCatJoin, variables: { input: toppingsCategoryJoiners[1] } }).then(({ data: { createItemOptionCatJoin } }) => {
+            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[0] } }).then(({ data: { createItemOptionOptionJoin } }) => {
+            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[1] } }).then(({ data: { createItemOptionOptionJoin } }) => {
+            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[2] } }).then(({ data: { createItemOptionOptionJoin } }) => {
+            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[3] } }).then(({ data: { createItemOptionOptionJoin } }) => {
+            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[4] } }).then(({ data: { createItemOptionOptionJoin } }) => {
+            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[5] } }).then(({ data: { createItemOptionOptionJoin } }) => {
+            }).catch((error) => { console.log(error); });
+            }).catch((error) => { console.log(error); });
+            }).catch((error) => { console.log(error); });
+            }).catch((error) => { console.log(error); });
+            }).catch((error) => { console.log(error); });
+            }).catch((error) => { console.log(error); });
+          }).catch((error) => { console.log(error); });
+          }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+        }).catch((error) => { console.log(error); });
+      }).catch((error) => { console.log(error); });
+      }).catch((error) => { console.log(error); });
+    }
+
     const menuItem = {
       id: selectedMenuItem.id,
       menuId: props.restaurant.id,
@@ -110,6 +193,7 @@ function PortalMenu(props) {
 
     API.graphql({ query: mutations.updateMenuItem, variables: { input: menuItem } }).then(({ data: { updateMenuItem } }) => {
       console.log("Update Menu Item", updateMenuItem);
+      setMenuItems({});
       getData();
       changeMode("");
       selectMenuItem(defaultMenuItem);
@@ -126,11 +210,50 @@ function PortalMenu(props) {
 
     API.graphql({ query: mutations.deleteMenuItem, variables: { input: menuItem } }).then(({ data: { deleteMenuItem } }) => {
       console.log("Delete Menu Item", deleteMenuItem);
+      setMenuItems({});
       getData();
       changeMode("");
       selectMenuItem(defaultMenuItem)
     }).catch((error) => {
       console.log(error);
+    });
+  }
+
+  function addOption(categoryIndex) {
+    const newMenuInput = {
+      name: useRef(),
+      price: useRef(),
+      description: useRef(),
+      tags: useRef(),
+      image: useRef(),
+      toppings: menuInput.toppings
+    };
+    for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
+      newMenuInput.toppings[categoryIndex].options.append(useRef());
+    }
+
+    setMenuInput({
+      ...menuInput,
+      toppings: newMenuInput
+    });
+  }
+
+  function addToppings() {
+    const newMenuInput = {
+      name: useRef(),
+      price: useRef(),
+      description: useRef(),
+      tags: useRef(),
+      image: useRef(),
+      toppings: menuInput.toppings
+    };
+    for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
+      newMenuInput.toppings[categoryIndex].options.append(useRef());
+    }
+
+    setMenuInput({
+      ...menuInput,
+      toppings: [...menuInput.toppings, {name: useRef(), options: [useRef()]}]
     });
   }
 
@@ -145,8 +268,12 @@ function PortalMenu(props) {
           <div className="content">
             <form className="portal-menu-item-form">
               <div className="portal-menu-item-form-type-section">
-                <span className="subheading">Item Type</span>
-                <RadioButton options={["Regular", "Customizable"]} currentChoice={addItemType} setChoice={setAddItemType}/>
+                {mode == "editItem" ? 
+                  <div>
+                    <span className="subheading">Item Type</span>
+                    <RadioButton options={["Regular", "Customizable"]} currentChoice={addItemType} setChoice={setAddItemType}/>
+                  </div>
+                : ""}
               </div>
               
               <div className="portal-menu-item-form-name-section">
@@ -181,24 +308,26 @@ function PortalMenu(props) {
                 <div className="portal-menu-item-form-toppings-section">
                   <div className="portal-menu-item-form-toppings-container">
                     <span className="subheading">Toppings Name</span>
-                    <input className="text-input" type="text" placeholder="Patty Type" ref={itemNameInput} />
+                    <input className="text-input" type="text" placeholder="Patty Type" ref={toppings1NameInput} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 0 ? Object.keys(selectedMenuItem.toppings)[0] : ""}/>
 
                     <div className="portal-menu-item-form-toppings-options-container">
-                      <span className="subheading">Options <img src={plusButtonIcon} /></span>
-                      <input className="text-input" type="text" placeholder="Crab Patty" ref={itemNameInput} />
-                      <input className="text-input" type="text" placeholder="Fish Patty" ref={itemNameInput} />
+                      <span className="subheading">Options <button className="blue-plus" type="button" onClick={(e) => addOption(i)}><img src={plusButtonIcon} /></button></span>
+                      <input className="text-input" type="text" placeholder="Crab Patty" ref={toppings1Option1Input} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 0 ? selectedMenuItem.toppings[Object.keys(selectedMenuItem.toppings)[0]][0] : ""}/>
+                      <input className="text-input" type="text" placeholder="Fish Patty" ref={toppings1Option2Input} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 1 ? selectedMenuItem.toppings[Object.keys(selectedMenuItem.toppings)[0]][1] : ""}/>
+                      <input className="text-input" type="text" placeholder="Seaweed Patty" ref={toppings1Option3Input} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 2 ? selectedMenuItem.toppings[Object.keys(selectedMenuItem.toppings)[0]][2] : ""}/>
                     </div>
                   </div>
 
                   <div className="portal-menu-item-form-toppings-container">
                     <span className="subheading">Toppings Name</span>
-                    <input className="text-input" type="text" placeholder="Patty Type" ref={itemNameInput} />
+                    <input className="text-input" type="text" placeholder="Patty Type" ref={toppings2NameInput} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 1 ? Object.keys(selectedMenuItem.toppings)[1] : ""}/>
 
                     <div className="portal-menu-item-form-toppings-options-container">
-                      <span className="subheading">Options <img src={plusButtonIcon} /></span>
-                      <input className="text-input" type="text" placeholder="Crab Patty" ref={itemNameInput} />
-                      <input className="text-input" type="text" placeholder="Fish Patty" ref={itemNameInput} />
-                      <button className="blue-text"><span>+</span> Add Category</button>
+                      <span className="subheading">Options <button className="blue-plus" type="button" onClick={(e) => addOption(i)}><img src={plusButtonIcon} /></button></span>
+                      <input className="text-input" type="text" placeholder="Crab Patty" ref={toppings2Option1Input} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 1 ? selectedMenuItem.toppings[Object.keys(selectedMenuItem.toppings)[1]][0] : ""}/>
+                      <input className="text-input" type="text" placeholder="Fish Patty" ref={toppings2Option2Input} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 1 ? selectedMenuItem.toppings[Object.keys(selectedMenuItem.toppings)[1]][0] : ""}/>
+                      <input className="text-input" type="text" placeholder="Seaweed Patty" ref={toppings2Option3Input} defaultValue={mode == "editItem" && Object.keys(selectedMenuItem.toppings).length > 1 ? selectedMenuItem.toppings[Object.keys(selectedMenuItem.toppings)[1]][0] : ""}/>
+                      <button className="blue-text" type="button" onClick={addToppings}><span>+</span> Add Category</button>
                     </div>
                   </div>
                 </div>
@@ -227,11 +356,11 @@ function PortalMenu(props) {
           <div className="content">
             <div className="portal-menu-list">
               {Object.keys(menuItems).map((category =>
-                <div className="menu-category-container">
-                  <span className="blue-heading"><span>{category}</span><span><button className="blue-plus"><img onClick={() => {changeMode("addItem"); selectCategory(category)}} src={plusButtonIcon} /></button></span></span>
+                <div key={category.id} className="menu-category-container">
+                  <span className="blue-heading"><span>{category}</span><span><button className="blue-plus" onClick={() => {changeMode("addItem"); selectCategory(category)}}><img src={plusButtonIcon} /></button></span></span>
 
                   {menuItems[category].map(item => 
-                    <div key={item.id} className={selectedMenuItem == item ? "menu-item-container active" : "menu-item-container"} onClick={() => selectMenuItem(item)}>
+                    <div key={item.id} className={selectedMenuItem.id == item.id ? "menu-item-container active" : "menu-item-container"} onClick={() => selectMenuItem(item)}>
                       <span className="subheading">{item.name}</span>
                       <span className="subheading">${item.price.toFixed(2)}</span>
                       <div className="menu-item-description">{item.description}</div>
@@ -247,12 +376,19 @@ function PortalMenu(props) {
                   <span className="blue-heading">${selectedMenuItem.price.toFixed(2)}</span>
                   <span className="subheading">Description</span>
                   <div className="menu-item-description">{selectedMenuItem.description}</div>
-                  <button className="orange" onClick={() => changeMode("editItem")}>Edit Menu Item</button>
+                  {Object.keys(selectedMenuItem.toppings).length > 0 ?
+                    <div>
+                      <span className="subheading">Toppings</span>
+                      {Object.keys(selectedMenuItem.toppings).map((topping =>
+                        <div key={topping} className="menu-item-description"><b>{topping}:</b> {selectedMenuItem.toppings[topping].join(", ")}</div>
+                      ))}
+                    </div>
+                  : ""}
+                  <button className="orange" onClick={() => {changeMode("editItem"); selectCategory(selectedMenuItem.menuCategoryName); setAddItemType(Object.keys(selectedMenuItem.toppings).length > 0 ? "Customizable" : "Regular")}}>Edit Menu Item</button>
                 </div>
               : ""}
             </div>
             <div className="portal-menu-view-buttons">
-              {/*<button className="orange" onClick={() => changeMode("addItem")}>Add Menu Item</button>*/}
               <button className="orange" onClick={() => changeMode("addCategory")}>Create Category</button>
             </div>
           </div>
@@ -288,7 +424,6 @@ function PortalMenu(props) {
           </header>
 
           <div className="content">
-            {/*<button onClick={() => changeMode("addItem")}>Add Menu Item</button>*/}
             <button onClick={() => changeMode("addCategory")}>Create Menu Category</button>
           </div>
         </div>

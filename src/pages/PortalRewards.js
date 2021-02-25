@@ -32,14 +32,9 @@ function PortalRewards(props) {
   }, []);
 
   function getData() {
-    API.graphql({ query: queries.listVendorRewards }).then(({ data: { listVendorRewards } }) => {
-      console.log(listVendorRewards)
-      let restaurantRewards = listVendorRewards.items.filter(reward => reward.menuId == props.restaurant.id);
-      restaurantRewards.forEach(reward => {
-        reward.description = reward.itemName;
-      });
+    API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id } } })).then(({ data: { listVendorRewards } }) => {
       setRewardItems({
-        Rewards: restaurantRewards
+        Rewards: listVendorRewards.items
       });
     }).catch((error) => {
       console.log(error);
@@ -55,7 +50,7 @@ function PortalRewards(props) {
       date_active_to: null,
       discountAmount: null,
       discountPercentage: null,
-      // description: descriptionInput.current.value,
+      description: descriptionInput.current.value,
     };
 
     API.graphql({ query: mutations.createVendorReward, variables: { input: reward } }).then(({ data: { createVendorReward } }) => {
@@ -74,10 +69,9 @@ function PortalRewards(props) {
       itemName: nameInput.current.value,
       menuId: props.restaurant.id,
       points: parseInt(pointsInput.current.value),
-      // description: descriptionInput.current.value,
+      description: descriptionInput.current.value,
     };
 
-    console.log(selectedRewardItem.id);
     API.graphql({ query: mutations.updateVendorReward, variables: { input: reward } }).then(({ data: { updateVendorReward } }) => {
       console.log("Update Reward", updateVendorReward);
       changeMode("");
@@ -93,7 +87,6 @@ function PortalRewards(props) {
       id: selectedRewardItem.id,
     }
 
-    console.log(selectedRewardItem.id);
     API.graphql({ query: mutations.deleteVendorReward, variables: { input: reward } }).then(({ data: { deleteVendorReward } }) => {
       console.log("Delete Reward", deleteVendorReward);
       changeMode("");
@@ -188,7 +181,7 @@ function PortalRewards(props) {
           </header>
 
           <div className="content">
-            <button>Add Reward</button>
+            <button onClick={() => changeMode("addReward")}>Add Reward</button>
           </div>
         </div>
       }
