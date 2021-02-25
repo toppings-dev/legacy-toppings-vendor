@@ -571,7 +571,7 @@ hr.short {
 
 .portal-menu-item-form-submit-section div:nth-of-type(2), .portal-rewards-form-submit-section div:nth-of-type(2) {
     text-align: right;
-    padding-left: 30%;
+    padding-left: 25%;
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: right;
