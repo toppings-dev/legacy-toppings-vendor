@@ -23,18 +23,6 @@ import rewardsIcon from '../assets/images/portal-rewards-icon.svg';
 import settingsIcon from '../assets/images/portal-settings-icon.svg';
 import logoutIcon from '../assets/images/portal-logout-icon.svg';
 
-/*
-  PRIORITY LIST:
-  Orders and Terms by Wednesday
-  Rewards by Next Week
-  Dashboard and Menu Later
-
-  DEV STUFF:
-  Websockets?
-  Hosting?
-  Database Schema?
-*/
-
 Amplify.configure(awsConfig);
 
 function Portal(props) {
@@ -47,19 +35,11 @@ function Portal(props) {
     getData();
   }, []);
 
-  function getData() {
-    console.log("GET DATA")
-    API.graphql({ query: queries.listRestaurants }).then(({ data: { listRestaurants } }) => {
-      console.log("RESTAURANTS", listRestaurants.items);
-      let email = getCurrentUser().username;
-      const myRestaurant = listRestaurants.items.find(restaurant => restaurant.email == email);
-      setRestaurant(myRestaurant);
-      console.log(email, myRestaurant);
-    }).catch((error) => {
-      console.log(error);
-    });
-
-    console.log("RESTAURANT", restaurant);
+  async function getData() {
+    let email = props.user.username;
+    const restaurantsResponse = await API.graphql(graphqlOperation(queries.listRestaurants, { filter: { email: { eq: email }}}));
+    const restaurants = restaurantsResponse.data.listRestaurants.items;
+    setRestaurant(restaurants[0]);
   }
 
   function logout() {

@@ -9,12 +9,13 @@ import PortalAuthentication from './pages/PortalAuthentication';
 
 function App() {
   const [showHeader, toggleShowHeader] = useState(true);
+  const [user, setUser] = useState({});
 
   return (
     <div className="wrapper">
       <BrowserRouter>
-        <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} />} />
-        <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} />} />
+        <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
+        <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
         
         {showHeader ?
           <header className="primary">

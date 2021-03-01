@@ -129,9 +129,14 @@ function PortalSignUp(props) {
     let password = passwordInput.current.value;
     
     if (email.length > 0 && password.length > 0) {
-      Auth.signIn({ username: email, password: password }).then(() => {
+      const user = { 
+        username: email, 
+        password: password 
+      };
+      Auth.signIn(user).then(() => {
         setLoggedIn(true);
-        setupSession({ username: email, password: password });
+        setupSession(user);
+        props.setUser(user);
       }).catch((error) => {
         setErrorMsg(error.message);
       });

@@ -7,6 +7,7 @@ import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
+import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 
 function PortalRewards(props) {
   const defaultReward = {
@@ -19,6 +20,7 @@ function PortalRewards(props) {
   const descriptionInput = useRef();
 
   const [mode, changeMode] = useState("");
+  const [loading, setLoading] = useState(false);
   const [selectedRewardItem, selectRewardItem] = useState(defaultReward);
   const [rewardItems, setRewardItems] = useState({
     // Rewards: [{id: 1, name: "Jelly Joy", price: 5, description: "10% discount on all jelly patties."}, 
@@ -31,14 +33,21 @@ function PortalRewards(props) {
     getData();
   }, []);
 
-  function getData() {
-    API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id } } })).then(({ data: { listVendorRewards } }) => {
-      setRewardItems({
-        Rewards: listVendorRewards.items
-      });
-    }).catch((error) => {
-      console.log(error);
+  async function getData() {
+    // API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id } } })).then(({ data: { listVendorRewards } }) => {
+    //   setRewardItems({
+    //     Rewards: listVendorRewards.items
+    //   });
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+    setLoading(true);
+    const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
+    const rewards = response.data.listVendorRewards.items;
+    setRewardItems({
+      Rewards: rewards
     });
+    setLoading(false);
   }
 
   function addReward() {
@@ -99,90 +108,101 @@ function PortalRewards(props) {
 
   return (
     <article className="portal-rewards-container">
-      {mode == "addReward" || mode == "editReward" ? 
-        <div className="portal-rewards-form-container">
-          <header>
-            <span className="orange-heading">New Reward</span>
-          </header>
-
-          <div className="content">
-            <form className="portal-rewards-form">
-              <div className="portal-rewards-form-name-section">
-                <span className="subheading">Reward Name</span>
-                <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={nameInput} defaultValue={mode == "editReward" ? selectedRewardItem.itemName : ""}/>
-              </div>
-              
-              <div className="portal-rewards-form-points-section">
-                <span className="subheading">Point Value</span>
-                <input className="text-input" type="number" placeholder="5" ref={pointsInput} defaultValue={mode == "editReward" ? selectedRewardItem.points : ""}/>
-              </div>
-              
-              <div className="portal-rewards-form-description-section">
-                <span className="subheading">Reward Description</span>
-                <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={descriptionInput} defaultValue={mode == "editReward" ? selectedRewardItem.description : ""}/>
-              </div>
-            </form>
-            
-            <div className="portal-rewards-form-submit-section">
-              <div>
-                <button className="red-text" onClick={deleteReward}>Delete</button>
-              </div>
-              <div>
-                <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
-                <button className="orange" onClick={mode == "addReward" ? addReward : editReward}>{mode == "addReward" ? "Add" : "Save"} Reward</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      : rewardItems.Rewards.length > 0 ? 
-        <div className="portal-rewards-list-container">
-          <header>
-            <span className="orange-heading">Active Rewards</span>
-          </header>
-
-          <div className="content">
-            <div className="portal-rewards-list">
-              {Object.keys(rewardItems).map((category =>
-                <div className="rewards-category-container" key={category.id}>
-                  <span className="blue-heading"></span>
-
-                  {rewardItems[category].map(item => 
-                    <div key={item.id} className={selectedRewardItem == item ? "reward-container active" : "reward-container"} onClick={() => selectRewardItem(item)}>
-                      <span className="subheading">{item.itemName}</span>
-                      <span className="subheading">{item.points} points</span>
-                      <div className="reward-description">{item.description}</div>
-                    </div>
-                  )}
-                </div> 
-              ))} 
-            </div>
-            <div className="portal-rewards-view">
-              {selectedRewardItem != null && selectedRewardItem.name != defaultReward.name ? 
-              <div>
-                <span className="orange-heading">{selectedRewardItem.itemName}</span>
-                <span className="blue-heading">{selectedRewardItem.points} points</span>
-                <span className="subheading">Description</span>
-                <div className="rewards-item-description">{selectedRewardItem.description}</div>
-                <button className="orange" onClick={() => changeMode("editReward")}>Edit Reward</button>
-              </div>
-              : ""}
-            </div>
-            <div className="portal-rewards-view-buttons">
-              <button className="orange" onClick={() => changeMode("addReward")}>Add Reward</button>
-            </div>
-          </div>
-        </div>
-      :
+      {loading ? 
         <div>
           <header>
-            <img className="portal-empty-image" src={bubbleIcon} />
-            <span className="subheading">You have no active rewards.</span>
-            <b>Get users excited by adding <br /> reward opportunities!</b>
+            <img className="portal-empty-image" src={loadingBubbleIcon} />
+            <span className="subheading">Loading...</span>
           </header>
+        </div>  
+      :
+        <div>
+          {mode == "addReward" || mode == "editReward" ? 
+            <div className="portal-rewards-form-container">
+              <header>
+                <span className="orange-heading">New Reward</span>
+              </header>
 
-          <div className="content">
-            <button onClick={() => changeMode("addReward")}>Add Reward</button>
-          </div>
+              <div className="content">
+                <form className="portal-rewards-form">
+                  <div className="portal-rewards-form-name-section">
+                    <span className="subheading">Reward Name</span>
+                    <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={nameInput} defaultValue={mode == "editReward" ? selectedRewardItem.itemName : ""}/>
+                  </div>
+                  
+                  <div className="portal-rewards-form-points-section">
+                    <span className="subheading">Point Value</span>
+                    <input className="text-input" type="number" placeholder="5" ref={pointsInput} defaultValue={mode == "editReward" ? selectedRewardItem.points : ""}/>
+                  </div>
+                  
+                  <div className="portal-rewards-form-description-section">
+                    <span className="subheading">Reward Description</span>
+                    <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={descriptionInput} defaultValue={mode == "editReward" ? selectedRewardItem.description : ""}/>
+                  </div>
+                </form>
+                
+                <div className="portal-rewards-form-submit-section">
+                  <div>
+                    <button className="red-text" onClick={deleteReward}>Delete</button>
+                  </div>
+                  <div>
+                    <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
+                    <button className="orange" onClick={mode == "addReward" ? addReward : editReward}>{mode == "addReward" ? "Add" : "Save"} Reward</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          : rewardItems.Rewards.length > 0 ? 
+            <div className="portal-rewards-list-container">
+              <header>
+                <span className="orange-heading">Active Rewards</span>
+              </header>
+
+              <div className="content">
+                <div className="portal-rewards-list">
+                  {Object.keys(rewardItems).map((category =>
+                    <div className="rewards-category-container" key={category.id}>
+                      <span className="blue-heading"></span>
+
+                      {rewardItems[category].map(item => 
+                        <div key={item.id} className={selectedRewardItem == item ? "reward-container active" : "reward-container"} onClick={() => selectRewardItem(item)}>
+                          <span className="subheading">{item.itemName}</span>
+                          <span className="subheading">{item.points} points</span>
+                          <div className="reward-description">{item.description}</div>
+                        </div>
+                      )}
+                    </div> 
+                  ))} 
+                </div>
+                <div className="portal-rewards-view">
+                  {selectedRewardItem != null && selectedRewardItem.name != defaultReward.name ? 
+                  <div>
+                    <span className="orange-heading">{selectedRewardItem.itemName}</span>
+                    <span className="blue-heading">{selectedRewardItem.points} points</span>
+                    <span className="subheading">Description</span>
+                    <div className="rewards-item-description">{selectedRewardItem.description}</div>
+                    <button className="orange" onClick={() => changeMode("editReward")}>Edit Reward</button>
+                  </div>
+                  : ""}
+                </div>
+                <div className="portal-rewards-view-buttons">
+                  <button className="orange" onClick={() => changeMode("addReward")}>Add Reward</button>
+                </div>
+              </div>
+            </div>
+          :
+            <div>
+              <header>
+                <img className="portal-empty-image" src={bubbleIcon} />
+                <span className="subheading">You have no active rewards.</span>
+                <b>Get users excited by adding <br /> reward opportunities!</b>
+              </header>
+
+              <div className="content">
+                <button onClick={() => changeMode("addReward")}>Add Reward</button>
+              </div>
+            </div>
+          }
         </div>
       }
     </article>
