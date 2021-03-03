@@ -1,7 +1,9 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+
+import { getCurrentUser, setupSession, clearSession } from './utils/session';
 
 import logo from './assets/images/logo-white.png';
 import Portal from './pages/Portal';

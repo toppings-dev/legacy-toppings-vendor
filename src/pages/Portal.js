@@ -36,7 +36,7 @@ function Portal(props) {
   }, []);
 
   async function getData() {
-    let email = props.user.username;
+    let email = await getCurrentUser() == null ? props.user.username : await getCurrentUser().username;
     const restaurantsResponse = await API.graphql(graphqlOperation(queries.listRestaurants, { filter: { email: { eq: email }}}));
     const restaurants = restaurantsResponse.data.listRestaurants.items;
     setRestaurant(restaurants[0]);

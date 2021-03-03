@@ -555,6 +555,10 @@ hr.short {
     font-weight: 700;
 }
 
+#add-category-button {
+    text-align: left;
+}
+
 #vendor-info-button-section, #portal-settings-form-submit-section {
     /* grid-area: submit; */
     text-align: right;

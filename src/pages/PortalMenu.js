@@ -55,81 +55,16 @@ function PortalMenu(props) {
   }, []);
 
   async function getData() {
-    let menu = {};
     setLoading(true);
-    // API.graphql(graphqlOperation(queries.listMenuCategorys, { filter: { menuId: { eq: props.restaurant.id } } })).then(({ data: { listMenuCategorys } }) => {
-    //   console.log("cat", listMenuCategorys.items)
-    //   listMenuCategorys.items.forEach(category => {
-    //     menu[category.name] = [];
-    //     setMenuItems({
-    //       [category.name]: category.menuItems.items
-    //     });
-    //     console.log("D", menuItems, category.name, category.menuItems.items);
-
-        // API.graphql(graphqlOperation(queries.listMenuItems, { filter: { menuId: { eq: props.restaurant.id }, menuCategoryName: { eq: category.name } } })).then(({ data: { listMenuItems } }) => {
-        //   if (listMenuItems.items.length <= 0) {
-        //     setMenuItems({
-        //       [category.name]: []
-        //     });
-        //     setLoading(false);
-        //   }
-          
-        //   listMenuItems.items.forEach(item => {
-        //     let menuItem = item;
-        //     menuItem.toppings = {};
-        //     item.options.items.forEach(topping => {
-        //       menuItem.toppings[topping.foodOptionName] = topping.optionCat.options.items.map(option => option.optionName);
-        //     });
-        //     menu[category.name].push(menuItem);
-            
-        //     setMenuItems(oldMenuItems => ({
-        //       ...oldMenuItems,
-        //       [category.name]: oldMenuItems.hasOwnProperty(category.name) ? [...oldMenuItems[category.name], menuItem] : [menuItem]
-        //     }));
-        //     setLoading(false);
-        //   });
-        // }).catch((error) => {
-        //   console.log(error);
-        // });
-    //   });
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-    // let menu = {};
-    const menuCategoriesResponse = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: props.restaurant.id }}}));
-    const menuCategoriesList = menuCategoriesResponse.data.listMenuCategorys.items;
-    // const menuItemsResponse = await API.graphql(graphqlOperation(queries.listMenuItems, { filter: { menuId: { eq: props.restaurant.id }}}));
-    // const menuItemsList = menuItemsResponse.data.listMenuItems.items;
-    // console.log("CAT", menuCategoriesList);
-    // setMenuItems({
-
-    // });
+    const response = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: props.restaurant.id }}}));
+    const menuCategoriesList = response.data.listMenuCategorys.items;
     menuCategoriesList.forEach(category => {
-      console.log(category);
       setMenuItems(oldMenuItems => ({
         ...oldMenuItems,
         [category.name]: category.menuItems.items,
       }));
     });
-    // menuItemsList.forEach(item => {
-    //   let menuItem = item;
-    //   menuItem.toppings = {};
-    //   item.options.items.forEach(topping => {
-    //     menuItem.toppings[topping.foodOptionName] = topping.optionCat.options.items.map(option => option.optionName);
-    //   });
-    // })
-    console.log(menuCategoriesList);
     setLoading(false);
-    // const menuCategoriesResponse = await API.graphql(graphqlOperation(queries.listMenuCategorys, { filter: { menuId: { eq: props.restaurant.id }}}));
-    // const menuCategoriesList = menuCategoriesResponse.data.listMenuCategorys.items; 
-    // const menuItemsResponse = await API.graphql(graphqlOperation(queries.listMenuItems, { filter: { menuId: { eq: props.restaurant.id }}}));
-    // const menuItemsList = menuItemsResponse.data.listMenuItems.items;
-    // setMenuCategories(menuCategoriesList);
-    // setMenuItems(menuItemsList);
-    // console.log(menuCategoriesList);
-    // console.log(menuItemsList);
-    // setLoading(false);
-    
   }
 
   function addCategory(e) {
@@ -266,41 +201,73 @@ function PortalMenu(props) {
     });
   }
 
-  function addOption(categoryIndex) {
-    const newMenuInput = {
-      name: useRef(),
-      price: useRef(),
-      description: useRef(),
-      tags: useRef(),
-      image: useRef(),
-      toppings: menuInput.toppings
-    };
-    for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
-      newMenuInput.toppings[categoryIndex].options.append(useRef());
-    }
+  function addOption(topping) {
+    // const newMenuInput = {
+    //   name: useRef(),
+    //   price: useRef(),
+    //   description: useRef(),
+    //   tags: useRef(),
+    //   image: useRef(),
+    //   toppings: menuInput.toppings
+    // };
+    // for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
+    //   newMenuInput.toppings[categoryIndex].options.append(useRef());
+    // }
 
-    setMenuInput({
-      ...menuInput,
-      toppings: newMenuInput
+    // setMenuInput({
+    //   ...menuInput,
+    //   toppings: newMenuInput
+    // });
+    const option = {
+      foodOptionName: topping.foodOptionName, 
+      menuId: props.restaurant.id, 
+      optionName: "New Option",
+      option: { price: null, name: "New Option", menuId: props.restaurant.id }
+    };
+    topping.optionCat.options.items.push(option);
+    selectMenuItem({
+      ...selectedMenuItem
     });
   }
 
   function addToppings() {
-    const newMenuInput = {
-      name: useRef(),
-      price: useRef(),
-      description: useRef(),
-      tags: useRef(),
-      image: useRef(),
-      toppings: menuInput.toppings
-    };
-    for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
-      newMenuInput.toppings[categoryIndex].options.append(useRef());
-    }
+    // const newMenuInput = {
+    //   name: useRef(),
+    //   price: useRef(),
+    //   description: useRef(),
+    //   tags: useRef(),
+    //   image: useRef(),
+    //   toppings: menuInput.toppings
+    // };
+    // for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
+    //   newMenuInput.toppings[categoryIndex].options.append(useRef());
+    // }
 
-    setMenuInput({
-      ...menuInput,
-      toppings: [...menuInput.toppings, {name: useRef(), options: [useRef()]}]
+    // setMenuInput({
+    //   ...menuInput,
+    //   toppings: [...menuInput.toppings, {name: useRef(), options: [useRef()]}]
+    // });
+    const topping = {
+      foodOptionName: "New Topping",
+      menuId: props.restaurant.id,
+      menuItemName: selectedMenuItem.name,
+      numchoices: 1,
+      optionCat: {
+        menuId: props.restaurant.id,
+        name: "New Topping",
+        options: {
+          items: [{
+                    foodOptionName: "New Topping", 
+                    menuId: props.restaurant.id, 
+                    optionName: "New Option",
+                    option: { price: null, name: "New Option", menuId: props.restaurant.id }
+                  }]
+        }
+      }
+    };
+    selectedMenuItem.options.items.push(topping);
+    selectMenuItem({
+      ...selectedMenuItem
     });
   }
 
@@ -360,33 +327,25 @@ function PortalMenu(props) {
                   </div>
                 </div>
 
-                {addItemType == "Customizable" ? 
+                {addItemType == "Customizable"  ? 
                   <div className="portal-menu-item-form-toppings-section">
-                    <div className="portal-menu-item-form-toppings-container">
-                      <span className="subheading">Toppings Name</span>
-                      <input className="text-input" type="text" placeholder="Patty Type" ref={toppings1NameInput} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? "PULL FROM DB" : ""}/>
+                    {selectedMenuItem.options.items.map((topping =>
+                      <div className="portal-menu-item-form-toppings-container">
+                        <span className="subheading">Toppings Name</span>
+                        <input className="text-input" type="text" placeholder="Patty Type" ref={toppings1NameInput} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
 
-                      <div className="portal-menu-item-form-toppings-options-container">
-                        <span className="subheading">Options <button className="blue-plus" type="button" onClick={(e) => addOption(i)}><img src={plusButtonIcon} /></button></span>
-                        <input className="text-input" type="text" placeholder="Crab Patty" ref={toppings1Option1Input} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? "PULL FROM DB" : ""}/>
-                        <input className="text-input" type="text" placeholder="Fish Patty" ref={toppings1Option2Input} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 1 ? "PULL FROM DB" : ""}/>
-                        <input className="text-input" type="text" placeholder="Seaweed Patty" ref={toppings1Option3Input} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 2 ? "PULL FROM DB" : ""}/>
+                        <div className="portal-menu-item-form-toppings-options-container">
+                          <span className="subheading">Options <button className="blue-plus" type="button" onClick={() => addOption(topping)}><img src={plusButtonIcon} /></button></span>
+                          {topping.optionCat.options.items.map((option => 
+                            <input className="text-input" type="text" placeholder="Crab Patty" ref={toppings1Option1Input} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-
-                    <div className="portal-menu-item-form-toppings-container">
-                      <span className="subheading">Toppings Name</span>
-                      <input className="text-input" type="text" placeholder="Patty Type" ref={toppings2NameInput} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 1 ? "PULL FROM DB" : ""}/>
-
-                      <div className="portal-menu-item-form-toppings-options-container">
-                        <span className="subheading">Options <button className="blue-plus" type="button" onClick={(e) => addOption(i)}><img src={plusButtonIcon} /></button></span>
-                        <input className="text-input" type="text" placeholder="Crab Patty" ref={toppings2Option1Input} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 1 ? "PULL FROM DB" : ""}/>
-                        <input className="text-input" type="text" placeholder="Fish Patty" ref={toppings2Option2Input} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 1 ? "PULL FROM DB" : ""}/>
-                        <input className="text-input" type="text" placeholder="Seaweed Patty" ref={toppings2Option3Input} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 1 ? "PULL FROM DB" : ""}/>
-                        <button className="blue-text" type="button" onClick={addToppings}><span>+</span> Add Category</button>
-                      </div>
-                    </div>
+                    ))}
                   </div>
+                : ""}
+                {addItemType == "Customizable"  ? 
+                  <button id="add-category-button" className="blue-text" type="button" onClick={addToppings}><span>+</span> Add Category</button> 
                 : ""}
               </form>
               
@@ -436,7 +395,7 @@ function PortalMenu(props) {
                       <div>
                         <span className="subheading">Toppings</span>
                         {selectedMenuItem.options.items.map((topping =>
-                          <div key={topping.foodOptionName} className="menu-item-description"><b>{topping.foodOptionName}:</b> {topping.optionCat.options.items.map(item => item.optionName).join(", ")}</div>
+                          <div key={topping.foodOptionName} className="menu-item-description"><b>{topping.foodOptionName}:</b> {topping.optionCat.options.items.map(option => option.optionName).join(", ")}</div>
                         ))}
                       </div>
                     : ""}

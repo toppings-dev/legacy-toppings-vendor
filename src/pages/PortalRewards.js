@@ -43,14 +43,16 @@ function PortalRewards(props) {
     // });
     setLoading(true);
     const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
+    console.log(response);
     const rewards = response.data.listVendorRewards.items;
+    console.log(rewards);
     setRewardItems({
       Rewards: rewards
     });
     setLoading(false);
   }
 
-  function addReward() {
+  async function addReward() {
     const reward = {
       itemName: nameInput.current.value,
       menuId: props.restaurant.id,
@@ -62,14 +64,12 @@ function PortalRewards(props) {
       description: descriptionInput.current.value,
     };
 
-    API.graphql({ query: mutations.createVendorReward, variables: { input: reward } }).then(({ data: { createVendorReward } }) => {
-      console.log("Create Reward", createVendorReward);
-      changeMode("");
-      getData();
-      selectRewardItem(defaultReward);
-    }).catch((error) => {
-      console.log(error);
-    });
+    const response = await API.graphqlOperation(mutations.createVendorReward, { variables: { input: reward }});
+    const newReward = response.data.createVendorReward;
+    console.log(newReward);
+    changeMode("");
+    getData();
+    selectRewardItem(defaultReward);
   }
 
   function editReward() {

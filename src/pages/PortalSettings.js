@@ -33,7 +33,7 @@ function PortalSettings(props) {
              props.restaurant.zip_code != null && props.restaurant.zip_code.length > 0 ?
              `${props.restaurant.address}, ${props.restaurant.city}, ${props.restaurant.state} ${props.restaurant.zip_code}`
              : "Your Address, Your City, Your State Your Zip Code",
-    contact: "Eugene H. Krabs",
+    contact: props.restaurant.restaurantOwnerName,
     phoneNumber: props.restaurant.phone_number != null && props.restaurant.phone_number.length > 0 ? props.restaurant.phone_number : "Your Restaurant Phone Number",
     email: props.restaurant.email != null && props.restaurant.email.length > 0 ? props.restaurant.email : "Your Restaurant Email",
     hours: {
@@ -83,7 +83,8 @@ function PortalSettings(props) {
       address: address,
       city: city,
       state: state,
-      zip_code: zipCode
+      zip_code: zipCode,
+      restaurantOwnerName: contactInput.current.value,
     };
     
     console.log(updatedVendor);
