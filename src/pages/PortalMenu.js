@@ -27,19 +27,13 @@ function PortalMenu(props) {
   const itemDescriptionInput = useRef();
   const itemTagsInput = useRef();
   const itemImageInput = useRef();
-  const toppings1NameInput = useRef();
-  const toppings1Option1Input = useRef();
-  const toppings1Option2Input = useRef();
-  const toppings1Option3Input = useRef();
-  const toppings2NameInput = useRef();
-  const toppings2Option1Input = useRef();
-  const toppings2Option2Input = useRef();
-  const toppings2Option3Input = useRef();
   
   const [loading, setLoading] = useState(false);
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
   const [selectedMenuItem, selectMenuItem] = useState(defaultMenuItem);
+  const [selectedMenuItemToppings, setSelectedMenuItemToppings] = useState([]); 
+  const [selectedMenuItemOptions, setSelectedMenuItemOptions] = useState([]); 
   const [selectedCategory, selectCategory] = useState(null);
   // const [menuItems, setMenuItems] = useState({
   //   Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
@@ -107,61 +101,11 @@ function PortalMenu(props) {
     });
   }
 
-  function editItem(e) {
+  async function editItem(e) {
     e.preventDefault();
 
     if (addItemType == "Customizable") {
-      const toppingsCategoryJoiners = [{ menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, menuItemName: itemNameInput.current.value, numchoices: 3 },
-                                       { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, menuItemName: itemNameInput.current.value, numchoices: 3 }];
-      const toppingsCategories = [{ menuId: props.restaurant.id, name: toppings1NameInput.current.value }, 
-                                  { menuId: props.restaurant.id, name: toppings2NameInput.current.value }];
-
-      const toppingsOptionJoiners = [{ menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, optionName: toppings1Option1Input.current.value },
-                                    { menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, optionName: toppings1Option2Input.current.value },
-                                    { menuId: props.restaurant.id, foodOptionName: toppings1NameInput.current.value, optionName: toppings1Option3Input.current.value },
-                                    { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, optionName: toppings2Option1Input.current.value },
-                                    { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, optionName: toppings2Option2Input.current.value },
-                                    { menuId: props.restaurant.id, foodOptionName: toppings2NameInput.current.value, optionName: toppings2Option3Input.current.value }];
-
-      const toppingsOptions = [{ menuId: props.restaurant.id, name: toppings1Option1Input.current.value },
-                              { menuId: props.restaurant.id, name: toppings1Option2Input.current.value },
-                              { menuId: props.restaurant.id, name: toppings1Option3Input.current.value },
-                              { menuId: props.restaurant.id, name: toppings2Option1Input.current.value },
-                              { menuId: props.restaurant.id, name: toppings2Option2Input.current.value },
-                              { menuId: props.restaurant.id, name: toppings2Option3Input.current.value }];
-
-      API.graphql({ query: mutations.createFoodOption, variables: { input: toppingsCategories[0] } }).then(({ data: { createFoodOption } }) => {
-      API.graphql({ query: mutations.createFoodOption, variables: { input: toppingsCategories[1] } }).then(({ data: { createFoodOption } }) => {
-        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[0] } }).then(({ data: { createOption } }) => {
-        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[1] } }).then(({ data: { createOption } }) => {
-        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[2] } }).then(({ data: { createOption } }) => {
-        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[3] } }).then(({ data: { createOption } }) => {
-        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[4] } }).then(({ data: { createOption } }) => {
-        API.graphql({ query: mutations.createOption, variables: { input: toppingsOptions[5] } }).then(({ data: { createOption } }) => {
-          API.graphql({ query: mutations.createItemOptionCatJoin, variables: { input: toppingsCategoryJoiners[0] } }).then(({ data: { createItemOptionCatJoin } }) => {
-          API.graphql({ query: mutations.createItemOptionCatJoin, variables: { input: toppingsCategoryJoiners[1] } }).then(({ data: { createItemOptionCatJoin } }) => {
-            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[0] } }).then(({ data: { createItemOptionOptionJoin } }) => {
-            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[1] } }).then(({ data: { createItemOptionOptionJoin } }) => {
-            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[2] } }).then(({ data: { createItemOptionOptionJoin } }) => {
-            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[3] } }).then(({ data: { createItemOptionOptionJoin } }) => {
-            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[4] } }).then(({ data: { createItemOptionOptionJoin } }) => {
-            API.graphql({ query: mutations.createItemOptionOptionJoin, variables: { input: toppingsOptionJoiners[5] } }).then(({ data: { createItemOptionOptionJoin } }) => {
-            }).catch((error) => { console.log(error); });
-            }).catch((error) => { console.log(error); });
-            }).catch((error) => { console.log(error); });
-            }).catch((error) => { console.log(error); });
-            }).catch((error) => { console.log(error); });
-            }).catch((error) => { console.log(error); });
-          }).catch((error) => { console.log(error); });
-          }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-        }).catch((error) => { console.log(error); });
-      }).catch((error) => { console.log(error); });
-      }).catch((error) => { console.log(error); });
+      
     }
 
     const menuItem = {
@@ -173,15 +117,13 @@ function PortalMenu(props) {
       price: itemPriceInput.current.value,
     };
 
-    API.graphql({ query: mutations.updateMenuItem, variables: { input: menuItem } }).then(({ data: { updateMenuItem } }) => {
-      console.log("Update Menu Item", updateMenuItem);
-      setMenuItems({});
-      getData();
-      changeMode("");
-      selectMenuItem(defaultMenuItem);
-    }).catch((error) => {
-      console.log(error);
-    });
+    const response = await API.graphql(graphqlOperation(mutations.updateMenuItem, { input: menuItem }));
+    const updatedMenuItem = response.data.updateMenuItem;
+    console.log("Update Menu Item", updatedMenuItem);
+    setMenuItems({});
+    getData();
+    changeMode("");
+    selectMenuItem(defaultMenuItem);
   }
   
   function deleteItem(e) {
@@ -202,22 +144,6 @@ function PortalMenu(props) {
   }
 
   function addOption(topping) {
-    // const newMenuInput = {
-    //   name: useRef(),
-    //   price: useRef(),
-    //   description: useRef(),
-    //   tags: useRef(),
-    //   image: useRef(),
-    //   toppings: menuInput.toppings
-    // };
-    // for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
-    //   newMenuInput.toppings[categoryIndex].options.append(useRef());
-    // }
-
-    // setMenuInput({
-    //   ...menuInput,
-    //   toppings: newMenuInput
-    // });
     const option = {
       foodOptionName: topping.foodOptionName, 
       menuId: props.restaurant.id, 
@@ -225,28 +151,14 @@ function PortalMenu(props) {
       option: { price: null, name: "New Option", menuId: props.restaurant.id }
     };
     topping.optionCat.options.items.push(option);
+    topping.numchoices = topping.optionCat.options.items.length;
     selectMenuItem({
       ...selectedMenuItem
     });
+    setSelectedMenuItemOptions([...selectedMenuItemOptions, option]);
   }
 
   function addToppings() {
-    // const newMenuInput = {
-    //   name: useRef(),
-    //   price: useRef(),
-    //   description: useRef(),
-    //   tags: useRef(),
-    //   image: useRef(),
-    //   toppings: menuInput.toppings
-    // };
-    // for (let i = 0; i < menuInput.toppings[categoryIndex].length + 1; i++) {
-    //   newMenuInput.toppings[categoryIndex].options.append(useRef());
-    // }
-
-    // setMenuInput({
-    //   ...menuInput,
-    //   toppings: [...menuInput.toppings, {name: useRef(), options: [useRef()]}]
-    // });
     const topping = {
       foodOptionName: "New Topping",
       menuId: props.restaurant.id,
@@ -269,6 +181,23 @@ function PortalMenu(props) {
     selectMenuItem({
       ...selectedMenuItem
     });
+    setSelectedMenuItemToppings([...selectedMenuItemToppings, topping]);
+  }
+
+  function editTopping(e, topping) {
+    topping.foodOptionName = e.target.value;
+    topping.optionCat.name = e.target.value,
+    topping.optionCat.options.items.forEach(option => option.foodOptionName = e.target.value);
+    setSelectedMenuItemToppings([...selectedMenuItemToppings]);
+    // console.log("TPS", selectedMenuItemToppings);
+    console.log("SMIT", selectedMenuItem);
+  }
+
+  function editOption(e, topping, option) {
+    option.optionName = e.target.value;
+    option.option.name = e.target.value;
+    setSelectedMenuItemOptions([...selectedMenuItemOptions]);
+    console.log("SMIO", selectedMenuItem);
   }
 
   return (
@@ -327,24 +256,24 @@ function PortalMenu(props) {
                   </div>
                 </div>
 
-                {addItemType == "Customizable"  ? 
+                {mode == "editItem" && addItemType == "Customizable"  ? 
                   <div className="portal-menu-item-form-toppings-section">
                     {selectedMenuItem.options.items.map((topping =>
                       <div className="portal-menu-item-form-toppings-container">
                         <span className="subheading">Toppings Name</span>
-                        <input className="text-input" type="text" placeholder="Patty Type" ref={toppings1NameInput} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
+                        <input className="text-input" type="text" placeholder="Patty Type" onChange={(e) => editTopping(e, topping)} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
 
                         <div className="portal-menu-item-form-toppings-options-container">
                           <span className="subheading">Options <button className="blue-plus" type="button" onClick={() => addOption(topping)}><img src={plusButtonIcon} /></button></span>
                           {topping.optionCat.options.items.map((option => 
-                            <input className="text-input" type="text" placeholder="Crab Patty" ref={toppings1Option1Input} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
+                            <input className="text-input" type="text" placeholder="Crab Patty" onChange={(e) => editOption(e, topping, option)} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
                           ))}
                         </div>
                       </div>
                     ))}
                   </div>
                 : ""}
-                {addItemType == "Customizable"  ? 
+                {mode == "editItem" && addItemType == "Customizable"  ? 
                   <button id="add-category-button" className="blue-text" type="button" onClick={addToppings}><span>+</span> Add Category</button> 
                 : ""}
               </form>
