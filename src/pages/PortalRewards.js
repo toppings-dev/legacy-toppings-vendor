@@ -64,7 +64,7 @@ function PortalRewards(props) {
       description: descriptionInput.current.value,
     };
 
-    const response = await API.graphqlOperation(mutations.createVendorReward, { variables: { input: reward }});
+    const response = await API.graphql(graphqlOperation(mutations.createVendorReward, { input: reward }));
     const newReward = response.data.createVendorReward;
     console.log(newReward);
     changeMode("");
@@ -72,7 +72,7 @@ function PortalRewards(props) {
     selectRewardItem(defaultReward);
   }
 
-  function editReward() {
+  async function editReward() {
     const reward = {
       id: selectedRewardItem.id,
       itemName: nameInput.current.value,
@@ -81,29 +81,21 @@ function PortalRewards(props) {
       description: descriptionInput.current.value,
     };
 
-    API.graphql({ query: mutations.updateVendorReward, variables: { input: reward } }).then(({ data: { updateVendorReward } }) => {
-      console.log("Update Reward", updateVendorReward);
-      changeMode("");
-      getData();
-      selectRewardItem(defaultReward);
-    }).catch((error) => {
-      console.log(error);
-    });
+    const response = await API.graphql(graphqlOperation(mutations.updateVendorReward, { input: reward }));
+    changeMode("");
+    getData();
+    selectRewardItem(defaultReward);
   }
 
-  function deleteReward() {
+  async function deleteReward() {
     const reward = {
       id: selectedRewardItem.id,
     }
 
-    API.graphql({ query: mutations.deleteVendorReward, variables: { input: reward } }).then(({ data: { deleteVendorReward } }) => {
-      console.log("Delete Reward", deleteVendorReward);
-      changeMode("");
-      getData();
-      selectRewardItem(defaultReward);
-    }).catch((error) => {
-      console.log(error);
-    });
+    const response = await API.graphql(graphqlOperation(mutations.deleteVendorReward, { input: reward }));
+    changeMode("");
+    getData();
+    selectRewardItem(defaultReward);
   }
 
   return (
@@ -143,7 +135,9 @@ function PortalRewards(props) {
                 
                 <div className="portal-rewards-form-submit-section">
                   <div>
-                    <button className="red-text" onClick={deleteReward}>Delete</button>
+                    {mode == "editReward" ? 
+                      <button className="red-text" onClick={deleteReward}>Delete</button>
+                    : ""}
                   </div>
                   <div>
                     <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>

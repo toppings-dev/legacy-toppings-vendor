@@ -17,9 +17,7 @@ function PortalMenu(props) {
     name: "Krabby Patty",
     price: 2.99,
     description: "The signature of the Krusty Krab, a juicy burger with secret ingredients.",
-    toppings: [
-      { name: "Patty Type", options: ["Crab Patty", "Fish Patty"] }
-    ],
+    options: { items: [] }
   };
   const categoryNameInput = useRef();
   const itemNameInput = useRef();
@@ -32,8 +30,7 @@ function PortalMenu(props) {
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
   const [selectedMenuItem, selectMenuItem] = useState(defaultMenuItem);
-  const [selectedMenuItemToppings, setSelectedMenuItemToppings] = useState([]); 
-  const [selectedMenuItemOptions, setSelectedMenuItemOptions] = useState([]); 
+  const [selectedMenuItemToppings, setSelectedMenuItemToppings] = useState([]);
   const [selectedCategory, selectCategory] = useState(null);
   // const [menuItems, setMenuItems] = useState({
   //   Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
@@ -79,7 +76,103 @@ function PortalMenu(props) {
     });
   }
 
-  function addItem(e) {
+  async function editToppings(menuItem) {
+    const existingToppings = menuItem.options.items.filter(item => selectedMenuItemToppings.indexOf(item) < 0);
+    console.log(existingToppings);
+    await Promise.all(existingToppings.map(async topping => {
+      const toppingCategory = {
+        menuId: props.restaurant.id,
+        name: topping.foodOptionName
+      };
+      console.log("TP", topping)
+      
+      const toppingCategoryResponse = await API.graphql(graphqlOperation(mutations.updateFoodOption, { input: toppingCategory }));
+      console.log("Edit Category", toppingCategoryResponse);
+
+      await Promise.all(topping.optionCat.options.items.map(async option=> {
+        const toppingOption = {
+          menuId: props.restaurant.id,
+          name: option.optionName,
+        };
+
+        const toppingOptionResponse = await API.graphql(graphqlOperation(mutations.updateOption, { input: toppingOption }));
+        console.log("Edit Option", toppingOptionResponse);
+      }));
+      
+      const toppingCategoryJoiner = {
+        id: topping.id,
+        menuId: props.restaurant.id,
+        foodOptionName: topping.foodOptionName,
+        menuItemName: menuItem.name,
+        numchoices: topping.numchoices,
+      };
+
+      const toppingCategoryJoinerResponse = await API.graphql(graphqlOperation(mutations.updateItemOptionCatJoin, { input: toppingCategoryJoiner }));
+      console.log("Edit Category Joiner", toppingCategoryJoinerResponse);
+      
+      await Promise.all(topping.optionCat.options.items.map(async option => {
+        console.log("Edit Options!!!")
+        const toppingOptionJoiner = {
+          id: option.id,
+          menuId: props.restaurant.id,
+          foodOptionName: topping.foodOptionName,
+          optionName: option.optionName,
+        };
+
+        const toppingOptionJoinerResponse = await API.graphql(graphqlOperation(mutations.updateItemOptionOptionJoin, { input: toppingOptionJoiner }));
+        console.log("Edit Option Joiner", toppingOptionJoinerResponse);
+      }));
+    }));
+  }
+
+  async function createToppings(menuItem) {
+    await Promise.all(selectedMenuItemToppings.map(async topping => {
+      const toppingCategory = {
+        menuId: props.restaurant.id,
+        name: topping.foodOptionName
+      };
+      // console.log("TP", topping)
+      
+      const toppingCategoryResponse = await API.graphql(graphqlOperation(mutations.createFoodOption, { input: toppingCategory }));
+      // console.log("Creating Category", toppingCategoryResponse);
+
+      await Promise.all(topping.optionCat.options.items.map(async option => {
+        const toppingOption = {
+          menuId: props.restaurant.id,
+          name: option.optionName,
+        };
+
+        const toppingOptionResponse = await API.graphql(graphqlOperation(mutations.createOption, { input: toppingOption }));
+        // console.log("Creating Option", toppingOptionResponse);
+      }));
+      
+      const toppingCategoryJoiner = {
+        menuId: props.restaurant.id,
+        foodOptionName: topping.foodOptionName,
+        menuItemName: menuItem.name,
+        numchoices: topping.numchoices,
+      };
+
+      const toppingCategoryJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionCatJoin, { input: toppingCategoryJoiner }));
+      // console.log("Creating Category Joiner", toppingCategoryJoinerResponse);
+      
+      await Promise.all(topping.optionCat.options.items.map(async option => {
+        // console.log("Making Options!!!")
+        const toppingOptionJoiner = {
+          menuId: props.restaurant.id,
+          foodOptionName: topping.foodOptionName,
+          optionName: option.optionName,
+        };
+
+        const toppingOptionJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionOptionJoin, { input: toppingOptionJoiner }));
+        // console.log("Creating Option Joiner", toppingOptionJoinerResponse);
+      }));
+    }));
+
+    setSelectedMenuItemToppings([]);
+  }
+
+  async function addItem(e) {
     e.preventDefault();
 
     const menuItem = {
@@ -90,22 +183,26 @@ function PortalMenu(props) {
       price: itemPriceInput.current.value,
     };
 
-    API.graphql({ query: mutations.createMenuItem, variables: { input: menuItem } }).then(({ data: { createMenuItem } }) => {
-      console.log("Create Menu Item", createMenuItem);
-      setMenuItems({});
-      getData();
-      changeMode("");
-      selectMenuItem(defaultMenuItem);
-    }).catch((error) => {
-      console.log(error);
-    });
+    const response = await API.graphql(graphqlOperation(mutations.createMenuItem, { input: menuItem }));
+    const newMenuItem = response.data.createMenuItem;
+    console.log("Create Menu Item", newMenuItem);
+    
+    // if (addItemType == "Customizable") {
+    //   await createToppings(newMenuItem);
+    // }
+
+    setMenuItems({});
+    getData();
+    changeMode("");
+    selectMenuItem(defaultMenuItem);
   }
 
   async function editItem(e) {
     e.preventDefault();
 
     if (addItemType == "Customizable") {
-      
+      // await editToppings(selectedMenuItem);
+      await createToppings(selectedMenuItem);
     }
 
     const menuItem = {
@@ -155,7 +252,6 @@ function PortalMenu(props) {
     selectMenuItem({
       ...selectedMenuItem
     });
-    setSelectedMenuItemOptions([...selectedMenuItemOptions, option]);
   }
 
   function addToppings() {
@@ -189,14 +285,13 @@ function PortalMenu(props) {
     topping.optionCat.name = e.target.value,
     topping.optionCat.options.items.forEach(option => option.foodOptionName = e.target.value);
     setSelectedMenuItemToppings([...selectedMenuItemToppings]);
-    // console.log("TPS", selectedMenuItemToppings);
+    console.log("TPS", selectedMenuItemToppings);
     console.log("SMIT", selectedMenuItem);
   }
 
   function editOption(e, topping, option) {
     option.optionName = e.target.value;
     option.option.name = e.target.value;
-    setSelectedMenuItemOptions([...selectedMenuItemOptions]);
     console.log("SMIO", selectedMenuItem);
   }
 
@@ -301,7 +396,7 @@ function PortalMenu(props) {
               <div className="portal-menu-list">
                 {Object.keys(menuItems).map((category =>
                   <div key={category.id} className="menu-category-container">
-                    <span className="blue-heading"><span>{category}</span><span><button className="blue-plus" onClick={() => {changeMode("addItem"); selectCategory(category)}}><img src={plusButtonIcon} /></button></span></span>
+                    <span className="blue-heading"><span>{category}</span><span><button className="blue-plus" onClick={() => {selectCategory(category); selectMenuItem(defaultMenuItem); changeMode("addItem")}}><img src={plusButtonIcon} /></button></span></span>
 
                     {menuItems[category].map(item => 
                       <div key={item.id} className={selectedMenuItem.id == item.id ? "menu-item-container active" : "menu-item-container"} onClick={() => selectMenuItem(item)}>
@@ -324,7 +419,7 @@ function PortalMenu(props) {
                       <div>
                         <span className="subheading">Toppings</span>
                         {selectedMenuItem.options.items.map((topping =>
-                          <div key={topping.foodOptionName} className="menu-item-description"><b>{topping.foodOptionName}:</b> {topping.optionCat.options.items.map(option => option.optionName).join(", ")}</div>
+                          <div key={topping.foodOptionName + topping.createdAt} className="menu-item-description"><b>{topping.foodOptionName}:</b> {topping.optionCat.options.items.map(option => option.optionName).join(", ")}</div>
                         ))}
                       </div>
                     : ""}

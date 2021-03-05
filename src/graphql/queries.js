@@ -105,6 +105,7 @@ export const getUniversity = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -173,6 +174,7 @@ export const listUniversitys = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -233,6 +235,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -283,6 +286,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -375,6 +379,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -414,6 +419,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -463,6 +469,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -502,6 +509,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -552,6 +560,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -591,6 +600,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -640,6 +650,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -715,6 +726,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -754,6 +766,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -817,6 +830,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -856,6 +870,7 @@ export const getUser = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -866,6 +881,7 @@ export const getUser = /* GraphQL */ `
         nextToken
       }
       deviceToken
+      platform
       createdAt
       updatedAt
     }
@@ -902,6 +918,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -922,6 +939,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -966,6 +984,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -975,6 +994,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -994,6 +1014,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1003,6 +1024,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1023,6 +1045,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1032,6 +1055,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1051,6 +1075,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1084,6 +1109,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1093,6 +1119,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1120,6 +1147,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1129,6 +1157,7 @@ export const listUsers = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1139,6 +1168,7 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -1191,6 +1221,7 @@ export const getGroup = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -1266,6 +1297,7 @@ export const getGroup = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -1305,6 +1337,7 @@ export const getGroup = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -1339,6 +1372,7 @@ export const listGroups = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1372,6 +1406,7 @@ export const listGroups = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1381,6 +1416,7 @@ export const listGroups = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1418,6 +1454,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1438,6 +1475,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1482,6 +1520,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1491,6 +1530,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1510,6 +1550,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1519,6 +1560,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1539,6 +1581,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1548,6 +1591,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1567,6 +1611,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1600,6 +1645,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1609,6 +1655,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1636,6 +1683,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1645,6 +1693,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1655,6 +1704,7 @@ export const getGroupMembership = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -1672,6 +1722,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1705,6 +1756,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1714,6 +1766,7 @@ export const getGroupMembership = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1840,6 +1893,7 @@ export const listGroupMemberships = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -1901,6 +1955,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1921,6 +1976,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1965,6 +2021,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1974,6 +2031,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -1993,6 +2051,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2002,6 +2061,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2022,6 +2082,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2031,6 +2092,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2050,6 +2112,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2083,6 +2146,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2092,6 +2156,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2119,6 +2184,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2128,6 +2194,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2138,6 +2205,7 @@ export const getFriendship = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -2157,6 +2225,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2177,6 +2246,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2221,6 +2291,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2230,6 +2301,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2249,6 +2321,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2258,6 +2331,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2278,6 +2352,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2287,6 +2362,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2306,6 +2382,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2339,6 +2416,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2348,6 +2426,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2375,6 +2454,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2384,6 +2464,7 @@ export const getFriendship = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2394,6 +2475,7 @@ export const getFriendship = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -2508,6 +2590,7 @@ export const listFriendships = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -2606,6 +2689,7 @@ export const listFriendships = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -2638,6 +2722,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2658,6 +2743,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2702,6 +2788,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2711,6 +2798,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2730,6 +2818,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2739,6 +2828,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2759,6 +2849,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2768,6 +2859,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2787,6 +2879,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2820,6 +2913,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2829,6 +2923,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2856,6 +2951,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2865,6 +2961,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2875,6 +2972,7 @@ export const getFriendRequest = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -2894,6 +2992,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2914,6 +3013,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2958,6 +3058,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2967,6 +3068,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2986,6 +3088,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -2995,6 +3098,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3015,6 +3119,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3024,6 +3129,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3043,6 +3149,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3076,6 +3183,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3085,6 +3193,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3112,6 +3221,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3121,6 +3231,7 @@ export const getFriendRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3131,6 +3242,7 @@ export const getFriendRequest = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -3246,6 +3358,7 @@ export const listFriendRequests = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -3344,6 +3457,7 @@ export const listFriendRequests = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -3375,6 +3489,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3408,6 +3523,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3417,6 +3533,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3445,6 +3562,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3465,6 +3583,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3509,6 +3628,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3518,6 +3638,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3537,6 +3658,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3546,6 +3668,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3566,6 +3689,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3575,6 +3699,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3594,6 +3719,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3627,6 +3753,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3636,6 +3763,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3663,6 +3791,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3672,6 +3801,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3682,6 +3812,7 @@ export const getGroupRequest = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -3701,6 +3832,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3721,6 +3853,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3765,6 +3898,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3774,6 +3908,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3793,6 +3928,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3802,6 +3938,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3822,6 +3959,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3831,6 +3969,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3850,6 +3989,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3883,6 +4023,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3892,6 +4033,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3919,6 +4061,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3928,6 +4071,7 @@ export const getGroupRequest = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -3938,6 +4082,7 @@ export const getGroupRequest = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -4082,6 +4227,7 @@ export const listGroupRequests = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -4180,6 +4326,7 @@ export const listGroupRequests = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -9018,6 +9165,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9038,6 +9186,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9082,6 +9231,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9091,6 +9241,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9110,6 +9261,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9119,6 +9271,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9139,6 +9292,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9148,6 +9302,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9167,6 +9322,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9200,6 +9356,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9209,6 +9366,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9236,6 +9394,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9245,6 +9404,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9255,6 +9415,7 @@ export const getPickup = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -9344,6 +9505,7 @@ export const getPickup = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -9380,6 +9542,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9395,6 +9558,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9462,6 +9626,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9482,6 +9647,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9526,6 +9692,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9535,6 +9702,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9554,6 +9722,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9563,6 +9732,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9583,6 +9753,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9592,6 +9763,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9611,6 +9783,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9644,6 +9817,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9653,6 +9827,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9680,6 +9855,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9689,6 +9865,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9699,6 +9876,7 @@ export const getPickup = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -9715,6 +9893,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9748,6 +9927,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -9757,6 +9937,7 @@ export const getPickup = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10150,6 +10331,7 @@ export const listPickups = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -10191,6 +10373,7 @@ export const listPickups = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10325,6 +10508,7 @@ export const listPickups = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -10749,6 +10933,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10769,6 +10954,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10813,6 +10999,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10822,6 +11009,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10841,6 +11029,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10850,6 +11039,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10870,6 +11060,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10879,6 +11070,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10898,6 +11090,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10931,6 +11124,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10940,6 +11134,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10967,6 +11162,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10976,6 +11172,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -10986,6 +11183,7 @@ export const getOrder = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -11033,6 +11231,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -11093,6 +11292,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -11235,6 +11435,7 @@ export const getOrder = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -11276,6 +11477,7 @@ export const getOrder = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -11410,6 +11612,7 @@ export const getOrder = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -11743,6 +11946,7 @@ export const listOrders = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -11842,6 +12046,7 @@ export const listOrders = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -11909,6 +12114,7 @@ export const listOrders = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -12004,6 +12210,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12024,6 +12231,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12068,6 +12276,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12077,6 +12286,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12096,6 +12306,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12105,6 +12316,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12125,6 +12337,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12134,6 +12347,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12153,6 +12367,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12186,6 +12401,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12195,6 +12411,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12222,6 +12439,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12231,6 +12449,7 @@ export const getReward = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -12241,6 +12460,7 @@ export const getReward = /* GraphQL */ `
           nextToken
         }
         deviceToken
+        platform
         createdAt
         updatedAt
       }
@@ -12622,6 +12842,7 @@ export const listRewards = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -13315,6 +13536,7 @@ export const getOrderItem = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -13414,6 +13636,7 @@ export const getOrderItem = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -13481,6 +13704,7 @@ export const getOrderItem = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -13729,6 +13953,7 @@ export const getOrderItem = /* GraphQL */ `
             nextToken
           }
           deviceToken
+          platform
           createdAt
           updatedAt
         }
@@ -13928,6 +14153,7 @@ export const listOrderItems = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }
@@ -13964,6 +14190,7 @@ export const listOrderItems = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -13979,6 +14206,7 @@ export const listOrderItems = /* GraphQL */ `
               phone_number
               name
               deviceToken
+              platform
               createdAt
               updatedAt
             }
@@ -14110,6 +14338,7 @@ export const listOrderItems = /* GraphQL */ `
               nextToken
             }
             deviceToken
+            platform
             createdAt
             updatedAt
           }

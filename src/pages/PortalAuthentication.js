@@ -78,7 +78,7 @@ function PortalSignUp(props) {
         setSignedUp(true);
       }).catch((error) => {
         setErrorMsg(error.message);
-        if (error.message.indexOf("Current status is CONFIRMED") > -1) {
+        if (error.message.indexOf("Current status is CONFIRMED") > -1 || error.message.indexOf("Invalid JSON") > -1) {
           setConfirmed(true);
           setErrorMsg("");
           setSuccessMsg("Account confirmed, please sign in.");
@@ -87,12 +87,6 @@ function PortalSignUp(props) {
             name: name,
             email: email
           }
-
-          // API.graphql({ query: mutations.createUser, variables: { input: user } }).then(({ data: { createUser } }) => {
-          //   console.log("Create User", createUser);
-          // }).catch((error) => {
-          //   console.log(error);
-          // });
 
           const restaurant = {
             name: "Your Restaurant Name",
