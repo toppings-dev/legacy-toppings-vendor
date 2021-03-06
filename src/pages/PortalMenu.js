@@ -243,7 +243,7 @@ function PortalMenu(props) {
 
   function editTopping(e, topping) {
     topping.foodOptionName = e.target.value;
-    topping.optionCat.name = e.target.value,
+    topping.optionCat.name = e.target.value;
     topping.optionCat.options.items.forEach(option => option.foodOptionName = e.target.value);
     setSelectedMenuItemToppings([...selectedMenuItemToppings]);
     console.log("TPS", selectedMenuItemToppings);
