@@ -354,7 +354,7 @@ function PortalMenu(props) {
                   : ""}
                 </div>
                 <div>
-                  <button className="orange-text" onClick={() => changeMode("")}>Cancel</button>
+                  <button className="orange-text" onClick={() => {changeMode(""); setSelectedMenuItemToppings([]); setSelectedMenuItemOptions([]); selectMenuItem(defaultMenuItem); getData();}}>Cancel</button>
                   <button className="orange" onClick={mode == "addItem" ? addItem : editItem}>{mode == "addItem" ? "Add" : "Save"} Menu Item</button>
                 </div>
               </div>
