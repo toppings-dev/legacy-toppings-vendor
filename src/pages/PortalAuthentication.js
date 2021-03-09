@@ -142,7 +142,7 @@ function PortalSignUp(props) {
   return (
     <section className="portal-login-container">
       {loggedIn ? 
-        <Redirect to="/portal/dashboard" />
+        <Redirect to="/portal/orders" />
         :
         <article className="login-container">
           <div className="login-panel">

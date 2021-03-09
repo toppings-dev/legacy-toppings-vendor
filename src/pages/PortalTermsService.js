@@ -170,7 +170,7 @@ SECTION 19 OF THIS AGREEMENT CONTAINS PROVISIONS THAT GOVERN HOW CLAIMS THAT YOU
           </ol>
         </div>
 
-        <button>Export as PDF</button>
+        {/*<button>Export as PDF</button>*/}
       </div>
     </article>
   );

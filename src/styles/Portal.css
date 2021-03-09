@@ -148,6 +148,7 @@
 }
 .portal-menu-item-form-submit-section button, .portal-rewards-form-submit-section button, #portal-settings-form-submit-section button {
   margin: 3rem 0rem;
+  max-width: 20rem;
 }
 
 .portal-menu-item-form-submit-section, .portal-rewards-form-submit-section {

@@ -44,7 +44,7 @@ function PortalRewards(props) {
     setLoading(true);
     const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
     console.log(response);
-    const rewards = response.data.listVendorRewards.items;
+    const rewards = response.data.listVendorRewards.items.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
     console.log(rewards);
     setRewardItems({
       Rewards: rewards
@@ -119,17 +119,17 @@ function PortalRewards(props) {
                 <form className="portal-rewards-form">
                   <div className="portal-rewards-form-name-section">
                     <span className="subheading">Reward Name</span>
-                    <input className="text-input" type="text" placeholder="Krabby Patty Happy Hour" ref={nameInput} defaultValue={mode == "editReward" ? selectedRewardItem.itemName : ""}/>
+                    <input className="text-input" type="text" placeholder="Enter Your Reward Name" ref={nameInput} defaultValue={mode == "editReward" ? selectedRewardItem.itemName : ""}/>
                   </div>
                   
                   <div className="portal-rewards-form-points-section">
                     <span className="subheading">Point Value</span>
-                    <input className="text-input" type="number" placeholder="5" ref={pointsInput} defaultValue={mode == "editReward" ? selectedRewardItem.points : ""}/>
+                    <input className="text-input" type="number" placeholder="Enter Your Reward Point Value" ref={pointsInput} defaultValue={mode == "editReward" ? selectedRewardItem.points : ""}/>
                   </div>
                   
                   <div className="portal-rewards-form-description-section">
                     <span className="subheading">Reward Description</span>
-                    <textarea className="text-input" type="text" placeholder="10% discount on all Krabby Patties between 12PM and 3PM." ref={descriptionInput} defaultValue={mode == "editReward" ? selectedRewardItem.description : ""}/>
+                    <textarea className="text-input" type="text" placeholder="Enter Your Reward Description" ref={descriptionInput} defaultValue={mode == "editReward" ? selectedRewardItem.description : ""}/>
                   </div>
                 </form>
                 
@@ -161,7 +161,7 @@ function PortalRewards(props) {
                       {rewardItems[category].map(item => 
                         <div key={item.id} className={selectedRewardItem == item ? "reward-container active" : "reward-container"} onClick={() => selectRewardItem(item)}>
                           <span className="subheading">{item.itemName}</span>
-                          <span className="subheading">{item.points} points</span>
+                          <span className="subheading">{item.points} pts</span>
                           <div className="reward-description">{item.description}</div>
                         </div>
                       )}

@@ -8,6 +8,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
+html {
+    font-size: 100%;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -287,4 +291,10 @@ button.close {
     background-color: #0082ff;
     color: #ffffff;
     z-index: 10;
+}
+
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 75%;
+    }
 }

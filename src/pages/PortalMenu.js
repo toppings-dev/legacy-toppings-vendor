@@ -296,17 +296,17 @@ function PortalMenu(props) {
                 
                 <div className="portal-menu-item-form-name-section">
                   <span className="subheading">Item Name</span>
-                  <input className="text-input" type="text" placeholder="Krabby Patties" ref={itemNameInput} defaultValue={mode == "editItem" ? selectedMenuItem.name : ""} />
+                  <input className="text-input" type="text" placeholder="Enter Your Item Name" ref={itemNameInput} defaultValue={mode == "editItem" ? selectedMenuItem.name : ""} />
                 </div>
                 
                 <div className="portal-menu-item-form-price-section">
-                  <span className="subheading">Item Price</span>
-                  <label for="price">$</label><input id="menu-item-price-input" className="text-input" type="text" placeholder="2.99" ref={itemPriceInput} defaultValue={mode == "editItem" ? selectedMenuItem.price.toFixed(2) : ""} />
+                  <span className="subheading">Item Price ($)</span>
+                  <input id="menu-item-price-input" className="text-input" type="text" placeholder="Enter Your Item Price" ref={itemPriceInput} defaultValue={mode == "editItem" ? selectedMenuItem.price.toFixed(2) : ""} />
                 </div>
                 
                 <div className="portal-menu-item-form-description-section">
                   <span className="subheading">Item Description</span>
-                  <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={itemDescriptionInput} defaultValue={mode == "editItem" ? selectedMenuItem.description : ""} />
+                  <textarea className="text-input" type="text" placeholder="Enter Your Item Description" ref={itemDescriptionInput} defaultValue={mode == "editItem" ? selectedMenuItem.description : ""} />
                 </div>
                 
                 {/*<div className="portal-menu-item-form-tags-section">
@@ -411,7 +411,7 @@ function PortalMenu(props) {
                 <button className="close" onClick={() => changeMode("")}>&#10005;</button>
                 <span className="subheading">Category Name</span>
                 <form className="portal-category-form">
-                    <input className="text-input" type="text" placeholder="Category" ref={categoryNameInput} />
+                    <input className="text-input" type="text" placeholder="Enter Category Name" ref={categoryNameInput} />
                     <button onClick={addCategory}>Create Category</button>
                 </form>
               </div>
@@ -424,7 +424,7 @@ function PortalMenu(props) {
                 <button className="close" onClick={() => changeMode("")}>&#10005;</button>
                 <span className="subheading">Category Name</span>
                 <form className="portal-category-form">
-                    <input className="text-input" type="text" placeholder="Category" ref={categoryNameInput} />
+                    <input className="text-input" type="text" placeholder="Enter Category Name" ref={categoryNameInput} />
                     <button onClick={addCategory}>Create Category</button>
                 </form>
               </div>

@@ -120,8 +120,8 @@ function PortalSettings(props) {
               </div>
               
               <div id="portal-settings-form-tags-section">
-                <span className="subheading">Tags</span>
-                <input className="text-input" type="text" placeholder="Fast Food, Outdoor Dining" ref={tagInput} />
+                {/*<span className="subheading">Tags</span>
+                <input className="text-input" type="text" placeholder="Fast Food, Outdoor Dining" ref={tagInput} />*/}
               </div>
               
               <div id="portal-settings-form-address-section">
@@ -229,7 +229,7 @@ function PortalSettings(props) {
                   </div>
                   </div>*/}
               </div>
-              <div></div>
+              {/*<div></div>*/}
               <div id="vendor-info-button-section">
                 <button className="orange" onClick={() => changeMode("edit")}>Edit Information</button>
               </div>
