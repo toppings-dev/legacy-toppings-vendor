@@ -1,0 +1,133 @@
+.portal-orders-subcontainer {
+  height: 100vh;
+  margin: 0rem -4rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+} 
+
+.orders-list {
+  border-right: 5px solid #e6e6e6;
+  text-align: left;
+}
+
+.orders-list header {
+  border-bottom: 5px solid #f2f2f2;
+  height: 7.5rem;
+  padding: 1.25rem;
+}
+
+.orders-list header button.tag {
+  padding: 0.5rem 2rem;
+}
+
+.orders-list .order-category {
+  background-color: #f2f2f2;
+  color: #8d8e8e;
+  width: 100%;
+  display: block;
+  padding: 0.5rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.orders-list .order-container {
+  border-bottom: 1px solid #e1e1e1;
+  background-color: #ffffff;
+  color: #979797;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.75rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.orders-list .order-container.active {
+  background-color: #979797;
+  color: #ffffff;
+}
+
+.orders-list .order-container span:nth-of-type(2) {
+  text-align: right;
+}
+
+.orders-list .order-container button {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+}
+
+.orders-list .order-container.active button {
+  background-color: #cdcdcd;
+  color: #979797;
+}
+
+.orders-list .empty-order-container {
+  border-bottom: 1px solid #e1e1e1;
+  background-color: #ffffff;
+  color: #cdcdcd;
+  width: 100%;
+  padding: 0.75rem 0rem 0.75rem 2rem;
+  font-size: 1.125rem;
+}
+
+.portal-orders-info header {
+  border-bottom: 5px solid #e6e6e6;
+  height: 7.5rem;
+  padding: 1.4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.portal-orders-info header span.blue-subheading {
+  color: #0082ff;
+}
+
+.order-details {
+  height: 85vh;
+  padding: 2rem 6rem;
+  text-align: left;
+  overflow-y: scroll;
+}
+
+.order-details .order-delivery-time button {
+  margin: 0rem 1rem;
+}
+
+.order-details .order-delivery-time span.blue-subheading {
+  color: #0082ff;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.order-details .order-item, .order-details .order-tax-tip, .order-details .order-total {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem 0rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.order-details .order-item-price {
+  text-align: right;
+}
+
+.order-details .order-total {
+  color: #ff5200;
+}
+
+.order-details .order-instructions {
+  margin: 2rem 0rem;
+}
+
+.order-details button {
+  margin: 1rem 3rem;
+  display: inline-block;
+}
+
+.order-details hr {
+  border: none;
+  background-color: #e1e1e1;
+  height: 1px;
+  margin-left: 0rem;
+}

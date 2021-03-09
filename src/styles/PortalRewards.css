@@ -1,0 +1,20 @@
+.portal-rewards-form {
+  height: auto;
+  padding-bottom: 0rem;
+  grid-template-columns: 3fr 2fr;
+  grid-template-areas: "name points"
+                       "description description";
+  overflow-y: hidden;
+}
+
+.portal-rewards-form-name-section {
+  grid-area: name;
+}
+
+.portal-rewards-form-points-section {
+  grid-area: points;
+}
+
+.portal-rewards-form-description-section {
+  grid-area: description;
+}

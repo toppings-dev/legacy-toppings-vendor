@@ -309,7 +309,7 @@ function PortalMenu(props) {
                   <textarea className="text-input" type="text" placeholder="The signature of the Krusty Krab, a juicy burger with secret ingredients." ref={itemDescriptionInput} defaultValue={mode == "editItem" ? selectedMenuItem.description : ""} />
                 </div>
                 
-                <div className="portal-menu-item-form-tags-section">
+                {/*<div className="portal-menu-item-form-tags-section">
                   <span className="subheading">Item Tags</span>
                   <input className="text-input" type="text" placeholder="Seafood" ref={itemTagsInput} />
                 </div>
@@ -320,13 +320,13 @@ function PortalMenu(props) {
                     <label htmlFor="portal-menu-item-form-image-input" className="image-upload">Upload an Image</label>
                     <input id="portal-menu-item-form-image-input" className="image-input" type="file" ref={itemImageInput} hidden />
                   </div>
-                </div>
+                </div>*/}
 
                 {mode == "editItem" && addItemType == "Customizable"  ? 
                   <div className="portal-menu-item-form-toppings-section">
                     {selectedMenuItem.options.items.map((topping =>
                       <div className="portal-menu-item-form-toppings-container">
-                        <span className="subheading">Toppings Name <button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button></span>
+                        <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
                         <input className="text-input" type="text" placeholder="Patty Type" onChange={(e) => editTopping(e, topping)} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
 
                         <div className="portal-menu-item-form-toppings-options-container">

@@ -26,7 +26,8 @@ function PortalSettings(props) {
     id: props.restaurant.id,
     name: props.restaurant.name != null && props.restaurant.name.length > 0 ? props.restaurant.name : "Your Restaurant Name",
     description: props.restaurant.description != null && props.restaurant.description.length > 0 ? props.restaurant.description : "Your Restaurant Description",
-    tags: ["Fast Food", "Outdoor Dining"],
+    // tags: ["Fast Food", "Outdoor Dining"],
+    tags: [],
     address: props.restaurant.address != null && props.restaurant.address.length > 0 && 
              props.restaurant.city != null && props.restaurant.city.length > 0 && 
              props.restaurant.state != null && props.restaurant.state.length > 0 && 
@@ -144,7 +145,7 @@ function PortalSettings(props) {
               </div>
 
               <div id="portal-settings-form-hours-section">
-                <span className="subheading">Hours of Operations</span>
+                {/*<span className="subheading">Hours of Operations</span>
                 {Object.keys(vendor.hours).map((day => 
                   <div key={day}>
                     <span>{day}:</span>
@@ -170,7 +171,7 @@ function PortalSettings(props) {
                       </div>
                     </span>
                   </div>
-                ))}
+                ))}*/}
               </div>
             </form>
             
@@ -215,7 +216,7 @@ function PortalSettings(props) {
                 </div>
               </div>
               <div id="vendor-hours-info-section" className="vendor-info-section">
-                <img src={clockIcon} />
+                {/*<img src={clockIcon} />
                 <div>
                   <span className="subheading">Hours</span>
                   <div id="vendor-hours-info">
@@ -226,7 +227,7 @@ function PortalSettings(props) {
                       </div>
                     ))}
                   </div>
-                </div>
+                  </div>*/}
               </div>
               <div></div>
               <div id="vendor-info-button-section">
