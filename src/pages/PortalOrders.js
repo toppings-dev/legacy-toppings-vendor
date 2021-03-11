@@ -34,11 +34,9 @@ function PortalOrders(props) {
   function advanceOrder(order, currentStatus) {
     const ordersCopy = orders;
     ordersCopy[currentStatus] = ordersCopy[currentStatus].filter(item => item != order);
-    if(currentStatus == "Incoming")
-    {
+    if(currentStatus == "Incoming"){
       ordersCopy["New"].push(order)
-    }
-    else if (currentStatus == "New") {
+    } else if (currentStatus == "New") {
       ordersCopy["Preparing"].push(order)
     } else if (currentStatus == "Preparing") {
       ordersCopy["Ready"].push(order)
