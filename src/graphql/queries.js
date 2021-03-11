@@ -9602,6 +9602,7 @@ export const getPickup = /* GraphQL */ `
           }
           status
           closed
+          isPaid
           createdAt
           updatedAt
         }
@@ -10405,6 +10406,7 @@ export const listPickups = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -11263,6 +11265,7 @@ export const getOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -11509,6 +11512,7 @@ export const getOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -11743,6 +11747,7 @@ export const getOrder = /* GraphQL */ `
       }
       status
       closed
+      isPaid
       createdAt
       updatedAt
     }
@@ -11976,6 +11981,7 @@ export const listOrders = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -12070,6 +12076,7 @@ export const listOrders = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -12182,6 +12189,7 @@ export const listOrders = /* GraphQL */ `
         }
         status
         closed
+        isPaid
         createdAt
         updatedAt
       }
@@ -13566,6 +13574,7 @@ export const getOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -13660,6 +13669,7 @@ export const getOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -13772,6 +13782,7 @@ export const getOrderItem = /* GraphQL */ `
         }
         status
         closed
+        isPaid
         createdAt
         updatedAt
       }
@@ -14250,6 +14261,7 @@ export const listOrderItems = /* GraphQL */ `
           }
           status
           closed
+          isPaid
           createdAt
           updatedAt
         }

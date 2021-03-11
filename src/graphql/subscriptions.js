@@ -19742,6 +19742,7 @@ export const onCreatePickup = /* GraphQL */ `
           }
           status
           closed
+          isPaid
           createdAt
           updatedAt
         }
@@ -20824,6 +20825,7 @@ export const onUpdatePickup = /* GraphQL */ `
           }
           status
           closed
+          isPaid
           createdAt
           updatedAt
         }
@@ -21906,6 +21908,7 @@ export const onDeletePickup = /* GraphQL */ `
           }
           status
           closed
+          isPaid
           createdAt
           updatedAt
         }
@@ -23153,6 +23156,7 @@ export const onCreateOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -23399,6 +23403,7 @@ export const onCreateOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -23633,6 +23638,7 @@ export const onCreateOrder = /* GraphQL */ `
       }
       status
       closed
+      isPaid
       createdAt
       updatedAt
     }
@@ -24260,6 +24266,7 @@ export const onUpdateOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -24506,6 +24513,7 @@ export const onUpdateOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -24740,6 +24748,7 @@ export const onUpdateOrder = /* GraphQL */ `
       }
       status
       closed
+      isPaid
       createdAt
       updatedAt
     }
@@ -25367,6 +25376,7 @@ export const onDeleteOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -25613,6 +25623,7 @@ export const onDeleteOrder = /* GraphQL */ `
             }
             status
             closed
+            isPaid
             createdAt
             updatedAt
           }
@@ -25847,6 +25858,7 @@ export const onDeleteOrder = /* GraphQL */ `
       }
       status
       closed
+      isPaid
       createdAt
       updatedAt
     }
@@ -28573,6 +28585,7 @@ export const onCreateOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -28667,6 +28680,7 @@ export const onCreateOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -28779,6 +28793,7 @@ export const onCreateOrderItem = /* GraphQL */ `
         }
         status
         closed
+        isPaid
         createdAt
         updatedAt
       }
@@ -29291,6 +29306,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -29385,6 +29401,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -29497,6 +29514,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
         }
         status
         closed
+        isPaid
         createdAt
         updatedAt
       }
@@ -30009,6 +30027,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -30103,6 +30122,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
               pickupId
               status
               closed
+              isPaid
               createdAt
               updatedAt
             }
@@ -30215,6 +30235,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
         }
         status
         closed
+        isPaid
         createdAt
         updatedAt
       }
