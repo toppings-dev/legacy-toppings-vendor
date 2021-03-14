@@ -1,6 +1,6 @@
 #vendor-info-button-section, #portal-settings-form-submit-section {
-  /* grid-area: submit; */
-  text-align: left;
+  grid-area: submit;
+  text-align: right;
 }
 
 .portal-vendor-info-container {
@@ -18,7 +18,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "location hours"
                        "contact hours"
-                       "button button";
+                       "none button";
 }
 
 .vendor-info-section {
@@ -51,8 +51,9 @@
   grid-area: hours;
 }
 
-#vendor-info-button-section button {
+#vendor-info-button-section {
   grid-area: button;
+  text-align: right;
 }
 
 .portal-settings-form-container {

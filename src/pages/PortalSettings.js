@@ -12,17 +12,7 @@ import phoneIcon from '../assets/images/phone-icon.svg';
 import clockIcon from '../assets/images/clock-icon.svg';
 
 function PortalSettings(props) {
-  const nameInput = useRef();
-  const tagInput = useRef();
-  const descriptionInput = useRef();
-  const addressInput = useRef();
-  const phoneNumberInput = useRef();
-  const contactInput = useRef();
-  const emailInput = useRef();
-  const timeInput = useRef();
-
-  const [mode, changeMode] = useState("");
-  const [vendor, setVendor] = useState({
+  const defaultVendor = {
     id: props.restaurant.id,
     name: props.restaurant.name != null && props.restaurant.name.length > 0 ? props.restaurant.name : "Your Restaurant Name",
     description: props.restaurant.description != null && props.restaurant.description.length > 0 ? props.restaurant.description : "Your Restaurant Description",
@@ -38,34 +28,54 @@ function PortalSettings(props) {
     phoneNumber: props.restaurant.phone_number != null && props.restaurant.phone_number.length > 0 ? props.restaurant.phone_number : "Your Restaurant Phone Number",
     email: props.restaurant.email != null && props.restaurant.email.length > 0 ? props.restaurant.email : "Your Restaurant Email",
     hours: {
-      Sunday: ["7:00 AM", "12:00 AM"],
-      Monday: ["7:00 AM", "2:00 AM"],
-      Tuesday: ["7:00 AM", "2:00 AM"],
-      Wednesday: ["7:00 AM", "2:00 AM"],
-      Thursday: ["7:00 AM", "2:00 AM"],
-      Friday: ["7:00 AM", "2:00 AM"],
-      Saturday: ["7:00 AM", "12:00 AM"],
+      Sunday: props.restaurant.sundayHours != null && props.restaurant.sundayHours.length > 0 ? [props.restaurant.sundayHours.split("-")[0], props.restaurant.sundayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
+      Monday: props.restaurant.mondayHours != null && props.restaurant.mondayHours.length > 0 ? [props.restaurant.mondayHours.split("-")[0], props.restaurant.mondayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
+      Tuesday: props.restaurant.tuesdayHours != null && props.restaurant.tuesdayHours.length > 0 ? [props.restaurant.tuesdayHours.split("-")[0], props.restaurant.tuesdayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
+      Wednesday: props.restaurant.wednesdayHours != null && props.restaurant.wednesdayHours.length > 0 ? [props.restaurant.wednesdayHours.split("-")[0], props.restaurant.wednesdayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
+      Thursday: props.restaurant.thursdayHours != null && props.restaurant.thursdayHours.length > 0 ? [props.restaurant.thursdayHours.split("-")[0], props.restaurant.thursdayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
+      Friday: props.restaurant.fridayHours != null && props.restaurant.fridayHours.length > 0 ? [props.restaurant.fridayHours.split("-")[0], props.restaurant.fridayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
+      Saturday: props.restaurant.saturdayHours != null && props.restaurant.saturdayHours.length > 0 ? [props.restaurant.saturdayHours.split("-")[0], props.restaurant.saturdayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],
     }
-  });
+  };
+
+  const nameInput = useRef();
+  const tagInput = useRef();
+  const descriptionInput = useRef();
+  const addressInput = useRef();
+  const phoneNumberInput = useRef();
+  const contactInput = useRef();
+  const emailInput = useRef();
+  const timeInput = useRef();
+
+  const [mode, changeMode] = useState("");
+  const [vendor, setVendor] = useState(defaultVendor);
   const [vendorForm, setVendorForm] = useState({
     hours: {
-      Sunday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
-      Monday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
-      Tuesday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
-      Wednesday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
-      Thursday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
-      Friday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
-      Saturday: {startTime: "7:00", startPeriod: "AM", endTime: "2:00", endPeriod: "AM"},
+      Sunday: {startTime: defaultVendor.hours.Sunday[0].split(" ")[0], startPeriod: defaultVendor.hours.Sunday[0].split(" ")[1], endTime: defaultVendor.hours.Sunday[1].split(" ")[0], endPeriod: defaultVendor.hours.Sunday[1].split(" ")[1]},
+      Monday: {startTime: defaultVendor.hours.Monday[0].split(" ")[0], startPeriod: defaultVendor.hours.Monday[0].split(" ")[1], endTime: defaultVendor.hours.Monday[1].split(" ")[0], endPeriod: defaultVendor.hours.Monday[1].split(" ")[1]},
+      Tuesday: {startTime: defaultVendor.hours.Tuesday[0].split(" ")[0], startPeriod: defaultVendor.hours.Tuesday[0].split(" ")[1], endTime: defaultVendor.hours.Tuesday[1].split(" ")[0], endPeriod: defaultVendor.hours.Tuesday[1].split(" ")[1]},
+      Wednesday: {startTime: defaultVendor.hours.Wednesday[0].split(" ")[0], startPeriod: defaultVendor.hours.Wednesday[0].split(" ")[1], endTime: defaultVendor.hours.Wednesday[1].split(" ")[0], endPeriod: defaultVendor.hours.Wednesday[1].split(" ")[1]},
+      Thursday: {startTime: defaultVendor.hours.Thursday[0].split(" ")[0], startPeriod: defaultVendor.hours.Thursday[0].split(" ")[1], endTime: defaultVendor.hours.Thursday[1].split(" ")[0], endPeriod: defaultVendor.hours.Thursday[1].split(" ")[1]},
+      Friday: {startTime: defaultVendor.hours.Friday[0].split(" ")[0], startPeriod: defaultVendor.hours.Friday[0].split(" ")[1], endTime: defaultVendor.hours.Friday[1].split(" ")[0], endPeriod: defaultVendor.hours.Friday[1].split(" ")[1]},
+      Saturday: {startTime: defaultVendor.hours.Saturday[0].split(" ")[0], startPeriod: defaultVendor.hours.Saturday[0].split(" ")[1], endTime: defaultVendor.hours.Saturday[1].split(" ")[0], endPeriod: defaultVendor.hours.Saturday[1].split(" ")[1]},
     }
   });
 
-  function changeVendorFormHoursPeriod(day, periodType, period) {
+  function changeVendorHours(e, day, dayHalf, timePlace) {
+    const vendorFormHours = vendorForm.hours;
+    let currentHours = vendorForm.hours[day][dayHalf];
+    vendorForm.hours[day][dayHalf] = currentHours.substr(0, timePlace) + e.target.value + currentHours.substr(timePlace + e.target.value.length);
+    setVendorForm({...vendorForm, vendorFormHours});
+    console.log(vendorForm.hours)
+  }
+
+  function changeVendorHoursPeriod(day, periodType, period) {
     const vendorFormHours = vendorForm.hours;
     vendorForm.hours[day][periodType] = period;
     setVendorForm({...vendorForm, vendorFormHours});
   }
 
-  function updateVendor() {
+  async function updateVendor() {
     const address = addressInput.current.value.split(", ")[0];
     const city = addressInput.current.value.split(", ")[1];
     const state = addressInput.current.value.split(", ")[2].slice(0, -6);
@@ -86,6 +96,13 @@ function PortalSettings(props) {
       state: state,
       zip_code: zipCode,
       restaurantOwnerName: contactInput.current.value,
+      sundayHours: vendorForm.hours.Sunday.startTime + " " + vendorForm.hours.Sunday.startPeriod + "-" + vendorForm.hours.Sunday.endTime + " " + vendorForm.hours.Sunday.endPeriod,
+      mondayHours: vendorForm.hours.Monday.startTime + " " + vendorForm.hours.Monday.startPeriod + "-" + vendorForm.hours.Monday.endTime + " " + vendorForm.hours.Monday.endPeriod,
+      tuesdayHours: vendorForm.hours.Tuesday.startTime + " " + vendorForm.hours.Tuesday.startPeriod + "-" + vendorForm.hours.Tuesday.endTime + " " + vendorForm.hours.Tuesday.endPeriod,
+      wednesdayHours: vendorForm.hours.Wednesday.startTime + " " + vendorForm.hours.Wednesday.startPeriod + "-" + vendorForm.hours.Wednesday.endTime + " " + vendorForm.hours.Wednesday.endPeriod,
+      thursdayHours: vendorForm.hours.Thursday.startTime + " " + vendorForm.hours.Thursday.startPeriod + "-" + vendorForm.hours.Thursday.endTime + " " + vendorForm.hours.Thursday.endPeriod,
+      fridayHours: vendorForm.hours.Friday.startTime + " " + vendorForm.hours.Friday.startPeriod + "-" + vendorForm.hours.Friday.endTime + " " + vendorForm.hours.Friday.endPeriod,
+      saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
     };
     
     console.log(updatedVendor);
@@ -145,33 +162,33 @@ function PortalSettings(props) {
               </div>
 
               <div id="portal-settings-form-hours-section">
-                {/*<span className="subheading">Hours of Operations</span>
+                <span className="subheading">Hours of Operations</span>
                 {Object.keys(vendor.hours).map((day => 
                   <div key={day}>
                     <span>{day}:</span>
                     <span>
-                      <input className="number-input" type="text" ref={timeInput} />
-                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][0][0]} onChange={(e) => changeVendorHours(e, day, "startTime", 0)} maxLength="1"/>
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][0][1]} onChange={(e) => changeVendorHours(e, day, "startTime", 1)} maxLength="1" />
                       :
-                      <input className="number-input" type="text" ref={timeInput} />
-                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][0][3]} onChange={(e) => changeVendorHours(e, day, "startTime", 3)} maxLength="1" />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][0][4]} onChange={(e) => changeVendorHours(e, day, "startTime", 4)} maxLength="1" />
                       <div className="am-pm-radio">
-                        <span className={vendorForm.hours[day].startPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "startPeriod", "AM")}>AM</span>
-                        <span className={vendorForm.hours[day].startPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "startPeriod", "PM")}>PM</span>
+                        <span className={vendorForm.hours[day].startPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorHoursPeriod(day, "startPeriod", "AM")}>AM</span>
+                        <span className={vendorForm.hours[day].startPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorHoursPeriod(day, "startPeriod", "PM")}>PM</span>
                       </div>
                       <span className="hyphen">-</span>
-                      <input className="number-input" type="text" ref={timeInput} />
-                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][1][0]} onChange={(e) => changeVendorHours(e, day, "endTime", 0)} maxLength="1" />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][1][1]} onChange={(e) => changeVendorHours(e, day, "endTime", 1)} maxLength="1" />
                       :
-                      <input className="number-input" type="text" ref={timeInput} />
-                      <input className="number-input" type="text" ref={timeInput} />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][1][3]} onChange={(e) => changeVendorHours(e, day, "endTime", 3)} maxLength="1" />
+                      <input className="number-input" type="text" defaultValue={vendor.hours[day][1][4]} onChange={(e) => changeVendorHours(e, day, "endTime", 4)} maxLength="1" />
                       <div className="am-pm-radio">
-                      <span className={vendorForm.hours[day].endPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "endPeriod", "AM")}>AM</span>
-                        <span className={vendorForm.hours[day].endPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorFormHoursPeriod(day, "endPeriod", "PM")}>PM</span>
+                      <span className={vendorForm.hours[day].endPeriod == "AM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorHoursPeriod(day, "endPeriod", "AM")}>AM</span>
+                        <span className={vendorForm.hours[day].endPeriod == "PM" ? "am-pm-radio-option active" : "am-pm-radio-option"} onClick={() => changeVendorHoursPeriod(day, "endPeriod", "PM")}>PM</span>
                       </div>
                     </span>
                   </div>
-                ))}*/}
+                ))}
               </div>
             </form>
             
@@ -216,20 +233,20 @@ function PortalSettings(props) {
                 </div>
               </div>
               <div id="vendor-hours-info-section" className="vendor-info-section">
-                {/*<img src={clockIcon} />
+                <img src={clockIcon} />
                 <div>
                   <span className="subheading">Hours</span>
                   <div id="vendor-hours-info">
                     {Object.keys(vendor.hours).map((day => 
                       <div>
                         <span>{day}:</span>
-                        <span>{vendor.hours[day][0]} - {vendor.hours[day][1]}</span>
+                        <span>{parseInt(vendor.hours[day][0].split(":")[0]) + ":" + vendor.hours[day][0].split(":")[1]} - {parseInt(vendor.hours[day][1].split(":")[0]) + ":" + vendor.hours[day][1].split(":")[1]}</span>
                       </div>
                     ))}
                   </div>
-                  </div>*/}
+                  </div>
               </div>
-              {/*<div></div>*/}
+              <div></div>
               <div id="vendor-info-button-section">
                 <button className="orange" onClick={() => changeMode("edit")}>Edit Information</button>
               </div>
