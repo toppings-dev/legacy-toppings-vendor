@@ -58,6 +58,7 @@ function PortalSignUp(props) {
       }).then(() => {
         setSignedUp(true);
         setSuccessMsg("Account created, please enter the confirmation code.");
+        setErrorMsg("");
         setUserName(name);
       }).catch((error) => {
         setErrorMsg(error.message);
