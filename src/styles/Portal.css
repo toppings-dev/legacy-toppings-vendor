@@ -90,7 +90,7 @@
   height: 100%;
 }
 
-.portal-container input.text-input, .portal-container textarea.text-input {
+.portal-container input.text-input, .portal-container textarea.text-input, .portal-container select.dropdown-input {
   outline: none;
   border-radius: 30px;
   border: none;

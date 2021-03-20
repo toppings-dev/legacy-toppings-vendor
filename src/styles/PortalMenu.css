@@ -80,6 +80,11 @@
   /* width: 90%; */
 }
 
+.portal-menu-item-form-toppings-container div select.dropdown-input {
+  display: inline-block;
+  width: 100%;
+}
+
 .portal-menu-item-form-toppings-options-container button.blue-text {
   margin: 0.75rem 0rem;
   padding: 0rem;

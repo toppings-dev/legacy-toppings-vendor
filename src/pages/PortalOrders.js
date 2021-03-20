@@ -10,9 +10,14 @@ import * as subscriptions from '../graphql/subscriptions'
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 import whiteCheckmark from '../assets/images/white-checkmark.svg';
 import grayCheckmark from '../assets/images/gray-checkmark.svg';
-
+import ding from '../assets/audio/ding.mp3';
 
 function PortalOrders(props) {
+  const newOrderTimeStamp = 30;
+  const preparingOrderTimeStamp = 15;
+  const readyOrderTimeStamp = 5;
+
+  const [audio] = useState(new Audio(ding));
   const [selectedOrder, selectOrder] = useState(null); 
   const [orders, setOrders] = useState({
     // New: [{id: 73, deliverer: "Patrick Star", customer: "Gary", tip: 0.00, instructions: "Meow", items: [{name: "Golden Loaf", price: 2.50}, {name: "Krabby Patty", price: 2.99}]}, 
@@ -31,17 +36,35 @@ function PortalOrders(props) {
     orderReceived();
   }, []);
 
-  function advanceOrder(order, currentStatus) {
+  async function advanceOrder(order, currentStatus) {
     const ordersCopy = orders;
     ordersCopy[currentStatus] = ordersCopy[currentStatus].filter(item => item != order);
-    if(currentStatus == "Incoming"){
-      ordersCopy["New"].push(order)
+    if (currentStatus == "Incoming") {
+      ordersCopy["New"].push(order);
+
     } else if (currentStatus == "New") {
-      ordersCopy["Preparing"].push(order)
+      ordersCopy["Preparing"].push(order);
+      const updatedOrder = {
+        id: order.id,
+        food_ready_time: preparingOrderTimeStamp,
+      };
+
+      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
     } else if (currentStatus == "Preparing") {
-      ordersCopy["Ready"].push(order)
+      ordersCopy["Ready"].push(order);
+      const updatedOrder = {
+        id: order.id,
+        food_ready_time: readyOrderTimeStamp,
+      };
+
+      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
+    } else if (currentStatus == "Ready") {
+      const updatedOrder = {
+        id: order.id,
+      };
+
+      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
     }
-    console.log(ordersCopy, ordersCopy[currentStatus])
 
     if (ordersCopy.New.length + ordersCopy.Preparing.length + ordersCopy.Ready.length <= 0) {
       selectOrder(null);
@@ -56,6 +79,7 @@ function PortalOrders(props) {
       const myOrder = eventData.value.data.onUpdateOrder;
       if (myOrder.restaurant.id == props.restaurant.id && myOrder.isPaid) {
         let foodItems = [];
+        console.log(myOrder)
         myOrder.orderItems.items.forEach(foodItem => {
           foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward });
         });
@@ -74,35 +98,49 @@ function PortalOrders(props) {
           Preparing: oldOrders["Preparing"],
           Ready: oldOrders["Ready"]
         }));
+        audio.play();
       }
     }});
   }
 
   async function getData() {
-    const response = await API.graphql(graphqlOperation(queries.listOrders));
-    const orders = response.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
-          
-    let New = []
-    orders.forEach(order => {
+    const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
+    const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
+    
+    receivedOrders.forEach(order => {
       let foodItems = [];
       order.orderItems.items.forEach(foodItem => {
         foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward });
       });
 
+      const date = new Date(Date.parse(order.updatedAt));
       const myOrder = {
         id: order.id, 
         deliverer: order.pickup.deliverer.name, 
         customer: order.customer.name, 
         tip: order.tip, 
         instructions: "", 
-        items: foodItems
+        items: foodItems,
+        time: `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+        food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
       }
 
-      setOrders(oldOrders => ({
-        New: [myOrder, ...oldOrders["New"]],
-        Preparing: oldOrders["Preparing"],
-        Ready: oldOrders["Ready"]
-      }));
+      if (myOrder.food_ready_time > preparingOrderTimeStamp) {
+        setOrders(oldOrders => ({
+          ...oldOrders,
+          New: [myOrder, ...oldOrders["New"]],
+        }));
+      } else if (myOrder.food_ready_time > readyOrderTimeStamp) {
+        setOrders(oldOrders => ({
+          ...oldOrders,
+          Preparing: [myOrder, ...oldOrders["Preparing"]],
+        }));
+      } else if (myOrder.food_ready_time >= 0) {
+        setOrders(oldOrders => ({
+          ...oldOrders,
+          Ready: [myOrder, ...oldOrders["Ready"]],
+        }));
+      }
     });
   }
 
@@ -115,22 +153,24 @@ function PortalOrders(props) {
               <span className="orange-subheading">1/27/21</span>
               <button className="tag">Receiving New Orders <img className="checkmark" src={whiteCheckmark} /></button>
             </header>
-            {Object.keys(orders).map((category =>
-                <div key={category} className="menu-category-container">
+              {Object.keys(orders).map((category =>
+                <div key={category}>
                   <span className="order-category">{category}</span>
 
-                  {orders[category].length > 0 ?
-                    orders[category].map(order => 
-                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => selectOrder(order)}>
-                        <span>#{order.id.slice(0, 5)}...</span> 
-                        <span>{category == "New" ? <button>New</button> : ""}</span>
+                  <div className="order-category-container">
+                    {orders[category].length > 0 ?
+                      orders[category].sort((order1, order2) => (order1.time > order2.time ? 1 : -1)).map(order => 
+                        <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                          <span>#{order.id.slice(0, 5)}...</span> 
+                          <span>{category == "New" ? <button>New</button> : ""}</span>
+                        </div>
+                      )
+                    : 
+                      <div className="empty-order-container">
+                        {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : ""}
                       </div>
-                    )
-                  : 
-                    <div className="empty-order-container">
-                      {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : ""}
-                    </div>
-                  }
+                    }
+                  </div>
                 </div> 
               ))}
           </div>
@@ -165,31 +205,30 @@ function PortalOrders(props) {
                     </div>
                   : ""}
 
-                  <span className="heading">Order #{selectedOrder.id}</span>
+                  <span className="heading">Order #{selectedOrder.id.slice(0, 5)} - {selectedOrder.time}</span>
                   <hr className="short" />
 
                   <div className="order-bill">
                     {selectedOrder.items.map((item => 
                       <div key={Math.random()} className="order-item">
                         <span className="order-item-name">{item.name}</span>
-                        <span className="order-item-price">{item.price}</span>
+                        {/* <span className="order-item-price">{item.price}</span> */}
                       </div>
                     ))}
                     <br />
-                    <div className="order-tax-tip">
+                    {/* <div className="order-tax-tip">
                       <span className="order-item-name">Tax</span>
                       <span className="order-item-price">${(Math.round(15 * selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)) * 0.01).toFixed(2)}</span>
                     </div>
-
                     <div className="order-tax-tip">
                       <span className="order-item-name">Tip</span>
-                       <span className="order-item-price">${selectedOrder.tip}</span> {/*add back in to fixed */}
+                       <span className="order-item-price">${selectedOrder.tip}</span> {/*add back in to fixed 
                     </div>
                     <br />
                     <div className="order-total">
                       <span className="order-item-name">Total</span>
                       <span className="order-item-price">${(selectedOrder.tip + (Math.round(15 * selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)) * 0.01) + selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)).toFixed(2)}</span>
-                    </div>
+                    </div> */}
                     <br />
 
                     <hr />

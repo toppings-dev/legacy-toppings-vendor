@@ -33,6 +33,8 @@ function PortalMenu(props) {
   const [selectedMenuItem, selectMenuItem] = useState(defaultMenuItem);
   const [selectedMenuItemToppings, setSelectedMenuItemToppings] = useState([]);
   const [selectedMenuItemOptions, setSelectedMenuItemOptions] = useState([]);
+  const [selectedMenuItemExistingToppings, setSelectedMenuItemExistingToppings] = useState([]);
+  const [existingToppings, setExistingToppings] = useState([]);
   const [removableToppings, setRemoveableToppings] = useState([]);
   const [removableOptions, setRemoveableOptions] = useState([]);
   const [selectedCategory, selectCategory] = useState(null);
@@ -81,6 +83,9 @@ function PortalMenu(props) {
   }
 
   async function createToppings(menuItem) {
+    // const existingToppingCategoriesResponse = await API.graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: props.restaurant.id }}});
+    // const existingToppingCategories = existingToppingCategoriesResponse.data.listFoodOptions.items;
+    console.log("D", menuItem);
     await Promise.all(selectedMenuItemToppings.map(async topping => {
       const toppingCategory = {
         menuId: props.restaurant.id,
@@ -102,13 +107,14 @@ function PortalMenu(props) {
       console.log("Creating Option", toppingOptionResponse);
     }));
     
-    await Promise.all(selectedMenuItemToppings.map(async topping => {
+    await Promise.all(selectedMenuItemToppings.concat(selectedMenuItemExistingToppings).map(async topping => {
       const toppingCategoryJoiner = {
         menuId: props.restaurant.id,
         foodOptionName: topping.foodOptionName,
         menuItemName: menuItem.name,
         numchoices: topping.numchoices,
       };
+      console.log(toppingCategoryJoiner);
 
       const toppingCategoryJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionCatJoin, { input: toppingCategoryJoiner }));
       console.log("Creating Category Joiner", toppingCategoryJoinerResponse);
@@ -128,6 +134,7 @@ function PortalMenu(props) {
 
     setSelectedMenuItemToppings([]);
     setSelectedMenuItemOptions([]);
+    setSelectedMenuItemExistingToppings([]);
   }
 
   async function addItem(e) {
@@ -241,6 +248,37 @@ function PortalMenu(props) {
     setSelectedMenuItemOptions([...selectedMenuItemOptions, option]);
   }
 
+  async function addExistingToppings() {
+    const existingToppingCategoriesResponse = await API.graphql(graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: props.restaurant.id }}}));
+    const existingToppingCategories = existingToppingCategoriesResponse.data.listFoodOptions.items;
+    setExistingToppings(existingToppingCategories);
+
+    const option = {
+      foodOptionName: "Old Topping", 
+      menuId: props.restaurant.id, 
+      optionName: "Old Option",
+      option: { price: null, name: "Old Option", menuId: props.restaurant.id }
+    };
+
+    const topping = {
+      foodOptionName: "Old Topping",
+      menuId: props.restaurant.id,
+      menuItemName: selectedMenuItem.name,
+      numchoices: 1,
+      optionCat: {
+        menuId: props.restaurant.id,
+        name: "Old Topping",
+        options: {
+          items: [option]
+        }
+      },
+      existing: true,
+    };
+
+    setSelectedMenuItemExistingToppings([...selectedMenuItemExistingToppings, topping]);
+    console.log("E", selectedMenuItemExistingToppings);
+  }
+
   function editTopping(e, topping) {
     topping.foodOptionName = e.target.value;
     topping.optionCat.name = e.target.value;
@@ -248,6 +286,15 @@ function PortalMenu(props) {
     setSelectedMenuItemToppings([...selectedMenuItemToppings]);
     console.log("TPS", selectedMenuItemToppings);
     console.log("SMIT", selectedMenuItem);
+  }
+
+  function editExistingTopping(e, topping) {
+    topping.foodOptionName = e.target.value;
+    topping.optionCat.name = e.target.value;
+    topping.optionCat.options.items.forEach(option => option.foodOptionName = e.target.value);
+    setSelectedMenuItemExistingToppings([...selectedMenuItemExistingToppings]);
+    console.log("ETPS", selectedMenuItemExistingToppings);
+    console.log("SMIET", selectedMenuItem);
   }
 
   function editOption(e, option) {
@@ -324,26 +371,42 @@ function PortalMenu(props) {
 
                 {mode == "editItem" && addItemType == "Customizable"  ? 
                   <div className="portal-menu-item-form-toppings-section">
-                    {selectedMenuItem.options.items.map((topping =>
+                    {selectedMenuItem.options.items.concat(selectedMenuItemExistingToppings).map((topping =>
                       <div className="portal-menu-item-form-toppings-container">
-                        <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
-                        <input className="text-input" type="text" placeholder="Patty Type" onChange={(e) => editTopping(e, topping)} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
+                        {topping.hasOwnProperty("existing") ? 
+                          <div>
+                            <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
+                            <select className="dropdown-input" onChange={(e) => editExistingTopping(e, topping)}>
+                              {existingToppings.filter(x => !selectedMenuItem.options.items.map(y => y.foodOptionName).includes(x.name)).map((existingTopping =>
+                                <option value={existingTopping.name}>{existingTopping.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        :
+                          <div>
+                            <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
+                            <input className="text-input" type="text" placeholder="Patty Type" onChange={(e) => editTopping(e, topping)} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
 
-                        <div className="portal-menu-item-form-toppings-options-container">
-                          <span className="subheading">Options <button className="blue-plus" type="button" onClick={() => addOption(topping)}><img src={plusButtonIcon} /></button></span>
-                          {topping.optionCat.options.items.map((option => 
-                            <div className="portal-menu-item-form-toppings-options-input-container">
-                              {/*<button className="red-x" type="button" onClick={() => deleteOption(option)}><img src={xButtonIcon} /></button>*/}
-                              <input className="text-input" type="text" placeholder="Crab Patty" onChange={(e) => editOption(e, option)} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
+                            <div className="portal-menu-item-form-toppings-options-container">
+                              <span className="subheading">Options <button className="blue-plus" type="button" onClick={() => addOption(topping)}><img src={plusButtonIcon} /></button></span>
+                              {topping.optionCat.options.items.map((option => 
+                                <div className="portal-menu-item-form-toppings-options-input-container">
+                                  {/*<button className="red-x" type="button" onClick={() => deleteOption(option)}><img src={xButtonIcon} /></button>*/}
+                                  <input className="text-input" type="text" placeholder="Crab Patty" onChange={(e) => editOption(e, option)} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
+                                </div>
+                              ))}
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        }
                       </div>
                     ))}
                   </div>
                 : ""}
                 {mode == "editItem" && addItemType == "Customizable"  ? 
-                  <button id="add-category-button" className="blue-text" type="button" onClick={addToppings}><span>+</span> Add Category</button> 
+                  <div>
+                    <button id="add-category-button" className="blue-text" type="button" onClick={addToppings}><span>+</span> Add New Category</button><br />
+                    {/*<button id="add-category-button" className="blue-text" type="button" onClick={addExistingToppings}><span>+</span> Add Existing Category</button>*/}
+                  </div>
                 : ""}
               </form>
               
@@ -354,7 +417,7 @@ function PortalMenu(props) {
                   : ""}
                 </div>
                 <div>
-                  <button className="orange-text" onClick={() => {changeMode(""); setSelectedMenuItemToppings([]); setSelectedMenuItemOptions([]); selectMenuItem(defaultMenuItem); getData();}}>Cancel</button>
+                  <button className="orange-text" onClick={() => {changeMode(""); setSelectedMenuItemToppings([]); setSelectedMenuItemOptions([]); setSelectedMenuItemExistingToppings([]); selectMenuItem(defaultMenuItem); getData();}}>Cancel</button>
                   <button className="orange" onClick={mode == "addItem" ? addItem : editItem}>{mode == "addItem" ? "Add" : "Save"} Menu Item</button>
                 </div>
               </div>
@@ -373,7 +436,7 @@ function PortalMenu(props) {
                     <span className="blue-heading"><span>{category}</span><span><button className="blue-plus" onClick={() => {selectCategory(category); selectMenuItem(defaultMenuItem); changeMode("addItem")}}><img src={plusButtonIcon} /></button></span></span>
 
                     {menuItems[category].map(item => 
-                      <div key={item.id} className={selectedMenuItem.id == item.id ? "menu-item-container active" : "menu-item-container"} onClick={() => selectMenuItem(item)}>
+                      <div key={item.id} className={selectedMenuItem.id == item.id ? "menu-item-container active" : "menu-item-container"} onClick={() => {selectMenuItem(item); console.log("select", item)}}>
                         <span className="subheading">{item.name}</span>
                         <span className="subheading">${item.price.toFixed(2)}</span>
                         <div className="menu-item-description">{item.description}</div>

@@ -40,7 +40,6 @@ function Portal(props) {
     const restaurantsResponse = await API.graphql(graphqlOperation(queries.listRestaurants, { filter: { email: { eq: email }}}));
     const restaurants = restaurantsResponse.data.listRestaurants.items;
     setRestaurant(restaurants[0]);
-    console.log("REST", restaurants);
   }
 
   function logout() {
