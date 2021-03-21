@@ -2,7 +2,7 @@
   "name": "toppings-vendor",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://toppings-dev.github.io/toppings-vendor",
   "dependencies": {
     "@aws-amplify/ui-react": "^0.2.34",
     "@testing-library/jest-dom": "^5.11.4",
@@ -19,8 +19,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts start",
-    "build": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

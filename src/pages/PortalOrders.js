@@ -125,7 +125,7 @@ function PortalOrders(props) {
         tip: order.tip, 
         instructions: "", 
         items: foodItems,
-        time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} (${date.getMonth() + 1}/${date.getDate()})`,
+        time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
         food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
       }
 
@@ -173,7 +173,7 @@ function PortalOrders(props) {
 
                     <div className="order-category-container">
                       {orders[category].length > 0 ?
-                        orders[category].sort((order1, order2) => (order1.time > order2.time ? 1 : -1)).map(order => 
+                        orders[category].sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
                           <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
                             <span>#{order.id.slice(0, 5)}...</span> 
                             <span>{category == "New" ? <button>New</button> : ""}</span>
