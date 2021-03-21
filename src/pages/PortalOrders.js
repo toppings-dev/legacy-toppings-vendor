@@ -7,6 +7,7 @@ import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import * as subscriptions from '../graphql/subscriptions'
 
+import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 import whiteCheckmark from '../assets/images/white-checkmark.svg';
 import grayCheckmark from '../assets/images/gray-checkmark.svg';
@@ -17,6 +18,7 @@ function PortalOrders(props) {
   const preparingOrderTimeStamp = 15;
   const readyOrderTimeStamp = 5;
 
+  const [loading, setLoading] = useState(false);
   const [audio] = useState(new Audio(ding));
   const [selectedOrder, selectOrder] = useState(null); 
   const [orders, setOrders] = useState({
@@ -64,6 +66,7 @@ function PortalOrders(props) {
       };
 
       const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
+      selectOrder(null);
     }
 
     if (ordersCopy.New.length + ordersCopy.Preparing.length + ordersCopy.Ready.length <= 0) {
@@ -104,13 +107,14 @@ function PortalOrders(props) {
   }
 
   async function getData() {
+    setLoading(true);
     const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
     
     receivedOrders.forEach(order => {
       let foodItems = [];
       order.orderItems.items.forEach(foodItem => {
-        foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward });
+        foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward, info: foodItem });
       });
 
       const date = new Date(Date.parse(order.updatedAt));
@@ -121,7 +125,7 @@ function PortalOrders(props) {
         tip: order.tip, 
         instructions: "", 
         items: foodItems,
-        time: `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+        time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} (${date.getMonth() + 1}/${date.getDate()})`,
         food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
       }
 
@@ -142,126 +146,138 @@ function PortalOrders(props) {
         }));
       }
     });
+    setLoading(false);
   }
 
   return (
     <article className="portal-orders-container">
-      {Object.keys(orders).length > 0 ?
-        <div className="portal-orders-subcontainer">
-          <div className="orders-list">
-            <header>
-              <span className="orange-subheading">1/27/21</span>
-              <button className="tag">Receiving New Orders <img className="checkmark" src={whiteCheckmark} /></button>
-            </header>
-              {Object.keys(orders).map((category =>
-                <div key={category}>
-                  <span className="order-category">{category}</span>
-
-                  <div className="order-category-container">
-                    {orders[category].length > 0 ?
-                      orders[category].sort((order1, order2) => (order1.time > order2.time ? 1 : -1)).map(order => 
-                        <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                          <span>#{order.id.slice(0, 5)}...</span> 
-                          <span>{category == "New" ? <button>New</button> : ""}</span>
-                        </div>
-                      )
-                    : 
-                      <div className="empty-order-container">
-                        {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : ""}
-                      </div>
-                    }
-                  </div>
-                </div> 
-              ))}
-          </div>
-          <div className="portal-orders-info">
-            {selectedOrder != null ? 
-              <div>
-                <header>
-                  <span className="subheading">Items <br />
-                    <span className="blue-subheading">{selectedOrder.items.length}</span>
-                  </span>
-                  
-                  <span className="subheading">Deliverer <br />
-                    <span className="blue-subheading">{selectedOrder.deliverer}</span>
-                  </span>
-                  
-                  <span className="subheading">Customer <br />
-                    <span className="blue-subheading">{selectedOrder.customer}</span>
-                  </span>
-                </header>
-
-                <div className="order-details">
-                  {orders.Preparing.indexOf(selectedOrder) > -1 ? 
-                    <div className="order-delivery-time">
-                      <span className="blue-subheading">Estimated Time:</span>
-                      <button className="blue">15 Minutes</button>
-                    </div>
-                  : ""} 
-
-                  {orders.Ready.indexOf(selectedOrder) > -1 ? 
-                    <div className="order-delivery-time">
-                      <span className="blue-subheading">Waiting for delivery confirmation.</span>
-                    </div>
-                  : ""}
-
-                  <span className="heading">Order #{selectedOrder.id.slice(0, 5)} - {selectedOrder.time}</span>
-                  <hr className="short" />
-
-                  <div className="order-bill">
-                    {selectedOrder.items.map((item => 
-                      <div key={Math.random()} className="order-item">
-                        <span className="order-item-name">{item.name}</span>
-                        {/* <span className="order-item-price">{item.price}</span> */}
-                      </div>
-                    ))}
-                    <br />
-                    {/* <div className="order-tax-tip">
-                      <span className="order-item-name">Tax</span>
-                      <span className="order-item-price">${(Math.round(15 * selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)) * 0.01).toFixed(2)}</span>
-                    </div>
-                    <div className="order-tax-tip">
-                      <span className="order-item-name">Tip</span>
-                       <span className="order-item-price">${selectedOrder.tip}</span> {/*add back in to fixed 
-                    </div>
-                    <br />
-                    <div className="order-total">
-                      <span className="order-item-name">Total</span>
-                      <span className="order-item-price">${(selectedOrder.tip + (Math.round(15 * selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)) * 0.01) + selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)).toFixed(2)}</span>
-                    </div> */}
-                    <br />
-
-                    <hr />
-                    <span className="subheading">Payment Confirmed <img className="checkmark" src={grayCheckmark} /></span>
-                    <hr />
-            
-                    <div className="order-instructions">
-                      <span className="heading">Special Instructions</span>
-                      <hr className="short" />
-                      <span>{selectedOrder.instructions.length > 0 ? "\"" + selectedOrder.instructions + "\"" : "None"}</span>
-                    </div>
-
-                    <button className="gray">Report Issue</button>
-                    {orders.New.indexOf(selectedOrder) > -1 ? 
-                      <button className="orange" onClick={() => advanceOrder(selectedOrder, "New")}>Confirm Order</button>
-                    : orders.Preparing.indexOf(selectedOrder) > -1 ? 
-                      <button className="orange" onClick={() => advanceOrder(selectedOrder, "Preparing")}>Ready for Pickup</button>
-                    : orders.Ready.indexOf(selectedOrder) > -1 ? 
-                      <button className="orange" onClick={() => advanceOrder(selectedOrder, "Ready")}>Delivered</button>
-                    : ""}
-                  </div>
-                </div>
-                </div>
-            : ""}
-          </div>
-        </div>
-      :
+    {loading ? 
+      <div>
         <header>
-          <img className="portal-empty-image" src={bubbleIcon} />
-          <span className="subheading">You have no active orders.</span>
-          <b>Orders placed through the Toppings app today <br /> will appear here.</b>
+          <img className="portal-empty-image" src={loadingBubbleIcon} />
+          <span className="subheading">Loading...</span>
         </header>
-      }
+      </div>  
+    :
+      <div>
+        {Object.keys(orders).length > 0 ?
+          <div className="portal-orders-subcontainer">
+            <div className="orders-list">
+              <header>
+                <span className="orange-subheading">1/27/21</span>
+                <button className="tag">Receiving New Orders <img className="checkmark" src={whiteCheckmark} /></button>
+              </header>
+                {Object.keys(orders).map((category =>
+                  <div key={category}>
+                    <span className="order-category">{category}</span>
+
+                    <div className="order-category-container">
+                      {orders[category].length > 0 ?
+                        orders[category].sort((order1, order2) => (order1.time > order2.time ? 1 : -1)).map(order => 
+                          <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                            <span>#{order.id.slice(0, 5)}...</span> 
+                            <span>{category == "New" ? <button>New</button> : ""}</span>
+                          </div>
+                        )
+                      : 
+                        <div className="empty-order-container">
+                          {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : ""}
+                        </div>
+                      }
+                    </div>
+                  </div> 
+                ))}
+            </div>
+            <div className="portal-orders-info">
+              {selectedOrder != null ? 
+                <div>
+                  <header>
+                    <span className="subheading">Items <br />
+                      <span className="blue-subheading">{selectedOrder.items.length}</span>
+                    </span>
+                    
+                    <span className="subheading">Deliverer <br />
+                      <span className="blue-subheading">{selectedOrder.deliverer}</span>
+                    </span>
+                    
+                    <span className="subheading">Customer <br />
+                      <span className="blue-subheading">{selectedOrder.customer}</span>
+                    </span>
+                  </header>
+
+                  <div className="order-details">
+                    {orders.Preparing.indexOf(selectedOrder) > -1 ? 
+                      <div className="order-delivery-time">
+                        <span className="blue-subheading">Estimated Time:</span>
+                        <button className="blue">15 Minutes</button>
+                      </div>
+                    : ""} 
+
+                    {orders.Ready.indexOf(selectedOrder) > -1 ? 
+                      <div className="order-delivery-time">
+                        <span className="blue-subheading">Waiting for delivery confirmation.</span>
+                      </div>
+                    : ""}
+
+                    <span className="heading">Order #{selectedOrder.id.slice(0, 5)} - {selectedOrder.time}</span>
+                    <hr className="short" />
+
+                    <div className="order-bill">
+                      {selectedOrder.items.map((item => 
+                        <div key={Math.random()} className="order-item">
+                          <span className="order-item-name">{item.name}</span>
+                          {/* <span className="order-item-price">{item.price}</span> */}
+                        </div>
+                      ))}
+                      <br />
+                      {/* <div className="order-tax-tip">
+                        <span className="order-item-name">Tax</span>
+                        <span className="order-item-price">${(Math.round(15 * selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)) * 0.01).toFixed(2)}</span>
+                      </div>
+                      <div className="order-tax-tip">
+                        <span className="order-item-name">Tip</span>
+                        <span className="order-item-price">${selectedOrder.tip}</span> {/*add back in to fixed 
+                      </div>
+                      <br />
+                      <div className="order-total">
+                        <span className="order-item-name">Total</span>
+                        <span className="order-item-price">${(selectedOrder.tip + (Math.round(15 * selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)) * 0.01) + selectedOrder.items.reduce((a, b) => a + (b.price || 0), 0)).toFixed(2)}</span>
+                      </div> */}
+                      <br />
+
+                      <hr />
+                      <span className="subheading">Payment Confirmed <img className="checkmark" src={grayCheckmark} /></span>
+                      <hr />
+              
+                      <div className="order-instructions">
+                        <span className="heading">Special Instructions</span>
+                        <hr className="short" />
+                        <span>{selectedOrder.instructions.length > 0 ? "\"" + selectedOrder.instructions + "\"" : "None"}</span>
+                      </div>
+
+                      <button className="gray">Report Issue</button>
+                      {orders.New.indexOf(selectedOrder) > -1 ? 
+                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "New")}>Confirm Order</button>
+                      : orders.Preparing.indexOf(selectedOrder) > -1 ? 
+                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "Preparing")}>Ready for Pickup</button>
+                      : orders.Ready.indexOf(selectedOrder) > -1 ? 
+                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "Ready")}>Delivered</button>
+                      : ""}
+                    </div>
+                  </div>
+                  </div>
+              : ""}
+            </div>
+          </div>
+        :
+          <header>
+            <img className="portal-empty-image" src={bubbleIcon} />
+            <span className="subheading">You have no active orders.</span>
+            <b>Orders placed through the Toppings app today <br /> will appear here.</b>
+          </header>
+        }
+      </div>
+    }
     </article>
   );
 }
