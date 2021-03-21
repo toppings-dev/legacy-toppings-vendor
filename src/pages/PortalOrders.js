@@ -78,22 +78,28 @@ function PortalOrders(props) {
 
 
   async function orderReceived() {
+    console.log("RECEIVED");
     await API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
       const myOrder = eventData.value.data.onUpdateOrder;
+      console.log("Order Valid?", myOrder);
+
       if (myOrder.restaurant.id == props.restaurant.id && myOrder.isPaid) {
         let foodItems = [];
-        console.log(myOrder)
+        console.log(myOrder);
         myOrder.orderItems.items.forEach(foodItem => {
-          foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward });
+          foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward, info: foodItem });
         });
         
+      const date = new Date(Date.parse(order.createdAt));
         const newOrder = {
           id: myOrder.id,
           deliverer: myOrder.pickup.deliverer.name,
           customer: myOrder.customer.name,
           tip: myOrder.tip,
           instructions: "",
-          items: foodItems
+          items: foodItems,
+          time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
+          food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
         };
 
         setOrders(oldOrders => ({
@@ -117,7 +123,7 @@ function PortalOrders(props) {
         foodItems.push({ name: foodItem.itemName, price: foodItem.price_before_reward, info: foodItem });
       });
 
-      const date = new Date(Date.parse(order.updatedAt));
+      const date = new Date(Date.parse(order.createdAt));
       const myOrder = {
         id: order.id, 
         deliverer: order.pickup.deliverer.name, 

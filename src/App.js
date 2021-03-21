@@ -22,24 +22,22 @@ function App() {
 
   return (
     <div className="wrapper">
-      <BrowserRouter>
-        <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
-        <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
-        
-        <Redirect to="/portal-auth/sign-in" />
-        {showHeader ?
-          <header className="primary">
-            <nav>
-              <span className="heading"><Link className="nav-link" to="/portal-auth/sign-in"><img src={logo} /></Link></span>
+      <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
+      <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
+      
+      <Redirect to="/portal-auth/sign-in" />
+      {showHeader ?
+        <header className="primary">
+          <nav>
+            <span className="heading"><Link className="nav-link" to="/portal-auth/sign-in"><img src={logo} /></Link></span>
 
-              <ul className="nav-buttons links">
-                {/*<li><Link className="nav-link" to="/">About Us</Link></li>*/}
-                {/*<li><Link className="nav-link" to="/portal-auth/sign-in">Vendor Portal</Link></li>*/}
-              </ul>
-            </nav>
-          </header>
-        : ""}
-      </BrowserRouter>
+            <ul className="nav-buttons links">
+              {/*<li><Link className="nav-link" to="/">About Us</Link></li>*/}
+              {/*<li><Link className="nav-link" to="/portal-auth/sign-in">Vendor Portal</Link></li>*/}
+            </ul>
+          </nav>
+        </header>
+      : ""}
     </div>
   );
 }
