@@ -17,6 +17,7 @@ function PortalOrders(props) {
   const newOrderTimeStamp = 30;
   const preparingOrderTimeStamp = 15;
   const readyOrderTimeStamp = 5;
+  const deliveredOrderTimeStamp = 0;
 
   const [loading, setLoading] = useState(false);
   const [audio] = useState(new Audio(ding));
@@ -63,9 +64,11 @@ function PortalOrders(props) {
     } else if (currentStatus == "Ready") {
       const updatedOrder = {
         id: order.id,
+        food_ready_time: deliveredOrderTimeStamp,
       };
 
-      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
+      // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
+      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
       selectOrder(null);
     }
 
@@ -77,10 +80,10 @@ function PortalOrders(props) {
   }
 
   async function orderReceived() {
-    console.log("RECEIVED");
-    await API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
-      const order = eventData.value.data.onUpdateOrder;
-      if (order.restaurant.id == props.restaurant.id && order.isPaid) {
+    await API.graphql(graphqlOperation(subscriptions.onCreateOrder)).subscribe({ next: (eventData) => {
+      const order = eventData.value.data.onCreateOrder;
+      console.log("RECEIVED", order);
+      if (order.restaurant.id == props.restaurant.id && order.isPaid && (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp)) {
         const date = new Date(Date.parse(order.createdAt));
         const newOrder = {
           id: order.id,
@@ -93,12 +96,23 @@ function PortalOrders(props) {
           food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
         };
 
-        setOrders(oldOrders => ({
-          New: [newOrder, ...oldOrders["New"]],
-          Preparing: oldOrders["Preparing"],
-          Ready: oldOrders["Ready"]
-        }));
-        audio.play();
+        if (newOrder.food_ready_time > preparingOrderTimeStamp) {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            New: [newOrder, ...oldOrders["New"]],
+          }));
+          audio.play();
+        } else if (newOrder.food_ready_time > readyOrderTimeStamp) {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Preparing: [newOrder, ...oldOrders["Preparing"]],
+          }));
+        } else if (newOrder.food_ready_time > 0) {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Ready: [newOrder, ...oldOrders["Ready"]],
+          }));
+        }
       }
     }});
   }
@@ -110,13 +124,7 @@ function PortalOrders(props) {
     
     receivedOrders.forEach(order => {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
-        let foodItems = [];
-        order.orderItems.items.forEach(foodItem => {
-          foodItems.push(foodItem);
-        });
-
         const date = new Date(Date.parse(order.createdAt));
-        console.log(order);
         const myOrder = {
           id: order.id, 
           deliverer: order.pickup.deliverer.name, 
@@ -138,7 +146,7 @@ function PortalOrders(props) {
             ...oldOrders,
             Preparing: [myOrder, ...oldOrders["Preparing"]],
           }));
-        } else if (myOrder.food_ready_time >= 0) {
+        } else if (myOrder.food_ready_time > 0) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Ready: [myOrder, ...oldOrders["Ready"]],
@@ -226,8 +234,15 @@ function PortalOrders(props) {
                       {selectedOrder.items.map((item => 
                         <div key={Math.random()} className="order-item">
                           <span className="order-item-name">{item.itemName}</span><br />
-                          <span key={Math.random()} style={{fontSize: "1rem", marginTop: "0.5rem"}}>{item.comment.toString().slice(1, -1)}</span>
+                          {/*<span key={Math.random()} style={{fontSize: "1rem", marginTop: "0.5rem"}}>{item.comment.toString().slice(1, -1)}</span>*/}
                           {/* <span className="order-item-price">{item.price}</span> */}
+                          {item.foodOptionsArray != null ? 
+                            <ul className="order-item-toppings">
+                              {item.foodOptionsArray.map((topping => 
+                                <li>{topping}</li>  
+                              ))}
+                            </ul>
+                          : "" }
                         </div>
                       ))}
                       <br />

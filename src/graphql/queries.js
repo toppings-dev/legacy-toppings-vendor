@@ -330,6 +330,9 @@ export const getUser = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4386,6 +4389,9 @@ export const getRestaurant = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4451,6 +4457,9 @@ export const getRestaurant = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4525,6 +4534,9 @@ export const getRestaurant = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4598,6 +4610,9 @@ export const getRestaurant = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4698,6 +4713,9 @@ export const getRestaurant = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4761,6 +4779,9 @@ export const getRestaurant = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -4856,6 +4877,61 @@ export const getRestaurant = /* GraphQL */ `
       thursdayHours
       fridayHours
       saturdayHours
+      images {
+        items {
+          id
+          menuId
+          restaurant {
+            id
+            name
+            menuCategories {
+              nextToken
+            }
+            menuItems {
+              nextToken
+            }
+            foodOptions {
+              nextToken
+            }
+            joinedItemsOptions {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            joinedItemOptionsOptions {
+              nextToken
+            }
+            description
+            address
+            zip_code
+            city
+            state
+            lat
+            long
+            phone_number
+            email
+            restaurantOwnerName
+            sundayHours
+            mondayHours
+            tuesdayHours
+            wednesdayHours
+            thursdayHours
+            fridayHours
+            saturdayHours
+            images {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          type
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -5131,6 +5207,40 @@ export const listRestaurants = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5407,6 +5517,40 @@ export const getMenuCategory = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5454,6 +5598,9 @@ export const getMenuCategory = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -5587,6 +5734,17 @@ export const listMenuCategorys = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -5909,6 +6067,40 @@ export const getMenuItem = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5956,6 +6148,9 @@ export const getMenuItem = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -6020,6 +6215,9 @@ export const getMenuItem = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -6181,6 +6379,17 @@ export const listMenuItems = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -6541,6 +6750,40 @@ export const getFoodOption = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -6586,6 +6829,9 @@ export const getFoodOption = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -6687,6 +6933,9 @@ export const getFoodOption = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -6875,6 +7124,17 @@ export const listFoodOptions = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -7244,6 +7504,40 @@ export const getItemOptionCatJoin = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -7293,6 +7587,9 @@ export const getItemOptionCatJoin = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -7413,6 +7710,17 @@ export const getItemOptionCatJoin = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -7615,6 +7923,17 @@ export const listItemOptionCatJoins = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -7703,6 +8022,9 @@ export const listItemOptionCatJoins = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -8007,6 +8329,40 @@ export const getOption = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -8054,6 +8410,9 @@ export const getOption = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -8241,6 +8600,17 @@ export const listOptions = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -8568,6 +8938,40 @@ export const getItemOptionOptionJoin = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -8661,6 +9065,17 @@ export const getItemOptionOptionJoin = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -8845,6 +9260,17 @@ export const getItemOptionOptionJoin = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -9004,6 +9430,17 @@ export const listItemOptionOptionJoins = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -9050,6 +9487,9 @@ export const listItemOptionOptionJoins = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -9119,6 +9559,9 @@ export const listItemOptionOptionJoins = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -9460,6 +9903,9 @@ export const getPickup = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -9521,6 +9967,7 @@ export const getPickup = /* GraphQL */ `
               price_after_reward
               quantity
               comment
+              foodOptionsArray
               createdAt
               updatedAt
             }
@@ -10217,6 +10664,40 @@ export const getPickup = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -10630,6 +11111,17 @@ export const listPickups = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -10910,6 +11402,40 @@ export const getOrder = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -11328,6 +11854,7 @@ export const getOrder = /* GraphQL */ `
             updatedAt
           }
           comment
+          foodOptionsArray
           createdAt
           updatedAt
         }
@@ -11736,6 +12263,17 @@ export const getOrder = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -11847,6 +12385,17 @@ export const listOrders = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -12001,6 +12550,7 @@ export const listOrders = /* GraphQL */ `
               updatedAt
             }
             comment
+            foodOptionsArray
             createdAt
             updatedAt
           }
@@ -12178,6 +12728,9 @@ export const listOrders = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -12737,6 +13290,40 @@ export const getReward = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -12941,6 +13528,17 @@ export const listRewards = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -13225,6 +13823,40 @@ export const getVendorReward = /* GraphQL */ `
         thursdayHours
         fridayHours
         saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -13335,6 +13967,17 @@ export const listVendorRewards = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -13440,6 +14083,17 @@ export const getOrderItem = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -13594,6 +14248,7 @@ export const getOrderItem = /* GraphQL */ `
               updatedAt
             }
             comment
+            foodOptionsArray
             createdAt
             updatedAt
           }
@@ -13771,6 +14426,9 @@ export const getOrderItem = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -13830,6 +14488,9 @@ export const getOrderItem = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -14055,6 +14716,17 @@ export const getOrderItem = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -14062,6 +14734,7 @@ export const getOrderItem = /* GraphQL */ `
         updatedAt
       }
       comment
+      foodOptionsArray
       createdAt
       updatedAt
     }
@@ -14119,6 +14792,9 @@ export const listOrderItems = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -14180,6 +14856,7 @@ export const listOrderItems = /* GraphQL */ `
               price_after_reward
               quantity
               comment
+              foodOptionsArray
               createdAt
               updatedAt
             }
@@ -14394,6 +15071,9 @@ export const listOrderItems = /* GraphQL */ `
             thursdayHours
             fridayHours
             saturdayHours
+            images {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -14401,6 +15081,441 @@ export const listOrderItems = /* GraphQL */ `
           updatedAt
         }
         comment
+        foodOptionsArray
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getRestaurantImage = /* GraphQL */ `
+  query GetRestaurantImage($id: ID!) {
+    getRestaurantImage(id: $id) {
+      id
+      menuId
+      restaurant {
+        id
+        name
+        menuCategories {
+          items {
+            id
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            menuItems {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        menuItems {
+          items {
+            id
+            name
+            description
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            menuCategoryName
+            menuCategory {
+              nextToken
+            }
+            price
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        foodOptions {
+          items {
+            name
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            menuItem {
+              nextToken
+            }
+            options {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            foodOptionName
+            menuItemName
+            menuItem {
+              nextToken
+            }
+            optionCat {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            numchoices
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        options {
+          items {
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            name
+            price
+            foodoption {
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        joinedItemOptionsOptions {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            optionName
+            foodOptionName
+            foodOption {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            option {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        description
+        address
+        zip_code
+        city
+        state
+        lat
+        long
+        phone_number
+        email
+        restaurantOwnerName
+        sundayHours
+        mondayHours
+        tuesdayHours
+        wednesdayHours
+        thursdayHours
+        fridayHours
+        saturdayHours
+        images {
+          items {
+            id
+            menuId
+            restaurant {
+              id
+              name
+              description
+              address
+              zip_code
+              city
+              state
+              lat
+              long
+              phone_number
+              email
+              restaurantOwnerName
+              sundayHours
+              mondayHours
+              tuesdayHours
+              wednesdayHours
+              thursdayHours
+              fridayHours
+              saturdayHours
+              createdAt
+              updatedAt
+            }
+            type
+            url
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      type
+      url
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listRestaurantImages = /* GraphQL */ `
+  query ListRestaurantImages(
+    $filter: ModelRestaurantImageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRestaurantImages(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          restaurantOwnerName
+          sundayHours
+          mondayHours
+          tuesdayHours
+          wednesdayHours
+          thursdayHours
+          fridayHours
+          saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        type
+        url
         createdAt
         updatedAt
       }
@@ -14512,6 +15627,17 @@ export const categoriesByMenu = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -14671,6 +15797,17 @@ export const itemsByCategories = /* GraphQL */ `
           thursdayHours
           fridayHours
           saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
           createdAt
           updatedAt
         }
@@ -14756,6 +15893,132 @@ export const itemsByCategories = /* GraphQL */ `
           }
           nextToken
         }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const imagesByMenu = /* GraphQL */ `
+  query ImagesByMenu(
+    $menuId: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelRestaurantImageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    imagesByMenu(
+      menuId: $menuId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        menuId
+        restaurant {
+          id
+          name
+          menuCategories {
+            items {
+              id
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          menuItems {
+            items {
+              id
+              name
+              description
+              menuId
+              menuCategoryName
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          foodOptions {
+            items {
+              name
+              menuId
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemsOptions {
+            items {
+              id
+              menuId
+              foodOptionName
+              menuItemName
+              numchoices
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          options {
+            items {
+              menuId
+              name
+              price
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          joinedItemOptionsOptions {
+            items {
+              id
+              menuId
+              optionName
+              foodOptionName
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          description
+          address
+          zip_code
+          city
+          state
+          lat
+          long
+          phone_number
+          email
+          restaurantOwnerName
+          sundayHours
+          mondayHours
+          tuesdayHours
+          wednesdayHours
+          thursdayHours
+          fridayHours
+          saturdayHours
+          images {
+            items {
+              id
+              menuId
+              type
+              url
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        type
+        url
         createdAt
         updatedAt
       }
