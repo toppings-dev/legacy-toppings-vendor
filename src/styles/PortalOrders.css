@@ -15,8 +15,21 @@
   padding: 1.25rem;
 }
 
-.orders-list header button.tag {
+.orders-list header button.tag.orange {
   padding: 0.5rem 2rem;
+  cursor: pointer;
+}
+
+.orders-list header button.tag.red {
+  padding: 0.35rem 2rem;
+  cursor: pointer;
+}
+
+.orders-list header button.tag span.x {
+  font-size: 1.25rem;
+  vertical-align: middle;
+  padding-left: 0.25rem;
+  padding-right: -0.25rem;
 }
 
 .orders-list .order-category-container {
@@ -108,6 +121,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 1rem 0rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.order-details span.red-subheading {
+  color: #ff004c;
   font-size: 1.5rem;
   font-weight: 500;
 }

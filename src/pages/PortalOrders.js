@@ -18,10 +18,12 @@ function PortalOrders(props) {
   const preparingOrderTimeStamp = 15;
   const readyOrderTimeStamp = 5;
   const deliveredOrderTimeStamp = 0;
+  const cancelledOrderTimeStamp = -1;
 
   const [loading, setLoading] = useState(false);
   const [audio] = useState(new Audio(ding));
   const [selectedOrder, selectOrder] = useState(null); 
+  const [receivingOrders, setReceivingOrders] = useState(true);
   const [orders, setOrders] = useState({
     // New: [{id: 73, deliverer: "Patrick Star", customer: "Gary", tip: 0.00, instructions: "Meow", items: [{name: "Golden Loaf", price: 2.50}, {name: "Krabby Patty", price: 2.99}]}, 
     //       {id: 72, deliverer: "Plankton", customer: "Karen", tip: 2.00, instructions: "Give me the secret formula Mr. Krabs!", items: [{name: "Krabby Patty", price: 2.99}]}],
@@ -31,13 +33,24 @@ function PortalOrders(props) {
     
     New: [],
     Preparing: [],
-    Ready: []
+    Ready: [],
+    Cancelled: [],
   });
 
   useEffect(() => {
     getData();
     orderReceived();
   }, []);
+
+  async function toggleReceivingOrders() {
+    const updatedRestaurant = {
+      id: props.restaurant.id,
+      isOpen: !receivingOrders,
+    };
+
+    const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
+    setReceivingOrders(updatedRestaurantResponse.data.updateRestaurant.isOpen);
+  }
 
   async function advanceOrder(order, currentStatus) {
     const ordersCopy = orders;
@@ -61,10 +74,10 @@ function PortalOrders(props) {
       };
 
       const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
-    } else if (currentStatus == "Ready") {
+    } else if (currentStatus == "Ready" || currentStatus == "Cancelled") {
       const updatedOrder = {
         id: order.id,
-        food_ready_time: deliveredOrderTimeStamp,
+        food_ready_time: deliveredOrderTimeStamp
       };
 
       // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
@@ -80,37 +93,52 @@ function PortalOrders(props) {
   }
 
   async function orderReceived() {
-    await API.graphql(graphqlOperation(subscriptions.onCreateOrder)).subscribe({ next: (eventData) => {
-      const order = eventData.value.data.onCreateOrder;
+    await API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
+      const order = eventData.value.data.onUpdateOrder;
+      const oldOrder = [...orders.New, ...ordersPreparing, ...orders.Ready, ...orders.Cancelled].filter(o => o.id == order.id)[0];
       console.log("RECEIVED", order);
-      if (order.restaurant.id == props.restaurant.id && order.isPaid && (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp)) {
-        const date = new Date(Date.parse(order.createdAt));
-        const newOrder = {
-          id: order.id,
-          deliverer: order.pickup.deliverer.name,
-          customer: order.customer.name,
-          tip: order.tip,
-          instructions: order.comment != null ? order.comment.toString() : "",
-          items: order.orderItems.items,
-          time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
-          food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
-        };
+      console.log("EXISTING?", oldOrder);
+      if (order.restaurant.id == props.restaurant.id && order.isPaid) {
+        if (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp) {
+          const date = new Date(Date.parse(order.createdAt));
+          const newOrder = {
+            ...order,
+            id: order.id,
+            deliverer: order.pickup.deliverer.name,
+            customer: order.customer.name,
+            tip: order.tip,
+            instructions: order.comment != null ? order.comment.toString() : "",
+            items: order.orderItems.items,
+            time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
+            food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
+          };
 
-        if (newOrder.food_ready_time > preparingOrderTimeStamp) {
+          if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
+            setOrders(oldOrders => ({
+              ...oldOrders,
+              Cancelled: [myOrder, ...oldOrders["Cancelled"]],
+            }));
+          } else if (newOrder.food_ready_time > preparingOrderTimeStamp) {
+            setOrders(oldOrders => ({
+              ...oldOrders,
+              New: [newOrder, ...oldOrders["New"]],
+            }));
+            audio.play();
+          } else if (newOrder.food_ready_time > readyOrderTimeStamp) {
+            setOrders(oldOrders => ({
+              ...oldOrders,
+              Preparing: [newOrder, ...oldOrders["Preparing"]],
+            }));
+          } else if (newOrder.food_ready_time > deliveredOrderTimeStamp) {
+            setOrders(oldOrders => ({
+              ...oldOrders,
+              Ready: [newOrder, ...oldOrders["Ready"]],
+            }));
+          }
+        } else if (oldOrder != null && !oldOrder.closed && order.closed) {
           setOrders(oldOrders => ({
             ...oldOrders,
-            New: [newOrder, ...oldOrders["New"]],
-          }));
-          audio.play();
-        } else if (newOrder.food_ready_time > readyOrderTimeStamp) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Preparing: [newOrder, ...oldOrders["Preparing"]],
-          }));
-        } else if (newOrder.food_ready_time > 0) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Ready: [newOrder, ...oldOrders["Ready"]],
+            Cancelled: [myOrder, ...oldOrders["Cancelled"]],
           }));
         }
       }
@@ -118,6 +146,7 @@ function PortalOrders(props) {
   }
 
   async function getData() {
+    setReceivingOrders(props.restaurant.isOpen);
     setLoading(true);
     const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
@@ -126,6 +155,7 @@ function PortalOrders(props) {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
         const date = new Date(Date.parse(order.createdAt));
         const myOrder = {
+          ...order,
           id: order.id, 
           deliverer: order.pickup.deliverer.name, 
           customer: order.customer.name, 
@@ -136,17 +166,22 @@ function PortalOrders(props) {
           food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
         }
 
-        if (myOrder.food_ready_time > preparingOrderTimeStamp) {
+        if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Cancelled: [myOrder, ...oldOrders["Cancelled"]],
+          }));
+        } else if (!myOrder.closed && myOrder.food_ready_time > preparingOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             New: [myOrder, ...oldOrders["New"]],
           }));
-        } else if (myOrder.food_ready_time > readyOrderTimeStamp) {
+        } else if (!myOrder.closed && myOrder.food_ready_time > readyOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Preparing: [myOrder, ...oldOrders["Preparing"]],
           }));
-        } else if (myOrder.food_ready_time > 0) {
+        } else if (!myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Ready: [myOrder, ...oldOrders["Ready"]],
@@ -172,8 +207,8 @@ function PortalOrders(props) {
           <div className="portal-orders-subcontainer">
             <div className="orders-list">
               <header>
-                <span className="orange-subheading">1/27/21</span>
-                <button className="tag">Receiving New Orders <img className="checkmark" src={whiteCheckmark} /></button>
+                <span className="orange-subheading">{`${new Date().getMonth() + 1}/${String(new Date().getDate()).padStart(2, "0")}/${String(new Date().getFullYear()).slice(2, 4)}`}</span>
+                <button className={receivingOrders ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
               </header>
                 {Object.keys(orders).map((category =>
                   <div key={category}>
@@ -189,7 +224,7 @@ function PortalOrders(props) {
                         )
                       : 
                         <div className="empty-order-container">
-                          {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : ""}
+                          {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : category == "Cancelled" ? "No cancelled orders." : ""}
                         </div>
                       }
                     </div>
@@ -228,6 +263,7 @@ function PortalOrders(props) {
                     : ""}
 
                     <span className="heading">Order #{selectedOrder.id.slice(0, 5)} - {selectedOrder.time}</span>
+                    {selectedOrder.closed ? <span className="red-subheading">Order Closed</span> : ""}
                     <hr className="short" />
 
                     <div className="order-bill">
@@ -278,6 +314,8 @@ function PortalOrders(props) {
                         <button className="orange" onClick={() => advanceOrder(selectedOrder, "Preparing")}>Ready for Pickup</button>
                       : orders.Ready.indexOf(selectedOrder) > -1 ? 
                         <button className="orange" onClick={() => advanceOrder(selectedOrder, "Ready")}>Delivered</button>
+                      : orders.Cancelled.indexOf(selectedOrder) > -1 ?
+                      <button className="orange" onClick={() => advanceOrder(selectedOrder, "Cancelled")}>Confirm</button>
                       : ""}
                     </div>
                   </div>

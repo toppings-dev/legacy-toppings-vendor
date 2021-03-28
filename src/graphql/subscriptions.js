@@ -106,6 +106,7 @@ export const onCreateUniversity = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -221,6 +222,7 @@ export const onUpdateUniversity = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -336,6 +338,7 @@ export const onDeleteUniversity = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -395,6 +398,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -446,6 +450,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -492,6 +497,7 @@ export const onCreateUser = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -542,6 +548,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -582,6 +589,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -632,6 +640,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -672,6 +681,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -723,6 +733,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -763,6 +774,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -813,6 +825,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -889,6 +902,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -929,6 +943,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -993,6 +1008,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1033,6 +1049,7 @@ export const onCreateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1044,6 +1061,7 @@ export const onCreateUser = /* GraphQL */ `
       }
       deviceToken
       platform
+      isUser
       createdAt
       updatedAt
     }
@@ -1098,6 +1116,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1149,6 +1168,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1195,6 +1215,7 @@ export const onUpdateUser = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -1245,6 +1266,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1285,6 +1307,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1335,6 +1358,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1375,6 +1399,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1426,6 +1451,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1466,6 +1492,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1516,6 +1543,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1592,6 +1620,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1632,6 +1661,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1696,6 +1726,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1736,6 +1767,7 @@ export const onUpdateUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1747,6 +1779,7 @@ export const onUpdateUser = /* GraphQL */ `
       }
       deviceToken
       platform
+      isUser
       createdAt
       updatedAt
     }
@@ -1801,6 +1834,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1852,6 +1886,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1898,6 +1933,7 @@ export const onDeleteUser = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -1948,6 +1984,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -1988,6 +2025,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2038,6 +2076,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2078,6 +2117,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2129,6 +2169,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2169,6 +2210,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2219,6 +2261,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2295,6 +2338,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2335,6 +2379,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2399,6 +2444,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2439,6 +2485,7 @@ export const onDeleteUser = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2450,6 +2497,7 @@ export const onDeleteUser = /* GraphQL */ `
       }
       deviceToken
       platform
+      isUser
       createdAt
       updatedAt
     }
@@ -2501,6 +2549,7 @@ export const onCreateGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2577,6 +2626,7 @@ export const onCreateGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2617,6 +2667,7 @@ export const onCreateGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2677,6 +2728,7 @@ export const onUpdateGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2753,6 +2805,7 @@ export const onUpdateGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2793,6 +2846,7 @@ export const onUpdateGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2853,6 +2907,7 @@ export const onDeleteGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2929,6 +2984,7 @@ export const onDeleteGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -2969,6 +3025,7 @@ export const onDeleteGroup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -3005,6 +3062,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3026,6 +3084,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3051,6 +3110,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -3071,6 +3131,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3081,6 +3142,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3101,6 +3163,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3111,6 +3174,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3132,6 +3196,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3142,6 +3207,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3162,6 +3228,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3196,6 +3263,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3206,6 +3274,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3234,6 +3303,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3244,6 +3314,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3255,6 +3326,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -3273,6 +3345,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3307,6 +3380,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3317,6 +3391,7 @@ export const onCreateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3356,6 +3431,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3377,6 +3453,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3402,6 +3479,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -3422,6 +3500,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3432,6 +3511,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3452,6 +3532,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3462,6 +3543,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3483,6 +3565,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3493,6 +3576,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3513,6 +3597,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3547,6 +3632,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3557,6 +3643,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3585,6 +3672,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3595,6 +3683,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3606,6 +3695,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -3624,6 +3714,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3658,6 +3749,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3668,6 +3760,7 @@ export const onUpdateGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3707,6 +3800,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3728,6 +3822,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3753,6 +3848,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -3773,6 +3869,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3783,6 +3880,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3803,6 +3901,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3813,6 +3912,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3834,6 +3934,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3844,6 +3945,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3864,6 +3966,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3898,6 +4001,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3908,6 +4012,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3936,6 +4041,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3946,6 +4052,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -3957,6 +4064,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -3975,6 +4083,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4009,6 +4118,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4019,6 +4129,7 @@ export const onDeleteGroupMembership = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4059,6 +4170,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4080,6 +4192,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4105,6 +4218,7 @@ export const onCreateFriendship = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -4125,6 +4239,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4135,6 +4250,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4155,6 +4271,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4165,6 +4282,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4186,6 +4304,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4196,6 +4315,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4216,6 +4336,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4250,6 +4371,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4260,6 +4382,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4288,6 +4411,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4298,6 +4422,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4309,6 +4434,7 @@ export const onCreateFriendship = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -4329,6 +4455,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4350,6 +4477,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4375,6 +4503,7 @@ export const onCreateFriendship = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -4395,6 +4524,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4405,6 +4535,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4425,6 +4556,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4435,6 +4567,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4456,6 +4589,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4466,6 +4600,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4486,6 +4621,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4520,6 +4656,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4530,6 +4667,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4558,6 +4696,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4568,6 +4707,7 @@ export const onCreateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4579,6 +4719,7 @@ export const onCreateFriendship = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -4610,6 +4751,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4631,6 +4773,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4656,6 +4799,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -4676,6 +4820,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4686,6 +4831,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4706,6 +4852,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4716,6 +4863,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4737,6 +4885,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4747,6 +4896,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4767,6 +4917,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4801,6 +4952,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4811,6 +4963,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4839,6 +4992,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4849,6 +5003,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4860,6 +5015,7 @@ export const onUpdateFriendship = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -4880,6 +5036,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4901,6 +5058,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4926,6 +5084,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -4946,6 +5105,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4956,6 +5116,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4976,6 +5137,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -4986,6 +5148,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5007,6 +5170,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5017,6 +5181,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5037,6 +5202,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5071,6 +5237,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5081,6 +5248,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5109,6 +5277,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5119,6 +5288,7 @@ export const onUpdateFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5130,6 +5300,7 @@ export const onUpdateFriendship = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -5161,6 +5332,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5182,6 +5354,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5207,6 +5380,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -5227,6 +5401,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5237,6 +5412,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5257,6 +5433,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5267,6 +5444,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5288,6 +5466,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5298,6 +5477,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5318,6 +5498,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5352,6 +5533,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5362,6 +5544,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5390,6 +5573,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5400,6 +5584,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5411,6 +5596,7 @@ export const onDeleteFriendship = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -5431,6 +5617,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5452,6 +5639,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5477,6 +5665,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -5497,6 +5686,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5507,6 +5697,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5527,6 +5718,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5537,6 +5729,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5558,6 +5751,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5568,6 +5762,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5588,6 +5783,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5622,6 +5818,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5632,6 +5829,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5660,6 +5858,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5670,6 +5869,7 @@ export const onDeleteFriendship = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5681,6 +5881,7 @@ export const onDeleteFriendship = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -5712,6 +5913,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5733,6 +5935,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5758,6 +5961,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -5778,6 +5982,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5788,6 +5993,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5808,6 +6014,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5818,6 +6025,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5839,6 +6047,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5849,6 +6058,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5869,6 +6079,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5903,6 +6114,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5913,6 +6125,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5941,6 +6154,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5951,6 +6165,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -5962,6 +6177,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -5982,6 +6198,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6003,6 +6220,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6028,6 +6246,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -6048,6 +6267,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6058,6 +6278,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6078,6 +6299,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6088,6 +6310,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6109,6 +6332,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6119,6 +6343,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6139,6 +6364,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6173,6 +6399,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6183,6 +6410,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6211,6 +6439,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6221,6 +6450,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6232,6 +6462,7 @@ export const onCreateFriendRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -6264,6 +6495,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6285,6 +6517,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6310,6 +6543,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -6330,6 +6564,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6340,6 +6575,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6360,6 +6596,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6370,6 +6607,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6391,6 +6629,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6401,6 +6640,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6421,6 +6661,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6455,6 +6696,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6465,6 +6707,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6493,6 +6736,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6503,6 +6747,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6514,6 +6759,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -6534,6 +6780,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6555,6 +6802,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6580,6 +6828,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -6600,6 +6849,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6610,6 +6860,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6630,6 +6881,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6640,6 +6892,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6661,6 +6914,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6671,6 +6925,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6691,6 +6946,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6725,6 +6981,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6735,6 +6992,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6763,6 +7021,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6773,6 +7032,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6784,6 +7044,7 @@ export const onUpdateFriendRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -6816,6 +7077,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6837,6 +7099,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6862,6 +7125,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -6882,6 +7146,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6892,6 +7157,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6912,6 +7178,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6922,6 +7189,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6943,6 +7211,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6953,6 +7222,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -6973,6 +7243,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7007,6 +7278,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7017,6 +7289,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7045,6 +7318,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7055,6 +7329,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7066,6 +7341,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -7086,6 +7362,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7107,6 +7384,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7132,6 +7410,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -7152,6 +7431,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7162,6 +7442,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7182,6 +7463,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7192,6 +7474,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7213,6 +7496,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7223,6 +7507,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7243,6 +7528,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7277,6 +7563,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7287,6 +7574,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7315,6 +7603,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7325,6 +7614,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7336,6 +7626,7 @@ export const onDeleteFriendRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -7366,6 +7657,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7400,6 +7692,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7410,6 +7703,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7439,6 +7733,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7460,6 +7755,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7485,6 +7781,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -7505,6 +7802,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7515,6 +7813,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7535,6 +7834,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7545,6 +7845,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7566,6 +7867,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7576,6 +7878,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7596,6 +7899,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7630,6 +7934,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7640,6 +7945,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7668,6 +7974,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7678,6 +7985,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7689,6 +7997,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -7709,6 +8018,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7730,6 +8040,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7755,6 +8066,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -7775,6 +8087,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7785,6 +8098,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7805,6 +8119,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7815,6 +8130,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7836,6 +8152,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7846,6 +8163,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7866,6 +8184,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7900,6 +8219,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7910,6 +8230,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7938,6 +8259,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7948,6 +8270,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -7959,6 +8282,7 @@ export const onCreateGroupRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -7989,6 +8313,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8023,6 +8348,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8033,6 +8359,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8062,6 +8389,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8083,6 +8411,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8108,6 +8437,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -8128,6 +8458,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8138,6 +8469,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8158,6 +8490,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8168,6 +8501,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8189,6 +8523,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8199,6 +8534,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8219,6 +8555,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8253,6 +8590,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8263,6 +8601,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8291,6 +8630,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8301,6 +8641,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8312,6 +8653,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -8332,6 +8674,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8353,6 +8696,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8378,6 +8722,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -8398,6 +8743,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8408,6 +8754,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8428,6 +8775,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8438,6 +8786,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8459,6 +8808,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8469,6 +8819,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8489,6 +8840,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8523,6 +8875,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8533,6 +8886,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8561,6 +8915,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8571,6 +8926,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8582,6 +8938,7 @@ export const onUpdateGroupRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -8612,6 +8969,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8646,6 +9004,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8656,6 +9015,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8685,6 +9045,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8706,6 +9067,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8731,6 +9093,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -8751,6 +9114,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8761,6 +9125,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8781,6 +9146,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8791,6 +9157,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8812,6 +9179,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8822,6 +9190,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8842,6 +9211,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8876,6 +9246,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8886,6 +9257,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8914,6 +9286,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8924,6 +9297,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8935,6 +9309,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -8955,6 +9330,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -8976,6 +9352,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9001,6 +9378,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -9021,6 +9399,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9031,6 +9410,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9051,6 +9431,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9061,6 +9442,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9082,6 +9464,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9092,6 +9475,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9112,6 +9496,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9146,6 +9531,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9156,6 +9542,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9184,6 +9571,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9194,6 +9582,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -9205,6 +9594,7 @@ export const onDeleteGroupRequest = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -9265,6 +9655,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9333,6 +9724,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9410,6 +9802,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9486,6 +9879,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9527,6 +9921,7 @@ export const onCreateRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -9589,6 +9984,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9655,6 +10051,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9683,6 +10080,7 @@ export const onCreateRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -9717,6 +10115,7 @@ export const onCreateRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -9795,6 +10194,7 @@ export const onCreateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9805,6 +10205,7 @@ export const onCreateRestaurant = /* GraphQL */ `
         }
         nextToken
       }
+      isOpen
       createdAt
       updatedAt
     }
@@ -9861,6 +10262,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -9929,6 +10331,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10006,6 +10409,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10082,6 +10486,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10123,6 +10528,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -10185,6 +10591,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10251,6 +10658,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10279,6 +10687,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -10313,6 +10722,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -10391,6 +10801,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10401,6 +10812,7 @@ export const onUpdateRestaurant = /* GraphQL */ `
         }
         nextToken
       }
+      isOpen
       createdAt
       updatedAt
     }
@@ -10457,6 +10869,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10525,6 +10938,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10602,6 +11016,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10678,6 +11093,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10719,6 +11135,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -10781,6 +11198,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10847,6 +11265,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10875,6 +11294,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -10909,6 +11329,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -10987,6 +11408,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -10997,6 +11419,7 @@ export const onDeleteRestaurant = /* GraphQL */ `
         }
         nextToken
       }
+      isOpen
       createdAt
       updatedAt
     }
@@ -11036,6 +11459,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11073,6 +11497,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11113,6 +11538,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11151,6 +11577,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11194,6 +11621,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11231,6 +11659,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11295,6 +11724,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11305,6 +11735,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -11355,6 +11786,7 @@ export const onCreateMenuCategory = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -11426,6 +11858,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11463,6 +11896,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11503,6 +11937,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11541,6 +11976,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11584,6 +12020,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11621,6 +12058,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11685,6 +12123,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11695,6 +12134,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -11745,6 +12185,7 @@ export const onUpdateMenuCategory = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -11816,6 +12257,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11853,6 +12295,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11893,6 +12336,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11931,6 +12375,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -11974,6 +12419,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12011,6 +12457,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12075,6 +12522,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12085,6 +12533,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -12135,6 +12584,7 @@ export const onDeleteMenuCategory = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -12207,6 +12657,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12244,6 +12695,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12284,6 +12736,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12322,6 +12775,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12365,6 +12819,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12402,6 +12857,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12466,6 +12922,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12476,6 +12933,7 @@ export const onCreateMenuItem = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -12526,6 +12984,7 @@ export const onCreateMenuItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -12593,6 +13052,7 @@ export const onCreateMenuItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -12634,6 +13094,7 @@ export const onCreateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12692,6 +13153,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12729,6 +13191,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12769,6 +13232,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12807,6 +13271,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12850,6 +13315,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12887,6 +13353,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12951,6 +13418,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -12961,6 +13429,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -13011,6 +13480,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -13078,6 +13548,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -13119,6 +13590,7 @@ export const onUpdateMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13177,6 +13649,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13214,6 +13687,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13254,6 +13728,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13292,6 +13767,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13335,6 +13811,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13372,6 +13849,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13436,6 +13914,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13446,6 +13925,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -13496,6 +13976,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -13563,6 +14044,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -13604,6 +14086,7 @@ export const onDeleteMenuItem = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13660,6 +14143,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13697,6 +14181,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13737,6 +14222,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13775,6 +14261,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13818,6 +14305,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13855,6 +14343,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13919,6 +14408,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -13929,6 +14419,7 @@ export const onCreateFoodOption = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -13977,6 +14468,7 @@ export const onCreateFoodOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -14018,6 +14510,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14081,6 +14574,7 @@ export const onCreateFoodOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -14109,6 +14603,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14143,6 +14638,7 @@ export const onCreateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14197,6 +14693,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14234,6 +14731,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14274,6 +14772,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14312,6 +14811,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14355,6 +14855,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14392,6 +14893,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14456,6 +14958,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14466,6 +14969,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -14514,6 +15018,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -14555,6 +15060,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14618,6 +15124,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -14646,6 +15153,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14680,6 +15188,7 @@ export const onUpdateFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14734,6 +15243,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14771,6 +15281,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14811,6 +15322,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14849,6 +15361,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14892,6 +15405,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14929,6 +15443,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -14993,6 +15508,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15003,6 +15519,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -15051,6 +15568,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -15092,6 +15610,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15155,6 +15674,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -15183,6 +15703,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15217,6 +15738,7 @@ export const onDeleteFoodOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15271,6 +15793,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15308,6 +15831,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15348,6 +15872,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15386,6 +15911,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15429,6 +15955,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15466,6 +15993,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15530,6 +16058,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15540,6 +16069,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -15592,6 +16122,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -15723,6 +16254,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -15750,6 +16282,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15794,6 +16327,7 @@ export const onCreateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15859,6 +16393,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15896,6 +16431,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15936,6 +16472,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -15974,6 +16511,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16017,6 +16555,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16054,6 +16593,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16118,6 +16658,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16128,6 +16669,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -16180,6 +16722,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -16311,6 +16854,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -16338,6 +16882,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16382,6 +16927,7 @@ export const onUpdateItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16447,6 +16993,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16484,6 +17031,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16524,6 +17072,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16562,6 +17111,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16605,6 +17155,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16642,6 +17193,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16706,6 +17258,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16716,6 +17269,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -16768,6 +17322,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -16899,6 +17454,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -16926,6 +17482,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -16970,6 +17527,7 @@ export const onDeleteItemOptionCatJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17034,6 +17592,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17071,6 +17630,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17111,6 +17671,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17149,6 +17710,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17192,6 +17754,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17229,6 +17792,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17293,6 +17857,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17303,6 +17868,7 @@ export const onCreateOption = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -17353,6 +17919,7 @@ export const onCreateOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -17381,6 +17948,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17415,6 +17983,7 @@ export const onCreateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17468,6 +18037,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17505,6 +18075,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17545,6 +18116,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17583,6 +18155,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17626,6 +18199,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17663,6 +18237,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17727,6 +18302,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17737,6 +18313,7 @@ export const onUpdateOption = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -17787,6 +18364,7 @@ export const onUpdateOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -17815,6 +18393,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17849,6 +18428,7 @@ export const onUpdateOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17902,6 +18482,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17939,6 +18520,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -17979,6 +18561,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18017,6 +18600,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18060,6 +18644,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18097,6 +18682,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18161,6 +18747,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18171,6 +18758,7 @@ export const onDeleteOption = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -18221,6 +18809,7 @@ export const onDeleteOption = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -18249,6 +18838,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18283,6 +18873,7 @@ export const onDeleteOption = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18337,6 +18928,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18374,6 +18966,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18414,6 +19007,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18452,6 +19046,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18495,6 +19090,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18532,6 +19128,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18596,6 +19193,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18606,6 +19204,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -18710,6 +19309,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -18737,6 +19337,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18781,6 +19382,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18905,6 +19507,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -18934,6 +19537,7 @@ export const onCreateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -18998,6 +19602,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19035,6 +19640,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19075,6 +19681,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19113,6 +19720,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19156,6 +19764,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19193,6 +19802,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19257,6 +19867,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19267,6 +19878,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -19371,6 +19983,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -19398,6 +20011,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19442,6 +20056,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19566,6 +20181,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -19595,6 +20211,7 @@ export const onUpdateItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19659,6 +20276,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19696,6 +20314,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19736,6 +20355,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19774,6 +20394,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19817,6 +20438,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19854,6 +20476,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19918,6 +20541,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -19928,6 +20552,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -20032,6 +20657,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -20059,6 +20685,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -20103,6 +20730,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -20227,6 +20855,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -20256,6 +20885,7 @@ export const onDeleteItemOptionOptionJoin = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -20308,6 +20938,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20329,6 +20960,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20354,6 +20986,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -20374,6 +21007,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20384,6 +21018,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20404,6 +21039,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20414,6 +21050,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20435,6 +21072,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20445,6 +21083,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20465,6 +21104,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20499,6 +21139,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20509,6 +21150,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20537,6 +21179,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20547,6 +21190,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20558,6 +21202,7 @@ export const onCreatePickup = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -20605,6 +21250,7 @@ export const onCreatePickup = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -20651,6 +21297,7 @@ export const onCreatePickup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -20689,6 +21336,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20705,6 +21353,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20737,6 +21386,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -20774,6 +21424,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20795,6 +21446,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20820,6 +21472,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -20840,6 +21493,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20850,6 +21504,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20870,6 +21525,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20880,6 +21536,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20901,6 +21558,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20911,6 +21569,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20931,6 +21590,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20965,6 +21625,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -20975,6 +21636,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21003,6 +21665,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21013,6 +21676,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21024,6 +21688,7 @@ export const onCreatePickup = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -21041,6 +21706,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21075,6 +21741,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21085,6 +21752,7 @@ export const onCreatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21128,6 +21796,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21165,6 +21834,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21205,6 +21875,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21243,6 +21914,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21286,6 +21958,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21323,6 +21996,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21387,6 +22061,7 @@ export const onCreatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21397,6 +22072,7 @@ export const onCreatePickup = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -21429,6 +22105,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21450,6 +22127,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21475,6 +22153,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21495,6 +22174,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21505,6 +22185,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21525,6 +22206,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21535,6 +22217,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21556,6 +22239,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21566,6 +22250,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21586,6 +22271,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21620,6 +22306,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21630,6 +22317,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21658,6 +22346,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21668,6 +22357,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21679,6 +22369,7 @@ export const onUpdatePickup = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -21726,6 +22417,7 @@ export const onUpdatePickup = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -21772,6 +22464,7 @@ export const onUpdatePickup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -21810,6 +22503,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21826,6 +22520,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21858,6 +22553,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21895,6 +22591,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21916,6 +22613,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21941,6 +22639,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -21961,6 +22660,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21971,6 +22671,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -21991,6 +22692,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22001,6 +22703,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22022,6 +22725,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22032,6 +22736,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22052,6 +22757,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22086,6 +22792,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22096,6 +22803,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22124,6 +22832,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22134,6 +22843,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22145,6 +22855,7 @@ export const onUpdatePickup = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -22162,6 +22873,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22196,6 +22908,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22206,6 +22919,7 @@ export const onUpdatePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22249,6 +22963,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22286,6 +23001,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22326,6 +23042,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22364,6 +23081,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22407,6 +23125,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22444,6 +23163,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22508,6 +23228,7 @@ export const onUpdatePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22518,6 +23239,7 @@ export const onUpdatePickup = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -22550,6 +23272,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22571,6 +23294,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22596,6 +23320,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -22616,6 +23341,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22626,6 +23352,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22646,6 +23373,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22656,6 +23384,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22677,6 +23406,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22687,6 +23417,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22707,6 +23438,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22741,6 +23473,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22751,6 +23484,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22779,6 +23513,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22789,6 +23524,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22800,6 +23536,7 @@ export const onDeletePickup = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -22847,6 +23584,7 @@ export const onDeletePickup = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -22893,6 +23631,7 @@ export const onDeletePickup = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -22931,6 +23670,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22947,6 +23687,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -22979,6 +23720,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23016,6 +23758,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23037,6 +23780,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23062,6 +23806,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23082,6 +23827,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23092,6 +23838,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23112,6 +23859,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23122,6 +23870,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23143,6 +23892,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23153,6 +23903,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23173,6 +23924,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23207,6 +23959,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23217,6 +23970,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23245,6 +23999,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23255,6 +24010,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23266,6 +24022,7 @@ export const onDeletePickup = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -23283,6 +24040,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23317,6 +24075,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23327,6 +24086,7 @@ export const onDeletePickup = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23370,6 +24130,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23407,6 +24168,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23447,6 +24209,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23485,6 +24248,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23528,6 +24292,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23565,6 +24330,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23629,6 +24395,7 @@ export const onDeletePickup = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23639,6 +24406,7 @@ export const onDeletePickup = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -23682,6 +24450,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23719,6 +24488,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23759,6 +24529,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23797,6 +24568,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23840,6 +24612,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23877,6 +24650,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23941,6 +24715,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -23951,6 +24726,7 @@ export const onCreateOrder = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -23977,6 +24753,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -23998,6 +24775,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24023,6 +24801,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24043,6 +24822,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24053,6 +24833,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24073,6 +24854,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24083,6 +24865,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24104,6 +24887,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24114,6 +24898,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24134,6 +24919,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24168,6 +24954,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24178,6 +24965,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24206,6 +24994,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24216,6 +25005,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24227,6 +25017,7 @@ export const onCreateOrder = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -24259,6 +25050,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24275,6 +25067,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24337,6 +25130,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24362,6 +25156,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24481,6 +25276,7 @@ export const onCreateOrder = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -24507,6 +25303,7 @@ export const onCreateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24523,6 +25320,7 @@ export const onCreateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -24659,6 +25457,7 @@ export const onCreateOrder = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -24789,6 +25588,7 @@ export const onCreateOrder = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -24838,6 +25638,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24875,6 +25676,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24915,6 +25717,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24953,6 +25756,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -24996,6 +25800,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25033,6 +25838,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25097,6 +25903,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25107,6 +25914,7 @@ export const onUpdateOrder = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -25133,6 +25941,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25154,6 +25963,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25179,6 +25989,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25199,6 +26010,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25209,6 +26021,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25229,6 +26042,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25239,6 +26053,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25260,6 +26075,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25270,6 +26086,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25290,6 +26107,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25324,6 +26142,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25334,6 +26153,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25362,6 +26182,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25372,6 +26193,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25383,6 +26205,7 @@ export const onUpdateOrder = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -25415,6 +26238,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25431,6 +26255,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25493,6 +26318,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25518,6 +26344,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25637,6 +26464,7 @@ export const onUpdateOrder = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -25663,6 +26491,7 @@ export const onUpdateOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -25679,6 +26508,7 @@ export const onUpdateOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -25815,6 +26645,7 @@ export const onUpdateOrder = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -25945,6 +26776,7 @@ export const onUpdateOrder = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -25994,6 +26826,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26031,6 +26864,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26071,6 +26905,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26109,6 +26944,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26152,6 +26988,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26189,6 +27026,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26253,6 +27091,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26263,6 +27102,7 @@ export const onDeleteOrder = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -26289,6 +27129,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26310,6 +27151,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26335,6 +27177,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26355,6 +27198,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26365,6 +27209,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26385,6 +27230,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26395,6 +27241,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26416,6 +27263,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26426,6 +27274,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26446,6 +27295,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26480,6 +27330,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26490,6 +27341,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26518,6 +27370,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26528,6 +27381,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26539,6 +27393,7 @@ export const onDeleteOrder = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -26571,6 +27426,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26587,6 +27443,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26649,6 +27506,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26674,6 +27532,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26793,6 +27652,7 @@ export const onDeleteOrder = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -26819,6 +27679,7 @@ export const onDeleteOrder = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -26835,6 +27696,7 @@ export const onDeleteOrder = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -26971,6 +27833,7 @@ export const onDeleteOrder = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -27101,6 +27964,7 @@ export const onDeleteOrder = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -27140,6 +28004,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27161,6 +28026,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27186,6 +28052,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27206,6 +28073,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27216,6 +28084,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27236,6 +28105,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27246,6 +28116,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27267,6 +28138,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27277,6 +28149,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27297,6 +28170,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27331,6 +28205,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27341,6 +28216,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27369,6 +28245,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27379,6 +28256,7 @@ export const onCreateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27390,6 +28268,7 @@ export const onCreateReward = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -27423,6 +28302,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27460,6 +28340,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27500,6 +28381,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27538,6 +28420,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27581,6 +28464,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27618,6 +28502,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27682,6 +28567,7 @@ export const onCreateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27692,6 +28578,7 @@ export const onCreateReward = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -27722,6 +28609,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27743,6 +28631,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27768,6 +28657,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -27788,6 +28678,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27798,6 +28689,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27818,6 +28710,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27828,6 +28721,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27849,6 +28743,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27859,6 +28754,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27879,6 +28775,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27913,6 +28810,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27923,6 +28821,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27951,6 +28850,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27961,6 +28861,7 @@ export const onUpdateReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -27972,6 +28873,7 @@ export const onUpdateReward = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -28005,6 +28907,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28042,6 +28945,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28082,6 +28986,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28120,6 +29025,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28163,6 +29069,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28200,6 +29107,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28264,6 +29172,7 @@ export const onUpdateReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28274,6 +29183,7 @@ export const onUpdateReward = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -28304,6 +29214,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28325,6 +29236,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28350,6 +29262,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28370,6 +29283,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28380,6 +29294,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28400,6 +29315,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28410,6 +29326,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28431,6 +29348,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28441,6 +29359,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28461,6 +29380,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28495,6 +29415,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28505,6 +29426,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28533,6 +29455,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28543,6 +29466,7 @@ export const onDeleteReward = /* GraphQL */ `
               name
               deviceToken
               platform
+              isUser
               createdAt
               updatedAt
             }
@@ -28554,6 +29478,7 @@ export const onDeleteReward = /* GraphQL */ `
         }
         deviceToken
         platform
+        isUser
         createdAt
         updatedAt
       }
@@ -28587,6 +29512,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28624,6 +29550,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28664,6 +29591,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28702,6 +29630,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28745,6 +29674,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28782,6 +29712,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28846,6 +29777,7 @@ export const onDeleteReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28856,6 +29788,7 @@ export const onDeleteReward = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -28903,6 +29836,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28940,6 +29874,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -28980,6 +29915,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29018,6 +29954,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29061,6 +29998,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29098,6 +30036,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29162,6 +30101,7 @@ export const onCreateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29172,6 +30112,7 @@ export const onCreateVendorReward = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -29220,6 +30161,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29257,6 +30199,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29297,6 +30240,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29335,6 +30279,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29378,6 +30323,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29415,6 +30361,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29479,6 +30426,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29489,6 +30437,7 @@ export const onUpdateVendorReward = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -29537,6 +30486,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29574,6 +30524,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29614,6 +30565,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29652,6 +30604,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29695,6 +30648,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29732,6 +30686,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29796,6 +30751,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -29806,6 +30762,7 @@ export const onDeleteVendorReward = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -29920,6 +30877,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -30025,6 +30983,7 @@ export const onCreateOrderItem = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -30127,6 +31086,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -30196,6 +31156,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -30255,6 +31216,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -30317,6 +31279,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -30452,6 +31415,7 @@ export const onCreateOrderItem = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -30553,6 +31517,7 @@ export const onCreateOrderItem = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -30671,6 +31636,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -30776,6 +31742,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -30878,6 +31845,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -30947,6 +31915,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -31006,6 +31975,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -31068,6 +32038,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -31203,6 +32174,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -31304,6 +32276,7 @@ export const onUpdateOrderItem = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -31422,6 +32395,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -31527,6 +32501,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -31629,6 +32604,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -31698,6 +32674,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             }
             deviceToken
             platform
+            isUser
             createdAt
             updatedAt
           }
@@ -31757,6 +32734,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -31819,6 +32797,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             images {
               nextToken
             }
+            isOpen
             createdAt
             updatedAt
           }
@@ -31954,6 +32933,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
           }
           deviceToken
           platform
+          isUser
           createdAt
           updatedAt
         }
@@ -32055,6 +33035,7 @@ export const onDeleteOrderItem = /* GraphQL */ `
             }
             nextToken
           }
+          isOpen
           createdAt
           updatedAt
         }
@@ -32101,6 +33082,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32138,6 +33120,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32178,6 +33161,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32216,6 +33200,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32259,6 +33244,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32296,6 +33282,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32360,6 +33347,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32370,6 +33358,7 @@ export const onCreateRestaurantImage = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -32413,6 +33402,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32450,6 +33440,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32490,6 +33481,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32528,6 +33520,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32571,6 +33564,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32608,6 +33602,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32672,6 +33667,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32682,6 +33678,7 @@ export const onUpdateRestaurantImage = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }
@@ -32725,6 +33722,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32762,6 +33760,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32802,6 +33801,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32840,6 +33840,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32883,6 +33884,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32920,6 +33922,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32984,6 +33987,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
               thursdayHours
               fridayHours
               saturdayHours
+              isOpen
               createdAt
               updatedAt
             }
@@ -32994,6 +33998,7 @@ export const onDeleteRestaurantImage = /* GraphQL */ `
           }
           nextToken
         }
+        isOpen
         createdAt
         updatedAt
       }

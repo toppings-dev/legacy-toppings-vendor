@@ -203,6 +203,10 @@ button.orange {
     background-color: #ff5200;
 }
 
+button.red {
+    background-color: #ff004c;
+}
+
 button.gray {
     background-color: #cdcdcd;
     color: #ffffff;
@@ -227,7 +231,6 @@ button.red-text {
 }
 
 button.tag {
-    background-color: #ff5200;
     display: inline-block;
     cursor: default;
 }
