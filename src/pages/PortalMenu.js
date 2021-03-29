@@ -372,13 +372,13 @@ function PortalMenu(props) {
                 {mode == "editItem" && addItemType == "Customizable"  ? 
                   <div className="portal-menu-item-form-toppings-section">
                     {selectedMenuItem.options.items.concat(selectedMenuItemExistingToppings).map((topping =>
-                      <div className="portal-menu-item-form-toppings-container">
+                      <div key={topping.id} className="portal-menu-item-form-toppings-container">
                         {topping.hasOwnProperty("existing") ? 
                           <div>
                             <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
                             <select className="dropdown-input" onChange={(e) => editExistingTopping(e, topping)}>
                               {existingToppings.filter(x => !selectedMenuItem.options.items.map(y => y.foodOptionName).includes(x.name)).map((existingTopping =>
-                                <option value={existingTopping.name}>{existingTopping.name}</option>
+                                <option key={existingTopping.name} value={existingTopping.name}>{existingTopping.name}</option>
                               ))}
                             </select>
                           </div>
@@ -390,7 +390,7 @@ function PortalMenu(props) {
                             <div className="portal-menu-item-form-toppings-options-container">
                               <span className="subheading">Options <button className="blue-plus" type="button" onClick={() => addOption(topping)}><img src={plusButtonIcon} /></button></span>
                               {topping.optionCat.options.items.map((option => 
-                                <div className="portal-menu-item-form-toppings-options-input-container">
+                                <div key={option.optionName} className="portal-menu-item-form-toppings-options-input-container">
                                   {/*<button className="red-x" type="button" onClick={() => deleteOption(option)}><img src={xButtonIcon} /></button>*/}
                                   <input className="text-input" type="text" placeholder="Crab Patty" onChange={(e) => editOption(e, option)} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
                                 </div>

@@ -104,8 +104,6 @@ function PortalSettings(props) {
       fridayHours: vendorForm.hours.Friday.startTime + " " + vendorForm.hours.Friday.startPeriod + "-" + vendorForm.hours.Friday.endTime + " " + vendorForm.hours.Friday.endPeriod,
       saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
     };
-    
-    console.log(updatedVendor);
 
     API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
       console.log("UPDATE", updateRestaurant);
@@ -205,7 +203,7 @@ function PortalSettings(props) {
             <span className="orange-heading">{vendor.name}</span>
             <span className="caption">{vendor.description}</span>
             {vendor.tags.map((tag => 
-              <button className="tag">{tag}</button>  
+              <button key={tag} className="tag">{tag}</button>  
             ))}
           </header>
 
@@ -238,7 +236,7 @@ function PortalSettings(props) {
                   <span className="subheading">Hours</span>
                   <div id="vendor-hours-info">
                     {Object.keys(vendor.hours).map((day => 
-                      <div>
+                      <div key={day}>
                         <span>{day}:</span>
                         <span>{parseInt(vendor.hours[day][0].split(":")[0]) + ":" + vendor.hours[day][0].split(":")[1]} - {parseInt(vendor.hours[day][1].split(":")[0]) + ":" + vendor.hours[day][1].split(":")[1]}</span>
                       </div>

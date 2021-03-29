@@ -156,18 +156,18 @@ function PortalSignUp(props) {
                 {!signedUp && !confirmed ? 
                   <form onSubmit={signUp}>
                     {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
-                    <label for="name">Name</label><input className="text-input" type="text" ref={nameInput} />
-                    <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
-                    <label for="phone">Phone Number</label><input className="text-input" type="tel" ref={phoneNumberInput} defaultValue="" />
-                    <label for="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
+                    <label htmlFor="name">Name</label><input className="text-input" type="text" ref={nameInput} />
+                    <label htmlFor="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                    <label htmlFor="phone">Phone Number</label><input className="text-input" type="tel" ref={phoneNumberInput} defaultValue="" />
+                    <label htmlFor="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
                     <input className="submit-button" type="submit" value="Submit" />
                   </form>
                 : signedUp && !confirmed ?
                   <form onSubmit={confirmSignUp}>
                     {errorMsg == "" && successMsg != "" ? <span className="login-message success">{successMsg}</span> : ""}
                     {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
-                    <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
-                    <label for="code">Confirmation Code</label><input className="text-input" type="text" ref={codeInput} />
+                    <label htmlFor="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                    <label htmlFor="code">Confirmation Code</label><input className="text-input" type="text" ref={codeInput} />
                     <input className="submit-button" type="submit" value="Submit" />
                   </form>
                 : 
@@ -180,8 +180,8 @@ function PortalSignUp(props) {
                 <form onSubmit={login}>
                   {errorMsg == "" && successMsg != "" ? <span className="login-message success">{successMsg}</span> : ""}
                   {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
-                  <label for="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
-                  <label for="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
+                  <label htmlFor="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                  <label htmlFor="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
                   <input className="submit-button" type="submit" value="Submit" />
                 </form>
 
