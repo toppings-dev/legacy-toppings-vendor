@@ -34,7 +34,7 @@ function PortalOrders(props) {
     New: [],
     Preparing: [],
     Ready: [],
-    Cancelled: [],
+    // Cancelled: [],
   });
 
   useEffect(() => {
@@ -95,7 +95,7 @@ function PortalOrders(props) {
   async function orderReceived() {
     await API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
       const order = eventData.value.data.onUpdateOrder;
-      const oldOrder = [...orders.New, ...ordersPreparing, ...orders.Ready, ...orders.Cancelled].filter(o => o.id == order.id)[0];
+      const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
       console.log("RECEIVED", order);
       console.log("EXISTING?", oldOrder);
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
@@ -113,12 +113,12 @@ function PortalOrders(props) {
             food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
           };
 
-          if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
+          /*if (newOrder.closed && newOrder.food_ready_time > deliveredOrderTimeStamp) {
             setOrders(oldOrders => ({
               ...oldOrders,
-              Cancelled: [myOrder, ...oldOrders["Cancelled"]],
+              Cancelled: [newOrder, ...oldOrders["Cancelled"]],
             }));
-          } else if (newOrder.food_ready_time > preparingOrderTimeStamp) {
+          } else */if (newOrder.food_ready_time > preparingOrderTimeStamp) {
             setOrders(oldOrders => ({
               ...oldOrders,
               New: [newOrder, ...oldOrders["New"]],
@@ -135,12 +135,12 @@ function PortalOrders(props) {
               Ready: [newOrder, ...oldOrders["Ready"]],
             }));
           }
-        } else if (oldOrder != null && !oldOrder.closed && order.closed) {
+        } /*else if (oldOrder != null && !oldOrder.closed && order.closed) {
           setOrders(oldOrders => ({
             ...oldOrders,
-            Cancelled: [myOrder, ...oldOrders["Cancelled"]],
+            Cancelled: [newOrder, ...oldOrders["Cancelled"]],
           }));
-        }
+        }*/
       }
     }});
   }
@@ -166,22 +166,22 @@ function PortalOrders(props) {
           food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
         }
 
-        if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
+        /*if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Cancelled: [myOrder, ...oldOrders["Cancelled"]],
           }));
-        } else if (!myOrder.closed && myOrder.food_ready_time > preparingOrderTimeStamp) {
+        } else*/ if (/*!myOrder.closed && */myOrder.food_ready_time > preparingOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             New: [myOrder, ...oldOrders["New"]],
           }));
-        } else if (!myOrder.closed && myOrder.food_ready_time > readyOrderTimeStamp) {
+        } else if (/*!myOrder.closed && */myOrder.food_ready_time > readyOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Preparing: [myOrder, ...oldOrders["Preparing"]],
           }));
-        } else if (!myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
+        } else if (/*!myOrder.closed && */myOrder.food_ready_time > deliveredOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Ready: [myOrder, ...oldOrders["Ready"]],
@@ -212,7 +212,7 @@ function PortalOrders(props) {
               </header>
                 {Object.keys(orders).map((category =>
                   <div key={category}>
-                    <span className="order-category">{category}</span>
+                    <span className="order-category">{category == "Cancelled" ? "Cancelled/Closed" : category}</span>
 
                     <div className="order-category-container">
                       {orders[category].length > 0 ?
@@ -263,7 +263,7 @@ function PortalOrders(props) {
                     : ""}
 
                     <span className="heading">Order #{selectedOrder.id.slice(0, 5)} - {selectedOrder.time}</span>
-                    {selectedOrder.closed ? <span className="red-subheading">Order Closed</span> : ""}
+                    {false && selectedOrder.closed ? <span className="red-subheading">Order Closed</span> : ""}
                     <hr className="short" />
 
                     <div className="order-bill">
@@ -275,7 +275,7 @@ function PortalOrders(props) {
                           {item.foodOptionsArray != null ? 
                             <ul className="order-item-toppings">
                               {item.foodOptionsArray.map((topping => 
-                                <li>{topping}</li>  
+                                <li key={Math.random()}>{topping}</li>  
                               ))}
                             </ul>
                           : "" }

@@ -5,12 +5,23 @@ function getCurrentUser() {
   return JSON.parse(sessionStorage.user);
 }
 
-function setupSession(data) {
+function setCurrentUser(data) {
   sessionStorage.setItem("user", JSON.stringify(data));
+}
+
+function getCurrentPage() { 
+  if (typeof sessionStorage.page === "undefined") {
+    return null;
+  }
+  return sessionStorage.page;
+}
+
+function setCurrentPage(data) {
+  sessionStorage.setItem("page", data);
 }
 
 function clearSession(field) {
   sessionStorage.removeItem(field);
 }
 
-export { getCurrentUser, setupSession, clearSession };
+export { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession };

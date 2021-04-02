@@ -6,7 +6,7 @@ import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 
-import { getCurrentUser, setupSession, clearSession } from '../utils/session';
+import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession } from '../utils/session';
 
 Amplify.configure(awsConfig);
 
@@ -28,7 +28,8 @@ function PortalSignUp(props) {
     props.toggleShowHeader(true);
 
     let user = getCurrentUser();
-    if (user != null) {
+    let page = getCurrentPage();
+    if (user != null && page != null) {
       emailInput.current.value = user.username;
       passwordInput.current.value = user.password;
       login(null);
@@ -129,9 +130,12 @@ function PortalSignUp(props) {
         password: password 
       };
       Auth.signIn(user).then(() => {
-        setLoggedIn(true);
-        setupSession(user);
+        setCurrentUser(user);
+        if (getCurrentPage() == null) {
+          setCurrentPage("orders");
+        }
         props.setUser(user);
+        setLoggedIn(true);
       }).catch((error) => {
         setErrorMsg(error.message);
       });
@@ -143,7 +147,7 @@ function PortalSignUp(props) {
   return (
     <section className="portal-login-container">
       {loggedIn ? 
-        <Redirect to="/portal/orders" />
+        <Redirect to={`/portal/${getCurrentPage()}`} />
         :
         <article className="login-container">
           <div className="login-panel">

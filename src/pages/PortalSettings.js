@@ -13,7 +13,7 @@ import clockIcon from '../assets/images/clock-icon.svg';
 
 function PortalSettings(props) {
   const defaultVendor = {
-    id: props.restaurant.id,
+    id: props.restaurant.id != null && props.restaurant.id.length > 0 ? props.restaurant.id : "-1",
     name: props.restaurant.name != null && props.restaurant.name.length > 0 ? props.restaurant.name : "Your Restaurant Name",
     description: props.restaurant.description != null && props.restaurant.description.length > 0 ? props.restaurant.description : "Your Restaurant Description",
     // tags: ["Fast Food", "Outdoor Dining"],
@@ -108,6 +108,10 @@ function PortalSettings(props) {
     API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
       console.log("UPDATE", updateRestaurant);
       props.getData();
+      // setVendor(oldVendor => ({
+      //   ...oldVendor,
+      //   description: updateRestaurant.description,
+      // }))
       changeMode("")
     }).catch((error) => {
       console.log(error);
@@ -156,7 +160,7 @@ function PortalSettings(props) {
 
               <div id="portal-settings-form-email-section">
                 <span className="subheading">Email Address</span>
-                <input className="text-input" type="text" placeholder="Vendor Email" defaultValue={vendor.email} ref={emailInput} />
+                <input className="text-input" type="text" placeholder="Vendor Email" defaultValue={vendor.email} ref={emailInput} readOnly />
               </div>
 
               <div id="portal-settings-form-hours-section">

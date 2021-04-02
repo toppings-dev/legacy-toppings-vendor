@@ -21050,6 +21050,7 @@ export const createPickup = /* GraphQL */ `
   ) {
     createPickup(input: $input, condition: $condition) {
       id
+      delivererId
       deliverer {
         email
         university_name
@@ -21389,6 +21390,7 @@ export const createPickup = /* GraphQL */ `
           delivery_address
           delivery_lat
           delivery_long
+          customerId
           customer {
             email
             university_name
@@ -21458,6 +21460,7 @@ export const createPickup = /* GraphQL */ `
           pickupId
           pickup {
             id
+            delivererId
             deliverer {
               email
               university_name
@@ -22220,6 +22223,7 @@ export const updatePickup = /* GraphQL */ `
   ) {
     updatePickup(input: $input, condition: $condition) {
       id
+      delivererId
       deliverer {
         email
         university_name
@@ -22559,6 +22563,7 @@ export const updatePickup = /* GraphQL */ `
           delivery_address
           delivery_lat
           delivery_long
+          customerId
           customer {
             email
             university_name
@@ -22628,6 +22633,7 @@ export const updatePickup = /* GraphQL */ `
           pickupId
           pickup {
             id
+            delivererId
             deliverer {
               email
               university_name
@@ -23390,6 +23396,7 @@ export const deletePickup = /* GraphQL */ `
   ) {
     deletePickup(input: $input, condition: $condition) {
       id
+      delivererId
       deliverer {
         email
         university_name
@@ -23729,6 +23736,7 @@ export const deletePickup = /* GraphQL */ `
           delivery_address
           delivery_lat
           delivery_long
+          customerId
           customer {
             email
             university_name
@@ -23798,6 +23806,7 @@ export const deletePickup = /* GraphQL */ `
           pickupId
           pickup {
             id
+            delivererId
             deliverer {
               email
               university_name
@@ -24874,6 +24883,7 @@ export const createOrder = /* GraphQL */ `
       delivery_address
       delivery_lat
       delivery_long
+      customerId
       customer {
         email
         university_name
@@ -25198,6 +25208,7 @@ export const createOrder = /* GraphQL */ `
             delivery_address
             delivery_lat
             delivery_long
+            customerId
             customer {
               email
               university_name
@@ -25223,6 +25234,7 @@ export const createOrder = /* GraphQL */ `
             pickupId
             pickup {
               id
+              delivererId
               lat
               long
               expdate
@@ -25318,6 +25330,7 @@ export const createOrder = /* GraphQL */ `
       pickupId
       pickup {
         id
+        delivererId
         deliverer {
           email
           university_name
@@ -25451,6 +25464,7 @@ export const createOrder = /* GraphQL */ `
             delivery_address
             delivery_lat
             delivery_long
+            customerId
             customer {
               email
               university_name
@@ -25476,6 +25490,7 @@ export const createOrder = /* GraphQL */ `
             pickupId
             pickup {
               id
+              delivererId
               lat
               long
               expdate
@@ -26065,6 +26080,7 @@ export const updateOrder = /* GraphQL */ `
       delivery_address
       delivery_lat
       delivery_long
+      customerId
       customer {
         email
         university_name
@@ -26389,6 +26405,7 @@ export const updateOrder = /* GraphQL */ `
             delivery_address
             delivery_lat
             delivery_long
+            customerId
             customer {
               email
               university_name
@@ -26414,6 +26431,7 @@ export const updateOrder = /* GraphQL */ `
             pickupId
             pickup {
               id
+              delivererId
               lat
               long
               expdate
@@ -26509,6 +26527,7 @@ export const updateOrder = /* GraphQL */ `
       pickupId
       pickup {
         id
+        delivererId
         deliverer {
           email
           university_name
@@ -26642,6 +26661,7 @@ export const updateOrder = /* GraphQL */ `
             delivery_address
             delivery_lat
             delivery_long
+            customerId
             customer {
               email
               university_name
@@ -26667,6 +26687,7 @@ export const updateOrder = /* GraphQL */ `
             pickupId
             pickup {
               id
+              delivererId
               lat
               long
               expdate
@@ -27256,6 +27277,7 @@ export const deleteOrder = /* GraphQL */ `
       delivery_address
       delivery_lat
       delivery_long
+      customerId
       customer {
         email
         university_name
@@ -27580,6 +27602,7 @@ export const deleteOrder = /* GraphQL */ `
             delivery_address
             delivery_lat
             delivery_long
+            customerId
             customer {
               email
               university_name
@@ -27605,6 +27628,7 @@ export const deleteOrder = /* GraphQL */ `
             pickupId
             pickup {
               id
+              delivererId
               lat
               long
               expdate
@@ -27700,6 +27724,7 @@ export const deleteOrder = /* GraphQL */ `
       pickupId
       pickup {
         id
+        delivererId
         deliverer {
           email
           university_name
@@ -27833,6 +27858,7 @@ export const deleteOrder = /* GraphQL */ `
             delivery_address
             delivery_lat
             delivery_long
+            customerId
             customer {
               email
               university_name
@@ -27858,6 +27884,7 @@ export const deleteOrder = /* GraphQL */ `
             pickupId
             pickup {
               id
+              delivererId
               lat
               long
               expdate
@@ -31052,6 +31079,7 @@ export const createOrderItem = /* GraphQL */ `
         delivery_address
         delivery_lat
         delivery_long
+        customerId
         customer {
           email
           university_name
@@ -31167,6 +31195,7 @@ export const createOrderItem = /* GraphQL */ `
               delivery_address
               delivery_lat
               delivery_long
+              customerId
               comment
               order_price_before_discount
               order_price_after_discount
@@ -31214,6 +31243,7 @@ export const createOrderItem = /* GraphQL */ `
         pickupId
         pickup {
           id
+          delivererId
           deliverer {
             email
             university_name
@@ -31264,6 +31294,7 @@ export const createOrderItem = /* GraphQL */ `
               delivery_address
               delivery_lat
               delivery_long
+              customerId
               comment
               order_price_before_discount
               order_price_after_discount
@@ -31814,6 +31845,7 @@ export const updateOrderItem = /* GraphQL */ `
         delivery_address
         delivery_lat
         delivery_long
+        customerId
         customer {
           email
           university_name
@@ -31929,6 +31961,7 @@ export const updateOrderItem = /* GraphQL */ `
               delivery_address
               delivery_lat
               delivery_long
+              customerId
               comment
               order_price_before_discount
               order_price_after_discount
@@ -31976,6 +32009,7 @@ export const updateOrderItem = /* GraphQL */ `
         pickupId
         pickup {
           id
+          delivererId
           deliverer {
             email
             university_name
@@ -32026,6 +32060,7 @@ export const updateOrderItem = /* GraphQL */ `
               delivery_address
               delivery_lat
               delivery_long
+              customerId
               comment
               order_price_before_discount
               order_price_after_discount
@@ -32576,6 +32611,7 @@ export const deleteOrderItem = /* GraphQL */ `
         delivery_address
         delivery_lat
         delivery_long
+        customerId
         customer {
           email
           university_name
@@ -32691,6 +32727,7 @@ export const deleteOrderItem = /* GraphQL */ `
               delivery_address
               delivery_lat
               delivery_long
+              customerId
               comment
               order_price_before_discount
               order_price_after_discount
@@ -32738,6 +32775,7 @@ export const deleteOrderItem = /* GraphQL */ `
         pickupId
         pickup {
           id
+          delivererId
           deliverer {
             email
             university_name
@@ -32788,6 +32826,7 @@ export const deleteOrderItem = /* GraphQL */ `
               delivery_address
               delivery_lat
               delivery_long
+              customerId
               comment
               order_price_before_discount
               order_price_after_discount

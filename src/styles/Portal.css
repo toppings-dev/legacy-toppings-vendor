@@ -71,6 +71,11 @@
   height: 1.5rem;
 }
 
+.portal-container nav .portal-version-label {
+  margin-left: 80px;
+  font-size: 0.875rem;
+}
+
 .portal-container main {
   display: flex;
   text-align: center;
