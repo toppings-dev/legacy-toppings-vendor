@@ -25,7 +25,7 @@ function App() {
       <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
       <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
       
-      <Redirect to="/portal-auth/sign-in" />
+      <Redirect to="/portal/orders" />
       {showHeader ?
         <header className="primary">
           <nav>

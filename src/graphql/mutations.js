@@ -21525,6 +21525,8 @@ export const createPickup = /* GraphQL */ `
             closed
             windowEndTime
             windowClosed
+            isPickedUp
+            status
             createdAt
             updatedAt
           }
@@ -22211,6 +22213,8 @@ export const createPickup = /* GraphQL */ `
       closed
       windowEndTime
       windowClosed
+      isPickedUp
+      status
       createdAt
       updatedAt
     }
@@ -22698,6 +22702,8 @@ export const updatePickup = /* GraphQL */ `
             closed
             windowEndTime
             windowClosed
+            isPickedUp
+            status
             createdAt
             updatedAt
           }
@@ -23384,6 +23390,8 @@ export const updatePickup = /* GraphQL */ `
       closed
       windowEndTime
       windowClosed
+      isPickedUp
+      status
       createdAt
       updatedAt
     }
@@ -23871,6 +23879,8 @@ export const deletePickup = /* GraphQL */ `
             closed
             windowEndTime
             windowClosed
+            isPickedUp
+            status
             createdAt
             updatedAt
           }
@@ -24557,6 +24567,8 @@ export const deletePickup = /* GraphQL */ `
       closed
       windowEndTime
       windowClosed
+      isPickedUp
+      status
       createdAt
       updatedAt
     }
@@ -25244,6 +25256,8 @@ export const createOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -25500,6 +25514,8 @@ export const createOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -25748,6 +25764,8 @@ export const createOrder = /* GraphQL */ `
         closed
         windowEndTime
         windowClosed
+        isPickedUp
+        status
         createdAt
         updatedAt
       }
@@ -26441,6 +26459,8 @@ export const updateOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -26697,6 +26717,8 @@ export const updateOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -26945,6 +26967,8 @@ export const updateOrder = /* GraphQL */ `
         closed
         windowEndTime
         windowClosed
+        isPickedUp
+        status
         createdAt
         updatedAt
       }
@@ -27638,6 +27662,8 @@ export const deleteOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -27894,6 +27920,8 @@ export const deleteOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -28142,6 +28170,8 @@ export const deleteOrder = /* GraphQL */ `
         closed
         windowEndTime
         windowClosed
+        isPickedUp
+        status
         createdAt
         updatedAt
       }
@@ -31419,6 +31449,8 @@ export const createOrderItem = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }
@@ -32185,6 +32217,8 @@ export const updateOrderItem = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }
@@ -32951,6 +32985,8 @@ export const deleteOrderItem = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }

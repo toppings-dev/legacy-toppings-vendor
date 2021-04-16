@@ -70,7 +70,7 @@ function Portal(props) {
               <li><Link to="/portal/settings" onClick={() => setCurrentPage("settings")}><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}><img src={settingsIcon} /> Account Settings</span></Link></li>
               <li><span className="portal-nav-option" onClick={logout}><img src={logoutIcon} /> Log Out</span></li>
             </ul>
-            <div className="portal-version-label">Version 1.4.1</div>
+            <div className="portal-version-label">Version 1.5.1</div>
           </nav>
 
           <main>

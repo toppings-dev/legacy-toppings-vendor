@@ -7,40 +7,135 @@ import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import * as subscriptions from '../graphql/subscriptions'
 
+import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession } from '../utils/session';
+
 import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 import whiteCheckmark from '../assets/images/white-checkmark.svg';
 import grayCheckmark from '../assets/images/gray-checkmark.svg';
 import ding from '../assets/audio/ding.mp3';
+import { Redirect } from 'react-router';
 
 function PortalOrders(props) {
-  const newOrderTimeStamp = 30;
-  const preparingOrderTimeStamp = 15;
-  const readyOrderTimeStamp = 5;
-  const deliveredOrderTimeStamp = 0;
-  const cancelledOrderTimeStamp = -1;
-
-  const [loading, setLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [currentPage, setCurrentPage] = useState("orders");
+  const [loading, setLoading] = useState(true);
   const [audio] = useState(new Audio(ding));
   const [selectedOrder, selectOrder] = useState(null); 
-  const [receivingOrders, setReceivingOrders] = useState(true);
+  const [receivingOrders, setReceivingOrders] = useState(props.restaurant.isOpen);
+  const [subscriptionRunning, setSubscriptionRunning] = useState(false);
   const [orders, setOrders] = useState({
-    // New: [{id: 73, deliverer: "Patrick Star", customer: "Gary", tip: 0.00, instructions: "Meow", items: [{name: "Golden Loaf", price: 2.50}, {name: "Krabby Patty", price: 2.99}]}, 
-    //       {id: 72, deliverer: "Plankton", customer: "Karen", tip: 2.00, instructions: "Give me the secret formula Mr. Krabs!", items: [{name: "Krabby Patty", price: 2.99}]}],
-    // Preparing: [{id: 71, deliverer: "Triton", customer: "King Neptune", tip: 1.00, instructions: "Extra jelly please!", items: [{name: "Jelly Patty", price: 3.99}, {name: "Jelly Patty", price: 3.99}, {name: "Jelly Patty", price: 3.99}]}, 
-    //             {id: 70, deliverer: "Princess Mindy", customer: "King Neptune", tip: 0.80, instructions: "", items: [{name: "Fried Oyster Skin", price: 0.99}, {name: "Golden Loaf", price: 2.50}]}],
-    // Ready: [{id: 69, deliverer: "Larry the Lobster", customer: "Mrs. Puff", tip: 1.00, instructions: "", items: [{name: "Krabby Patty", price: 2.99}, {name: "Krabby Patty", price: 2.99}, {name: "Jelly Patty", price: 3.99}]}]
-    
     New: [],
     Preparing: [],
     Ready: [],
-    // Cancelled: [],
   });
 
   useEffect(() => {
-    getData();
-    orderReceived();
+    let mounted = true;
+
+    let user = getCurrentUser();
+    let page = getCurrentPage();
+    if (mounted) {
+      setLoggedIn(user != null);
+      setCurrentPage(page);
+      setSubscriptionRunning(true);
+    }
+
+    getData(mounted);
+
+    return () => {
+      mounted = false;
+    };
   }, []);
+
+  useEffect(() => {
+    let subscribed = true;
+    console.log("Subscribed?", subscribed);
+
+    let orderSubscription = API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
+      const order = eventData.value.data.onUpdateOrder;
+      const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
+      console.log("RECEIVED", order);
+      console.log("EXISTING?", oldOrder);
+      if (order.restaurant.id == props.restaurant.id && order.isPaid && order.status == "ACCEPTED") {
+        const date = new Date(Date.parse(order.createdAt));
+        const newOrder = {
+          ...order,
+          id: order.id,
+          deliverer: order.pickup.deliverer.name,
+          customer: order.customer.name,
+          tip: order.tip,
+          instructions: order.comment != null ? order.comment.toString() : "",
+          items: order.orderItems.items,
+          time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
+        };
+
+        if (newOrder.status == "ACCEPTED") {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            New: [newOrder, ...oldOrders["New"]],
+          }));
+          audio.play();
+        } else if (newOrder.status == "PREPARING") {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Preparing: [newOrder, ...oldOrders["Preparing"]],
+          }));
+        } else if (newOrder.status == "READY") {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Ready: [newOrder, ...oldOrders["Ready"]],
+          }));
+        }
+      }
+    }});
+
+    return () => {
+      subscribed = false;
+      console.log("Still Subscribed?", subscribed);
+      orderSubscription.unsubscribe();
+    };
+  }, [subscriptionRunning]);
+
+  async function getData(mounted) {
+    const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
+    const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
+    
+    receivedOrders.forEach(order => {
+      if (mounted && order.restaurant.id == props.restaurant.id && order.isPaid) {
+        const date = new Date(Date.parse(order.createdAt));
+        const myOrder = {
+          ...order,
+          id: order.id, 
+          deliverer: order.pickup.deliverer.name, 
+          customer: order.customer.name, 
+          tip: order.tip, 
+          instructions: order.comment != null ? order.comment.toString() : "",
+          items: order.orderItems.items,
+          time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
+        }
+
+        if (myOrder.status == "ACCEPTED") {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            New: [myOrder, ...oldOrders["New"]],
+          }));
+        } else if (myOrder.status == "PREPARING") {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Preparing: [myOrder, ...oldOrders["Preparing"]],
+          }));
+        } else if (myOrder.status == "READY") {
+          setOrders(oldOrders => ({
+            ...oldOrders,
+            Ready: [myOrder, ...oldOrders["Ready"]],
+          }));
+        }
+
+        setLoading(false);
+      }
+    });
+  }
 
   async function toggleReceivingOrders() {
     const updatedRestaurant = {
@@ -57,30 +152,30 @@ function PortalOrders(props) {
     ordersCopy[currentStatus] = ordersCopy[currentStatus].filter(item => item != order);
     if (currentStatus == "Incoming") {
       ordersCopy["New"].push(order);
-
     } else if (currentStatus == "New") {
+      order.status = "PREPARING";
       ordersCopy["Preparing"].push(order);
       const updatedOrder = {
         id: order.id,
-        food_ready_time: preparingOrderTimeStamp,
+        status: "PREPARING"
       };
 
       const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
     } else if (currentStatus == "Preparing") {
+      order.status = "READY";
       ordersCopy["Ready"].push(order);
       const updatedOrder = {
         id: order.id,
-        food_ready_time: readyOrderTimeStamp,
+        status: "READY"
       };
 
       const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
     } else if (currentStatus == "Ready" || currentStatus == "Cancelled") {
       const updatedOrder = {
         id: order.id,
-        food_ready_time: deliveredOrderTimeStamp
+        status: "PICKEDUP"
       };
 
-      // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
       const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
       selectOrder(null);
     }
@@ -88,113 +183,16 @@ function PortalOrders(props) {
     if (ordersCopy.New.length + ordersCopy.Preparing.length + ordersCopy.Ready.length <= 0) {
       selectOrder(null);
     }
-
-    setOrders({... ordersCopy});
-  }
-
-  async function orderReceived() {
-    await API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
-      const order = eventData.value.data.onUpdateOrder;
-      const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
-      console.log("RECEIVED", order);
-      console.log("EXISTING?", oldOrder);
-      if (order.restaurant.id == props.restaurant.id && order.isPaid) {
-        if (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp) {
-          const date = new Date(Date.parse(order.createdAt));
-          const newOrder = {
-            ...order,
-            id: order.id,
-            deliverer: order.pickup.deliverer.name,
-            customer: order.customer.name,
-            tip: order.tip,
-            instructions: order.comment != null ? order.comment.toString() : "",
-            items: order.orderItems.items,
-            time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
-            food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
-          };
-
-          /*if (newOrder.closed && newOrder.food_ready_time > deliveredOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              Cancelled: [newOrder, ...oldOrders["Cancelled"]],
-            }));
-          } else */if (newOrder.food_ready_time > preparingOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              New: [newOrder, ...oldOrders["New"]],
-            }));
-            audio.play();
-          } else if (newOrder.food_ready_time > readyOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              Preparing: [newOrder, ...oldOrders["Preparing"]],
-            }));
-          } else if (newOrder.food_ready_time > deliveredOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              Ready: [newOrder, ...oldOrders["Ready"]],
-            }));
-          }
-        } /*else if (oldOrder != null && !oldOrder.closed && order.closed) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Cancelled: [newOrder, ...oldOrders["Cancelled"]],
-          }));
-        }*/
-      }
-    }});
-  }
-
-  async function getData() {
-    setReceivingOrders(props.restaurant.isOpen);
-    setLoading(true);
-    const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
-    const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
-    
-    receivedOrders.forEach(order => {
-      if (order.restaurant.id == props.restaurant.id && order.isPaid) {
-        const date = new Date(Date.parse(order.createdAt));
-        const myOrder = {
-          ...order,
-          id: order.id, 
-          deliverer: order.pickup.deliverer.name, 
-          customer: order.customer.name, 
-          tip: order.tip, 
-          instructions: order.comment != null ? order.comment.toString() : "",
-          items: order.orderItems.items,
-          time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
-          food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
-        }
-
-        /*if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Cancelled: [myOrder, ...oldOrders["Cancelled"]],
-          }));
-        } else*/ if (/*!myOrder.closed && */myOrder.food_ready_time > preparingOrderTimeStamp) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            New: [myOrder, ...oldOrders["New"]],
-          }));
-        } else if (/*!myOrder.closed && */myOrder.food_ready_time > readyOrderTimeStamp) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Preparing: [myOrder, ...oldOrders["Preparing"]],
-          }));
-        } else if (/*!myOrder.closed && */myOrder.food_ready_time > deliveredOrderTimeStamp) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Ready: [myOrder, ...oldOrders["Ready"]],
-          }));
-        }
-      }
-    });
-    setLoading(false);
+    setOrders({...ordersCopy});
   }
 
   return (
     <article className="portal-orders-container">
-    {loading ? 
+    {!loggedIn ? 
+      <Redirect to="/portal-auth/sign-in" />
+    : currentPage != "orders" ? 
+      <Redirect to={`/portal/${currentPage}`} />
+    : loading ? 
       <div>
         <header>
           <img className="portal-empty-image" src={loadingBubbleIcon} />

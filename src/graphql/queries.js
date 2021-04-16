@@ -10327,6 +10327,8 @@ export const getPickup = /* GraphQL */ `
             closed
             windowEndTime
             windowClosed
+            isPickedUp
+            status
             createdAt
             updatedAt
           }
@@ -11013,6 +11015,8 @@ export const getPickup = /* GraphQL */ `
       closed
       windowEndTime
       windowClosed
+      isPickedUp
+      status
       createdAt
       updatedAt
     }
@@ -11197,6 +11201,8 @@ export const listPickups = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -11445,6 +11451,8 @@ export const listPickups = /* GraphQL */ `
         closed
         windowEndTime
         windowClosed
+        isPickedUp
+        status
         createdAt
         updatedAt
       }
@@ -12131,6 +12139,8 @@ export const getOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -12387,6 +12397,8 @@ export const getOrder = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -12635,6 +12647,8 @@ export const getOrder = /* GraphQL */ `
         closed
         windowEndTime
         windowClosed
+        isPickedUp
+        status
         createdAt
         updatedAt
       }
@@ -13101,6 +13115,8 @@ export const listOrders = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }
@@ -14842,6 +14858,8 @@ export const getOrderItem = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }
@@ -15350,6 +15368,8 @@ export const listOrderItems = /* GraphQL */ `
             closed
             windowEndTime
             windowClosed
+            isPickedUp
+            status
             createdAt
             updatedAt
           }
@@ -16521,6 +16541,8 @@ export const pickupsByDeliverer = /* GraphQL */ `
               closed
               windowEndTime
               windowClosed
+              isPickedUp
+              status
               createdAt
               updatedAt
             }
@@ -16769,6 +16791,8 @@ export const pickupsByDeliverer = /* GraphQL */ `
         closed
         windowEndTime
         windowClosed
+        isPickedUp
+        status
         createdAt
         updatedAt
       }
@@ -17239,6 +17263,8 @@ export const ordersByPickup = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }
@@ -17715,6 +17741,8 @@ export const ordersByCustomer = /* GraphQL */ `
           closed
           windowEndTime
           windowClosed
+          isPickedUp
+          status
           createdAt
           updatedAt
         }
@@ -17936,6 +17964,8 @@ export const orderItemsByOrder = /* GraphQL */ `
             closed
             windowEndTime
             windowClosed
+            isPickedUp
+            status
             createdAt
             updatedAt
           }
