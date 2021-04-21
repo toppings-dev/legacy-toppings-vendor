@@ -1,16 +1,11 @@
 {
   "files": {
-    "main.css": "/toppings-vendor/static/css/main.ee5a38a8.chunk.css",
-    "main.js": "/toppings-vendor/static/js/main.4fd01f98.chunk.js",
-    "main.js.map": "/toppings-vendor/static/js/main.4fd01f98.chunk.js.map",
+    "main.css": "/toppings-vendor/static/css/main.acd4c99c.chunk.css",
+    "main.js": "/toppings-vendor/static/js/main.6ea3fcf1.chunk.js",
     "runtime-main.js": "/toppings-vendor/static/js/runtime-main.819c3fe4.js",
-    "runtime-main.js.map": "/toppings-vendor/static/js/runtime-main.819c3fe4.js.map",
-    "static/js/2.8e8b274a.chunk.js": "/toppings-vendor/static/js/2.8e8b274a.chunk.js",
-    "static/js/2.8e8b274a.chunk.js.map": "/toppings-vendor/static/js/2.8e8b274a.chunk.js.map",
+    "static/js/2.54101e32.chunk.js": "/toppings-vendor/static/js/2.54101e32.chunk.js",
     "index.html": "/toppings-vendor/index.html",
-    "static/css/main.ee5a38a8.chunk.css.map": "/toppings-vendor/static/css/main.ee5a38a8.chunk.css.map",
-    "static/js/2.8e8b274a.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/2.8e8b274a.chunk.js.LICENSE.txt",
-    "static/js/main.4fd01f98.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/main.4fd01f98.chunk.js.LICENSE.txt",
+    "static/js/2.54101e32.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/2.54101e32.chunk.js.LICENSE.txt",
     "static/media/App.css": "/toppings-vendor/static/media/FatFrank-Regular.532265e9.otf",
     "static/media/bubble-icon-1.2de73295.svg": "/toppings-vendor/static/media/bubble-icon-1.2de73295.svg",
     "static/media/bubble-icon-2.7af7e509.svg": "/toppings-vendor/static/media/bubble-icon-2.7af7e509.svg",
@@ -36,8 +31,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.819c3fe4.js",
-    "static/js/2.8e8b274a.chunk.js",
-    "static/css/main.ee5a38a8.chunk.css",
-    "static/js/main.4fd01f98.chunk.js"
+    "static/js/2.54101e32.chunk.js",
+    "static/css/main.acd4c99c.chunk.css",
+    "static/js/main.6ea3fcf1.chunk.js"
   ]
 }
