@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/toppings-vendor/static/css/main.acd4c99c.chunk.css",
-    "main.js": "/toppings-vendor/static/js/main.6ea3fcf1.chunk.js",
+    "main.js": "/toppings-vendor/static/js/main.f51175ec.chunk.js",
     "runtime-main.js": "/toppings-vendor/static/js/runtime-main.819c3fe4.js",
     "static/js/2.54101e32.chunk.js": "/toppings-vendor/static/js/2.54101e32.chunk.js",
     "index.html": "/toppings-vendor/index.html",
@@ -33,6 +33,6 @@
     "static/js/runtime-main.819c3fe4.js",
     "static/js/2.54101e32.chunk.js",
     "static/css/main.acd4c99c.chunk.css",
-    "static/js/main.6ea3fcf1.chunk.js"
+    "static/js/main.f51175ec.chunk.js"
   ]
 }
