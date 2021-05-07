@@ -8,6 +8,7 @@ import * as mutations from '../graphql/mutations';
 import * as subscriptions from '../graphql/subscriptions'
 
 import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession } from '../utils/session';
+import useInterval from '../utils/useInterval';
 
 import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
@@ -17,13 +18,18 @@ import ding from '../assets/audio/ding.mp3';
 import { Redirect } from 'react-router';
 
 function PortalOrders(props) {
+  const subscriptionTimeout = (30000 - 1800) * 1000;
+  // const subscriptionTimeout = 5 * 1000;
+
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentPage, setCurrentPage] = useState("orders");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [audio] = useState(new Audio(ding));
   const [selectedOrder, selectOrder] = useState(null); 
   const [receivingOrders, setReceivingOrders] = useState(props.restaurant.isOpen);
   const [subscriptionRunning, setSubscriptionRunning] = useState(false);
+  const [orderSubscription, setOrderSubscription] = useState(null);
+  const [subscriptionInterval, setSubscriptionInterval] = useState(subscriptionTimeout);
   const [orders, setOrders] = useState({
     New: [],
     Preparing: [],
@@ -39,6 +45,7 @@ function PortalOrders(props) {
       setLoggedIn(user != null);
       setCurrentPage(page);
       setSubscriptionRunning(true);
+      setOrderSubscription(API.graphql(graphqlOperation(subscriptions.onUpdateOrder)));
     }
 
     getData(mounted);
@@ -48,9 +55,55 @@ function PortalOrders(props) {
     };
   }, []);
 
+  useInterval(() => {
+    window.location.reload();
+    // setSubscriptionInterval(subscriptionTimeout);
+    // console.log("START SUB INTERVAL")
+    // if (orderSubscription != null) {
+    //   // orderSubscription.unsubscribe();
+    //   orderSubscription.subscribe({ next: (eventData) => {
+    //     const order = eventData.value.data.onUpdateOrder;
+    //     const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
+    //     console.log("RECEIVED", order);
+    //     console.log("EXISTING?", oldOrder);
+    //     if (order.restaurant.id == props.restaurant.id && order.isPaid && order.status == "ACCEPTED") {
+    //       const date = new Date(Date.parse(order.createdAt));
+    //       const newOrder = {
+    //         ...order,
+    //         id: order.id,
+    //         deliverer: order.pickup.deliverer.name,
+    //         customer: order.customer.name,
+    //         tip: order.tip,
+    //         instructions: order.comment != null ? order.comment.toString() : "",
+    //         items: order.orderItems.items,
+    //         time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
+    //       };
+
+    //       if (newOrder.status == "ACCEPTED") {
+    //         setOrders(oldOrders => ({
+    //           ...oldOrders,
+    //           New: [newOrder, ...oldOrders["New"]],
+    //         }));
+    //         audio.play();
+    //       } else if (newOrder.status == "PREPARING") {
+    //         setOrders(oldOrders => ({
+    //           ...oldOrders,
+    //           Preparing: [newOrder, ...oldOrders["Preparing"]],
+    //         }));
+    //       } else if (newOrder.status == "READY") {
+    //         setOrders(oldOrders => ({
+    //           ...oldOrders,
+    //           Ready: [newOrder, ...oldOrders["Ready"]],
+    //         }));
+    //       }
+    //     }
+    //   }});
+    // }
+  }, subscriptionInterval);
+  
   useEffect(() => {
     let subscribed = true;
-    console.log("Subscribed?", subscribed);
+    // console.log("Subscribed?", subscribed);
 
     let orderSubscription = API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
       const order = eventData.value.data.onUpdateOrder;
@@ -92,15 +145,18 @@ function PortalOrders(props) {
 
     return () => {
       subscribed = false;
-      console.log("Still Subscribed?", subscribed);
+      // console.log("Still Subscribed?", subscribed);
       orderSubscription.unsubscribe();
     };
   }, [subscriptionRunning]);
-
+  
   async function getData(mounted) {
     const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
     
+    if (receivedOrders.length == 0) {
+      // setLoading(false);
+    }
     receivedOrders.forEach(order => {
       if (mounted && order.restaurant.id == props.restaurant.id && order.isPaid) {
         const date = new Date(Date.parse(order.createdAt));
