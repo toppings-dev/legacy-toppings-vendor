@@ -6,6 +6,9 @@ import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import * as subscriptions from '../graphql/subscriptions'
+import * as customQueries from '../graphql/customQueries';
+import * as customMutations from '../graphql/customMutations';
+import * as customSubscription from '../graphql/customSubscriptions';
 
 import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
@@ -48,7 +51,8 @@ function PortalOrders(props) {
       isOpen: !receivingOrders,
     };
 
-    const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
+    // const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
+    const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, updatedRestaurant));
     setReceivingOrders(updatedRestaurantResponse.data.updateRestaurant.isOpen);
   }
 
@@ -65,7 +69,8 @@ function PortalOrders(props) {
         food_ready_time: preparingOrderTimeStamp,
       };
 
-      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
+      await API.graphql(graphqlOperation(customMutations.updateFoodReady, updatedOrder));
+      // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
     } else if (currentStatus == "Preparing") {
       ordersCopy["Ready"].push(order);
       const updatedOrder = {
@@ -73,7 +78,8 @@ function PortalOrders(props) {
         food_ready_time: readyOrderTimeStamp,
       };
 
-      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
+      await API.graphql(graphqlOperation(customMutations.updateFoodReady, updatedOrder));
+      // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
     } else if (currentStatus == "Ready" || currentStatus == "Cancelled") {
       const updatedOrder = {
         id: order.id,
@@ -81,7 +87,8 @@ function PortalOrders(props) {
       };
 
       // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.deleteOrder, { input: updatedOrder }));
-      const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
+      // const updatedOrderResponse = await API.graphql(graphqlOperation(mutations.updateOrder, { input: updatedOrder }));
+      await API.graphql(graphqlOperation(customMutations.updateFoodReady, updatedOrder));
       selectOrder(null);
     }
 
@@ -93,7 +100,7 @@ function PortalOrders(props) {
   }
 
   async function orderReceived() {
-    await API.graphql(graphqlOperation(subscriptions.onUpdateOrder)).subscribe({ next: (eventData) => {
+    await API.graphql(graphqlOperation(customSubscription.onCreateNewOrder)).subscribe({ next: (eventData) => {
       const order = eventData.value.data.onUpdateOrder;
       const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
       console.log("RECEIVED", order);
@@ -148,8 +155,9 @@ function PortalOrders(props) {
   async function getData() {
     setReceivingOrders(props.restaurant.isOpen);
     setLoading(true);
-    const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
-    const receivedOrders = receivedOrdersResponse.data.listOrders.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
+    const receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
+    // const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
+    const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
     
     receivedOrders.forEach(order => {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {

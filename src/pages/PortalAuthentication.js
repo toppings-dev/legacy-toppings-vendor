@@ -5,6 +5,7 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
+import * as customMutations from '../graphql/customMutations';
 
 import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession } from '../utils/session';
 
@@ -103,11 +104,13 @@ function PortalSignUp(props) {
             zip_code: "Your Zip Code"
           };
 
-          API.graphql({ query: mutations.createRestaurant, variables: { input: restaurant } }).then(({ data: { createRestaurant } }) => {
-            console.log("Create Restaurant", createRestaurant);
-            setErrorMsg("");
-          }).catch((error) => {
-            console.log(error);
+          API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
+          .then(createRestaurantResp => {
+            console.log('Create Restaurant', createRestaurantResp);
+            setErrorMsg('');
+          })
+          .catch(err => {
+            console.log(err);
           });
         }
       });
