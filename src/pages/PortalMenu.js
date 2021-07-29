@@ -55,14 +55,14 @@ function PortalMenu(props) {
   async function getData() {
     setLoading(true);
     //replace with smth to do with get menu
-    const response = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: props.restaurant.id }}}));
-    const menuCategoriesList = response.data.listMenuCategorys.items;
-    menuCategoriesList.forEach(category => {
-      setMenuItems(oldMenuItems => ({
-        ...oldMenuItems,
-        [category.name]: category.menuItems.items,
-      }));
-    });
+    // const response = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: props.restaurant.id }}}));
+    // const menuCategoriesList = response.data.listMenuCategorys.items;
+    // menuCategoriesList.forEach(category => {
+    //   setMenuItems(oldMenuItems => ({
+    //     ...oldMenuItems,
+    //     [category.name]: category.menuItems.items,
+    //   }));
+    // });
     setLoading(false);
   }
 

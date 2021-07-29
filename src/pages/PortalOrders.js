@@ -155,7 +155,11 @@ function PortalOrders(props) {
   async function getData() {
     setReceivingOrders(props.restaurant.isOpen);
     setLoading(true);
-    const receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
+    try {
+      var receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
+    } catch (err) {
+      console.log('[ERROR]:', err);
+    }
     // const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
     

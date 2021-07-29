@@ -487,3 +487,11 @@ export const updateFoodReady = /* GraphQL */ `
     }
   }
 `;
+
+export const deleteMenuItem = /* GraphQL */ `
+  mutation DeleteMenuItem($id: ID!) {
+    deleteMenuItem(id: $id) {
+      id
+    }
+  }
+`;
