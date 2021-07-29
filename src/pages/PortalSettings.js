@@ -5,6 +5,7 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
+import * as customMutations from '../graphql/mutations';
 
 import settingsDesign from '../assets/images/settings-design.PNG';
 import locationIcon from '../assets/images/location-icon.svg';
@@ -105,17 +106,26 @@ function PortalSettings(props) {
       saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
     };
 
-    API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
-      console.log("UPDATE", updateRestaurant);
+    API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))
+    .then(updateRestaurant => {
+      console.log('UPDATED RESTAURANT', updateRestaurant);
       props.getData();
-      // setVendor(oldVendor => ({
-      //   ...oldVendor,
-      //   description: updateRestaurant.description,
-      // }))
-      changeMode("")
-    }).catch((error) => {
-      console.log(error);
+      changeMode('');
+    })
+    .catch(err => {
+      console.log(err);
     });
+    // API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
+    //   console.log("UPDATE", updateRestaurant);
+    //   props.getData();
+    //   // setVendor(oldVendor => ({
+    //   //   ...oldVendor,
+    //   //   description: updateRestaurant.description,
+    //   // }))
+    //   changeMode("")
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
   }
   
   return (

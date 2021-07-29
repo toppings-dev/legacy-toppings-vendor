@@ -5,6 +5,8 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
+import * as customQueries from '../graphql/customQueries';
+import * as customMutations from '../graphql/customMutations';
 
 import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
@@ -42,9 +44,10 @@ function PortalRewards(props) {
     //   console.log(error);
     // });
     setLoading(true);
-    const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
+    const response = await API.graphql(graphqlOperation(customQueries.getVendorRewards, { menuId: props.restaurant.id }));
+    // const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
     console.log(response);
-    const rewards = response.data.listVendorRewards.items.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
+    const rewards = response.data.getVendorRewards.items.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
     console.log(rewards);
     setRewardItems({
       Rewards: rewards
@@ -64,7 +67,8 @@ function PortalRewards(props) {
       description: descriptionInput.current.value,
     };
 
-    const response = await API.graphql(graphqlOperation(mutations.createVendorReward, { input: reward }));
+    const response = await API.graphql(graphqlOperation(customMutations.createVendorReward, reward));
+    // const response = await API.graphql(graphqlOperation(mutations.createVendorReward, { input: reward }));
     const newReward = response.data.createVendorReward;
     console.log(newReward);
     changeMode("");
@@ -81,7 +85,8 @@ function PortalRewards(props) {
       description: descriptionInput.current.value,
     };
 
-    const response = await API.graphql(graphqlOperation(mutations.updateVendorReward, { input: reward }));
+    await API.graphql(graphqlOperation(customMutations.updateVendorReward, reward));
+    // const response = await API.graphql(graphqlOperation(mutations.updateVendorReward, { input: reward }));
     changeMode("");
     getData();
     selectRewardItem(defaultReward);
@@ -92,7 +97,8 @@ function PortalRewards(props) {
       id: selectedRewardItem.id,
     }
 
-    const response = await API.graphql(graphqlOperation(mutations.deleteVendorReward, { input: reward }));
+    await API.graphql(graphqlOperation(customMutations.deleteVendorReward, reward));
+    // const response = await API.graphql(graphqlOperation(mutations.deleteVendorReward, { input: reward }));
     changeMode("");
     getData();
     selectRewardItem(defaultReward);

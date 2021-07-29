@@ -5,6 +5,7 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as customQueries from '../graphql/customQueries';
+import * as customMutations from '../graphql/customMutations';
 import * as mutations from '../graphql/mutations';
 
 import RadioButton from '../components/RadioButton';
@@ -53,6 +54,7 @@ function PortalMenu(props) {
 
   async function getData() {
     setLoading(true);
+    //replace with smth to do with get menu
     const response = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: props.restaurant.id }}}));
     const menuCategoriesList = response.data.listMenuCategorys.items;
     menuCategoriesList.forEach(category => {
@@ -71,14 +73,15 @@ function PortalMenu(props) {
       name: categoryNameInput.current.value,
     };
 
-    API.graphql({ query: mutations.createMenuCategory, variables: { input: menuCategory } }).then(({ data: { createMenuCategory } }) => {
-      console.log("Create Menu Category", createMenuCategory);
+    API.graphql(graphqlOperation(customMutations.createMenuCategory, menuCategory))
+    .then(createMenuCategoryResp => {
       setMenuItems({});
       getData();
-      changeMode("");
+      changeMode('');
       selectMenuItem(defaultMenuItem);
-    }).catch((error) => {
-      console.log(error);
+    })
+    .catch(err => {
+      console.log(err);
     });
   }
 
@@ -86,51 +89,60 @@ function PortalMenu(props) {
     // const existingToppingCategoriesResponse = await API.graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: props.restaurant.id }}});
     // const existingToppingCategories = existingToppingCategoriesResponse.data.listFoodOptions.items;
     console.log("D", menuItem);
-    await Promise.all(selectedMenuItemToppings.map(async topping => {
-      const toppingCategory = {
-        menuId: props.restaurant.id,
-        name: topping.foodOptionName
-      };
-      // console.log("TP", topping)
+    const createToppingsInput = {
+      id: props.restaurant.id,
+      selectedMenuItemToppings,
+      selectedMenuItemOptions,
+      selectedMenuItemExistingToppings,
+      menuItem,
+    };
+
+    await API.graphql(graphqlOperation(customMutations.createToppings, createToppingsInput));
+    // await Promise.all(selectedMenuItemToppings.map(async topping => {
+    //   const toppingCategory = {
+    //     menuId: props.restaurant.id,
+    //     name: topping.foodOptionName
+    //   };
+    //   // console.log("TP", topping)
       
-      const toppingCategoryResponse = await API.graphql(graphqlOperation(mutations.createFoodOption, { input: toppingCategory }));
-      console.log("Creating Category", toppingCategoryResponse);
-    }));
+    //   const toppingCategoryResponse = await API.graphql(graphqlOperation(mutations.createFoodOption, { input: toppingCategory }));
+    //   console.log("Creating Category", toppingCategoryResponse);
+    // }));
 
-    await Promise.all(selectedMenuItemOptions.map(async option => {
-      const toppingOption = {
-        menuId: props.restaurant.id,
-        name: option.optionName,
-      };
+    // await Promise.all(selectedMenuItemOptions.map(async option => {
+    //   const toppingOption = {
+    //     menuId: props.restaurant.id,
+    //     name: option.optionName,
+    //   };
 
-      const toppingOptionResponse = await API.graphql(graphqlOperation(mutations.createOption, { input: toppingOption }));
-      console.log("Creating Option", toppingOptionResponse);
-    }));
+    //   const toppingOptionResponse = await API.graphql(graphqlOperation(mutations.createOption, { input: toppingOption }));
+    //   console.log("Creating Option", toppingOptionResponse);
+    // }));
     
-    await Promise.all(selectedMenuItemToppings.concat(selectedMenuItemExistingToppings).map(async topping => {
-      const toppingCategoryJoiner = {
-        menuId: props.restaurant.id,
-        foodOptionName: topping.foodOptionName,
-        menuItemName: menuItem.name,
-        numchoices: topping.numchoices,
-      };
-      console.log(toppingCategoryJoiner);
+    // await Promise.all(selectedMenuItemToppings.concat(selectedMenuItemExistingToppings).map(async topping => {
+    //   const toppingCategoryJoiner = {
+    //     menuId: props.restaurant.id,
+    //     foodOptionName: topping.foodOptionName,
+    //     menuItemName: menuItem.name,
+    //     numchoices: topping.numchoices,
+    //   };
+    //   console.log(toppingCategoryJoiner);
 
-      const toppingCategoryJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionCatJoin, { input: toppingCategoryJoiner }));
-      console.log("Creating Category Joiner", toppingCategoryJoinerResponse);
-  }));
+    //   const toppingCategoryJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionCatJoin, { input: toppingCategoryJoiner }));
+    //   console.log("Creating Category Joiner", toppingCategoryJoinerResponse);
+    // }));
     
-    await Promise.all(selectedMenuItemOptions.map(async option => {
-      console.log("Making Options!!!")
-      const toppingOptionJoiner = {
-        menuId: props.restaurant.id,
-        foodOptionName: option.foodOptionName,
-        optionName: option.optionName,
-      };
+    // await Promise.all(selectedMenuItemOptions.map(async option => {
+    //   console.log("Making Options!!!")
+    //   const toppingOptionJoiner = {
+    //     menuId: props.restaurant.id,
+    //     foodOptionName: option.foodOptionName,
+    //     optionName: option.optionName,
+    //   };
 
-      const toppingOptionJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionOptionJoin, { input: toppingOptionJoiner }));
-      console.log("Creating Option Joiner", toppingOptionJoinerResponse);
-    }));
+    //   const toppingOptionJoinerResponse = await API.graphql(graphqlOperation(mutations.createItemOptionOptionJoin, { input: toppingOptionJoiner }));
+    //   console.log("Creating Option Joiner", toppingOptionJoinerResponse);
+    // }));
 
     setSelectedMenuItemToppings([]);
     setSelectedMenuItemOptions([]);
@@ -148,8 +160,10 @@ function PortalMenu(props) {
       price: itemPriceInput.current.value,
     };
 
-    const response = await API.graphql(graphqlOperation(mutations.createMenuItem, { input: menuItem }));
-    const newMenuItem = response.data.createMenuItem;
+    const resp = await API.graphql(graphqlOperation(customMutations.createMenuItem, menuItem));
+    const newMenuItem = resp.data.createMenuItem;
+    // const response = await API.graphql(graphqlOperation(mutations.createMenuItem, { input: menuItem }));
+    // const newMenuItem = response.data.createMenuItem;
     console.log("Create Menu Item", newMenuItem);
     
     // if (addItemType == "Customizable") {
@@ -178,8 +192,11 @@ function PortalMenu(props) {
       price: itemPriceInput.current.value,
     };
 
-    const response = await API.graphql(graphqlOperation(mutations.updateMenuItem, { input: menuItem }));
-    const updatedMenuItem = response.data.updateMenuItem;
+    // const response = await API.graphql(graphqlOperation(mutations.updateMenuItem, { input: menuItem }));
+    // const updatedMenuItem = response.data.updateMenuItem;
+    const resp = await API.graphql(graphqlOperation(customMutations.updateMenuItem, menuItem));
+    const updatedMenuItem = resp.data.updatedMenuItem;
+
     console.log("Update Menu Item", updatedMenuItem);
     setMenuItems({});
     getData();
@@ -193,15 +210,26 @@ function PortalMenu(props) {
       id: selectedMenuItem.id
     };
 
-    API.graphql({ query: mutations.deleteMenuItem, variables: { input: menuItem } }).then(({ data: { deleteMenuItem } }) => {
-      console.log("Delete Menu Item", deleteMenuItem);
+    API.graphql(graphqlOperation(customMutations.deleteMenuItem, menuItem))
+    .then(deleteMenuItem => {
+      console.log('DELETED MENU ITEM', deleteMenuItem);
       setMenuItems({});
       getData();
-      changeMode("");
-      selectMenuItem(defaultMenuItem)
-    }).catch((error) => {
-      console.log(error);
-    });
+      changeMode('');
+      selectMenuItem(defaultMenuItem);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    // API.graphql({ query: mutations.deleteMenuItem, variables: { input: menuItem } }).then(({ data: { deleteMenuItem } }) => {
+    //   console.log("Delete Menu Item", deleteMenuItem);
+    //   setMenuItems({});
+    //   getData();
+    //   changeMode("");
+    //   selectMenuItem(defaultMenuItem)
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   function addOption(topping) {
@@ -249,6 +277,7 @@ function PortalMenu(props) {
   }
 
   async function addExistingToppings() {
+    //change to some sort of get menu
     const existingToppingCategoriesResponse = await API.graphql(graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: props.restaurant.id }}}));
     const existingToppingCategories = existingToppingCategoriesResponse.data.listFoodOptions.items;
     setExistingToppings(existingToppingCategories);
