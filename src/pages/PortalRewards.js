@@ -47,7 +47,7 @@ function PortalRewards(props) {
     const response = await API.graphql(graphqlOperation(customQueries.getVendorRewards, { menuId: props.restaurant.id }));
     // const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
     console.log(response);
-    const rewards = response.data.getVendorRewards.items.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
+    const rewards = response.data.getVendorRewards.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
     console.log(rewards);
     setRewardItems({
       Rewards: rewards

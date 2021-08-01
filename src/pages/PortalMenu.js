@@ -63,6 +63,15 @@ function PortalMenu(props) {
     //     [category.name]: category.menuItems.items,
     //   }));
     // });
+    const response = await API.graphql(graphqlOperation(customQueries.getMenu, { id: props.restaurant.id }));
+    console.log(response);
+    const menuCategoriesList = response.data.getMenu.menuCategories.items;
+    menuCategoriesList.forEach(category => {
+      setMenuItems(oldMenuItems => ({
+        ...oldMenuItems,
+        [category.name]: category.menuItems.items,
+      }));
+    });
     setLoading(false);
   }
 

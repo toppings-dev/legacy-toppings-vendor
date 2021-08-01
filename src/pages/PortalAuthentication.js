@@ -44,8 +44,8 @@ function PortalSignUp(props) {
     let password = passwordInput.current.value;
     let phoneNumber = phoneNumberInput.current.value.replaceAll(/-/g, "").replaceAll(/\s/g, "");
 
-    if (phoneNumber.charAt(0) != "+") {
-        phoneNumber = "+" + (phoneNumber.length == 10 ? "1" : "") + phoneNumber;
+    if (phoneNumber.charAt(0) !== "+") {
+        phoneNumber = "+" + (phoneNumber.length === 10 ? "1" : "") + phoneNumber;
     }
     
     if (name.length > 0 && email.length > 0 && phoneNumber.length >= 10 && password.length > 0) {
@@ -54,8 +54,10 @@ function PortalSignUp(props) {
         password: password,
         attributes: {
           name: name,
-          email: email,
-          phone_number: phoneNumber
+          phone_number: phoneNumber,
+          "custom:university": "none",
+          "custom:isUser": "false",
+          'custom:referralCode': "",
         }
       }).then(() => {
         setSignedUp(true);
@@ -70,50 +72,53 @@ function PortalSignUp(props) {
     }
   }
 
-  function confirmSignUp(e) {
+  async function confirmSignUp(e) {
     e.preventDefault();
     let name = userName;
     let email = emailInput.current.value;
     let code = codeInput.current.value;
 
     if (email.length > 0 && code.length > 0) {
-      Auth.confirmSignUp(email, code).then(() => {
-        setSignedUp(true);
-      }).catch((error) => {
-        setErrorMsg(error.message);
-        if (error.message.indexOf("Current status is CONFIRMED") > -1 || error.message.indexOf("Invalid JSON") > -1) {
-          setConfirmed(true);
-          setErrorMsg("");
-          setSuccessMsg("Account confirmed, please sign in.");
+      await Auth.confirmSignUp(email, code)
+        // setSignedUp(true);
+      // }).catch((error) => {
+      //   setErrorMsg(error.message);
+      //   if (error.message.indexOf("Current status is CONFIRMED") > -1 /*|| error.message.indexOf("Invalid JSON") > -1*/) {
+      //     setConfirmed(true);
+      //     setErrorMsg("");
+      //     setSuccessMsg("Account confirmed, please sign in.");
 
-          const user = {
-            name: name,
-            email: email
-          }
+      //     const user = {
+      //       name: name,
+      //       email: email
+      //     }
+      //   }
+      // });
+      setConfirmed(true);
+      setErrorMsg("");
+      setSuccessMsg("Account confirmed, please sign in.");
 
-          const restaurant = {
-            name: "Your Restaurant Name",
-            email: email,
-            address: "Your Address",
-            city: "Your City",
-            description: null,
-            lat: null,
-            long: null,
-            phone_number: null,
-            state: "Your State",
-            zip_code: "Your Zip Code"
-          };
+      // const restaurant = {
+      //   name: "Your Restaurant Name",
+      //   email: email,
+      //   address: "Your Address",
+      //   city: "Your City",
+      //   description: "Your Restaurant Description",
+      //   lat: null,
+      //   long: null,
+      //   phone_number: null,
+      //   state: "Your State",
+      //   zip_code: "Your Zip Code"
+      // };
 
-          API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
-          .then(createRestaurantResp => {
-            console.log('Create Restaurant', createRestaurantResp);
-            setErrorMsg('');
-          })
-          .catch(err => {
-            console.log(err);
-          });
-        }
-      });
+      // API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
+      // .then(createRestaurantResp => {
+      //   console.log('Create Restaurant', createRestaurantResp);
+      //   setErrorMsg('');
+      // })
+      // .catch(err => {
+      //   console.log(err);
+      // });
     } else {
       setErrorMsg("Account info is incomplete.");
     }
@@ -139,6 +144,28 @@ function PortalSignUp(props) {
         }
         props.setUser(user);
         setLoggedIn(true);
+
+        const restaurant = {
+          name: "Your Restaurant Name",
+          email: email,
+          address: "Your Address",
+          city: "Your City",
+          description: "Your Restaurant Description",
+          lat: null,
+          long: null,
+          phone_number: null,
+          state: "Your State",
+          zip_code: "Your Zip Code",
+        };
+  
+        API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
+        .then(createRestaurantResp => {
+          console.log('Create Restaurant', createRestaurantResp);
+          setErrorMsg('');
+        })
+        .catch(err => {
+          console.log(err);
+        });
       }).catch((error) => {
         setErrorMsg(error.message);
       });

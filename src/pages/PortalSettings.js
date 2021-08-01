@@ -86,24 +86,28 @@ function PortalSettings(props) {
         phoneNumber = "+" + (phoneNumber.length == 10 ? "1" : "") + phoneNumber;
     }
 
+    console.log("UP", vendor)
+
     const updatedVendor = {
       id: vendor.id,
-      name: nameInput.current.value,
-      description: descriptionInput.current.value,
-      phone_number: phoneNumber,
-      email: emailInput.current.value,
-      address: address,
-      city: city,
-      state: state,
-      zip_code: zipCode,
-      restaurantOwnerName: contactInput.current.value,
-      sundayHours: vendorForm.hours.Sunday.startTime + " " + vendorForm.hours.Sunday.startPeriod + "-" + vendorForm.hours.Sunday.endTime + " " + vendorForm.hours.Sunday.endPeriod,
-      mondayHours: vendorForm.hours.Monday.startTime + " " + vendorForm.hours.Monday.startPeriod + "-" + vendorForm.hours.Monday.endTime + " " + vendorForm.hours.Monday.endPeriod,
-      tuesdayHours: vendorForm.hours.Tuesday.startTime + " " + vendorForm.hours.Tuesday.startPeriod + "-" + vendorForm.hours.Tuesday.endTime + " " + vendorForm.hours.Tuesday.endPeriod,
-      wednesdayHours: vendorForm.hours.Wednesday.startTime + " " + vendorForm.hours.Wednesday.startPeriod + "-" + vendorForm.hours.Wednesday.endTime + " " + vendorForm.hours.Wednesday.endPeriod,
-      thursdayHours: vendorForm.hours.Thursday.startTime + " " + vendorForm.hours.Thursday.startPeriod + "-" + vendorForm.hours.Thursday.endTime + " " + vendorForm.hours.Thursday.endPeriod,
-      fridayHours: vendorForm.hours.Friday.startTime + " " + vendorForm.hours.Friday.startPeriod + "-" + vendorForm.hours.Friday.endTime + " " + vendorForm.hours.Friday.endPeriod,
-      saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
+      input: {
+        name: nameInput.current.value,
+        description: descriptionInput.current.value,
+        phone_number: phoneNumber,
+        email: emailInput.current.value,
+        address: address,
+        city: city,
+        state: state,
+        zip_code: zipCode,
+        restaurantOwnerName: contactInput.current.value,
+        sundayHours: vendorForm.hours.Sunday.startTime + " " + vendorForm.hours.Sunday.startPeriod + "-" + vendorForm.hours.Sunday.endTime + " " + vendorForm.hours.Sunday.endPeriod,
+        mondayHours: vendorForm.hours.Monday.startTime + " " + vendorForm.hours.Monday.startPeriod + "-" + vendorForm.hours.Monday.endTime + " " + vendorForm.hours.Monday.endPeriod,
+        tuesdayHours: vendorForm.hours.Tuesday.startTime + " " + vendorForm.hours.Tuesday.startPeriod + "-" + vendorForm.hours.Tuesday.endTime + " " + vendorForm.hours.Tuesday.endPeriod,
+        wednesdayHours: vendorForm.hours.Wednesday.startTime + " " + vendorForm.hours.Wednesday.startPeriod + "-" + vendorForm.hours.Wednesday.endTime + " " + vendorForm.hours.Wednesday.endPeriod,
+        thursdayHours: vendorForm.hours.Thursday.startTime + " " + vendorForm.hours.Thursday.startPeriod + "-" + vendorForm.hours.Thursday.endTime + " " + vendorForm.hours.Thursday.endPeriod,
+        fridayHours: vendorForm.hours.Friday.startTime + " " + vendorForm.hours.Friday.startPeriod + "-" + vendorForm.hours.Friday.endTime + " " + vendorForm.hours.Friday.endPeriod,
+        saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
+      },
     };
 
     API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))

@@ -347,7 +347,7 @@ export const updatePlatform = /* GraphQL */ `
 `;
 
 export const createRestaurant = /* GraphQL */ `
-  mutation CreateRestaurant($name: String!, $email: AWSEmail!, $address: String!, $city: String!, $description: String!, $lat: Float!, $long: Float!, $phone_number: AWSPhone!, $state: String!, $zip_code: String!) {
+  mutation CreateRestaurant($name: String!, $email: AWSEmail!, $address: String, $city: String, $description: String, $lat: Float, $long: Float, $phone_number: AWSPhone, $state: String, $zip_code: String) {
     createRestaurant(name: $name, email: $email, address: $address, city: $city, description: $description, lat: $lat, long: $long, phone_number: $phone_number, state: $state, zip_code: $zip_code) {
       id
       name
@@ -455,8 +455,8 @@ export const deleteVendorReward = /* GraphQL */ `
 `;
 
 export const updateRestaurant = /* GraphQL */ `
-  mutation UpdateRestaurant($id: ID!, $name: String, $description: String, $phone_number: AWSPhone, $email: AWSEmail, $address: String, $city: String, $state: String, $zip_code: String, $restaurantOwnerName: String, $sundayHours: String, $mondayHours: String, $tuesdayHours: String, $wednesdayHours: String, $thursdayHours: String, $fridayHours: String, $saturdayHours: String, $isOpen: String) {
-    updateRestaurant(id: $id, name: $name, description: $description, phone_number: $phone_number, email: $email, address: $address, city: $city, state: $state, zip_code: $zip_code, restaurantOwnerName: $restaurantOwnerName: sundayHours: $sundayHours, mondayHours: $mondayHours, tuesdayHours: $tuesdayHours, wednesdayHours: $wednesdayHours, thursdayHours: $thursdayHours, fridayHours: $fridayHours, saturdayHours: $saturdayHours, sundayHours: $sundayHours, isOpen: $isOpen) {
+  mutation UpdateRestaurant($id: ID!, $input: UpdateRestaurantInput!) {
+    updateRestaurant(id: $id, input: $input) {
       id
       name
       description
@@ -470,7 +470,7 @@ export const updateRestaurant = /* GraphQL */ `
       mondayHours
       tuesdayHours
       wednesdayHours
-      thursdayHorus
+      thursdayHours
       fridayHours
       saturdayHours
       sundayHours

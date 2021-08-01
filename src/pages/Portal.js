@@ -38,10 +38,11 @@ function Portal(props) {
 
   async function getData() {
     const email = await getCurrentUser() == null ? props.user.username : await getCurrentUser().username;
+    console.log("GET RESTU", email)
     const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { email }));
     const restaurant = restaurantsResponse.data.getRestaurantByOwner;
     setRestaurant(restaurant);
-    console.log(restaurant);
+    console.log("Set restaurant props", restaurant);
   }
 
   function logout() {

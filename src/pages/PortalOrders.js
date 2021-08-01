@@ -46,14 +46,16 @@ function PortalOrders(props) {
   }, []);
 
   async function toggleReceivingOrders() {
+    console.log("TOG")
     const updatedRestaurant = {
       id: props.restaurant.id,
-      isOpen: !receivingOrders,
+      input: { isOpen: !receivingOrders ? "true" : "false", },
     };
 
     // const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
-    const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, updatedRestaurant));
-    setReceivingOrders(updatedRestaurantResponse.data.updateRestaurant.isOpen);
+    const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
+    console.log(updatedRestaurantResponse)
+    setReceivingOrders(updatedRestaurantResponse.data.updateRestaurant.isOpen === "true");
   }
 
   async function advanceOrder(order, currentStatus) {
@@ -155,13 +157,11 @@ function PortalOrders(props) {
   async function getData() {
     setReceivingOrders(props.restaurant.isOpen);
     setLoading(true);
-    try {
-      var receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
-    } catch (err) {
-      console.log('[ERROR]:', err);
-    }
+    console.log("PROPS", props.restaurant);
+    const receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
     // const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
-    const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant.items.filter(order => order.restaurant != null && order.restaurant.id == props.restaurant.id && order.orderItems.items.length > 0);
+    console.log(receivedOrdersResponse);
+    const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant;
     
     receivedOrders.forEach(order => {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
@@ -220,7 +220,7 @@ function PortalOrders(props) {
             <div className="orders-list">
               <header>
                 <span className="orange-subheading">{`${new Date().getMonth() + 1}/${String(new Date().getDate()).padStart(2, "0")}/${String(new Date().getFullYear()).slice(2, 4)}`}</span>
-                <button className={receivingOrders ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
+                <button className={receivingOrders === "true" ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
               </header>
                 {Object.keys(orders).map((category =>
                   <div key={category}>
