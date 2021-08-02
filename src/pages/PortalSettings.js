@@ -5,7 +5,7 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
-import * as customMutations from '../graphql/mutations';
+import * as customMutations from '../graphql/customMutations';
 
 import settingsDesign from '../assets/images/settings-design.PNG';
 import locationIcon from '../assets/images/location-icon.svg';
@@ -86,35 +86,61 @@ function PortalSettings(props) {
         phoneNumber = "+" + (phoneNumber.length == 10 ? "1" : "") + phoneNumber;
     }
 
-    const updatedVendor = {
+    console.log("UP", vendor)
+
+    // const updatedRestaurant = {
+    //   id: props.restaurant.id,
+    //   input: { isOpen: "false", },
+    // };
+
+    // console.log("TOGs", props.restaurant.id)
+    // const updatedRestaurant = {
+    //   id: props.restaurant.id,
+    //   input: { isOpen: "false", },
+    // };
+
+    // console.log("UR", updatedRestaurant);
+
+    // // const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
+    // const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
+    // console.log(updatedRestaurantResponse)
+
+    const updatedRestaurant = {
       id: vendor.id,
-      name: nameInput.current.value,
-      description: descriptionInput.current.value,
-      phone_number: phoneNumber,
-      email: emailInput.current.value,
-      address: address,
-      city: city,
-      state: state,
-      zip_code: zipCode,
-      restaurantOwnerName: contactInput.current.value,
-      sundayHours: vendorForm.hours.Sunday.startTime + " " + vendorForm.hours.Sunday.startPeriod + "-" + vendorForm.hours.Sunday.endTime + " " + vendorForm.hours.Sunday.endPeriod,
-      mondayHours: vendorForm.hours.Monday.startTime + " " + vendorForm.hours.Monday.startPeriod + "-" + vendorForm.hours.Monday.endTime + " " + vendorForm.hours.Monday.endPeriod,
-      tuesdayHours: vendorForm.hours.Tuesday.startTime + " " + vendorForm.hours.Tuesday.startPeriod + "-" + vendorForm.hours.Tuesday.endTime + " " + vendorForm.hours.Tuesday.endPeriod,
-      wednesdayHours: vendorForm.hours.Wednesday.startTime + " " + vendorForm.hours.Wednesday.startPeriod + "-" + vendorForm.hours.Wednesday.endTime + " " + vendorForm.hours.Wednesday.endPeriod,
-      thursdayHours: vendorForm.hours.Thursday.startTime + " " + vendorForm.hours.Thursday.startPeriod + "-" + vendorForm.hours.Thursday.endTime + " " + vendorForm.hours.Thursday.endPeriod,
-      fridayHours: vendorForm.hours.Friday.startTime + " " + vendorForm.hours.Friday.startPeriod + "-" + vendorForm.hours.Friday.endTime + " " + vendorForm.hours.Friday.endPeriod,
-      saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
+      input: {
+        name: nameInput.current.value,
+        description: descriptionInput.current.value,
+        phone_number: phoneNumber,
+        email: emailInput.current.value,
+        address: address,
+        city: city,
+        state: state,
+        zip_code: zipCode,
+        restaurantOwnerName: contactInput.current.value,
+        sundayHours: vendorForm.hours.Sunday.startTime + " " + vendorForm.hours.Sunday.startPeriod + "-" + vendorForm.hours.Sunday.endTime + " " + vendorForm.hours.Sunday.endPeriod,
+        mondayHours: vendorForm.hours.Monday.startTime + " " + vendorForm.hours.Monday.startPeriod + "-" + vendorForm.hours.Monday.endTime + " " + vendorForm.hours.Monday.endPeriod,
+        tuesdayHours: vendorForm.hours.Tuesday.startTime + " " + vendorForm.hours.Tuesday.startPeriod + "-" + vendorForm.hours.Tuesday.endTime + " " + vendorForm.hours.Tuesday.endPeriod,
+        wednesdayHours: vendorForm.hours.Wednesday.startTime + " " + vendorForm.hours.Wednesday.startPeriod + "-" + vendorForm.hours.Wednesday.endTime + " " + vendorForm.hours.Wednesday.endPeriod,
+        thursdayHours: vendorForm.hours.Thursday.startTime + " " + vendorForm.hours.Thursday.startPeriod + "-" + vendorForm.hours.Thursday.endTime + " " + vendorForm.hours.Thursday.endPeriod,
+        fridayHours: vendorForm.hours.Friday.startTime + " " + vendorForm.hours.Friday.startPeriod + "-" + vendorForm.hours.Friday.endTime + " " + vendorForm.hours.Friday.endPeriod,
+        saturdayHours: vendorForm.hours.Saturday.startTime + " " + vendorForm.hours.Saturday.startPeriod + "-" + vendorForm.hours.Saturday.endTime + " " + vendorForm.hours.Saturday.endPeriod,
+      },
     };
 
-    API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))
-    .then(updateRestaurant => {
-      console.log('UPDATED RESTAURANT', updateRestaurant);
-      props.getData();
-      changeMode('');
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
+    console.log(updatedRestaurantResponse);
+    props.getData();
+    changeMode("");
+
+    // API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))
+    // .then(updateRestaurant => {
+    //   console.log('UPDATED RESTAURANT', updateRestaurant);
+    //   props.getData();
+    //   changeMode('');
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
     // API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
     //   console.log("UPDATE", updateRestaurant);
     //   props.getData();

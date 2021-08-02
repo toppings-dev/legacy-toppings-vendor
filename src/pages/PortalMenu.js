@@ -63,6 +63,15 @@ function PortalMenu(props) {
     //     [category.name]: category.menuItems.items,
     //   }));
     // });
+    const response = await API.graphql(graphqlOperation(customQueries.getMenu, { id: props.restaurant.id }));
+    console.log(response);
+    const menuCategoriesList = response.data.getMenu.menuCategories.items;
+    menuCategoriesList.forEach(category => {
+      setMenuItems(oldMenuItems => ({
+        ...oldMenuItems,
+        [category.name]: category.menuItems.items,
+      }));
+    });
     setLoading(false);
   }
 
@@ -179,7 +188,7 @@ function PortalMenu(props) {
   async function editItem(e) {
     e.preventDefault();
 
-    if (addItemType == "Customizable") {
+    if (addItemType === "Customizable") {
       await createToppings(selectedMenuItem);
     }
 
@@ -191,6 +200,8 @@ function PortalMenu(props) {
       description: itemDescriptionInput.current.value,
       price: itemPriceInput.current.value,
     };
+
+    console.log("MI", menuItem)
 
     // const response = await API.graphql(graphqlOperation(mutations.updateMenuItem, { input: menuItem }));
     // const updatedMenuItem = response.data.updateMenuItem;
