@@ -1,14 +1,19 @@
 {
   "files": {
-    "main.css": "/toppings-vendor/static/css/main.acd4c99c.chunk.css",
-    "main.js": "/toppings-vendor/static/js/main.6ec243ee.chunk.js",
-    "runtime-main.js": "/toppings-vendor/static/js/runtime-main.819c3fe4.js",
-    "static/js/2.54101e32.chunk.js": "/toppings-vendor/static/js/2.54101e32.chunk.js",
+    "main.css": "/toppings-vendor/static/css/main.ee5a38a8.chunk.css",
+    "main.js": "/toppings-vendor/static/js/main.d7e6d3a9.chunk.js",
+    "main.js.map": "/toppings-vendor/static/js/main.d7e6d3a9.chunk.js.map",
+    "runtime-main.js": "/toppings-vendor/static/js/runtime-main.5f50cafb.js",
+    "runtime-main.js.map": "/toppings-vendor/static/js/runtime-main.5f50cafb.js.map",
+    "static/js/2.13ec210f.chunk.js": "/toppings-vendor/static/js/2.13ec210f.chunk.js",
+    "static/js/2.13ec210f.chunk.js.map": "/toppings-vendor/static/js/2.13ec210f.chunk.js.map",
     "index.html": "/toppings-vendor/index.html",
-    "static/js/2.54101e32.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/2.54101e32.chunk.js.LICENSE.txt",
+    "static/css/main.ee5a38a8.chunk.css.map": "/toppings-vendor/static/css/main.ee5a38a8.chunk.css.map",
+    "static/js/2.13ec210f.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/2.13ec210f.chunk.js.LICENSE.txt",
+    "static/js/main.d7e6d3a9.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/main.d7e6d3a9.chunk.js.LICENSE.txt",
     "static/media/App.css": "/toppings-vendor/static/media/FatFrank-Regular.532265e9.otf",
     "static/media/bubble-icon-1.2de73295.svg": "/toppings-vendor/static/media/bubble-icon-1.2de73295.svg",
-    "static/media/bubble-icon-2.7af7e509.svg": "/toppings-vendor/static/media/bubble-icon-2.7af7e509.svg",
+    "static/media/bubble-icon-2.a7fbf348.svg": "/toppings-vendor/static/media/bubble-icon-2.a7fbf348.svg",
     "static/media/clock-icon.12ff6eda.svg": "/toppings-vendor/static/media/clock-icon.12ff6eda.svg",
     "static/media/dashboard-design.b466fc61.PNG": "/toppings-vendor/static/media/dashboard-design.b466fc61.PNG",
     "static/media/ding.8e0939ed.mp3": "/toppings-vendor/static/media/ding.8e0939ed.mp3",
@@ -30,9 +35,9 @@
     "static/media/white-checkmark.7ae308e4.svg": "/toppings-vendor/static/media/white-checkmark.7ae308e4.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.819c3fe4.js",
-    "static/js/2.54101e32.chunk.js",
-    "static/css/main.acd4c99c.chunk.css",
-    "static/js/main.6ec243ee.chunk.js"
+    "static/js/runtime-main.5f50cafb.js",
+    "static/js/2.13ec210f.chunk.js",
+    "static/css/main.ee5a38a8.chunk.css",
+    "static/js/main.d7e6d3a9.chunk.js"
   ]
 }
