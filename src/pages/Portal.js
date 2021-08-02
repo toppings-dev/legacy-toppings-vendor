@@ -33,16 +33,30 @@ function Portal(props) {
 
   useEffect(() => {
     props.toggleShowHeader(false);
+    console.log("U", props.user)
     getData();
   }, []);
 
   async function getData() {
-    const email = await getCurrentUser() == null ? props.user.username : await getCurrentUser().username;
-    console.log("GET RESTU", email)
-    const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { email }));
-    const restaurant = restaurantsResponse.data.getRestaurantByOwner;
-    setRestaurant(restaurant);
-    console.log("Set restaurant props", restaurant);
+    // await props.setUser(getCurrentUser());
+    // console.log("PU", props.user)
+    // console.log("PU", getCurrentUser())
+    // if (getCurrentUser().hasOwnProperty("username")) {
+      // await login();
+      console.log("GD")
+      const email = await getCurrentUser() == null ? props.user.username : await getCurrentUser().username;
+      console.log("GET RESTU", email)
+      const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { email }));
+      console.log("Set restaurant resp", restaurantsResponse);
+      const restaurant = restaurantsResponse.data.getRestaurantByOwner;
+      setRestaurant(restaurant);
+      console.log("Set restaurant props", restaurant);
+    // }
+  }
+
+  async function login() {
+    console.log("LOGIN");
+    // await Auth.signIn(getCurrentUser());
   }
 
   function logout() {
@@ -72,7 +86,7 @@ function Portal(props) {
               <li><Link to="/portal/settings" onClick={() => setCurrentPage("settings")}><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}><img src={settingsIcon} /> Account Settings</span></Link></li>
               <li><span className="portal-nav-option" onClick={logout}><img src={logoutIcon} /> Log Out</span></li>
             </ul>
-            <div className="portal-version-label">Version 1.4.1</div>
+            <div className="portal-version-label">Version 2.0.1</div>
           </nav>
 
           <main>

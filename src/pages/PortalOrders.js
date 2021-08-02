@@ -41,6 +41,8 @@ function PortalOrders(props) {
   });
 
   useEffect(() => {
+    setLoading(true);
+    
     getData();
     orderReceived();
   }, []);
@@ -51,6 +53,8 @@ function PortalOrders(props) {
       id: props.restaurant.id,
       input: { isOpen: !receivingOrders ? "true" : "false", },
     };
+
+    console.log("ur", updatedRestaurant)
 
     // const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
     const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
@@ -102,66 +106,79 @@ function PortalOrders(props) {
   }
 
   async function orderReceived() {
-    await API.graphql(graphqlOperation(customSubscription.onCreateNewOrder)).subscribe({ next: (eventData) => {
-      const order = eventData.value.data.onUpdateOrder;
-      const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
-      console.log("RECEIVED", order);
-      console.log("EXISTING?", oldOrder);
-      if (order.restaurant.id == props.restaurant.id && order.isPaid) {
-        if (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp) {
-          const date = new Date(Date.parse(order.createdAt));
-          const newOrder = {
-            ...order,
-            id: order.id,
-            deliverer: order.pickup.deliverer.name,
-            customer: order.customer.name,
-            tip: order.tip,
-            instructions: order.comment != null ? order.comment.toString() : "",
-            items: order.orderItems.items,
-            time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
-            food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
-          };
 
-          /*if (newOrder.closed && newOrder.food_ready_time > deliveredOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              Cancelled: [newOrder, ...oldOrders["Cancelled"]],
-            }));
-          } else */if (newOrder.food_ready_time > preparingOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              New: [newOrder, ...oldOrders["New"]],
-            }));
-            audio.play();
-          } else if (newOrder.food_ready_time > readyOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              Preparing: [newOrder, ...oldOrders["Preparing"]],
-            }));
-          } else if (newOrder.food_ready_time > deliveredOrderTimeStamp) {
-            setOrders(oldOrders => ({
-              ...oldOrders,
-              Ready: [newOrder, ...oldOrders["Ready"]],
-            }));
-          }
-        } /*else if (oldOrder != null && !oldOrder.closed && order.closed) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Cancelled: [newOrder, ...oldOrders["Cancelled"]],
-          }));
-        }*/
-      }
+    await API.graphql(graphqlOperation(customSubscription.onCreateNewPickup)).subscribe({ next: (eventData) => {
+      console.log("EDY", eventData);
+      getData();
+    }});
+
+    await API.graphql(graphqlOperation(customSubscription.onCreateNewOrder)).subscribe({ next: (eventData) => {
+      console.log("EDZ", eventData);
+      getData();
+      // const order = eventData.value.data.onUpdateOrder;
+      // const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
+      // console.log("RECEIVED", order);
+      // console.log("EXISTING?", oldOrder);
+      // if (order.restaurant.id == props.restaurant.id && order.isPaid) {
+      //   if (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp) {
+      //     const date = new Date(Date.parse(order.createdAt));
+      //     const newOrder = {
+      //       ...order,
+      //       id: order.id,
+      //       deliverer: order.pickup.deliverer.name,
+      //       customer: order.customer.name,
+      //       tip: order.tip,
+      //       instructions: order.comment != null ? order.comment.toString() : "",
+      //       items: order.orderItems.items,
+      //       time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
+      //       food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
+      //     };
+
+      //     /*if (newOrder.closed && newOrder.food_ready_time > deliveredOrderTimeStamp) {
+      //       setOrders(oldOrders => ({
+      //         ...oldOrders,
+      //         Cancelled: [newOrder, ...oldOrders["Cancelled"]],
+      //       }));
+      //     } else */if (newOrder.food_ready_time > preparingOrderTimeStamp) {
+      //       setOrders(oldOrders => ({
+      //         ...oldOrders,
+      //         New: [newOrder, ...oldOrders["New"]],
+      //       }));
+      //       audio.play();
+      //     } else if (newOrder.food_ready_time > readyOrderTimeStamp) {
+      //       setOrders(oldOrders => ({
+      //         ...oldOrders,
+      //         Preparing: [newOrder, ...oldOrders["Preparing"]],
+      //       }));
+      //     } else if (newOrder.food_ready_time > deliveredOrderTimeStamp) {
+      //       setOrders(oldOrders => ({
+      //         ...oldOrders,
+      //         Ready: [newOrder, ...oldOrders["Ready"]],
+      //       }));
+      //     }
+      //   } /*else if (oldOrder != null && !oldOrder.closed && order.closed) {
+      //     setOrders(oldOrders => ({
+      //       ...oldOrders,
+      //       Cancelled: [newOrder, ...oldOrders["Cancelled"]],
+      //     }));
+      //   }*/
+      // }
     }});
   }
 
   async function getData() {
     setReceivingOrders(props.restaurant.isOpen);
-    setLoading(true);
     console.log("PROPS", props.restaurant);
     const receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
     // const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     console.log(receivedOrdersResponse);
     const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant;
+
+    setOrders({
+      New: [],
+      Preparing: [],
+      Ready: [],
+    });
     
     receivedOrders.forEach(order => {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
@@ -184,6 +201,7 @@ function PortalOrders(props) {
             Cancelled: [myOrder, ...oldOrders["Cancelled"]],
           }));
         } else*/ if (/*!myOrder.closed && */myOrder.food_ready_time > preparingOrderTimeStamp) {
+          audio.play();
           setOrders(oldOrders => ({
             ...oldOrders,
             New: [myOrder, ...oldOrders["New"]],
@@ -220,7 +238,7 @@ function PortalOrders(props) {
             <div className="orders-list">
               <header>
                 <span className="orange-subheading">{`${new Date().getMonth() + 1}/${String(new Date().getDate()).padStart(2, "0")}/${String(new Date().getFullYear()).slice(2, 4)}`}</span>
-                <button className={receivingOrders === "true" ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
+                <button className={receivingOrders ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
               </header>
                 {Object.keys(orders).map((category =>
                   <div key={category}>
@@ -326,8 +344,8 @@ function PortalOrders(props) {
                         <button className="orange" onClick={() => advanceOrder(selectedOrder, "Preparing")}>Ready for Pickup</button>
                       : orders.Ready.indexOf(selectedOrder) > -1 ? 
                         <button className="orange" onClick={() => advanceOrder(selectedOrder, "Ready")}>Delivered</button>
-                      : orders.Cancelled.indexOf(selectedOrder) > -1 ?
-                      <button className="orange" onClick={() => advanceOrder(selectedOrder, "Cancelled")}>Confirm</button>
+                      /*: orders.Cancelled.indexOf(selectedOrder) > -1 ?
+                      <button className="orange" onClick={() => advanceOrder(selectedOrder, "Cancelled")}>Confirm</button>*/
                       : ""}
                     </div>
                   </div>

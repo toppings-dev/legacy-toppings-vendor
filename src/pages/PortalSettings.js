@@ -5,7 +5,7 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
-import * as customMutations from '../graphql/mutations';
+import * as customMutations from '../graphql/customMutations';
 
 import settingsDesign from '../assets/images/settings-design.PNG';
 import locationIcon from '../assets/images/location-icon.svg';
@@ -88,7 +88,24 @@ function PortalSettings(props) {
 
     console.log("UP", vendor)
 
-    const updatedVendor = {
+    // const updatedRestaurant = {
+    //   id: props.restaurant.id,
+    //   input: { isOpen: "false", },
+    // };
+
+    // console.log("TOGs", props.restaurant.id)
+    // const updatedRestaurant = {
+    //   id: props.restaurant.id,
+    //   input: { isOpen: "false", },
+    // };
+
+    // console.log("UR", updatedRestaurant);
+
+    // // const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
+    // const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
+    // console.log(updatedRestaurantResponse)
+
+    const updatedRestaurant = {
       id: vendor.id,
       input: {
         name: nameInput.current.value,
@@ -110,15 +127,20 @@ function PortalSettings(props) {
       },
     };
 
-    API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))
-    .then(updateRestaurant => {
-      console.log('UPDATED RESTAURANT', updateRestaurant);
-      props.getData();
-      changeMode('');
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
+    console.log(updatedRestaurantResponse);
+    props.getData();
+    changeMode("");
+
+    // API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))
+    // .then(updateRestaurant => {
+    //   console.log('UPDATED RESTAURANT', updateRestaurant);
+    //   props.getData();
+    //   changeMode('');
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
     // API.graphql({ query: mutations.updateRestaurant, variables: { input: updatedVendor } }).then(({ data: { updateRestaurant } }) => {
     //   console.log("UPDATE", updateRestaurant);
     //   props.getData();

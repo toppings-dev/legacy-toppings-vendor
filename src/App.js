@@ -10,7 +10,7 @@ import './styles/PortalSettings.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 
-import { getCurrentUser, setupSession, clearSession } from './utils/session';
+import { getCurrentUser, setupSession, clearSession, getCurrentPage } from './utils/session';
 
 import logo from './assets/images/logo-white.png';
 import Portal from './pages/Portal';
@@ -25,7 +25,7 @@ function App() {
       <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
       <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
       
-      <Redirect to="/portal-auth/sign-in" />
+      <Redirect to={`/portal-auth/sign-in`} />
       {showHeader ?
         <header className="primary">
           <nav>

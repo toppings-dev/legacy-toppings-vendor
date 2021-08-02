@@ -124,7 +124,7 @@ function PortalSignUp(props) {
     }
   }
 
-  function login(e) {
+  async function login(e) {
     if (e != null) {
       e.preventDefault();
     }
@@ -137,14 +137,8 @@ function PortalSignUp(props) {
         username: email, 
         password: password 
       };
-      Auth.signIn(user).then(() => {
-        setCurrentUser(user);
-        if (getCurrentPage() == null) {
-          setCurrentPage("orders");
-        }
-        props.setUser(user);
-        setLoggedIn(true);
-
+      await Auth.signIn(user); //.then(() => {
+        
         const restaurant = {
           name: "Your Restaurant Name",
           email: email,
@@ -156,19 +150,30 @@ function PortalSignUp(props) {
           phone_number: null,
           state: "Your State",
           zip_code: "Your Zip Code",
+          isOpen: "true",
         };
   
-        API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
-        .then(createRestaurantResp => {
-          console.log('Create Restaurant', createRestaurantResp);
-          setErrorMsg('');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      }).catch((error) => {
-        setErrorMsg(error.message);
-      });
+        await API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
+      //   .then(createRestaurantResp => {
+      //     console.log('Create Restaurant', createRestaurantResp);
+      //     setErrorMsg('');
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
+      // }).catch((error) => {
+      //   setErrorMsg(error.message);
+      // });
+      
+      setCurrentUser(user);
+      
+      if (getCurrentPage() == null) {
+        setCurrentPage("orders");
+      }
+
+
+      props.setUser(user);
+      setLoggedIn(true);
     } else {
       setErrorMsg("Login info is incomplete.");
     }

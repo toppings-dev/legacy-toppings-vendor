@@ -29,6 +29,7 @@ export const getMenu = /* GraphQL */ `
             items {
               id
               name
+              menuCategoryName
               description
               price
               options {

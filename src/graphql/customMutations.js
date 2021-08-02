@@ -347,8 +347,8 @@ export const updatePlatform = /* GraphQL */ `
 `;
 
 export const createRestaurant = /* GraphQL */ `
-  mutation CreateRestaurant($name: String!, $email: AWSEmail!, $address: String, $city: String, $description: String, $lat: Float, $long: Float, $phone_number: AWSPhone, $state: String, $zip_code: String) {
-    createRestaurant(name: $name, email: $email, address: $address, city: $city, description: $description, lat: $lat, long: $long, phone_number: $phone_number, state: $state, zip_code: $zip_code) {
+  mutation CreateRestaurant($name: String!, $email: AWSEmail!, $address: String, $city: String, $description: String, $lat: Float, $long: Float, $phone_number: AWSPhone, $state: String, $zip_code: String, $isOpen: String) {
+    createRestaurant(name: $name, email: $email, address: $address, city: $city, description: $description, lat: $lat, long: $long, phone_number: $phone_number, state: $state, zip_code: $zip_code, isOpen: $isOpen) {
       id
       name
       email
@@ -362,6 +362,7 @@ export const createRestaurant = /* GraphQL */ `
       zip_code
       createdAt
       updatedAt
+      isOpen
     }
   }
 `;
@@ -402,12 +403,12 @@ export const createMenuItem = /* GraphQL */ `
 `;
 
 export const updateMenuItem = /* GraphQL */ `
-  mutation UpdateMenuItem($menuId: ID!, $id: ID!, $itemName: String!, $name: String!, $description: String!, $price: Float!) {
-    updateMenuItem(menuId: $menuId, id: $id, itemName: $itemName, name: $name, description: $description, price: $price) {
+  mutation UpdateMenuItem($menuId: ID!, $id: ID!, $menuCategoryName: String!, $name: String!, $description: String!, $price: Float!) {
+    updateMenuItem(menuId: $menuId, id: $id, menuCategoryName: $menuCategoryName, name: $name, description: $description, price: $price) {
       id
-      itemName
+      menuCategoryName
+      name
       menuId
-      points
       description
       price
       updatedAt
@@ -416,7 +417,7 @@ export const updateMenuItem = /* GraphQL */ `
 `;
 
 export const createVendorReward = /* GraphQL */ `
-  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, description: $String!) {
+  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: String!) {
     createVendorReward(menuId: $menuId, itemName: $itemName, points: $points, date_active_from: $date_active_from, date_active_to: $date_active_to, discountAmount: $discountAmount, discountPercentage: $discountPercentage, description: $description) {
       id
       itemName
@@ -455,8 +456,8 @@ export const deleteVendorReward = /* GraphQL */ `
 `;
 
 export const updateRestaurant = /* GraphQL */ `
-  mutation UpdateRestaurant($id: ID!, $input: UpdateRestaurantInput!) {
-    updateRestaurant(id: $id, input: $input) {
+  mutation UpdateRestaurantFields($id: ID!, $input: UpdateRestaurantInput!) {
+    updateRestaurantFields(id: $id, input: $input) {
       id
       name
       description
@@ -480,8 +481,8 @@ export const updateRestaurant = /* GraphQL */ `
 `;
 
 export const updateFoodReady = /* GraphQL */ `
-  mutation UpdateFoodReady($id: ID!, $food_ready_time: AWSTimestamp!) {
-    updateFoodReady(id: $id, food_ready_time: $food_ready_time) {
+  mutation UpdateFoodReadyTime($id: ID!, $food_ready_time: AWSTimestamp!) {
+    updateFoodReadyTime(id: $id, food_ready_time: $food_ready_time) {
       id
       food_ready_time
     }
