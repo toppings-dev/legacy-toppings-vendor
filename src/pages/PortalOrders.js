@@ -73,6 +73,7 @@ function PortalOrders(props) {
       const updatedOrder = {
         id: order.id,
         food_ready_time: preparingOrderTimeStamp,
+        status: 'PREPARING',
       };
 
       await API.graphql(graphqlOperation(customMutations.updateFoodReady, updatedOrder));
@@ -82,6 +83,7 @@ function PortalOrders(props) {
       const updatedOrder = {
         id: order.id,
         food_ready_time: readyOrderTimeStamp,
+        status: 'READY',
       };
 
       await API.graphql(graphqlOperation(customMutations.updateFoodReady, updatedOrder));
