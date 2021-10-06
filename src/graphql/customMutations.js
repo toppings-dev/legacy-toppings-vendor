@@ -16,9 +16,10 @@ export const updateDriverLocation = /* GraphQL */ `
           status
           delivery_address
           customer {
-            email
+            pk
+            sk
             name
-            phone_number
+            phoneNumber
             pfp
           }
           restaurant {
@@ -41,8 +42,26 @@ export const updateEta = /* GraphQL */ `
 `;
 
 export const createPickup = /* GraphQL */ `
-  mutation CreatePickup($cart: AWSJSON!, $currency: String!, $delivererId: AWSEmail!, $description: String!, $menuId: ID!, $rewardsCart: AWSJSON!, $stripeToken: String!, $windowOpenTime: Int!) {
-    createNewPickup(cart: $cart, currency: $currency, delivererId: $delivererId, description: $description, menuId: $menuId, rewardsCart: $rewardsCart, stripeToken: $stripeToken, windowOpenTime: $windowOpenTime) {
+  mutation CreatePickup(
+    $cart: AWSJSON!
+    $currency: String!
+    $delivererId: String!
+    $description: String!
+    $menuId: ID!
+    $rewardsCart: AWSJSON!
+    $stripeToken: String!
+    $windowOpenTime: Int!
+  ) {
+    createNewPickup(
+      cart: $cart
+      currency: $currency
+      delivererId: $delivererId
+      description: $description
+      menuId: $menuId
+      rewardsCart: $rewardsCart
+      stripeToken: $stripeToken
+      windowOpenTime: $windowOpenTime
+    ) {
       id
       delivererId
       transportation_type
@@ -53,9 +72,11 @@ export const createPickup = /* GraphQL */ `
       isPickedUp
       status
       deliverer {
-        email
+        pk
+        sk
         name
-        phone_number
+        phoneNumber
+        pfp
       }
       orders {
         items {
@@ -66,9 +87,10 @@ export const createPickup = /* GraphQL */ `
           pickupId
           customerId
           customer {
-            email
+            pk
+            sk
             name
-            phone_number
+            phoneNumber
             pfp
           }
           orderItems {
@@ -90,8 +112,32 @@ export const createPickup = /* GraphQL */ `
 `;
 
 export const createOrder = /* GraphQL */ `
-  mutation CreateOrder($cart: AWSJSON!, $currency: String!, $customerId: AWSEmail!, $delivery_address: String!, $delivery_lat: Float!, $delivery_long: Float!, $description: String!, $orderRestaurantId: ID!, $pickupId: ID!, $rewardsCart: AWSJSON!, $stripeToken: String!) {
-    createNewOrder(cart: $cart, currency: $currency, customerId: $customerId, delivery_address: $delivery_address, delivery_lat: $delivery_lat, delivery_long: $delivery_long, description: $description, orderRestaurantId: $orderRestaurantId, pickupId: $pickupId, rewardsCart: $rewardsCart, stripeToken: $stripeToken) {
+  mutation CreateOrder(
+    $cart: AWSJSON!
+    $currency: String!
+    $customerId: String!
+    $delivery_address: String!
+    $delivery_lat: Float!
+    $delivery_long: Float!
+    $description: String!
+    $orderRestaurantId: ID!
+    $pickupId: ID!
+    $rewardsCart: AWSJSON!
+    $stripeToken: String!
+  ) {
+    createNewOrder(
+      cart: $cart
+      currency: $currency
+      customerId: $customerId
+      delivery_address: $delivery_address
+      delivery_lat: $delivery_lat
+      delivery_long: $delivery_long
+      description: $description
+      orderRestaurantId: $orderRestaurantId
+      pickupId: $pickupId
+      rewardsCart: $rewardsCart
+      stripeToken: $stripeToken
+    ) {
       id
       isPaid
       closed
@@ -124,15 +170,17 @@ export const createOrder = /* GraphQL */ `
         isPickedUp
         status
         deliverer {
-          email
+          pk
+          sk
           name
-          phone_number
+          phoneNumber
         }
       }
       customer {
-        email
+        pk
+        sk
         name
-        phone_number
+        phoneNumber
       }
     }
   }
@@ -266,6 +314,25 @@ export const markOrderDelivered = /* GraphQL */ `
       status
       tax
       tip
+      customer {
+        pk
+        sk
+        name
+        phoneNumber
+        pfp
+      }
+      orderItems {
+        items {
+          comment
+          foodOptionsArray
+          id
+          itemName
+          price_after_reward
+          price_before_reward
+          price_per_item
+          quantity
+        }
+      }
     }
   }
 `;
@@ -298,7 +365,7 @@ export const cancelOrder = /* GraphQL */ `
 `;
 
 export const createReferral = /* GraphQL */ `
-  mutation CreateReferral($referrerUserId: AWSEmail!) {
+  mutation CreateReferral($referrerUserId: String!) {
     createReferral(referrerUserId: $referrerUserId) {
       code
       referrerUserId
@@ -307,62 +374,86 @@ export const createReferral = /* GraphQL */ `
 `;
 
 export const updatePfp = /* GraphQL */ `
-  mutation UpdatePfp($email: AWSEmail!, $pfp: String!) {
-    updatePfp(email: $email, pfp: $pfp) {
+  mutation UpdatePfp($userId: String!, $pfp: String!) {
+    updatePfp(userId: $userId, pfp: $pfp) {
+      pk
+      sk
       name
-      email
-      phone_number
+      phoneNumber
       pfp
     }
   }
 `;
 
 export const updateDeviceToken = /* GraphQL */ `
-  mutation UpdateDeviceToken($email: AWSEmail!, $deviceToken: String!) {
-    updateDeviceToken(email: $email, deviceToken: $deviceToken) {
+  mutation UpdateDeviceToken($userId: String!, $deviceToken: String!) {
+    updateDeviceToken(userId: $userId, deviceToken: $deviceToken) {
+      pk
+      sk
       name
-      email
-      phone_number
+      phoneNumber
     }
   }
 `;
 
 export const createFeedback = /* GraphQL */ `
-  mutation CreateFeedback($userEmail: AWSEmail!, $feedback: String!) {
-    createFeedback(userEmail: $userEmail, feedback: $feedback) {
-      userEmail
+  mutation CreateFeedback($userId: String!, $feedback: String!) {
+    createFeedback(userId: $userId, feedback: $feedback) {
+      userId
       feedback
     }
   }
 `;
 
 export const updatePlatform = /* GraphQL */ `
-  mutation UpdateDeviceToken($email: AWSEmail!, $platform: String!) {
-    updatePlatform(email: $email, platform: $platform) {
+  mutation UpdateDeviceToken($userId: String!, $platform: String!) {
+    updatePlatform(userId: $userId, platform: $platform) {
+      pk
+      sk
       name
-      email
-      phone_number
+      phoneNumber
     }
   }
 `;
 
 export const createRestaurant = /* GraphQL */ `
-  mutation CreateRestaurant($name: String!, $email: AWSEmail!, $address: String, $city: String, $description: String, $lat: Float, $long: Float, $phone_number: AWSPhone, $state: String, $zip_code: String, $isOpen: String) {
-    createRestaurant(name: $name, email: $email, address: $address, city: $city, description: $description, lat: $lat, long: $long, phone_number: $phone_number, state: $state, zip_code: $zip_code, isOpen: $isOpen) {
+  mutation CreateRestaurant(
+    $name: String!
+    $userId: String!
+    $address: String!
+    $city: String!
+    $description: String!
+    $lat: Float!
+    $long: Float!
+    $phoneNumber: AWSPhone!
+    $state: String!
+    $zip_code: String!
+  ) {
+    createRestaurant(
+      name: $name
+      userId: $userId
+      address: $address
+      city: $city
+      description: $description
+      lat: $lat
+      long: $long
+      phoneNumber: $phoneNumber
+      state: $state
+      zip_code: $zip_code
+    ) {
       id
       name
-      email
+      userId
       address
       city
       description
       lat
       long
-      phone_number
+      phoneNumber
       state
       zip_code
       createdAt
       updatedAt
-      isOpen
     }
   }
 `;
@@ -380,16 +471,40 @@ export const createMenuCategory = /* GraphQL */ `
 `;
 
 export const createToppings = /* GraphQL */ `
-  mutation CreateToppings($id: ID!, $selectedMenuItemToppings: AWSJSON!, $selectedMenuItemOptions: AWSJSON!, $menuItem: AWSJSON!, $selectedMenuItemExistingToppings: AWSJSON!) {
-    createToppings(id: $id, selectedMenuItemToppings: $selectedMenuItemToppings, selectedMenuItemOptions: $selectedMenuItemOptions, menuItem: $menuItem, selectedMenuItemExistingToppings: $selectedMenuItemExistingToppings) {
+  mutation CreateToppings(
+    $id: ID!
+    $selectedMenuItemToppings: AWSJSON!
+    $selectedMenuItemOptions: AWSJSON!
+    $menuItem: AWSJSON!
+    $selectedMenuItemExistingToppings: AWSJSON!
+  ) {
+    createToppings(
+      id: $id
+      selectedMenuItemToppings: $selectedMenuItemToppings
+      selectedMenuItemOptions: $selectedMenuItemOptions
+      menuItem: $menuItem
+      selectedMenuItemExistingToppings: $selectedMenuItemExistingToppings
+    ) {
       id
     }
   }
 `;
 
 export const createMenuItem = /* GraphQL */ `
-  mutation CreateMenuItem($menuId: ID!, $menuCategoryName: String!, $name: String!, $description: String!, $price: Float!) {
-    createMenuItem(menuId: $menuId, menuCategoryName: $menuCategoryName, name: $name, description: $description, price: $price) {
+  mutation CreateMenuItem(
+    $menuId: ID!
+    $menuCategoryName: String!
+    $name: String!
+    $description: String!
+    $price: Float!
+  ) {
+    createMenuItem(
+      menuId: $menuId
+      menuCategoryName: $menuCategoryName
+      name: $name
+      description: $description
+      price: $price
+    ) {
       id
       menuId
       menuCategoryName
@@ -403,8 +518,22 @@ export const createMenuItem = /* GraphQL */ `
 `;
 
 export const updateMenuItem = /* GraphQL */ `
-  mutation UpdateMenuItem($menuId: ID!, $id: ID!, $menuCategoryName: String!, $name: String!, $description: String!, $price: Float!) {
-    updateMenuItem(menuId: $menuId, id: $id, menuCategoryName: $menuCategoryName, name: $name, description: $description, price: $price) {
+  mutation UpdateMenuItem(
+    $menuId: ID!
+    $id: ID!
+    $menuCategoryName: String!
+    $name: String!
+    $description: String!
+    $price: Float!
+  ) {
+    updateMenuItem(
+      menuId: $menuId
+      id: $id
+      menuCategoryName: $menuCategoryName
+      name: $name
+      description: $description
+      price: $price
+    ) {
       id
       menuCategoryName
       name
@@ -417,7 +546,7 @@ export const updateMenuItem = /* GraphQL */ `
 `;
 
 export const createVendorReward = /* GraphQL */ `
-  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: String!) {
+  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: $String!) {
     createVendorReward(menuId: $menuId, itemName: $itemName, points: $points, date_active_from: $date_active_from, date_active_to: $date_active_to, discountAmount: $discountAmount, discountPercentage: $discountPercentage, description: $description) {
       id
       itemName
@@ -461,7 +590,7 @@ export const updateRestaurant = /* GraphQL */ `
       id
       name
       description
-      email
+      userId
       address
       city
       state
@@ -471,7 +600,7 @@ export const updateRestaurant = /* GraphQL */ `
       mondayHours
       tuesdayHours
       wednesdayHours
-      thursdayHours
+      thursdayHorus
       fridayHours
       saturdayHours
       sundayHours

@@ -63,7 +63,7 @@ export const getMenu = /* GraphQL */ `
 `;
 
 export const listActiveOrdersByCustomer = /* GraphQL */ `
-  query ListActiveOrdersByCustomer($customerId: AWSEmail!) {
+  query ListActiveOrdersByCustomer($customerId: String!) {
     listActiveOrdersByCustomer(customerId: $customerId) {
       id
       status
@@ -72,7 +72,8 @@ export const listActiveOrdersByCustomer = /* GraphQL */ `
         id
         delivererId
         deliverer {
-          email
+          pk
+          sk
           name
         }
       }
@@ -90,12 +91,13 @@ export const listActiveOrdersByCustomer = /* GraphQL */ `
 `;
 
 export const listOpenPickups = /* GraphQL */ `
-  query ListOpenPickups($email: AWSEmail!) {
-    listOpenPickups(email: $email) {
+  query ListOpenPickups($userId: String!) {
+    listOpenPickups(userId: $userId) {
       id
       delivererId
       deliverer {
-        email
+        pk
+        sk
         name
       }
       windowEndTime
@@ -142,7 +144,7 @@ export const getOrder = /* GraphQL */ `
         address
         city
         description
-        email
+        userId
         fridayHours
         id
         isOpen
@@ -150,7 +152,7 @@ export const getOrder = /* GraphQL */ `
         long
         mondayHours
         name
-        phone_number
+        phoneNumber
         restaurantOwnerName
         saturdayHours
         state
@@ -173,9 +175,10 @@ export const getOrder = /* GraphQL */ `
         closed
         delivererId
         deliverer {
-          cognitoId
+          pk
+          sk
           name
-          phone_number
+          phoneNumber
         }
         expdate
         id
@@ -190,10 +193,11 @@ export const getOrder = /* GraphQL */ `
       }
       customer {
         deviceToken
-        email
+        pk
+        sk
         name
         isUser
-        phone_number
+        phoneNumber
         platform
       }
       orderItems {
@@ -215,12 +219,12 @@ export const getOrder = /* GraphQL */ `
 `;
 
 export const getReward = /* GraphQL */ `
-  query GetReward($menuId: ID!, $userEmail: AWSEmail!) {
-    getRewardInfo(menuId: $menuId, userEmail: $userEmail) {
+  query GetReward($menuId: ID!, $userId: String!) {
+    getRewardInfo(menuId: $menuId, userId: $userId) {
       id
       menuId
       points
-      userEmail
+      userId
     }
   }
 `;
@@ -247,7 +251,7 @@ export const listRestaurants = /* GraphQL */ `
       address
       city
       description
-      email
+      userId
       fridayHours
       id
       isOpen
@@ -255,7 +259,7 @@ export const listRestaurants = /* GraphQL */ `
       long
       mondayHours
       name
-      phone_number
+      phoneNumber
       restaurantOwnerName
       saturdayHours
       state
@@ -274,7 +278,7 @@ export const listRestaurants = /* GraphQL */ `
 `;
 
 export const getPickup = /* GraphQL */ `
-  query GetPickup($delivererId: AWSEmail!) {
+  query GetPickup($delivererId: String!) {
     getPickupInfo(delivererId: $delivererId) {
       closed
       createdAt
@@ -289,9 +293,10 @@ export const getPickup = /* GraphQL */ `
       windowClosed
       windowEndTime
       deliverer {
-        email
+        pk
+        sk
         name
-        phone_number
+        phoneNumber
       }
       orders {
         items {
@@ -308,10 +313,12 @@ export const getPickup = /* GraphQL */ `
           id
           status
           tax
+          tip
           customer {
-            email
+            pk
+            sk
             name
-            phone_number
+            phoneNumber
             pfp
           }
           orderItems {
@@ -332,7 +339,7 @@ export const getPickup = /* GraphQL */ `
         address
         city
         description
-        email
+        userId
         fridayHours
         id
         isOpen
@@ -340,7 +347,7 @@ export const getPickup = /* GraphQL */ `
         long
         mondayHours
         name
-        phone_number
+        phoneNumber
         restaurantOwnerName
         saturdayHours
         state
@@ -360,12 +367,21 @@ export const getPickup = /* GraphQL */ `
 `;
 
 export const getUserInfo = /* GraphQL */ `
-  query GetUserInfo($email: AWSEmail!) {
-    getUserInfo(email: $email) {
-      email
+  query GetUserInfo($userId: String!) {
+    getUserInfo(userId: $userId) {
+      pk
+      sk
       name
-      phone_number
+      phoneNumber
       pfp
+      referralCode
+      referredUsers {
+        pk
+        sk
+        name
+        phoneNumber
+        pfp
+      }
     }
   }
 `;
@@ -406,10 +422,11 @@ export const listOrdersByRestaurant = /* GraphQL */ `
       tip
       updatedAt
       customer {
-        email
+        pk
+        sk
         name
         pfp
-        phone_number
+        phoneNumber
       }
       orderItems {
         items {
@@ -444,10 +461,11 @@ export const listOrdersByRestaurant = /* GraphQL */ `
         windowClosed
         windowEndTime
         deliverer {
-          email
+          pk
+          sk
           name
           pfp
-          phone_number
+          phoneNumber
         }
       }
       restaurant {
@@ -455,7 +473,7 @@ export const listOrdersByRestaurant = /* GraphQL */ `
         city
         createdAt
         description
-        email
+        userId
         fridayHours
         id
         isOpen
@@ -463,7 +481,7 @@ export const listOrdersByRestaurant = /* GraphQL */ `
         long
         mondayHours
         name
-        phone_number
+        phoneNumber
         restaurantOwnerName
         saturdayHours
         state
@@ -479,30 +497,42 @@ export const listOrdersByRestaurant = /* GraphQL */ `
 `;
 
 export const getRestaurantByOwner = /* GraphQL */ `
-  query GetRestaurantByOwner($email: AWSEmail!) {
-    getRestaurantByOwner(email: $email) {
+  query GetRestaurantByOwner($userId: String!) {
+    getRestaurantByOwner(userId: $userId) {
       address
-        city
-        createdAt
-        description
-        email
-        fridayHours
-        id
-        isOpen
-        lat
-        long
-        mondayHours
-        name
-        phone_number
-        restaurantOwnerName
-        saturdayHours
-        state
-        sundayHours
-        thursdayHours
-        tuesdayHours
-        updatedAt
-        wednesdayHours
-        zip_code
+      city
+      createdAt
+      description
+      userId
+      fridayHours
+      id
+      isOpen
+      lat
+      long
+      mondayHours
+      name
+      phoneNumber
+      restaurantOwnerName
+      saturdayHours
+      state
+      sundayHours
+      thursdayHours
+      tuesdayHours
+      updatedAt
+      wednesdayHours
+      zip_code
+    }
+  }
+`;
+
+export const listUsers = /* GraphQL */ `
+  query ListUsers {
+    listUsers {
+      pk
+      sk
+      name
+      phoneNumber
+      pfp
     }
   }
 `;

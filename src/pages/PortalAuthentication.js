@@ -55,9 +55,6 @@ function PortalSignUp(props) {
         attributes: {
           name: name,
           phone_number: phoneNumber,
-          "custom:university": "none",
-          "custom:isUser": "false",
-          'custom:referralCode': "",
         }
       }).then(() => {
         setSignedUp(true);
@@ -125,29 +122,37 @@ function PortalSignUp(props) {
   }
 
   async function login(e) {
+    console.log('dalk');
     if (e != null) {
+      console.log('wot');
       e.preventDefault();
     }
+
+    console.log(awsConfig);
 
     let email = emailInput.current.value;
     let password = passwordInput.current.value;
     
+    console.log('HI');
     if (email.length > 0 && password.length > 0) {
       const user = { 
         username: email, 
         password: password 
       };
+      console.log(user);
       await Auth.signIn(user); //.then(() => {
         
+      const currentUser = await Auth.currentAuthenticatedUser();
+
         const restaurant = {
           name: "Your Restaurant Name",
-          email: email,
+          userId: currentUser.attributes.sub,
           address: "Your Address",
           city: "Your City",
           description: "Your Restaurant Description",
-          lat: null,
-          long: null,
-          phone_number: null,
+          lat: 100.0,
+          long: 100.0,
+          phoneNumber: '+15105132142',
           state: "Your State",
           zip_code: "Your Zip Code",
           isOpen: "true",
@@ -219,7 +224,7 @@ function PortalSignUp(props) {
                 <form onSubmit={login}>
                   {errorMsg == "" && successMsg != "" ? <span className="login-message success">{successMsg}</span> : ""}
                   {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
-                  <label htmlFor="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                  <label htmlFor="email">Email Address</label><input className="text-input" ref={emailInput} />
                   <label htmlFor="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
                   <input className="submit-button" type="submit" value="Submit" />
                 </form>

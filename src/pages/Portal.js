@@ -44,9 +44,9 @@ function Portal(props) {
     // if (getCurrentUser().hasOwnProperty("username")) {
       // await login();
       console.log("GD")
-      const email = await getCurrentUser() == null ? props.user.username : await getCurrentUser().username;
+      const userId = await getCurrentUser() == null ? props.user.sub : await getCurrentUser().sub;
       console.log("GET RESTU", email)
-      const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { email }));
+      const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { userId }));
       console.log("Set restaurant resp", restaurantsResponse);
       const restaurant = restaurantsResponse.data.getRestaurantByOwner;
       setRestaurant(restaurant);
