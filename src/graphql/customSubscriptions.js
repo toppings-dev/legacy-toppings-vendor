@@ -2,46 +2,25 @@ export const onUpdateDriverLocation = /* GraphQL */ `
   subscription OnUpdateDriverLocation {
     onUpdateDriverLocation {
       id
-      isPaid
-      closed
-      pickupId
-      delivery_address
-      delivery_lat
-      delivery_long
-      customerId
-      status
-      charge_id
-      orderItems {
+      lat
+      long
+      apiResponse
+      orders {
         items {
-          itemName
-          menuId
-          orderId
-          quantity
-          price_per_item
-          price_before_reward
-          foodOptionsArray
+          id
+          closed
+          customerId
+          delivery_lat
+          delivery_long
+          pickupId
+          status
+          delivery_address
+          customer
+          restaurant {
+            id
+            name
+          }
         }
-      }
-      pickup {
-        id
-        delivererId
-        transportation_type
-        menuId
-        closed
-        windowEndTime
-        windowClosed
-        isPickedUp
-        status
-        deliverer {
-          email
-          name
-          phone_number
-        }
-      }
-      customer {
-        email
-        name
-        phone_number
       }
     }
   }
@@ -87,11 +66,7 @@ export const onCreateNewPickup = /* GraphQL */ `
       windowClosed
       isPickedUp
       status
-      deliverer {
-        email
-        name
-        phone_number
-      }
+      deliverer
       orders {
         items {
           isPaid
@@ -100,12 +75,7 @@ export const onCreateNewPickup = /* GraphQL */ `
           closed
           pickupId
           customerId
-          customer {
-            email
-            name
-            phone_number
-            pfp
-          }
+          customer
           orderItems {
             items {
               id

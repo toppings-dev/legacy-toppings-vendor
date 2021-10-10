@@ -15,13 +15,7 @@ export const updateDriverLocation = /* GraphQL */ `
           pickupId
           status
           delivery_address
-          customer {
-            pk
-            sk
-            name
-            phoneNumber
-            pfp
-          }
+          customer
           restaurant {
             id
             name
@@ -71,13 +65,7 @@ export const createPickup = /* GraphQL */ `
       windowClosed
       isPickedUp
       status
-      deliverer {
-        pk
-        sk
-        name
-        phoneNumber
-        pfp
-      }
+      deliverer
       orders {
         items {
           isPaid
@@ -86,13 +74,7 @@ export const createPickup = /* GraphQL */ `
           closed
           pickupId
           customerId
-          customer {
-            pk
-            sk
-            name
-            phoneNumber
-            pfp
-          }
+          customer
           orderItems {
             items {
               id
@@ -169,19 +151,9 @@ export const createOrder = /* GraphQL */ `
         windowClosed
         isPickedUp
         status
-        deliverer {
-          pk
-          sk
-          name
-          phoneNumber
-        }
+        deliverer
       }
-      customer {
-        pk
-        sk
-        name
-        phoneNumber
-      }
+      customer
     }
   }
 `;
@@ -314,13 +286,7 @@ export const markOrderDelivered = /* GraphQL */ `
       status
       tax
       tip
-      customer {
-        pk
-        sk
-        name
-        phoneNumber
-        pfp
-      }
+      customer
       orderItems {
         items {
           comment
