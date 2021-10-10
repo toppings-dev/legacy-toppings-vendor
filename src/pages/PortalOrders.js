@@ -176,6 +176,10 @@ function PortalOrders(props) {
     // const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     console.log(receivedOrdersResponse);
     const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant;
+    for (let i = 0; i < receivedOrders?.data?.listOrdersByRestaurant?.length; i++) {
+      receivedOrders.data.listOrdersByRestaurant[i].customer = JSON.parse(receivedOrders.data.listOrdersByRestaurant[i].customer);
+      receivedOrders.data.listOrdersByRestaurant[i].pickup.deliverer = JSON.parse(receivedOrders.data.listOrdersByRestaurant[i].pickup.deliverer);
+    }
 
     setOrders({
       New: [],
