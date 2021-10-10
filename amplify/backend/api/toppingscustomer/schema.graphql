@@ -1,0 +1,371 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Query {
+  getMenu(id: ID!): Restaurant!
+  listActiveOrdersByCustomer(customerId: String!): [Order]!
+  listOpenPickups(userId: String!): [Pickup]!
+  getOrderInfo(id: ID!): Order!
+  getRewardInfo(menuId: ID!, userId: String!): Reward!
+  getVendorRewards(menuId: ID!): [VendorReward]!
+  listRestaurantsInfo: [Restaurant]!
+  getPickupInfo(delivererId: String!): Pickup!
+  getUserInfo(userId: String!): User!
+  getPickupPublicInfo(id: ID!): Pickup!
+  listOrdersByRestaurant(restaurantId: ID!): [Order]!
+  getRestaurantByOwner(userId: String!): Restaurant!
+  listUsers: [User]!
+}
+
+type Mutation {
+  updateDriverLocation(id: ID!, lat: Float!, long: Float!): Pickup!
+  updateEta(id: ID!, estimated_delivery_time: AWSTimestamp!): Order!
+  createNewPickup(delivererId: String!, menuId: ID!, windowOpenTime: Int!, rewardsCart: AWSJSON!, cart: AWSJSON!, stripeToken: String! currency: String!, description: String!): Pickup!
+  createNewOrder(pickupId: ID!, orderRestaurantId: ID!, delivery_address: String!, delivery_lat: Float!, delivery_long: Float!, customerId: String!, rewardsCart: AWSJSON!, cart: AWSJSON!, stripeToken: String!, currency: String!, description: String!): Order!
+  closeOrder(id: ID!): Order!
+  acceptOrder(id: ID!): Order!
+  declineOrder(id: ID!): Order!
+  markPickupPickedUp(id: ID!): Pickup!
+  markOrderDelivered(id: ID!): Order!
+  cancelOrder(id: ID!): Order!
+  updatePfp(userId: String!, pfp: String!): User!
+  updateDeviceToken(userId: String!, deviceToken: String!): User!
+  createFeedback(userId: String!, feedback: String!): Feedback!
+  updatePlatform(userId: String!, platform: String!): User!
+  createMenuCategory(menuId: ID!, name: String!): MenuCategory!
+  createVendorReward(itemName: String!, menuId: ID!, points: Int!, date_active_from: AWSDate, date_active_to: AWSDate, discountAmount: Float, discountPercentage: Float, description: String!): VendorReward!
+  updateVendorReward(id: ID!, itemName: String!, menuId: ID!, points: Int!, description: String!): VendorReward!
+  deleteVendorReward(id: ID!): VendorReward!
+  createToppings(id: ID!, selectedMenuItemToppings: AWSJSON!, selectedMenuItemOptions: AWSJSON!, selectedMenuItemExistingToppings: AWSJSON!, menuItem: AWSJSON!): Restaurant!
+  updateRestaurantFields(id: ID!, input: UpdateRestaurantInput!): Restaurant!
+  createMenuItem(menuId: ID!, menuCategoryName: String!, name: String!, description: String!, price: Float!): MenuItem!
+  updateMenuItem(id: ID!, menuId: ID!, menuCategoryName: String!, name: String!, description: String!, price: Float!): MenuItem!
+  createRestaurant(name: String!, userId: String, address: String, city: String, description: String, lat: Float, long: Float, phoneNumber: AWSPhone, state: String, zip_code: String, isOpen: String): Restaurant!
+  updateFoodReadyTime(id: ID!, food_ready_time: AWSTimestamp, status: STATUS): Order!
+  deleteMenuItem(id: ID!): MenuItem!
+  updateUserAttributes(name: String!): User!
+}
+
+type Subscription {
+  onUpdateDriverLocation: Pickup @aws_subscribe(mutations: ["updateDriverLocation"])
+  onCreateNewOrder: Order @aws_subscribe(mutations: ["createNewOrder"])
+  onCreateNewPickup: Pickup @aws_subscribe(mutations: ["createNewPickup"])
+}
+
+input UpdateRestaurantInput {
+  name: String, 
+  description: String, 
+  phoneNumber: AWSPhone, 
+  userId: String, 
+  address: String, 
+  city: String, 
+  state: String, 
+  zip_code: String, 
+  restaurantOwnerName: String, 
+  sundayHours: String, 
+  mondayHours: String, 
+  tuesdayHours: String, 
+  wednesdayHours: String, 
+  thursdayHours: String, 
+  fridayHours: String, 
+  saturdayHours: String, 
+  isOpen: String
+}
+
+type University @model(queries: {}, mutations: {}) 
+@key(fields: ["name"])
+{
+  name: String!
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  students: [User] @connection
+}
+
+type User @model(queries: {}, mutations: {}) 
+@key(fields:["pk", "sk"])
+{
+  pk: String!
+  sk: String!
+  phoneNumber: String!
+  cognitoId: String!
+  isUser: Boolean!
+  pfp: String!
+  name: String
+  referralCode: String
+  dev: Boolean!
+  admin: Boolean!
+  referredUsers: [User]
+  referrer: User
+  deviceToken: String
+  platform: String
+}
+
+type Referral @model(queries: {}, mutations: {})
+@key(fields:["code"])
+{
+  code: String!
+  userId: String!
+}
+
+type Restaurant @model(queries: {}, mutations: {})
+@key(name: "byOpen", fields: ["isOpen"])
+@key(name: "byUserId", fields: ["userId"]) 
+{
+  id: ID!
+  name: String!
+  menuCategories: [MenuCategory] @connection(keyName:"categoriesByMenu",fields:["id"])
+  menuItems: [MenuItem] @connection(fields:["id"])
+  foodOptions: [FoodOption] @connection(fields:["id"])
+  joinedItemsOptions: [ItemOptionCatJoin] @connection(keyName: "byMenu", fields:["id"])
+  options: [Option] @connection(fields:["id"])
+  joinedItemOptionsOptions: [ItemOptionOptionJoin] @connection(keyName: "byMenu", fields:["id"])
+  description: String
+  address: String!
+  zip_code: String!
+  city: String!
+  state: String!
+  lat: Float
+  long: Float
+  phoneNumber: AWSPhone
+  userId: String!
+  restaurantOwnerName: String
+  sundayHours: String
+  mondayHours: String
+  tuesdayHours: String
+  wednesdayHours: String
+  thursdayHours: String
+  fridayHours: String
+  saturdayHours: String
+  images: [RestaurantImage] @connection(keyName:"imagesByMenu", fields:["id"])
+  isOpen: String!
+}
+
+type MenuCategory @model(queries: {}, mutations: {})  
+@key(name: "byCategoryName", fields: ["menuId", "name"])
+@key(name: "categoriesByMenu", fields: ["menuId"])
+{
+  id: ID!
+  name: String!
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  menuItems: [MenuItem] @connection(keyName: "byCategory", fields: ["menuId", "name"])
+}
+
+type MenuItem @model(queries: {}, mutations: {})  
+@key(name:"byMenu", fields:["menuId"])
+@key(name: "byItemName", fields: ["menuId", "name"])
+@key(name: "byCategory", fields: ["menuId", "menuCategoryName"])
+{
+  id: ID!
+  name: String!
+  description: String
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  menuCategoryName: String!
+  menuCategory: [MenuCategory] @connection(keyName: "byCategoryName",fields: ["menuId", "menuCategoryName"])
+  price: Float!
+  options: [ItemOptionCatJoin] @connection(keyName: "byMenuItem", fields:["menuId", "name"])
+}
+type FoodOption @model(queries: {}, mutations: {})  
+@key(fields: ["menuId", "name"])
+{
+  name: String!
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  menuItem: [ItemOptionCatJoin] @connection(keyName: "byFoodOptionName", fields:["menuId", "name"])
+  options: [ItemOptionOptionJoin] @connection(keyName: "byFoodOptionName", fields:["menuId", "name"])
+}
+
+type ItemOptionCatJoin @model(queries: {}, mutations: {}) 
+@key(name:"byMenu", fields:["menuId"])
+@key(name:"byMenuItem", fields:["menuId", "menuItemName"])
+@key(name:"byFoodOptionName", fields:["menuId", "foodOptionName"])
+{
+  id: ID!
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  foodOptionName: String!
+  menuItemName: String!
+  menuItem: [MenuItem]! @connection(keyName: "byItemName", fields: ["menuId", "menuItemName"])
+  optionCat: FoodOption! @connection(fields: ["menuId", "foodOptionName"])
+  numchoices: Int
+}
+
+type Option @model(queries: {}, mutations: {})  
+@key(fields: ["menuId", "name"])
+{
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  name: String!
+  price: Float
+  foodoption: [ItemOptionOptionJoin] @connection
+}
+
+type ItemOptionOptionJoin @model(queries: {}, mutations: {}) 
+@key(name:"byMenu", fields:["menuId"])
+@key(name:"byFoodOptionName", fields:["menuId", "foodOptionName"])
+@key(name:"byOptionName", fields:["menuId", "optionName"])
+{
+  id: ID!
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  optionName: String!
+  foodOptionName: String!
+  foodOption: FoodOption! @connection(fields: ["menuId", "foodOptionName"])
+  option: Option! @connection(fields:["menuId", "optionName"])
+}
+
+enum PICKUP_STATUS {
+  WINDOW,
+  PREPARING,
+  PICKEDUP,
+  CLOSED
+}
+
+type Pickup @model(queries: {}, mutations: {}) 
+@key(name:"byMenu", fields:["menuId"])
+@key(name:"byDelivererId", fields:["delivererId", "closed"])
+@key(name:"byWindowClosed", fields:["windowClosed"])
+{
+  id: ID!
+  delivererId: String!
+  deliverer: User
+  orders: [Order] @connection(keyName: "byPickupId", fields: ["id"])
+  lat: Float
+  long: Float
+  expdate: AWSTime
+  friends: [User]
+  transportation_type: TRANSPORTATION_TYPE!
+  apiResponse: AWSJSON
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  closed: String
+  windowEndTime: AWSTimestamp
+  windowClosed: String
+  isPickedUp: Boolean
+  status: PICKUP_STATUS
+}
+
+enum TRANSPORTATION_TYPE {
+  DRIVING,
+  WALKING,
+  BICYCLING
+}
+
+enum STATUS {
+  PENDING,
+  ACCEPTED,
+  DECLINED,
+  PREPARING,
+  READY,
+  PICKEDUP,
+  DELIVERED,
+  RECEIVED,
+  REFUND,
+  CANCELED
+}
+
+type Order @model(queries: {}, mutations: {}) 
+@key(name: "byPickupId", fields:["pickupId", "closed"])
+@key(name: "byCustomerId", fields:["customerId", "closed"])
+{
+    id: ID!
+    restaurant: Restaurant @connection
+    food_ready_time: AWSTimestamp
+    estimated_delivery_time: AWSTimestamp
+    actual_delivery_time: AWSTimestamp
+    delivery_address: String!
+    delivery_lat: Float
+    delivery_long: Float
+    customerId: String!
+    customer: User
+    comment: String
+    orderItems: [OrderItem] @connection(keyName: "byOrder", fields: ["id"])
+    order_price_before_discount: Float
+    order_price_after_discount: Float
+    discount: Float
+    tax: Float
+    fees: Float
+    tip: Float
+    grandTotal: Float
+    pickupId: ID!
+    pickup: Pickup @connection(fields:["pickupId"])
+    status: STATUS
+    closed: String
+    isPaid: Boolean
+    charge_id: String
+}
+
+type Reward @model(queries: {}, mutations: {}) 
+@key(name: "byUserId", fields:["userId"])
+@key(name: "byMenu", fields:["menuId", "userId"])
+{
+    id: ID!
+    userId: String!
+    owner: User! @connection(fields:["userId"])
+    menuId: ID!
+    points: Int 
+    restaurant: Restaurant @connection(fields:["menuId"]) 
+}
+
+type VendorReward @model(queries: {}, mutations: {}) 
+@key(name: "byMenu", fields:["menuId"]) 
+{
+  id: ID!
+  date_active_from: AWSDate
+  date_active_to: AWSDate
+  discountPercentage: Float
+  discountAmount: Float
+  itemName: String!
+  menuId: ID!
+  points: Int!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  description: String
+}
+
+type OrderItem @model(queries: {}, mutations: {}) 
+@key(name: "byOrder", fields: ["orderId"])
+@key(name: "byMenu", fields:["menuId"])
+{
+    id: ID!
+    orderId: ID!
+    menuId: ID!
+    itemName: String!
+    order: Order @connection(fields: ["orderId"])
+    menuItem: [MenuItem]! @connection(keyName:"byItemName", fields:["menuId", "itemName"])
+    price_per_item: Float!
+    price_before_reward: Float!
+    price_after_reward: Float
+    quantity: Int!
+    reward: Reward @connection
+    comment: String
+    foodOptionsArray: [String]
+}
+
+enum IMAGE_TYPE {
+  THUMBNAIL
+}
+
+type RestaurantImage @model(queries: {}, mutations: {}) 
+@key(name: "imagesByMenu", fields: ["menuId"])
+{
+  id: ID!
+  menuId: ID!
+  restaurant: Restaurant @connection(fields:["menuId"])
+  type: IMAGE_TYPE!
+  url: String!
+}
+
+type Feedback @model(queries: {}, mutations: {})
+@key(name: "byResolved", fields: ["resolved"])
+{
+  id: ID!
+  userId: String!
+  feedback: String!
+  resolved: String!
+}

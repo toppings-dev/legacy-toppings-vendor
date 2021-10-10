@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "getPickupLayer",
+      "version": 1
+    }
+  ]
+}

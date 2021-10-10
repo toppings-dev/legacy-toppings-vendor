@@ -44,9 +44,10 @@ function Portal(props) {
     // if (getCurrentUser().hasOwnProperty("username")) {
       // await login();
       console.log("GD")
-      const userId = await getCurrentUser() == null ? props.user.sub : await getCurrentUser().sub;
-      console.log("GET RESTU", email)
+      const userId = await getCurrentUser() == null ? props.user.sub : await getCurrentUser().cognitoId;
+      console.log("GET RESTU", userId)
       const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { userId }));
+      console.log("HELOOOOOOO");
       console.log("Set restaurant resp", restaurantsResponse);
       const restaurant = restaurantsResponse.data.getRestaurantByOwner;
       setRestaurant(restaurant);

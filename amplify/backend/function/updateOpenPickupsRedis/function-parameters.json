@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "listOpenPickupsLayer",
+      "version": 1
+    }
+  ]
+}

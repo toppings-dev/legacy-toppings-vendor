@@ -49,6 +49,7 @@ function PortalOrders(props) {
 
   async function toggleReceivingOrders() {
     console.log("TOG")
+    console.log("NOTICE ME", props.restaurant.id)
     const updatedRestaurant = {
       id: props.restaurant.id,
       input: { isOpen: !receivingOrders ? "true" : "false", },
@@ -59,7 +60,7 @@ function PortalOrders(props) {
     // const updatedRestaurantResponse = await API.graphql(graphqlOperation(mutations.updateRestaurant, { input: updatedRestaurant }));
     const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
     console.log(updatedRestaurantResponse)
-    setReceivingOrders(updatedRestaurantResponse.data.updateRestaurant.isOpen === "true");
+    setReceivingOrders(updatedRestaurantResponse.data.updateRestaurantFields.isOpen === "true");
   }
 
   async function advanceOrder(order, currentStatus) {

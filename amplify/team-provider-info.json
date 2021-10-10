@@ -1,0 +1,214 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-toppingscustomer-dev-122034-authRole",
+      "UnauthRoleArn": "arn:aws:iam::830197922202:role/amplify-toppingscustomer-dev-122034-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::830197922202:role/amplify-toppingscustomer-dev-122034-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+      "UnauthRoleName": "amplify-toppingscustomer-dev-122034-unauthRole",
+      "StackName": "amplify-toppingscustomer-dev-122034",
+      "StackId": "arn:aws:cloudformation:us-east-1:830197922202:stack/amplify-toppingscustomer-dev-122034/3d1381d0-82a7-11eb-a7cb-0e5b1dad9edf",
+      "AmplifyAppId": "dbqv0a6x2gpof"
+    },
+    "categories": {
+      "auth": {
+        "toppingsUsers": {}
+      },
+      "function": {
+        "migrateDB": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/migrateDB-5757674955336d35766d-build.zip"
+        },
+        "updateDriverLocationResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateDriverLocationResolver-356c74757547672f7036-build.zip"
+        },
+        "updateEtaResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateEtaResolver-43486b48643455774373-build.zip"
+        },
+        "createOrderResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createOrderResolver-72355653793679373562-build.zip"
+        },
+        "createPickupResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createPickupResolver-354861574f5352695748-build.zip"
+        },
+        "listActiveOrdersByCustomer": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listActiveOrdersByCustomer-5576586470706b757975-build.zip"
+        },
+        "listOpenPickupsResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listOpenPickupsResolver-66697136547449375856-build.zip"
+        },
+        "closePickupWindow": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/closePickupWindow-57456c4a445a4c375647-build.zip"
+        },
+        "closeOrderResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/closeOrderResolver-356b573534746f4c486c-build.zip"
+        },
+        "getOrderResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/getOrderResolver-685451684153676e5972-build.zip"
+        },
+        "getRewardResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/getRewardResolver-535768414e4839706f72-build.zip"
+        },
+        "listRestaurantsInfo": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listRestaurantsInfo-2f71582f62792b554270-build.zip"
+        },
+        "getPickupResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/getPickupResolver-35576c38796a53565248-build.zip"
+        },
+        "acceptOrderResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/acceptOrderResolver-766c35396e3766326c6f-build.zip"
+        },
+        "declineOrder": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/declineOrder-2f6a422f744457706f77-build.zip"
+        },
+        "markPickupPickedUpResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/markPickupPickedUpResolver-78344554684c31455076-build.zip"
+        },
+        "markOrderDeliveredResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/markOrderDeliveredResolver-55636277455877517345-build.zip"
+        },
+        "getUserInfoResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/getUserInfoResolver-79325a41772b4838722b-build.zip"
+        },
+        "cancelOrderResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/cancelOrderResolver-7461467461746d546a63-build.zip"
+        },
+        "updatePfpResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updatePfpResolver-6d583830516b57697379-build.zip"
+        },
+        "getPickupLayer": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/getPickupLayer-build.zip"
+        },
+        "updateActivePickupRedis": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateActivePickupRedis-4d6649436d7172422b31-build.zip"
+        },
+        "activeOrdersByCustomerLayer": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/activeOrdersByCustomerLayer-build.zip"
+        },
+        "updateActiveOrdersByCustomerRedis": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateActiveOrdersByCustomerRedis-464550314a4e36514375-build.zip"
+        },
+        "updateOpenPickupsRedis": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateOpenPickupsRedis-59307157366247565835-build.zip"
+        },
+        "listOpenPickupsLayer": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listOpenPickupsLayer-build.zip"
+        },
+        "updateRewardInfoRedis": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateRewardInfoRedis-746c697367553844694d-build.zip"
+        },
+        "updateDeviceTokenResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateDeviceTokenResolver-31446e6d59443654594d-build.zip"
+        },
+        "createFeedbackResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createFeedbackResolver-334e2f7678415644416d-build.zip"
+        },
+        "updatePlatformResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updatePlatformResolver-4e76575a3131727a442f-build.zip"
+        },
+        "createMenuCategoryResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createMenuCategoryResolver-715443474c3770615252-build.zip"
+        },
+        "createVendorRewardResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createVendorRewardResolver-4641544b5a3064567548-build.zip"
+        },
+        "updateVendorRewardResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateVendorRewardResolver-704771374b2b596b5431-build.zip"
+        },
+        "deleteVendorRewardResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/deleteVendorRewardResolver-38667146527457594649-build.zip"
+        },
+        "createToppingsResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createToppingsResolver-712b416d722f412f6e32-build.zip"
+        },
+        "updateRestaurantResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateRestaurantResolver-4e787378346a41546361-build.zip"
+        },
+        "createMenuItemResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createMenuItemResolver-52437770436e30734965-build.zip"
+        },
+        "updateMenuItemResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateMenuItemResolver-714b6968336a6a6f5575-build.zip"
+        },
+        "createRestaurantResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/createRestaurantResolver-3262722b4b6250705532-build.zip"
+        },
+        "listOrdersByRestaurantResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listOrdersByRestaurantResolver-47727849713571433679-build.zip"
+        },
+        "updateFoodReadyResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateFoodReadyResolver-6d4e6c4f31747273766e-build.zip"
+        },
+        "listMenuCategoriesResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listMenuCategoriesResolver-4768534c697a6c672b69-build.zip"
+        },
+        "getRestaurantByOwnerResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/getRestaurantByOwnerResolver-7678512b392b51623371-build.zip"
+        },
+        "deleteMenuItemResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/deleteMenuItemResolver-364a4565375267777764-build.zip"
+        },
+        "listUsersResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/listUsersResolver-5854344838564e496766-build.zip"
+        },
+        "authPostVerification": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/authPostVerification-4d71422b4c57714a5654-build.zip"
+        },
+        "updateUserAttributesResolver": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/updateUserAttributesResolver-414d5063374270466a73-build.zip"
+        },
+        "toppingscustomer5e5736455e573645PostConfirmation": {
+          "deploymentBucketName": "amplify-toppingscustomer-dev-122034-deployment",
+          "s3Key": "amplify-builds/toppingscustomer5e5736455e573645PostConfirmation-5436416b536f486c366f-build.zip"
+        }
+      }
+    }
+  }
+}

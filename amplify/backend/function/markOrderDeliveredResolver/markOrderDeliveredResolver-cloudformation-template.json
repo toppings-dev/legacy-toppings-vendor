@@ -1,0 +1,440 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Parameters": {
+    "CloudWatchRule": {
+      "Type": "String",
+      "Default": "NONE",
+      "Description": " Schedule Expression"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "env": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
+    },
+    "PROD": {
+      "Type": "String",
+      "Default": "false"
+    },
+    "USERDBNAME": {
+      "Type": "String",
+      "Default": "User-27bvxqrbkrffdfchjgaqmtrn7y-dev"
+    },
+    "ORDERDBNAME": {
+      "Type": "String",
+      "Default": "Order-27bvxqrbkrffdfchjgaqmtrn7y-dev"
+    },
+    "PICKUPDBNAME": {
+      "Type": "String",
+      "Default": "Pickup-27bvxqrbkrffdfchjgaqmtrn7y-dev"
+    },
+    "ACTIVEPICKUPUPDATETOPICARN": {
+      "Type": "String",
+      "Default": "arn:aws:sns:us-east-1:830197922202:activePickupUpdate-dev"
+    },
+    "ACTIVEORDERSBYCUSTOMERUPDATETOPICARN": {
+      "Type": "String",
+      "Default": "arn:aws:sns:us-east-1:830197922202:activeOrdersByCustomerUpdate-dev"
+    },
+    "ORDERINFOUPDATETOPICARN": {
+      "Type": "String",
+      "Default": "arn:aws:sns:us-east-1:830197922202:orderInfoUpdate-dev"
+    },
+    "RESTAURANTDBNAME": {
+      "Type": "String",
+      "Default": "Restaurant-27bvxqrbkrffdfchjgaqmtrn7y-dev"
+    },
+    "PNSTOPICARN": {
+      "Type": "String",
+      "Default": "arn:aws:sns:us-east-1:830197922202:pns-dev"
+    },
+    "ORDERITEMDBNAME": {
+      "Type": "String",
+      "Default": "OrderItem-27bvxqrbkrffdfchjgaqmtrn7y-dev"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "LambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Metadata": {
+        "aws:asset:path": "./src",
+        "aws:asset:property": "Code"
+      },
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
+        "Handler": "index.handler",
+        "FunctionName": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "markOrderDeliveredResolver",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "markOrderDeliveredResolver",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "ENV": {
+              "Ref": "env"
+            },
+            "REGION": {
+              "Ref": "AWS::Region"
+            },
+            "PROD": {
+              "Ref": "PROD"
+            },
+            "USERDB_NAME": {
+              "Ref": "USERDBNAME"
+            },
+            "ORDERDB_NAME": {
+              "Ref": "ORDERDBNAME"
+            },
+            "PICKUPDB_NAME": {
+              "Ref": "PICKUPDBNAME"
+            },
+            "ACTIVEPICKUPUPDATE_TOPIC_ARN": {
+              "Ref": "ACTIVEPICKUPUPDATETOPICARN"
+            },
+            "ACTIVEORDERSBYCUSTOMERUPDATE_TOPIC_ARN": {
+              "Ref": "ACTIVEORDERSBYCUSTOMERUPDATETOPICARN"
+            },
+            "ORDERINFOUPDATE_TOPIC_ARN": {
+              "Ref": "ORDERINFOUPDATETOPICARN"
+            },
+            "RESTAURANTDB_NAME": {
+              "Ref": "RESTAURANTDBNAME"
+            },
+            "PNS_TOPIC_ARN": {
+              "Ref": "PNSTOPICARN"
+            },
+            "ORDERITEMDB_NAME": {
+              "Ref": "ORDERITEMDBNAME"
+            }
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaExecutionRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs14.x",
+        "Layers": [],
+        "Timeout": "25"
+      }
+    },
+    "LambdaExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "toppingscustomerLambdaRole0768cec1",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "toppingscustomerLambdaRole0768cec1",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "lambdaexecutionpolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Resource": {
+                "Fn::Sub": [
+                  "arn:aws:logs:${region}:${account}:log-group:/aws/lambda/${lambda}:log-stream:*",
+                  {
+                    "region": {
+                      "Ref": "AWS::Region"
+                    },
+                    "account": {
+                      "Ref": "AWS::AccountId"
+                    },
+                    "lambda": {
+                      "Ref": "LambdaFunction"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "dynamodbaccess": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "dynamodb-access",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:*",
+                "dax:*",
+                "application-autoscaling:DeleteScalingPolicy",
+                "application-autoscaling:DeregisterScalableTarget",
+                "application-autoscaling:DescribeScalableTargets",
+                "application-autoscaling:DescribeScalingActivities",
+                "application-autoscaling:DescribeScalingPolicies",
+                "application-autoscaling:PutScalingPolicy",
+                "application-autoscaling:RegisterScalableTarget",
+                "cloudwatch:DeleteAlarms",
+                "cloudwatch:DescribeAlarmHistory",
+                "cloudwatch:DescribeAlarms",
+                "cloudwatch:DescribeAlarmsForMetric",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics",
+                "cloudwatch:PutMetricAlarm",
+                "cloudwatch:GetMetricData",
+                "datapipeline:ActivatePipeline",
+                "datapipeline:CreatePipeline",
+                "datapipeline:DeletePipeline",
+                "datapipeline:DescribeObjects",
+                "datapipeline:DescribePipelines",
+                "datapipeline:GetPipelineDefinition",
+                "datapipeline:ListPipelines",
+                "datapipeline:PutPipelineDefinition",
+                "datapipeline:QueryObjects",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "iam:GetRole",
+                "iam:ListRoles",
+                "kms:DescribeKey",
+                "kms:ListAliases",
+                "sns:CreateTopic",
+                "sns:DeleteTopic",
+                "sns:ListSubscriptions",
+                "sns:ListSubscriptionsByTopic",
+                "sns:ListTopics",
+                "sns:Subscribe",
+                "sns:Unsubscribe",
+                "sns:SetTopicAttributes",
+                "lambda:CreateFunction",
+                "lambda:ListFunctions",
+                "lambda:ListEventSourceMappings",
+                "lambda:CreateEventSourceMapping",
+                "lambda:DeleteEventSourceMapping",
+                "lambda:GetFunctionConfiguration",
+                "lambda:DeleteFunction",
+                "resource-groups:ListGroups",
+                "resource-groups:ListGroupResources",
+                "resource-groups:GetGroup",
+                "resource-groups:GetGroupQuery",
+                "resource-groups:DeleteGroup",
+                "resource-groups:CreateGroup",
+                "tag:GetResources",
+                "kinesis:ListStreams",
+                "kinesis:DescribeStream",
+                "kinesis:DescribeStreamSummary"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": "cloudwatch:GetInsightRuleReport",
+              "Effect": "Allow",
+              "Resource": "arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*"
+            },
+            {
+              "Action": [
+                "iam:PassRole"
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+              "Condition": {
+                "StringLike": {
+                  "iam:PassedToService": [
+                    "application-autoscaling.amazonaws.com",
+                    "application-autoscaling.amazonaws.com.cn",
+                    "dax.amazonaws.com"
+                  ]
+                }
+              }
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "iam:CreateServiceLinkedRole"
+              ],
+              "Resource": "*",
+              "Condition": {
+                "StringEquals": {
+                  "iam:AWSServiceName": [
+                    "replication.dynamodb.amazonaws.com",
+                    "dax.amazonaws.com",
+                    "dynamodb.application-autoscaling.amazonaws.com",
+                    "contributorinsights.dynamodb.amazonaws.com",
+                    "kinesisreplication.dynamodb.amazonaws.com"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "lambdarole": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "lambdarole",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:InvokeFunction"
+              ],
+              "Resource": [
+                "*"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sns": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "sns",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "sns:*"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "Name": {
+      "Value": {
+        "Ref": "LambdaFunction"
+      }
+    },
+    "Arn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "LambdaFunction",
+          "Arn"
+        ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "LambdaExecutionRole": {
+      "Value": {
+        "Ref": "LambdaExecutionRole"
+      }
+    }
+  }
+}

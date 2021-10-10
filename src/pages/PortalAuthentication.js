@@ -137,7 +137,7 @@ function PortalSignUp(props) {
     if (email.length > 0 && password.length > 0) {
       const user = { 
         username: email, 
-        password: password 
+        password: password,
       };
       console.log(user);
       await Auth.signIn(user); //.then(() => {
@@ -157,8 +157,13 @@ function PortalSignUp(props) {
           zip_code: "Your Zip Code",
           isOpen: "true",
         };
-  
-        await API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant))
+        
+        await API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant));
+
+        const userWithSub = {
+          ...user,
+          cognitoId: currentUser.attributes.sub,
+        };
       //   .then(createRestaurantResp => {
       //     console.log('Create Restaurant', createRestaurantResp);
       //     setErrorMsg('');
@@ -170,14 +175,14 @@ function PortalSignUp(props) {
       //   setErrorMsg(error.message);
       // });
       
-      setCurrentUser(user);
+      setCurrentUser(userWithSub);
       
       if (getCurrentPage() == null) {
         setCurrentPage("orders");
       }
 
 
-      props.setUser(user);
+      props.setUser(userWithSub);
       setLoggedIn(true);
     } else {
       setErrorMsg("Login info is incomplete.");

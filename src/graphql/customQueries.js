@@ -1,10 +1,10 @@
 export const getMenu = /* GraphQL */ `
   query GetMenu($id: ID!) {
     getMenu(id: $id) {
-      description
-      id
       name
       address
+      description
+      id
       sundayHours
       mondayHours
       tuesdayHours

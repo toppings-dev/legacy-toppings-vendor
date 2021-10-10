@@ -546,7 +546,7 @@ export const updateMenuItem = /* GraphQL */ `
 `;
 
 export const createVendorReward = /* GraphQL */ `
-  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: $String!) {
+  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: String!) {
     createVendorReward(menuId: $menuId, itemName: $itemName, points: $points, date_active_from: $date_active_from, date_active_to: $date_active_to, discountAmount: $discountAmount, discountPercentage: $discountPercentage, description: $description) {
       id
       itemName
@@ -600,7 +600,7 @@ export const updateRestaurant = /* GraphQL */ `
       mondayHours
       tuesdayHours
       wednesdayHours
-      thursdayHorus
+      thursdayHours
       fridayHours
       saturdayHours
       sundayHours

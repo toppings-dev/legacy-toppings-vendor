@@ -88,9 +88,11 @@ export const onCreateNewPickup = /* GraphQL */ `
       isPickedUp
       status
       deliverer {
-        email
+        pk
+        sk
         name
-        phone_number
+        phoneNumber
+        pfp
       }
       orders {
         items {
@@ -101,9 +103,10 @@ export const onCreateNewPickup = /* GraphQL */ `
           pickupId
           customerId
           customer {
-            email
+            pk
+            sk
             name
-            phone_number
+            phoneNumber
             pfp
           }
           orderItems {

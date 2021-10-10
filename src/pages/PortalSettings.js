@@ -110,8 +110,8 @@ function PortalSettings(props) {
       input: {
         name: nameInput.current.value,
         description: descriptionInput.current.value,
-        phone_number: phoneNumber,
-        email: emailInput.current.value,
+        phoneNumber: phoneNumber,
+        // email: emailInput.current.value,
         address: address,
         city: city,
         state: state,
