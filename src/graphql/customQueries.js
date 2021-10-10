@@ -71,11 +71,7 @@ export const listActiveOrdersByCustomer = /* GraphQL */ `
       pickup {
         id
         delivererId
-        deliverer {
-          pk
-          sk
-          name
-        }
+        deliverer
       }
       restaurant {
         id
@@ -95,11 +91,7 @@ export const listOpenPickups = /* GraphQL */ `
     listOpenPickups(userId: $userId) {
       id
       delivererId
-      deliverer {
-        pk
-        sk
-        name
-      }
+      deliverer
       windowEndTime
       menuId
       restaurant {
@@ -174,12 +166,7 @@ export const getOrder = /* GraphQL */ `
         apiResponse
         closed
         delivererId
-        deliverer {
-          pk
-          sk
-          name
-          phoneNumber
-        }
+        deliverer
         expdate
         id
         isPickedUp
@@ -191,15 +178,7 @@ export const getOrder = /* GraphQL */ `
         windowClosed
         windowEndTime
       }
-      customer {
-        deviceToken
-        pk
-        sk
-        name
-        isUser
-        phoneNumber
-        platform
-      }
+      customer
       orderItems {
         items {
           comment
@@ -292,12 +271,7 @@ export const getPickup = /* GraphQL */ `
       transportation_type
       windowClosed
       windowEndTime
-      deliverer {
-        pk
-        sk
-        name
-        phoneNumber
-      }
+      deliverer
       orders {
         items {
           actual_delivery_time
@@ -314,13 +288,7 @@ export const getPickup = /* GraphQL */ `
           status
           tax
           tip
-          customer {
-            pk
-            sk
-            name
-            phoneNumber
-            pfp
-          }
+          customer
           orderItems {
             items {
               comment
@@ -421,13 +389,7 @@ export const listOrdersByRestaurant = /* GraphQL */ `
       tax
       tip
       updatedAt
-      customer {
-        pk
-        sk
-        name
-        pfp
-        phoneNumber
-      }
+      customer
       orderItems {
         items {
           comment
@@ -460,13 +422,7 @@ export const listOrdersByRestaurant = /* GraphQL */ `
         updatedAt
         windowClosed
         windowEndTime
-        deliverer {
-          pk
-          sk
-          name
-          pfp
-          phoneNumber
-        }
+        deliverer
       }
       restaurant {
         address
@@ -521,18 +477,6 @@ export const getRestaurantByOwner = /* GraphQL */ `
       updatedAt
       wednesdayHours
       zip_code
-    }
-  }
-`;
-
-export const listUsers = /* GraphQL */ `
-  query ListUsers {
-    listUsers {
-      pk
-      sk
-      name
-      phoneNumber
-      pfp
     }
   }
 `;
