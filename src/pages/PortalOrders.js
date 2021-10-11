@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 
 import awsConfig from '../utils/awsConfig';
+import useInterval from '../utils/useInterval';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import * as subscriptions from '../graphql/subscriptions'
@@ -15,6 +16,7 @@ import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 import whiteCheckmark from '../assets/images/white-checkmark.svg';
 import grayCheckmark from '../assets/images/gray-checkmark.svg';
 import ding from '../assets/audio/ding.mp3';
+import { ConsoleLogger } from '@aws-amplify/core';
 
 function PortalOrders(props) {
   const newOrderTimeStamp = 30;
@@ -22,11 +24,14 @@ function PortalOrders(props) {
   const readyOrderTimeStamp = 5;
   const deliveredOrderTimeStamp = 0;
   const cancelledOrderTimeStamp = -1;
+  const dingTimer = 5000;
 
+  const audio = new Audio(ding);
   const [loading, setLoading] = useState(false);
-  const [audio] = useState(new Audio(ding));
+  //const [audio] = useState(new Audio(ding));
   const [selectedOrder, selectOrder] = useState(null); 
   const [receivingOrders, setReceivingOrders] = useState(true);
+  const [hasNew, setHasNew] = useState(false);
   const [orders, setOrders] = useState({
     // New: [{id: 73, deliverer: "Patrick Star", customer: "Gary", tip: 0.00, instructions: "Meow", items: [{name: "Golden Loaf", price: 2.50}, {name: "Krabby Patty", price: 2.99}]}, 
     //       {id: 72, deliverer: "Plankton", customer: "Karen", tip: 2.00, instructions: "Give me the secret formula Mr. Krabs!", items: [{name: "Krabby Patty", price: 2.99}]}],
@@ -36,10 +41,10 @@ function PortalOrders(props) {
     
     New: [],
     Preparing: [],
-    Ready: [],
+    // Ready: [],
     // Cancelled: [],
   });
-
+  let timerId;
   useEffect(() => {
     setLoading(true);
     
@@ -47,6 +52,10 @@ function PortalOrders(props) {
     orderReceived();
   }, []);
 
+  useInterval(() => {
+    audio.play();
+  }, hasNew ? dingTimer : null);
+  
   async function toggleReceivingOrders() {
     console.log("TOG")
     console.log("NOTICE ME", props.restaurant.id)
@@ -103,6 +112,10 @@ function PortalOrders(props) {
 
     if (ordersCopy.New.length + ordersCopy.Preparing.length + ordersCopy.Ready.length <= 0) {
       selectOrder(null);
+    }
+    if (ordersCopy.New.length < 1) {
+      console.log("RESET AUDIO");
+      setHasNew(false);
     }
 
     setOrders({... ordersCopy});
@@ -186,7 +199,6 @@ function PortalOrders(props) {
       Preparing: [],
       Ready: [],
     });
-    
     receivedOrders.forEach(order => {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
         const date = new Date(Date.parse(order.createdAt));
@@ -208,11 +220,12 @@ function PortalOrders(props) {
             Cancelled: [myOrder, ...oldOrders["Cancelled"]],
           }));
         } else*/ if (/*!myOrder.closed && */myOrder.food_ready_time > preparingOrderTimeStamp) {
-          audio.play();
           setOrders(oldOrders => ({
             ...oldOrders,
             New: [myOrder, ...oldOrders["New"]],
           }));
+          setHasNew(true);
+          console.log('set hasNew to true', myOrder)
         } else if (/*!myOrder.closed && */myOrder.food_ready_time > readyOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
@@ -226,9 +239,11 @@ function PortalOrders(props) {
         }
       }
     });
+
     setLoading(false);
   }
 
+  console.log("ORDERS:", orders);
   return (
     <article className="portal-orders-container">
     {loading ? 
@@ -247,26 +262,23 @@ function PortalOrders(props) {
                 <span className="orange-subheading">{`${new Date().getMonth() + 1}/${String(new Date().getDate()).padStart(2, "0")}/${String(new Date().getFullYear()).slice(2, 4)}`}</span>
                 <button className={receivingOrders ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
               </header>
-                {Object.keys(orders).map((category =>
-                  <div key={category}>
-                    <span className="order-category">{category == "Cancelled" ? "Cancelled/Closed" : category}</span>
-
-                    <div className="order-category-container">
-                      {orders[category].length > 0 ?
+              <div>
+                <span className="order-category">Current</span>
+                <div className="order-category-container">
+                  {Object.keys(orders).map((category =>
+                    <div key={category}>
+                      {orders[category].length > 0 &&
                         orders[category].sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
                           <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
                             <span>#{order.id.slice(0, 5)}...</span> 
                             <span>{category == "New" ? <button>New</button> : ""}</span>
                           </div>
                         )
-                      : 
-                        <div className="empty-order-container">
-                          {category == "New" ? "No new orders." : category == "Preparing" ? "No orders are being prepared." : category == "Ready" ? "No orders are ready." : category == "Cancelled" ? "No cancelled orders." : ""}
-                        </div>
                       }
                     </div>
-                  </div> 
-                ))}
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="portal-orders-info">
               {selectedOrder != null ? 
@@ -346,11 +358,11 @@ function PortalOrders(props) {
 
                       <button className="gray">Report Issue</button>
                       {orders.New.indexOf(selectedOrder) > -1 ? 
-                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "New")}>Confirm Order</button>
+                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "New")}>Accept</button>
                       : orders.Preparing.indexOf(selectedOrder) > -1 ? 
-                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "Preparing")}>Ready for Pickup</button>
-                      : orders.Ready.indexOf(selectedOrder) > -1 ? 
-                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "Ready")}>Delivered</button>
+                        <button className="orange">Completed</button>
+                      // : orders.Ready.indexOf(selectedOrder) > -1 ? 
+                      //   <button className="orange">Completed</button>
                       /*: orders.Cancelled.indexOf(selectedOrder) > -1 ?
                       <button className="orange" onClick={() => advanceOrder(selectedOrder, "Cancelled")}>Confirm</button>*/
                       : ""}
