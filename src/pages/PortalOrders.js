@@ -41,7 +41,7 @@ function PortalOrders(props) {
     
     New: [],
     Preparing: [],
-    // Ready: [],
+    Ready: [],
     // Cancelled: [],
   });
   let timerId;
@@ -58,7 +58,7 @@ function PortalOrders(props) {
   
   async function toggleReceivingOrders() {
     console.log("TOG")
-    console.log("NOTICE ME", props.restaurant.id)
+    console.log("selectedorder:", selectedOrder);
     const updatedRestaurant = {
       id: props.restaurant.id,
       input: { isOpen: !receivingOrders ? "true" : "false", },
@@ -72,7 +72,13 @@ function PortalOrders(props) {
     setReceivingOrders(updatedRestaurantResponse.data.updateRestaurantFields.isOpen === "true");
   }
 
+  async function timerAdvanceOrder(order, currentStatus) {
+    console.log("crashing is fun");
+    advanceOrder(selectedOrder, "New");
+    setTimeout(()=>advanceOrder(selectedOrder, "Preparing"), 900000);
+  }
   async function advanceOrder(order, currentStatus) {
+    console.log("advance status:", currentStatus);
     const ordersCopy = orders;
     ordersCopy[currentStatus] = ordersCopy[currentStatus].filter(item => item != order);
     if (currentStatus == "Incoming") {
@@ -120,7 +126,6 @@ function PortalOrders(props) {
 
     setOrders({... ordersCopy});
   }
-
   async function orderReceived() {
 
     await API.graphql(graphqlOperation(customSubscription.onCreateNewPickup)).subscribe({ next: (eventData) => {
@@ -202,18 +207,19 @@ function PortalOrders(props) {
     receivedOrders.forEach(order => {
       if (order.restaurant.id == props.restaurant.id && order.isPaid) {
         const date = new Date(Date.parse(order.createdAt));
+        console.log("ORDER INFO:", order);
         const myOrder = {
           ...order,
           id: order.id, 
-          deliverer: order.pickup.deliverer.name, 
-          customer: order.customer.name, 
+          deliverer: JSON.parse(order.pickup.deliverer).name, 
+          customer: JSON.parse(order.customer).name, 
           tip: order.tip, 
           instructions: order.comment != null ? order.comment.toString() : "",
           items: order.orderItems.items,
           time: `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")} (${date.getMonth() + 1}/${date.getDate()})`,
           food_ready_time: order.hasOwnProperty("food_ready_time") && order.food_ready_time != null ? order.food_ready_time : newOrderTimeStamp,
         }
-
+        console.log("myorder info", myOrder.customer)
         /*if (myOrder.closed && myOrder.food_ready_time > deliveredOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
@@ -264,6 +270,36 @@ function PortalOrders(props) {
               </header>
               <div>
                 <span className="order-category">Current</span>
+                <div>
+                  {orders.New.length > 0 &&
+                    orders.New.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
+                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>#{order.id.slice(0, 5)}...</span>  
+                        <span><button>New</button></span>
+                      </div>
+                    )
+                  }
+                  {orders.Preparing.length > 0 &&
+                    orders.Preparing.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
+                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>#{order.id.slice(0, 5)}...</span> 
+                      </div>
+                    )
+                  }
+                </div>
+                <span className="order-category">Completed</span>
+                <div>
+                  {orders.Ready.length > 0 &&
+                    orders.Ready.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
+                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>#{order.id.slice(0, 5)}...</span>  
+                      </div>
+                    )
+                  }
+                </div>
+              </div>
+              {/* <div>
+                
                 <div className="order-category-container">
                   {Object.keys(orders).map((category =>
                     <div key={category}>
@@ -278,7 +314,7 @@ function PortalOrders(props) {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div>*/}
             </div>
             <div className="portal-orders-info">
               {selectedOrder != null ? 
@@ -307,7 +343,7 @@ function PortalOrders(props) {
 
                     {orders.Ready.indexOf(selectedOrder) > -1 ? 
                       <div className="order-delivery-time">
-                        <span className="blue-subheading">Waiting for delivery confirmation.</span>
+                        {/* <span className="blue-subheading">Waiting for delivery confirmation.</span> */}
                       </div>
                     : ""}
 
@@ -358,9 +394,9 @@ function PortalOrders(props) {
 
                       <button className="gray">Report Issue</button>
                       {orders.New.indexOf(selectedOrder) > -1 ? 
-                        <button className="orange" onClick={() => advanceOrder(selectedOrder, "New")}>Accept</button>
+                        <button className="orange" onClick={() => timerAdvanceOrder(selectedOrder, "New")}>Accept</button>
                       : orders.Preparing.indexOf(selectedOrder) > -1 ? 
-                        <button className="orange">Completed</button>
+                        <button className="orange">Accepted</button>
                       // : orders.Ready.indexOf(selectedOrder) > -1 ? 
                       //   <button className="orange">Completed</button>
                       /*: orders.Cancelled.indexOf(selectedOrder) > -1 ?
