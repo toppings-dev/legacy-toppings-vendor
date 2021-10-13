@@ -1,4 +1,4 @@
-const stage = "dev";
+const stage = "prod";
 
 const configVars = {
     dev: {
@@ -10,9 +10,9 @@ const configVars = {
         aws_user_files_s3_bucket: "images122034-dev",
     },
     prod: {
-        aws_cognito_identity_pool_id: "us-east-1:0d91a1fd-2f83-4386-94ff-13e7029d360e",
-        aws_user_pools_id: "us-east-1_sPJ3bNpKy",
-        aws_user_pools_web_client_id: "4f4neinvod1mgsfs69ogku2heo",
+        aws_cognito_identity_pool_id: "us-east-1:d28b4525-5715-4996-8b46-20d2c6bbd0a4",
+        aws_user_pools_id: "us-east-1_YgvAk1566",
+        aws_user_pools_web_client_id: "5n7lj78gnd8ocj4eu45v4eqjvj",
         aws_appsync_graphqlEndpoint: "https://mik3xstqlreaxo22eswh3jdlia.appsync-api.us-east-1.amazonaws.com/graphql",
         aws_dynamodb_table_schemas_tableName: "userdb-prod",
         aws_user_files_s3_bucket: "images153411-prod",
