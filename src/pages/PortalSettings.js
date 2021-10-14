@@ -26,7 +26,7 @@ function PortalSettings(props) {
              `${props.restaurant.address}, ${props.restaurant.city}, ${props.restaurant.state} ${props.restaurant.zip_code}`
              : "Your Address, Your City, Your State Your Zip Code",
     contact: props.restaurant.restaurantOwnerName,
-    phoneNumber: props.restaurant.phone_number != null && props.restaurant.phone_number.length > 0 ? props.restaurant.phone_number : "Your Restaurant Phone Number",
+    phoneNumber: props.restaurant.phoneNumber != null && props.restaurant.phoneNumber.length > 0 ? props.restaurant.phoneNumber : "Your Restaurant Phone Number",
     email: props.restaurant.email != null && props.restaurant.email.length > 0 ? props.restaurant.email : "Your Restaurant Email",
     hours: {
       Sunday: props.restaurant.sundayHours != null && props.restaurant.sundayHours.length > 0 ? [props.restaurant.sundayHours.split("-")[0], props.restaurant.sundayHours.split("-")[1]] : ["07:00 AM", "12:00 AM"],

@@ -232,17 +232,23 @@ function PortalOrders(props) {
           }));
           setHasNew(true);
           console.log('set hasNew to true', myOrder)
-        } else if (/*!myOrder.closed && */myOrder.food_ready_time > readyOrderTimeStamp) {
-          setOrders(oldOrders => ({
-            ...oldOrders,
-            Preparing: [myOrder, ...oldOrders["Preparing"]],
-          }));
-        } else if (/*!myOrder.closed && */myOrder.food_ready_time > deliveredOrderTimeStamp) {
+        }  else if (/*!myOrder.closed && */myOrder.food_ready_time > deliveredOrderTimeStamp) {
           setOrders(oldOrders => ({
             ...oldOrders,
             Ready: [myOrder, ...oldOrders["Ready"]],
           }));
         }
+        // else if (/*!myOrder.closed && */myOrder.food_ready_time > readyOrderTimeStamp) {
+        //   setOrders(oldOrders => ({
+        //     ...oldOrders,
+        //     Preparing: [myOrder, ...oldOrders["Preparing"]],
+        //   }));
+        // } else if (/*!myOrder.closed && */myOrder.food_ready_time > deliveredOrderTimeStamp) {
+        //   setOrders(oldOrders => ({
+        //     ...oldOrders,
+        //     Ready: [myOrder, ...oldOrders["Ready"]],
+        //   }));
+        // }
       }
     });
 

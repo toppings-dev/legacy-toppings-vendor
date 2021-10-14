@@ -46,7 +46,7 @@ function PortalRewards(props) {
     setLoading(true);
     const response = await API.graphql(graphqlOperation(customQueries.getVendorRewards, { menuId: props.restaurant.id }));
     // const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
-    console.log(response);
+    console.log("resp:", response);
     const rewards = response.data.getVendorRewards.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
     console.log(rewards);
     setRewardItems({
@@ -70,9 +70,10 @@ function PortalRewards(props) {
     const response = await API.graphql(graphqlOperation(customMutations.createVendorReward, reward));
     // const response = await API.graphql(graphqlOperation(mutations.createVendorReward, { input: reward }));
     const newReward = response.data.createVendorReward;
-    console.log(newReward);
+    console.log("newREWARD", newReward);
     changeMode("");
-    getData();
+    console.log("hallo");
+    await getData();
     selectRewardItem(defaultReward);
   }
 
