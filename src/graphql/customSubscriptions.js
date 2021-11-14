@@ -39,6 +39,7 @@ export const onCreateNewOrder = /* GraphQL */ `
       customerId
       status
       charge_id
+      comment
       orderItems {
         items {
           itemName
@@ -50,6 +51,19 @@ export const onCreateNewOrder = /* GraphQL */ `
           foodOptionsArray
         }
       }
+      pickup {
+        id
+        delivererId
+        transportation_type
+        menuId
+        closed
+        windowEndTime
+        windowClosed
+        isPickedUp
+        status
+        deliverer
+      }
+      customer
     }
   }
 `;

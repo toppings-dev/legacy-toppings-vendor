@@ -6,6 +6,7 @@ function getCurrentUser() {
 }
 
 function setCurrentUser(data) {
+  console.log(data);
   sessionStorage.setItem("user", JSON.stringify(data));
 }
 

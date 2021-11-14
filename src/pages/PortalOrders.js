@@ -26,6 +26,9 @@ function PortalOrders(props) {
   const cancelledOrderTimeStamp = -1;
   const dingTimer = 5000;
 
+  let restaurantSk = props.vendor.getVendor.restaurant.sk;
+  let restaurantId = restaurantSk.slice(restaurantSk.lastIndexOf("#")+1)
+
   const audio = new Audio(ding);
   const [loading, setLoading] = useState(false);
   //const [audio] = useState(new Audio(ding));
@@ -60,7 +63,7 @@ function PortalOrders(props) {
     console.log("TOG")
     console.log("selectedorder:", selectedOrder);
     const updatedRestaurant = {
-      id: props.restaurant.id,
+      id: restaurantId,
       input: { isOpen: !receivingOrders ? "true" : "false", },
     };
 
@@ -140,7 +143,7 @@ function PortalOrders(props) {
       // const oldOrder = [...orders.New, ...orders.Preparing, ...orders.Ready].filter(o => o.id == order.id)[0];
       // console.log("RECEIVED", order);
       // console.log("EXISTING?", oldOrder);
-      // if (order.restaurant.id == props.restaurant.id && order.isPaid) {
+      // if (order.restaurant.id == restaurantId && order.isPaid) {
       //   if (order.food_ready_time == null || order.food_ready_time >= newOrderTimeStamp) {
       //     const date = new Date(Date.parse(order.createdAt));
       //     const newOrder = {
@@ -188,9 +191,8 @@ function PortalOrders(props) {
   }
 
   async function getData() {
-    setReceivingOrders(props.restaurant.isOpen);
-    console.log("PROPS", props.restaurant);
-    const receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: props.restaurant.id }));
+    console.log("PROPS", props.vendor);
+    const receivedOrdersResponse = await API.graphql(graphqlOperation(customQueries.listOrdersByRestaurant, { restaurantId: restaurantId }));
     // const receivedOrdersResponse = await API.graphql(graphqlOperation(queries.listOrders));
     console.log(receivedOrdersResponse);
     const receivedOrders = receivedOrdersResponse.data.listOrdersByRestaurant;
@@ -205,7 +207,7 @@ function PortalOrders(props) {
       Ready: [],
     });
     receivedOrders.forEach(order => {
-      if (order.restaurant.id == props.restaurant.id && order.isPaid) {
+      if (order.restaurant.id == restaurantId && order.isPaid) {
         const date = new Date(Date.parse(order.createdAt));
         console.log("ORDER INFO:", order);
         const myOrder = {

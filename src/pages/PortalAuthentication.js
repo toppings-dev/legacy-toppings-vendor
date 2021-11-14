@@ -31,9 +31,10 @@ function PortalSignUp(props) {
     let user = getCurrentUser();
     let page = getCurrentPage();
     if (user != null && page != null) {
-      emailInput.current.value = user.username;
-      passwordInput.current.value = user.password;
+      emailInput.current.value = user.attributes.email;
+      passwordInput.current.value = '';
       login(null);
+      console.log("user", user);
     }
   }, []);
 
@@ -140,8 +141,10 @@ function PortalSignUp(props) {
         password: password,
       };
       console.log(user);
-      await Auth.signIn(user); //.then(() => {
-        
+      const result = await Auth.signIn(user); //.then(() => {
+      console.log("auth sign in", result);
+      setCurrentUser(result);
+
       const currentUser = await Auth.currentAuthenticatedUser();
 
         const restaurant = {
@@ -174,9 +177,7 @@ function PortalSignUp(props) {
       // }).catch((error) => {
       //   setErrorMsg(error.message);
       // });
-      
-      setCurrentUser(userWithSub);
-      
+            
       if (getCurrentPage() == null) {
         setCurrentPage("orders");
       }

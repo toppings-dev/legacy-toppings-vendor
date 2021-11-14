@@ -1,10 +1,12 @@
+import { gql } from '@apollo/client';
+
 export const getMenu = /* GraphQL */ `
   query GetMenu($id: ID!) {
     getMenu(id: $id) {
-      name
-      address
       description
       id
+      name
+      address
       sundayHours
       mondayHours
       tuesdayHours
@@ -224,7 +226,7 @@ export const getVendorRewards = /* GraphQL */ `
   }
 `;
 
-export const listRestaurants = /* GraphQL */ `
+export const listRestaurantsInfo = /* GraphQL */ `
   query ListRestaurants {
     listRestaurantsInfo {
       address
@@ -272,6 +274,7 @@ export const getPickup = /* GraphQL */ `
       windowClosed
       windowEndTime
       deliverer
+      usersOpenTo
       orders {
         items {
           actual_delivery_time
@@ -288,7 +291,11 @@ export const getPickup = /* GraphQL */ `
           status
           tax
           tip
+          order_price_before_discount
+          order_price_after_discount
+          discount
           customer
+          comment
           orderItems {
             items {
               comment
@@ -477,6 +484,239 @@ export const getRestaurantByOwner = /* GraphQL */ `
       updatedAt
       wednesdayHours
       zip_code
+    }
+  }
+`;
+
+export const getFeed = /* GraphQL */ gql`
+  query GetFeed {
+    getFeed {
+      pk
+      sk
+      createdAt
+      content {
+        ordererName
+        delivererName
+        delivererPfp
+        restaurantName
+        restaurantImage
+      }
+      reactions {
+        reactionType
+        userId
+        name
+      }
+      numComments
+    }
+  }
+`;
+
+export const listUsers = /* GraphQL */ `
+  query ListUsers {
+    listUsers {
+      pk
+      sk
+      name
+      phoneNumber
+      pfp
+      cognitoId
+    }
+  }
+`;
+
+export const getIncomingFriendRequests = /* GraphQL */ gql`
+  query GetIncomingFriendRequests {
+    getIncomingFriendRequests {
+      pk
+      sk
+      status
+      user {
+        pk
+        sk
+        phoneNumber
+        name
+        pfp
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const getFriendsFriends = /* GraphQL */ gql`
+  query GetFriendsFriends {
+    getFriendsFriends {
+      pk
+      sk
+      name
+      cognitoId
+      phoneNumber
+      pfp
+    }
+  }
+`;
+
+export const getOutgoingFriendRequests = /* GraphQL */ gql`
+  query GetOutgoingFriendRequests {
+    getOutgoingFriendRequests {
+      pk
+      sk
+      status
+      user {
+        pk
+        sk
+        phoneNumber
+        name
+        pfp
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const getFriends = /* GraphQL */ gql`
+  query GetFriends {
+    getFriends {
+      pk
+      sk
+      friends {
+        pk
+        sk
+        phoneNumber
+        name
+        pfp
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const listRestaurants = gql`
+  query ListRestaurants {
+    listRestaurants {
+      pk
+      sk
+      name
+      description
+      address
+      lat
+      long
+      phoneNumber
+      ownerId
+      ownerName
+      hours
+      thumbnail
+    }
+  }
+`;
+
+export const getRestaurant = gql`
+  query GetRestaurant($restaurantId: String!) {
+    getRestaurant(restaurantId: $restaurantId) {
+      pk
+      sk
+      name
+      description
+      address
+      lat
+      long
+      phoneNumber
+      ownerId
+      ownerName
+      hours
+      thumbnail
+      menu {
+        name
+        menuItems {
+          name
+          description
+          price
+          points
+          foodOptions {
+            name
+            numChoices
+            options {
+              name
+              price
+              points
+            }
+          }
+        }
+      }
+      rewardItems {
+        name
+        description
+        price
+        points
+        foodOptions {
+          name
+          numChoices
+          options {
+            name
+            price
+            points
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getVendor = gql`
+  query GetVendor {
+    getVendor {
+      pk
+      sk
+      cognitoId
+      name
+      email
+      phoneNumber
+      restaurant {
+        pk
+        sk
+        name
+        description
+        address
+        lat
+        long
+        phoneNumber
+        ownerId
+        ownerName
+        hours
+        thumbnail
+        menu {
+          name
+          menuItems {
+            name
+            description
+            price
+            points
+            foodOptions {
+              name
+              numChoices
+              options {
+                name
+                price
+                points
+              }
+            }
+          }
+        }
+        rewardItems {
+          name
+          description
+          price
+          points
+          foodOptions {
+            name
+            numChoices
+            options {
+              name
+              price
+              points
+            }
+          }
+        }
+      }
     }
   }
 `;

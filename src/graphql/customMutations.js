@@ -1,3 +1,5 @@
+import { gql } from '@apollo/client';
+
 export const updateDriverLocation = /* GraphQL */ `
   mutation UpdateDriverLocation($id: ID!, $lat: Float!, $long: Float!) {
     updateDriverLocation(id: $id, lat: $lat, long: $long) {
@@ -45,6 +47,8 @@ export const createPickup = /* GraphQL */ `
     $rewardsCart: AWSJSON!
     $stripeToken: String!
     $windowOpenTime: Int!
+    $usersOpenTo: AWSJSON
+    $isPublic: Boolean!
   ) {
     createNewPickup(
       cart: $cart
@@ -55,6 +59,8 @@ export const createPickup = /* GraphQL */ `
       rewardsCart: $rewardsCart
       stripeToken: $stripeToken
       windowOpenTime: $windowOpenTime
+      isPublic: $isPublic
+      usersOpenTo: $usersOpenTo
     ) {
       id
       delivererId
@@ -98,6 +104,7 @@ export const createOrder = /* GraphQL */ `
     $cart: AWSJSON!
     $currency: String!
     $customerId: String!
+    $comment: String!
     $delivery_address: String!
     $delivery_lat: Float!
     $delivery_long: Float!
@@ -111,6 +118,7 @@ export const createOrder = /* GraphQL */ `
       cart: $cart
       currency: $currency
       customerId: $customerId
+      comment: $comment
       delivery_address: $delivery_address
       delivery_lat: $delivery_lat
       delivery_long: $delivery_long
@@ -130,6 +138,7 @@ export const createOrder = /* GraphQL */ `
       customerId
       status
       charge_id
+      comment
       orderItems {
         items {
           itemName
@@ -298,6 +307,10 @@ export const markOrderDelivered = /* GraphQL */ `
           price_per_item
           quantity
         }
+      }
+      pickup {
+        id
+        closed
       }
     }
   }
@@ -512,7 +525,7 @@ export const updateMenuItem = /* GraphQL */ `
 `;
 
 export const createVendorReward = /* GraphQL */ `
-  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: String!) {
+  mutation CreateVendorReward($menuId: ID!, $itemName: String!, $points: Int!, $date_active_from: AWSDate, $date_active_to: AWSDate, $discountAmount: Float, $discountPercentage: Float, $description: $String!) {
     createVendorReward(menuId: $menuId, itemName: $itemName, points: $points, date_active_from: $date_active_from, date_active_to: $date_active_to, discountAmount: $discountAmount, discountPercentage: $discountPercentage, description: $description) {
       id
       itemName
@@ -566,7 +579,7 @@ export const updateRestaurant = /* GraphQL */ `
       mondayHours
       tuesdayHours
       wednesdayHours
-      thursdayHours
+      thursdayHorus
       fridayHours
       saturdayHours
       sundayHours
@@ -588,6 +601,136 @@ export const deleteMenuItem = /* GraphQL */ `
   mutation DeleteMenuItem($id: ID!) {
     deleteMenuItem(id: $id) {
       id
+    }
+  }
+`;
+
+export const likeFeedItem = /* GraphQL */ gql`
+  mutation LikeFeedItem($feedItemPk: String!, $feedItemSk: String!) {
+    likeFeedItem(feedItemPk: $feedItemPk, feedItemSk: $feedItemSk) {
+      pk
+      sk
+      createdAt
+      content {
+        ordererName
+        delivererName
+        delivererPfp
+        restaurantName
+        restaurantImage
+      }
+      reactions {
+        reactionType
+        userId
+      }
+      numComments
+    }
+  }
+`;
+
+export const acceptFriendRequest = /* GraphQL */ gql`
+  mutation AcceptFriendRequest($senderId: String!) {
+    acceptFriendRequest(senderId: $senderId) {
+      pk
+      sk
+      friends {
+        pk
+        sk
+        pfp
+        name
+        phoneNumber
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const declineFriendRequest = /* GraphQL */ gql`
+  mutation DeclineFriendRequest($senderId: String!) {
+    declineFriendRequest(senderId: $senderId) {
+      pk
+      sk
+      status
+      user {
+        pk
+        sk
+        phoneNumber
+        name
+        pfp
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const createFriendRequest = /* GraphQL */ gql`
+  mutation CreateFriendRequest($userId: String!) {
+    createFriendRequest(userId: $userId) {
+      pk
+      sk
+      status
+      user {
+        pk
+        sk
+        name
+        pfp
+        cognitoId
+        phoneNumber
+      }
+    }
+  }
+`;
+
+export const deleteFriend = /* GraphQL */ gql`
+  mutation DeleteFriend($deleteId: String!) {
+    deleteFriend(deleteId: $deleteId) {
+      pk
+      sk
+      friends {
+        pk
+        sk
+        pfp
+        name
+        phoneNumber
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const updateUserAttributes = /* GraphQL */ gql`
+  mutation UpdateUserAttributes($name: String!) {
+    updateUserAttributes(name: $name) {
+      pk
+      sk
+      name
+    }
+  }
+`;
+
+export const updateReferralCode = /* GraphQL */ gql`
+  mutation UpdateReferralCode($referralCode: String!) {
+    updateReferralCode(referralCode: $referralCode) {
+      pk
+      sk
+      cognitoId
+      name
+      referrer {
+        pk
+        sk
+        name
+        cognitoId
+      }
+    }
+  }
+`;
+
+export const createReferralReward = /* GraphQL */ `
+  mutation CreateReferralReward($menuId: ID!, $isReferred: Boolean!) {
+    createReferralReward(menuId: $menuId, isReferred: $isReferred) {
+      id
+      userId
+      menuId
+      points
     }
   }
 `;

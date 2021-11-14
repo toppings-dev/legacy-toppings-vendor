@@ -5,6 +5,7 @@ schema {
 }
 
 type Query {
+
   getMenu(id: ID!): Restaurant!
   listActiveOrdersByCustomer(customerId: String!): [Order]!
   listOpenPickups(userId: String!): [Pickup]!

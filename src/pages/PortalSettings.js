@@ -129,7 +129,6 @@ function PortalSettings(props) {
 
     const updatedRestaurantResponse = await API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedRestaurant));
     console.log(updatedRestaurantResponse);
-    props.getData();
     changeMode("");
 
     // API.graphql(graphqlOperation(customMutations.updateRestaurant, updatedVendor))

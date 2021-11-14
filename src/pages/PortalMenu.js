@@ -13,6 +13,7 @@ import bubbleIcon from '../assets/images/bubble-icon-1.svg';
 import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 import plusButtonIcon from '../assets/images/portal-menu-plus-button.svg';
 import xButtonIcon from '../assets/images/portal-menu-x-button.svg';
+import { graphql } from '@apollo/react-hoc';
 
 function PortalMenu(props) {
   const defaultMenuItem = {
@@ -21,17 +22,23 @@ function PortalMenu(props) {
     description: "The signature of the Krusty Krab, a juicy burger with secret ingredients.",
     options: { items: [] }
   };
+  let restaurantSk = props.vendor.getVendor.restaurant.sk;
+  let restaurantId = restaurantSk.slice(restaurantSk.lastIndexOf("#")+1)
+  console.log("chop chop", restaurantId);
+
   const categoryNameInput = useRef();
   const itemNameInput = useRef();
   const itemPriceInput = useRef();
   const itemDescriptionInput = useRef();
   const itemTagsInput = useRef();
   const itemImageInput = useRef();
+  //const restaurantId = props.vendorData.slice(props.vendorData.lastIndexOf('#')+1);
+  
   
   const [loading, setLoading] = useState(false);
   const [mode, changeMode] = useState("");
   const [addItemType, setAddItemType] = useState("Regular");
-  const [selectedMenuItem, selectMenuItem] = useState(defaultMenuItem);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(defaultMenuItem);
   const [selectedMenuItemToppings, setSelectedMenuItemToppings] = useState([]);
   const [selectedMenuItemOptions, setSelectedMenuItemOptions] = useState([]);
   const [selectedMenuItemExistingToppings, setSelectedMenuItemExistingToppings] = useState([]);
@@ -39,6 +46,7 @@ function PortalMenu(props) {
   const [removableToppings, setRemoveableToppings] = useState([]);
   const [removableOptions, setRemoveableOptions] = useState([]);
   const [selectedCategory, selectCategory] = useState(null);
+  const [hasMenu, setHasMenu] = useState(false);
   // const [menuItems, setMenuItems] = useState({
   //   Appetizers: [{id: 1, name: "Golden Loaf", price: "2.50", description: "A loaf that is golden."}, 
   //                  {id: 2, name: "Fried Oyster Skins", price: "0.99", description: "Oyster skins that are fried."}],
@@ -47,15 +55,17 @@ function PortalMenu(props) {
   //   Desserts: [{id: 5, name: "Seanut Brittle", price: "2.43", description: "Hard sugar candy pieces with seanuts inside."}]
   // });
   const [menuItems, setMenuItems] = useState({});
-
+  const [menuCategoriesList, setMenuCategoriesList] = useState({});
+  
   useEffect(() => {
     getData();
   }, []);
-
-  async function getData() {
+  
+  console.log("props", props);
+  function getData() {
     setLoading(true);
     //replace with smth to do with get menu
-    // const response = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: props.restaurant.id }}}));
+    // const response = await API.graphql(graphqlOperation(customQueries.listMenuCategories, { filter: { menuId: { eq: restaurantId }}}));
     // const menuCategoriesList = response.data.listMenuCategorys.items;
     // menuCategoriesList.forEach(category => {
     //   setMenuItems(oldMenuItems => ({
@@ -63,21 +73,28 @@ function PortalMenu(props) {
     //     [category.name]: category.menuItems.items,
     //   }));
     // });
-    const response = await API.graphql(graphqlOperation(customQueries.getMenu, { id: props.restaurant.id }));
-    const menuCategoriesList = response.data.getMenu.menuCategories.items;
-    menuCategoriesList.forEach(category => {
+    
+    const categories = props.vendor.getVendor.restaurant.menu;
+    setMenuCategoriesList(categories);
+
+    console.log(props.vendor.getVendor.restaurant.menu);
+    console.log("menucategories", menuCategoriesList);
+    Array.from(categories).forEach(category => {
       setMenuItems(oldMenuItems => ({
         ...oldMenuItems,
-        [category.name]: category.menuItems.items,
+        [category.name]: category.menuItems,
       }));
     });
+    console.log("menu items", menuItems);
+    console.log("default", defaultMenuItem);
+    setHasMenu(true);
     setLoading(false);
   }
 
   function addCategory(e) {
     e.preventDefault();
     const menuCategory = {
-      menuId: props.restaurant.id,
+      menuId: restaurantId,
       name: categoryNameInput.current.value,
     };
 
@@ -86,7 +103,7 @@ function PortalMenu(props) {
       setMenuItems({});
       getData();
       changeMode('');
-      selectMenuItem(defaultMenuItem);
+      setSelectedMenuItem(defaultMenuItem);
     })
     .catch(err => {
       console.log(err);
@@ -94,21 +111,24 @@ function PortalMenu(props) {
   }
 
   async function createToppings(menuItem) {
-    // const existingToppingCategoriesResponse = await API.graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: props.restaurant.id }}});
+    // const existingToppingCategoriesResponse = await API.graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: restaurantId }}});
     // const existingToppingCategories = existingToppingCategoriesResponse.data.listFoodOptions.items;
     console.log("D", menuItem);
     const createToppingsInput = {
-      id: props.restaurant.id,
-      selectedMenuItemToppings,
-      selectedMenuItemOptions,
-      selectedMenuItemExistingToppings,
-      menuItem,
+      id: restaurantId,
+      selectedMenuItemToppings: JSON.stringify(selectedMenuItemToppings),
+      selectedMenuItemOptions: JSON.stringify(selectedMenuItemOptions),
+      selectedMenuItemExistingToppings: JSON.stringify(selectedMenuItemExistingToppings),
+      menuItem: JSON.stringify(menuItem),
     };
 
+    console.log("selected options", selectedMenuItemOptions);
+    console.log("selected existing", selectedMenuItemExistingToppings);
+    console.log("selected toppings", selectedMenuItemToppings);
     await API.graphql(graphqlOperation(customMutations.createToppings, createToppingsInput));
     // await Promise.all(selectedMenuItemToppings.map(async topping => {
     //   const toppingCategory = {
-    //     menuId: props.restaurant.id,
+    //     menuId: restaurantId,
     //     name: topping.foodOptionName
     //   };
     //   // console.log("TP", topping)
@@ -119,7 +139,7 @@ function PortalMenu(props) {
 
     // await Promise.all(selectedMenuItemOptions.map(async option => {
     //   const toppingOption = {
-    //     menuId: props.restaurant.id,
+    //     menuId: restaurantId,
     //     name: option.optionName,
     //   };
 
@@ -129,7 +149,7 @@ function PortalMenu(props) {
     
     // await Promise.all(selectedMenuItemToppings.concat(selectedMenuItemExistingToppings).map(async topping => {
     //   const toppingCategoryJoiner = {
-    //     menuId: props.restaurant.id,
+    //     menuId: restaurantId,
     //     foodOptionName: topping.foodOptionName,
     //     menuItemName: menuItem.name,
     //     numchoices: topping.numchoices,
@@ -143,7 +163,7 @@ function PortalMenu(props) {
     // await Promise.all(selectedMenuItemOptions.map(async option => {
     //   console.log("Making Options!!!")
     //   const toppingOptionJoiner = {
-    //     menuId: props.restaurant.id,
+    //     menuId: restaurantId,
     //     foodOptionName: option.foodOptionName,
     //     optionName: option.optionName,
     //   };
@@ -161,7 +181,7 @@ function PortalMenu(props) {
     e.preventDefault();
 
     const menuItem = {
-      menuId: props.restaurant.id,
+      menuId: restaurantId,
       menuCategoryName: selectedCategory,
       name: itemNameInput.current.value,
       description: itemDescriptionInput.current.value,
@@ -181,7 +201,7 @@ function PortalMenu(props) {
     setMenuItems({});
     getData();
     changeMode("");
-    selectMenuItem(defaultMenuItem);
+    setSelectedMenuItem(defaultMenuItem);
   }
 
   async function editItem(e) {
@@ -193,7 +213,7 @@ function PortalMenu(props) {
 
     const menuItem = {
       id: selectedMenuItem.id,
-      menuId: props.restaurant.id,
+      menuId: restaurantId,
       menuCategoryName: selectedCategory,
       name: itemNameInput.current.value,
       description: itemDescriptionInput.current.value,
@@ -211,7 +231,7 @@ function PortalMenu(props) {
     setMenuItems({});
     getData();
     changeMode("");
-    selectMenuItem(defaultMenuItem);
+    setSelectedMenuItem(defaultMenuItem);
   }
   
   function deleteItem(e) {
@@ -226,7 +246,7 @@ function PortalMenu(props) {
       setMenuItems({});
       getData();
       changeMode('');
-      selectMenuItem(defaultMenuItem);
+      setSelectedMenuItem(defaultMenuItem);
     })
     .catch(err => {
       console.log(err);
@@ -236,7 +256,7 @@ function PortalMenu(props) {
     //   setMenuItems({});
     //   getData();
     //   changeMode("");
-    //   selectMenuItem(defaultMenuItem)
+    //   setSelectedMenuItem(defaultMenuItem)
     // }).catch((error) => {
     //   console.log(error);
     // });
@@ -245,13 +265,13 @@ function PortalMenu(props) {
   function addOption(topping) {
     const option = {
       foodOptionName: topping.foodOptionName, 
-      menuId: props.restaurant.id, 
+      menuId: restaurantId, 
       optionName: "New Option",
-      option: { price: null, name: "New Option", menuId: props.restaurant.id }
+      option: { price: null, name: "New Option", menuId: restaurantId }
     };
-    topping.optionCat.options.items.push(option);
-    topping.numchoices = topping.optionCat.options.items.length;
-    selectMenuItem({
+    topping.items.push(option);
+    topping.numchoices = topping.options.length;
+    setSelectedMenuItem({
       ...selectedMenuItem
     });
     setSelectedMenuItemOptions([...selectedMenuItemOptions, option]);
@@ -260,26 +280,26 @@ function PortalMenu(props) {
   function addToppings() {
     const option = {
       foodOptionName: "New Topping", 
-      menuId: props.restaurant.id, 
+      menuId: restaurantId, 
       optionName: "New Option",
-      option: { price: null, name: "New Option", menuId: props.restaurant.id }
+      option: { price: null, name: "New Option", menuId: restaurantId }
     };
 
     const topping = {
       foodOptionName: "New Topping",
-      menuId: props.restaurant.id,
+      menuId: restaurantId,
       menuItemName: selectedMenuItem.name,
       numchoices: 1,
       optionCat: {
-        menuId: props.restaurant.id,
+        menuId: restaurantId,
         name: "New Topping",
         options: {
           items: [option]
         }
       }
     };
-    selectedMenuItem.options.items.push(topping);
-    selectMenuItem({
+    selectedMenuItem.foodOptions.push(topping);
+    setSelectedMenuItem({
       ...selectedMenuItem
     });
     setSelectedMenuItemToppings([...selectedMenuItemToppings, topping]);
@@ -288,24 +308,24 @@ function PortalMenu(props) {
 
   async function addExistingToppings() {
     //change to some sort of get menu
-    const existingToppingCategoriesResponse = await API.graphql(graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: props.restaurant.id }}}));
+    const existingToppingCategoriesResponse = await API.graphql(graphqlOperation(queries.listFoodOptions, { filter: { menuId: { eq: restaurantId }}}));
     const existingToppingCategories = existingToppingCategoriesResponse.data.listFoodOptions.items;
     setExistingToppings(existingToppingCategories);
 
     const option = {
       foodOptionName: "Old Topping", 
-      menuId: props.restaurant.id, 
+      menuId: restaurantId, 
       optionName: "Old Option",
-      option: { price: null, name: "Old Option", menuId: props.restaurant.id }
+      option: { price: null, name: "Old Option", menuId: restaurantId }
     };
 
     const topping = {
       foodOptionName: "Old Topping",
-      menuId: props.restaurant.id,
+      menuId: restaurantId,
       menuItemName: selectedMenuItem.name,
       numchoices: 1,
       optionCat: {
-        menuId: props.restaurant.id,
+        menuId: restaurantId,
         name: "Old Topping",
         options: {
           items: [option]
@@ -321,7 +341,7 @@ function PortalMenu(props) {
   function editTopping(e, topping) {
     topping.foodOptionName = e.target.value;
     topping.optionCat.name = e.target.value;
-    topping.optionCat.options.items.forEach(option => option.foodOptionName = e.target.value);
+    topping.options.forEach(option => option.foodOptionName = e.target.value);
     setSelectedMenuItemToppings([...selectedMenuItemToppings]);
     console.log("TPS", selectedMenuItemToppings);
     console.log("SMIT", selectedMenuItem);
@@ -330,7 +350,7 @@ function PortalMenu(props) {
   function editExistingTopping(e, topping) {
     topping.foodOptionName = e.target.value;
     topping.optionCat.name = e.target.value;
-    topping.optionCat.options.items.forEach(option => option.foodOptionName = e.target.value);
+    topping.options.forEach(option => option.foodOptionName = e.target.value);
     setSelectedMenuItemExistingToppings([...selectedMenuItemExistingToppings]);
     console.log("ETPS", selectedMenuItemExistingToppings);
     console.log("SMIET", selectedMenuItem);
@@ -339,7 +359,7 @@ function PortalMenu(props) {
   function editOption(e, option) {
     option.optionName = e.target.value;
     option.option.name = e.target.value;
-    setSelectedMenuItemOptions([...selectedMenuItemOptions]);
+    //setSelectedMenuItemOptions([...selectedMenuItemOptions]);
     console.log("OPS", selectedMenuItemOptions);
     console.log("SMIO", selectedMenuItem);
   }
@@ -347,11 +367,16 @@ function PortalMenu(props) {
   function deleteTopping(topping) {
     const toppings = selectedMenuItemToppings.filter(t => t.foodOptionName != topping.foodOptionName);
     setSelectedMenuItemToppings(toppings);
-    selectedMenuItem.options.items = selectedMenuItem.options.items.filter(t => t.foodOptionName != topping.foodOptionName);
+    selectedMenuItem.foodOptions = selectedMenuItem.foodOptions.filter(t => t.foodOptionName != topping.foodOptionName);
     console.log("DTPS", selectedMenuItemToppings, toppings);
     console.log("DSMIT", selectedMenuItem);
   }
 
+  useEffect(() => {
+    console.log("select", selectedMenuItem)
+  }, [selectedMenuItem]);
+
+  console.log("render", menuItems)
   return (
     <article className="portal-menu-container">
     {loading ? 
@@ -410,13 +435,13 @@ function PortalMenu(props) {
 
                 {mode == "editItem" && addItemType == "Customizable"  ? 
                   <div className="portal-menu-item-form-toppings-section">
-                    {selectedMenuItem.options.items.concat(selectedMenuItemExistingToppings).map((topping =>
+                    {selectedMenuItem.foodOptions.concat(selectedMenuItemExistingToppings).map((topping =>
                       <div key={topping.id} className="portal-menu-item-form-toppings-container">
                         {topping.hasOwnProperty("existing") ? 
                           <div>
                             <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
                             <select className="dropdown-input" onChange={(e) => editExistingTopping(e, topping)}>
-                              {existingToppings.filter(x => !selectedMenuItem.options.items.map(y => y.foodOptionName).includes(x.name)).map((existingTopping =>
+                              {existingToppings.filter(x => !selectedMenuItem.foodOptions.map(y => y.foodOptionName).includes(x.name)).map((existingTopping =>
                                 <option key={existingTopping.name} value={existingTopping.name}>{existingTopping.name}</option>
                               ))}
                             </select>
@@ -424,14 +449,14 @@ function PortalMenu(props) {
                         :
                           <div>
                             <span className="subheading">Toppings Name {/*<button className="red-x" type="button" onClick={() => deleteTopping(topping)}><img src={xButtonIcon} /></button>*/}</span>
-                            <input className="text-input" type="text" placeholder="Patty Type" onChange={(e) => editTopping(e, topping)} defaultValue={mode == "editItem" && selectedMenuItem.options.items.length > 0 ? topping.foodOptionName : ""}/>
+                            <input className="text-input" type="text" placeholder="Patty Type" onChange={(e) => editTopping(e, topping)} defaultValue={mode == "editItem" && selectedMenuItem.foodOptions.length > 0 ? topping.foodOptionName : ""}/>
 
                             <div className="portal-menu-item-form-toppings-options-container">
                               <span className="subheading">Options <button className="blue-plus" type="button" onClick={() => addOption(topping)}><img src={plusButtonIcon} /></button></span>
-                              {topping.optionCat.options.items.map((option => 
+                              {topping.options((option => 
                                 <div key={option.optionName} className="portal-menu-item-form-toppings-options-input-container">
                                   {/*<button className="red-x" type="button" onClick={() => deleteOption(option)}><img src={xButtonIcon} /></button>*/}
-                                  <input className="text-input" type="text" placeholder="Crab Patty" onChange={(e) => editOption(e, option)} defaultValue={mode == "editItem" && topping.optionCat.options.items.length > 0 ? option.optionName : ""}/>
+                                  <input className="text-input" type="text" placeholder="Crab Patty" onChange={(e) => editOption(e, option)} defaultValue={mode == "editItem" && topping.options.length > 0 ? option.optionName : ""}/>
                                 </div>
                               ))}
                             </div>
@@ -456,7 +481,7 @@ function PortalMenu(props) {
                   : ""}
                 </div>
                 <div>
-                  <button className="orange-text" onClick={() => {changeMode(""); setSelectedMenuItemToppings([]); setSelectedMenuItemOptions([]); setSelectedMenuItemExistingToppings([]); selectMenuItem(defaultMenuItem); getData();}}>Cancel</button>
+                  <button className="orange-text" onClick={() => {changeMode(""); setSelectedMenuItemToppings([]); setSelectedMenuItemOptions([]); setSelectedMenuItemExistingToppings([]); setSelectedMenuItem(defaultMenuItem); getData();}}>Cancel</button>
                   <button className="orange" onClick={mode == "addItem" ? addItem : editItem}>{mode == "addItem" ? "Add" : "Save"} Menu Item</button>
                 </div>
               </div>
@@ -470,12 +495,12 @@ function PortalMenu(props) {
 
             <div className="content">
               <div className="portal-menu-list">
-                {Object.keys(menuItems).map((category =>
-                  <div key={category.id} className="menu-category-container">
-                    <span className="blue-heading"><span>{category}</span><span><button className="blue-plus" onClick={() => {selectCategory(category); selectMenuItem(defaultMenuItem); changeMode("addItem")}}><img src={plusButtonIcon} /></button></span></span>
+                {menuCategoriesList.map((category =>
+                  <div key={category.name} className="menu-category-container">
+                    <span className="blue-heading"><span>{category.name}</span><span><button className="blue-plus" onClick={() => {selectCategory(category); setSelectedMenuItem(defaultMenuItem); changeMode("addItem")}}><img src={plusButtonIcon} /></button></span></span>
 
-                    {menuItems[category].map(item => 
-                      <div key={item.id} className={selectedMenuItem.id == item.id ? "menu-item-container active" : "menu-item-container"} onClick={() => {selectMenuItem(item); console.log("select", item)}}>
+                    {category.menuItems.map(item => 
+                      <div key={item.name} className={selectedMenuItem == item ? "menu-item-container active" : "menu-item-container"} onClick={() => {setSelectedMenuItem(item)}}>
                         <span className="subheading">{item.name}</span>
                         <span className="subheading">${item.price.toFixed(2)}</span>
                         <div className="menu-item-description">{item.description}</div>
@@ -491,15 +516,13 @@ function PortalMenu(props) {
                     <span className="blue-heading">${selectedMenuItem.price.toFixed(2)}</span>
                     <span className="subheading">Description</span>
                     <div className="menu-item-description">{selectedMenuItem.description}</div>
-                    {selectedMenuItem.options.items.length > 0 ?
                       <div>
                         <span className="subheading">Toppings</span>
-                        {selectedMenuItem.options.items.map((topping =>
-                          <div key={topping.foodOptionName + topping.createdAt} className="menu-item-description"><b>{topping.foodOptionName}:</b> {topping.optionCat.options.items.map(option => option.optionName).join(", ")}</div>
+                        {(selectedMenuItem.foodOptions || []).map((topping =>
+                          <div key={topping.name} className="menu-item-description"><b>{topping.name}:</b> {topping.options.map(option => option.name).join(", ")}</div>
                         ))}
                       </div>
-                    : ""}
-                    <button className="orange" onClick={() => {changeMode("editItem"); selectCategory(selectedMenuItem.menuCategoryName); setAddItemType(selectedMenuItem.options.items.length > 0 ? "Customizable" : "Regular")}}>Edit Menu Item</button>
+                    <button className="orange" onClick={() => {changeMode("editItem"); setAddItemType(selectedMenuItem.foodOptions.length > 0 ? "Customizable" : "Regular")}}>Edit Menu Item</button>
                   </div>
                 : ""}
               </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+import { useQuery } from '@apollo/client';
 
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
@@ -34,26 +35,31 @@ function Portal(props) {
   useEffect(() => {
     props.toggleShowHeader(false);
     console.log("U", props.user)
-    getData();
   }, []);
 
-  async function getData() {
-    // await props.setUser(getCurrentUser());
-    // console.log("PU", props.user)
-    // console.log("PU", getCurrentUser())
-    // if (getCurrentUser().hasOwnProperty("username")) {
-      // await login();
-      console.log("GD")
-      const userId = await getCurrentUser() == null ? props.user.sub : await getCurrentUser().cognitoId;
-      console.log("GET RESTU", userId)
-      const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { userId }));
-      console.log("HELOOOOOOO");
-      console.log("Set restaurant resp", restaurantsResponse);
-      const restaurant = restaurantsResponse.data.getRestaurantByOwner;
-      setRestaurant(restaurant);
-      console.log("Set restaurant props", restaurant);
-    // }
+  let { data: vendorData, error: vendorError, loading: vendorLoading } = useQuery(customQueries.getVendor);
+  if (vendorData) {
+    console.log("vendor", vendorData)
   }
+  if (vendorError) console.log("vendorerror", vendorError);
+
+  // async function getData() {
+  //   // await props.setUser(getCurrentUser());
+  //   // console.log("PU", props.user)
+  //   // console.log("PU", getCurrentUser())
+  //   // if (getCurrentUser().hasOwnProperty("username")) {
+  //     // await login();
+  //     console.log("GD")
+  //     const userId = await getCurrentUser() == null ? props.user.sub : await getCurrentUser().cognitoId;
+  //     console.log("GET RESTU", userId)
+  //     const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { userId }));
+  //     console.log("HELOOOOOOO");
+  //     console.log("Set restaurant resp", restaurantsResponse);
+  //     const restaurant = restaurantsResponse.data.getRestaurantByOwner;
+  //     setRestaurant(restaurant);
+  //     console.log("Set restaurant props", restaurant);
+  //   // }
+  // }
 
   async function login() {
     console.log("LOGIN");
@@ -70,7 +76,12 @@ function Portal(props) {
       console.log("Error signing out", error);
     });
   }
-
+  if (vendorLoading) return null;
+  if (vendorError) {
+    console.log('error', vendorError);
+    return null;
+  }
+  console.log("vendorrrrr", vendorData.getVendor.restaurant);
   return (
     <section className="portal-login-container">
       {loggedIn ?
@@ -92,12 +103,12 @@ function Portal(props) {
 
           <main>
             <Switch>
-              <Route path="/portal/dashboard" component={() => <PortalDashboard restaurant={restaurant} />} />
-              <Route path="/portal/orders" component={() => <PortalOrders restaurant={restaurant} />} />
-              <Route path="/portal/terms-of-service" component={() => <PortalTermsService restaurant={restaurant} />} />
-              <Route path="/portal/menu" component={() => <PortalMenu restaurant={restaurant} />} />
-              <Route path="/portal/rewards" component={() => <PortalRewards restaurant={restaurant} />} />
-              <Route path="/portal/settings" component={() => <PortalSettings restaurant={restaurant} getData={getData} />} />
+              <Route path="/portal/dashboard" component={() => <PortalDashboard restaurant={vendorData.getVendor.restaurant} />} />
+              <Route path="/portal/orders" component={() => <PortalOrders vendor={vendorData} />} />
+              <Route path="/portal/terms-of-service" component={() => <PortalTermsService restaurant={vendorData.getVendor.restaurant} />} />
+              <Route path="/portal/menu" component={() => <PortalMenu vendor={vendorData} />} />
+              <Route path="/portal/rewards" component={() => <PortalRewards restaurant={vendorData.getVendor.restaurant} />} />
+              <Route path="/portal/settings" component={() => <PortalSettings restaurant={vendorData.getVendor.restaurant} />} />
             </Switch>
           </main>
         </article>
