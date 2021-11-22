@@ -107,7 +107,7 @@ function Portal(props) {
               <Route path="/portal/orders" component={() => <PortalOrders vendor={vendorData} />} />
               <Route path="/portal/terms-of-service" component={() => <PortalTermsService restaurant={vendorData.getVendor.restaurant} />} />
               <Route path="/portal/menu" component={() => <PortalMenu vendor={vendorData} />} />
-              <Route path="/portal/rewards" component={() => <PortalRewards restaurant={vendorData.getVendor.restaurant} />} />
+              <Route path="/portal/rewards" component={() => <PortalRewards vendor={vendorData} />} />
               <Route path="/portal/settings" component={() => <PortalSettings restaurant={vendorData.getVendor.restaurant} />} />
             </Switch>
           </main>

@@ -12,6 +12,8 @@ import bubbleIcon from '../assets/images/bubble-icon-2.svg';
 import loadingBubbleIcon from '../assets/images/bubble-icon-1.svg';
 
 function PortalRewards(props) {
+  let restaurantSk = props.vendor.getVendor.restaurant.sk;
+  let restaurantId = restaurantSk.slice(restaurantSk.lastIndexOf("#")+1)
   const defaultReward = {
     name: "Jelly Joy", 
     points: 5, 
@@ -44,7 +46,7 @@ function PortalRewards(props) {
     //   console.log(error);
     // });
     setLoading(true);
-    const response = await API.graphql(graphqlOperation(customQueries.getVendorRewards, { menuId: props.restaurant.id }));
+    const response = await API.graphql(graphqlOperation(customQueries.getVendorRewards, { menuId: restaurantId }));
     // const response = await API.graphql(graphqlOperation(queries.listVendorRewards, { filter: { menuId: { eq: props.restaurant.id }}}));
     console.log("resp:", response);
     const rewards = response.data.getVendorRewards.sort((reward1, reward2) => (reward1.points > reward2. points ? 1 : -1));
@@ -58,7 +60,7 @@ function PortalRewards(props) {
   async function addReward() {
     const reward = {
       itemName: nameInput.current.value,
-      menuId: props.restaurant.id,
+      menuId: restaurantId,
       points: parseInt(pointsInput.current.value),
       date_active_from: null,
       date_active_to: null,

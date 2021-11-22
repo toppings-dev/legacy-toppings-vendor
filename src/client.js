@@ -39,6 +39,9 @@ const client = new ApolloClient({
           },
         },
       },
+      Restaurant: {
+        keyFields: ['sk'],
+      },
       Query: {
         fields: {
           IncomingFriendRequests: {

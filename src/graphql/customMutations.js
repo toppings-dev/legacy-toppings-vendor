@@ -563,27 +563,54 @@ export const deleteVendorReward = /* GraphQL */ `
   }
 `;
 
-export const updateRestaurant = /* GraphQL */ `
-  mutation UpdateRestaurantFields($id: ID!, $input: UpdateRestaurantInput!) {
-    updateRestaurantFields(id: $id, input: $input) {
-      id
+export const updateRestaurant = /* GraphQL */ gql`
+  mutation UpdateRestaurant($id: String!, $input: UpdateRestaurantInput!) {
+    updateRestaurant(id: $id, input: $input) {
+      pk
+      sk
       name
       description
-      userId
       address
-      city
-      state
-      zip_code
-      restaurantOwnerName
-      sundayHours
-      mondayHours
-      tuesdayHours
-      wednesdayHours
-      thursdayHorus
-      fridayHours
-      saturdayHours
-      sundayHours
-      isOpen
+      lat
+      long
+      phoneNumber
+      ownerId
+      ownerName
+      hours
+      thumbnail
+      menu {
+        name
+        menuItems {
+          name
+          description
+          price
+          points
+          foodOptions {
+            name
+            numChoices
+            options {
+              name
+              price
+              points
+            }
+          }
+        }
+      }
+      rewardItems {
+        name
+        description
+        price
+        points
+        foodOptions {
+          name
+          numChoices
+          options {
+            name
+            price
+            points
+          }
+        }
+      }
     }
   }
 `;
