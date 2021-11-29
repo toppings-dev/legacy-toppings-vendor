@@ -499,7 +499,7 @@ function PortalMenu(props) {
                 
                 <div className="portal-menu-item-form-price-section">
                   <span className="subheading">Item Price ($)</span>
-                  <input id="menu-item-price-input" className="text-input" type="text" placeholder="Enter Your Item Price" ref={itemPriceInput} defaultValue={mode == "editItem" ? selectedMenuItem.price.toFixed(2) : ""} />
+                  <input id="menu-item-price-input" className="text-input" type="text" placeholder="Enter Your Item Price" ref={itemPriceInput} defaultValue={mode == "editItem" ? (((selectedMenuItem.price)/100).toFixed(2)) : ""} />
                 </div>
                 
                 <div className="portal-menu-item-form-description-section">
@@ -595,7 +595,7 @@ function PortalMenu(props) {
                     {category.menuItems.map(item => 
                       <div key={item.name} className={selectedMenuItem == item ? "menu-item-container active" : "menu-item-container"} onClick={() => {setSelectedMenuItem(item); setSelectedCategory(category)}}>
                         <span className="subheading">{item.name}</span>
-                        <span className="subheading">${item.price.toFixed(2)}</span>
+                        <span className="subheading">${((item.price)/100).toFixed(2)}</span>
                         <div className="menu-item-description">{item.description}</div>
                       </div>
                     )}

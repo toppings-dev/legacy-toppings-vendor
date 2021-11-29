@@ -199,6 +199,7 @@ function PortalOrders(props) {
     for (let i = 0; i < receivedOrders?.data?.listOrdersByRestaurant?.length; i++) {
       receivedOrders.data.listOrdersByRestaurant[i].customer = JSON.parse(receivedOrders.data.listOrdersByRestaurant[i].customer);
       receivedOrders.data.listOrdersByRestaurant[i].pickup.deliverer = JSON.parse(receivedOrders.data.listOrdersByRestaurant[i].pickup.deliverer);
+      receivedOrders.data.listOrdersByRestaurant[i].restaurant = JSON.parse(receivedOrders.data.listOrdersByRestaurant[i].restaurant);
     }
 
     setOrders({
@@ -207,7 +208,7 @@ function PortalOrders(props) {
       Ready: [],
     });
     receivedOrders.forEach(order => {
-      if (order.restaurant.id == restaurantId && order.isPaid) {
+      if (order.isPaid) {
         const date = new Date(Date.parse(order.createdAt));
         console.log("ORDER INFO:", order);
         const myOrder = {
@@ -274,23 +275,22 @@ function PortalOrders(props) {
             <div className="orders-list">
               <header>
                 <span className="orange-subheading">{`${new Date().getMonth() + 1}/${String(new Date().getDate()).padStart(2, "0")}/${String(new Date().getFullYear()).slice(2, 4)}`}</span>
-                <button className={receivingOrders ? "orange tag" : "red tag"} onClick={toggleReceivingOrders}>Receiving New Orders {receivingOrders ? <img className="checkmark" src={whiteCheckmark} /> : <span className="x">&#215;</span>}</button>
               </header>
               <div>
                 <span className="order-category">Current</span>
                 <div>
                   {orders.New.length > 0 &&
                     orders.New.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
-                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                        <span>#{order.id.slice(0, 5)}...</span>  
+                      <div key={order.name} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>{order.name}</span>  
                         <span><button>New</button></span>
                       </div>
                     )
                   }
                   {orders.Preparing.length > 0 &&
                     orders.Preparing.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
-                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                        <span>#{order.id.slice(0, 5)}...</span> 
+                      <div key={order.name} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>{order.name}</span> 
                       </div>
                     )
                   }
@@ -299,8 +299,8 @@ function PortalOrders(props) {
                 <div>
                   {orders.Ready.length > 0 &&
                     orders.Ready.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
-                      <div key={order.id} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                        <span>#{order.id.slice(0, 5)}...</span>  
+                      <div key={order.name} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>{order.name}</span>  
                       </div>
                     )
                   }
@@ -355,7 +355,7 @@ function PortalOrders(props) {
                       </div>
                     : ""}
 
-                    <span className="heading">Order #{selectedOrder.id.slice(0, 5)} - {selectedOrder.time}</span>
+                    <span className="heading">{selectedOrder.name} - {selectedOrder.time}</span>
                     {false && selectedOrder.closed ? <span className="red-subheading">Order Closed</span> : ""}
                     <hr className="short" />
 
@@ -393,18 +393,13 @@ function PortalOrders(props) {
                       <hr />
                       <span className="subheading">Payment Confirmed <img className="checkmark" src={grayCheckmark} /></span>
                       <hr />
-              
-                      <div className="order-instructions">
-                        <span className="heading">Special Instructions</span>
-                        <hr className="short" />
-                        <span>{selectedOrder.instructions.length > 0 ? "\"" + selectedOrder.instructions + "\"" : "None"}</span>
-                      </div>
 
                       <button className="gray">Report Issue</button>
                       {orders.New.indexOf(selectedOrder) > -1 ? 
                         <button className="orange" onClick={() => timerAdvanceOrder(selectedOrder, "New")}>Accept</button>
                       : orders.Preparing.indexOf(selectedOrder) > -1 ? 
-                        <button className="orange">Accepted</button>
+                        <button style={{fontSize: "1.5rem"}} className="orange">Accepted</button>
+                        //bookmark
                       // : orders.Ready.indexOf(selectedOrder) > -1 ? 
                       //   <button className="orange">Completed</button>
                       /*: orders.Cancelled.indexOf(selectedOrder) > -1 ?

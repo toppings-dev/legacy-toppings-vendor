@@ -431,30 +431,7 @@ export const listOrdersByRestaurant = /* GraphQL */ `
         windowEndTime
         deliverer
       }
-      restaurant {
-        address
-        city
-        createdAt
-        description
-        userId
-        fridayHours
-        id
-        isOpen
-        lat
-        long
-        mondayHours
-        name
-        phoneNumber
-        restaurantOwnerName
-        saturdayHours
-        state
-        sundayHours
-        thursdayHours
-        tuesdayHours
-        updatedAt
-        wednesdayHours
-        zip_code
-      }
+      restaurant
     }
   }
 `;

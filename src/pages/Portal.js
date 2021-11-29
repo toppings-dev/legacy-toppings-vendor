@@ -31,6 +31,7 @@ function Portal(props) {
   const [portalSelection, setPortalSelection] = useState(window.location.href.slice(window.location.href.indexOf("/portal/") + "/portal/".length));
   const [loggedIn, setLoggedIn] = useState(getCurrentUser() != null);
   const [restaurant, setRestaurant] = useState({});
+  const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
     props.toggleShowHeader(false);
@@ -66,6 +67,11 @@ function Portal(props) {
     // await Auth.signIn(getCurrentUser());
   }
 
+  function toggleSideBar() {
+    setSideBar(!sideBar);
+    console.log("toggle", sideBar);
+  }
+
   function logout() {
     Auth.signOut().then(() => {
       setLoggedIn(false);
@@ -86,20 +92,27 @@ function Portal(props) {
     <section className="portal-login-container">
       {loggedIn ?
         <article className="portal-container">
-          <nav>
-            <Link to="/"><img className="portal-toppings-logo" src={logo} /></Link>
-
-            <ul className="nav-buttons">
-              {/*<li><Link to="/portal/dashboard"><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}><img src={dashboardIcon} /> Dashboard</span></Link></li>*/}
-              <li><Link to="/portal/orders" onClick={() => setCurrentPage("orders")}><span className={portalSelection == "orders" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("orders")}><img src={ordersIcon} /> Orders</span></Link></li>
-              <li><Link to="/portal/terms-of-service" onClick={() => setCurrentPage("terms-of-service")}><span className={portalSelection == "terms-of-service" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms-of-service")}><img src={termsServiceIcon} /> Terms of Service</span></Link></li>
-              <li><Link to="/portal/menu" onClick={() => setCurrentPage("menu")}><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}><img src={menuIcon} /> Your Menu</span></Link></li>
-              <li><Link to="/portal/rewards" onClick={() => setCurrentPage("rewards")}><span className={portalSelection == "rewards" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("rewards")}><img src={rewardsIcon} /> Your Active Rewards</span></Link></li>
-              <li><Link to="/portal/settings" onClick={() => setCurrentPage("settings")}><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}><img src={settingsIcon} /> Account Settings</span></Link></li>
-              <li><span className="portal-nav-option" onClick={logout}><img src={logoutIcon} /> Log Out</span></li>
-            </ul>
-            <div className="portal-version-label">Version 2.0.1</div>
-          </nav>
+          <div>
+            <button style={{position: "absolute", marginLeft: "20px"}} className="orange" onClick={() => toggleSideBar()}>Toggle Sidebar</button>
+          </div>
+          {sideBar ? 
+            <nav>
+              <Link to="/"><img className="portal-toppings-logo" src={logo} /></Link>
+              <ul className="nav-buttons">
+                {/*<li><Link to="/portal/dashboard"><span className={portalSelection == "dashboard" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("dashboard")}><img src={dashboardIcon} /> Dashboard</span></Link></li>*/}
+                <li><Link to="/portal/orders" onClick={() => setCurrentPage("orders")}><span className={portalSelection == "orders" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("orders")}><img src={ordersIcon} /> Orders</span></Link></li>
+                <li><Link to="/portal/terms-of-service" onClick={() => setCurrentPage("terms-of-service")}><span className={portalSelection == "terms-of-service" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("terms-of-service")}><img src={termsServiceIcon} /> Terms of Service</span></Link></li>
+                <li><Link to="/portal/menu" onClick={() => setCurrentPage("menu")}><span className={portalSelection == "menu" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("menu")}><img src={menuIcon} /> Your Menu</span></Link></li>
+                <li><Link to="/portal/rewards" onClick={() => setCurrentPage("rewards")}><span className={portalSelection == "rewards" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("rewards")}><img src={rewardsIcon} /> Your Active Rewards</span></Link></li>
+                <li><Link to="/portal/settings" onClick={() => setCurrentPage("settings")}><span className={portalSelection == "settings" ? "portal-nav-option active" : "portal-nav-option"} onClick={() => setPortalSelection("settings")}><img src={settingsIcon} /> Account Settings</span></Link></li>
+                <li><span className="portal-nav-option" onClick={logout}><img src={logoutIcon} /> Log Out</span></li>
+              </ul>
+              <div className="portal-version-label">Version 2.0.1</div>
+            </nav>
+          : 
+          ""
+          }
+          
 
           <main>
             <Switch>

@@ -26,7 +26,7 @@
 }
 
 .orders-list header button.tag span.x {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   vertical-align: middle;
   padding-left: 0.25rem;
   padding-right: -0.25rem;
@@ -43,7 +43,7 @@
   width: 100%;
   display: block;
   padding: 0.5rem 2rem;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 500;
 }
 
@@ -55,7 +55,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0.75rem 2rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 500;
   cursor: pointer;
 }
@@ -85,7 +85,7 @@
   color: #cdcdcd;
   width: 100%;
   padding: 0.75rem 0rem 0.75rem 2rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 .portal-orders-info header {
@@ -113,7 +113,7 @@
 
 .order-details .order-delivery-time span.blue-subheading {
   color: #0082ff;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 500;
 }
 
@@ -121,13 +121,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 1rem 0rem;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 500;
 }
 
 .order-details span.red-subheading {
   color: #ff004c;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 500;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .order-details .order-item-toppings li {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 .order-details .order-item-price {
   text-align: right;
