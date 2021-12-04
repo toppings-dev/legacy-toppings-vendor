@@ -281,16 +281,16 @@ function PortalOrders(props) {
                 <div>
                   {orders.New.length > 0 &&
                     orders.New.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
-                      <div key={order.name} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                        <span>{order.name}</span>  
+                      <div key={order.customer} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>{order.customer}</span>  
                         <span><button>New</button></span>
                       </div>
                     )
                   }
                   {orders.Preparing.length > 0 &&
                     orders.Preparing.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
-                      <div key={order.name} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                        <span>{order.name}</span> 
+                      <div key={order.customer} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>{order.customer}</span> 
                       </div>
                     )
                   }
@@ -299,8 +299,8 @@ function PortalOrders(props) {
                 <div>
                   {orders.Ready.length > 0 &&
                     orders.Ready.sort((order1, order2) => (order1.time.split(" ")[1] + order1.time.split(" ")[0] > order2.time.split(" ")[1] + order2.time.split(" ")[0] ? 1 : -1)).map(order => 
-                      <div key={order.name} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
-                        <span>{order.name}</span>  
+                      <div key={order.customer} className={selectedOrder == order ? "order-container active" : "order-container"} onClick={() => {selectOrder(order); console.log(order)}}>
+                        <span>{order.customer}</span>  
                       </div>
                     )
                   }
@@ -355,7 +355,7 @@ function PortalOrders(props) {
                       </div>
                     : ""}
 
-                    <span className="heading">{selectedOrder.name} - {selectedOrder.time}</span>
+                    <span className="heading">{selectedOrder.customer} - {selectedOrder.time}</span>
                     {false && selectedOrder.closed ? <span className="red-subheading">Order Closed</span> : ""}
                     <hr className="short" />
 

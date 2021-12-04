@@ -202,7 +202,7 @@ function PortalMenu(props) {
         __typename: 'MenuItem',
         name: itemNameInput.current.value,
         description: itemDescriptionInput.current.value,
-        price: itemPriceInput.current.value,
+        price: parseFloat(itemPriceInput.current.value).toFixed(2) * 100,
         foodOptions: [],
       },    
     ]
@@ -253,7 +253,7 @@ function PortalMenu(props) {
       __typeName: 'MenuItem',
       name: itemNameInput.current.value,
       description: itemDescriptionInput.current.value,
-      price: itemPriceInput.current.value,
+      price: parseFloat(itemPriceInput.current.value).toFixed(2) * 100,
       points: null,
       foodOptions: arrayToppings,
     }
@@ -606,7 +606,7 @@ function PortalMenu(props) {
                 {selectedMenuItem != null && selectedMenuItem.name != defaultMenuItem.name ? 
                   <div>
                     <span className="orange-heading">{selectedMenuItem.name}</span>
-                    <span className="blue-heading">${selectedMenuItem.price.toFixed(2)}</span>
+                    <span className="blue-heading">${((selectedMenuItem.price)/100).toFixed(2)}</span>
                     <span className="subheading">Description</span>
                     <div className="menu-item-description">{selectedMenuItem.description}</div>
                       <div>
