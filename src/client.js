@@ -7,8 +7,7 @@ const apolloLocal = 'http://localhost:4000/graphql';
 const apolloProd = 'https://api.toppingsapp.com/graphql';
 
 const httpLink = new HttpLink({
-  // uri: __DEV__ ? apolloLocal : apolloProd,
-  uri: apolloLocal,
+  uri: __DEV__ ? apolloLocal : apolloProd,
 });
 
 const authLink = setContext(async (_, { headers }) => {

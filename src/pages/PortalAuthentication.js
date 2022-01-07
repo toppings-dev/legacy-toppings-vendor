@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
+import CognitoClient from '../utils/CognitoClient';
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
