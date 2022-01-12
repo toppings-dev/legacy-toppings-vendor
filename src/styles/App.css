@@ -2,6 +2,40 @@
     font-family: "FatFrank";
     src: url("../assets/fonts/FatFrank/FatFrank-Regular.otf") format("opentype");
 }
+
+@font-face {
+    font-family: "Raleway";
+    font-weight: 900;
+    src: url("../assets/fonts/Raleway/Raleway-Black.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Raleway";
+    font-weight: 600;
+    src: url("../assets/fonts/Raleway/Raleway-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 700;
+  src: url("../assets/fonts/Raleway/Raleway-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Cabin";
+  font-weight: 500;
+  src: url("../assets/fonts/Cabin/Cabin-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin";
+  font-weight: 700;
+  src: url("../assets/fonts/Cabin/Cabin-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SourceCodePro";
+  font-weight: 500;
+  src: url("../assets/fonts//SourceCodePro/SourceCodePro-Medium.ttf") format("truetype");
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');

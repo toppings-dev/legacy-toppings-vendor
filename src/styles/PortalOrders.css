@@ -6,8 +6,50 @@
 } 
 
 .orders-list {
-  border-right: 5px solid #e6e6e6;
+  border-right: 4px solid #747474;
   text-align: left;
+  padding-left: 30;
+}
+
+.party-orders-container {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.party-orders-container span {
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 36;
+  color: #747474;
+}
+
+.party-orders-container span.expanded {
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 36;
+  color: #0082FF;
+}
+
+.party-orders-container div.party-orders-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.party-orders-container div.party-orders-list p {
+  font-family: 'Raleway';
+  font-weight: 600;
+  font-size: 36;
+  color: #0082FF;
+}
+
+.party-orders-container div.party-orders-list p.selected {
+  font-family: 'Raleway';
+  font-weight: 900;
+  font-size: 36;
+  color: #0082FF;
 }
 
 .orders-list header {
@@ -52,8 +94,8 @@
   background-color: #ffffff;
   color: #979797;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   padding: 0.75rem 2rem;
   font-size: 1.25rem;
   font-weight: 500;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
+import { setUnverifiedUser, getUnverifiedUser } from '../utils/session';
 import CognitoClient from '../utils/CognitoClient';
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import awsConfig from '../utils/awsConfig';
@@ -8,11 +9,13 @@ import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
 import * as customMutations from '../graphql/customMutations';
 
-import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession } from '../utils/session';
+import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession, setTokens } from '../utils/session';
 
 Amplify.configure(awsConfig);
 
 function PortalSignUp(props) {
+  const { Cognito } = props;
+
   const nameInput = useRef();
   const emailInput = useRef();
   const passwordInput = useRef();
@@ -32,14 +35,15 @@ function PortalSignUp(props) {
     let user = getCurrentUser();
     let page = getCurrentPage();
     if (user != null && page != null) {
-      emailInput.current.value = user.attributes.email;
-      passwordInput.current.value = '';
+      console.log(user);
+      emailInput.current.value = user.username;
+      passwordInput.current.value = user.password;
       login(null);
       console.log("user", user);
     }
   }, []);
 
-  function signUp(e) {
+  async function signUp(e) {
     e.preventDefault();
     let name = nameInput.current.value;
     let email = emailInput.current.value;
@@ -50,22 +54,29 @@ function PortalSignUp(props) {
         phoneNumber = "+" + (phoneNumber.length === 10 ? "1" : "") + phoneNumber;
     }
     
+    let unverifiedUser;
+
     if (name.length > 0 && email.length > 0 && phoneNumber.length >= 10 && password.length > 0) {
-      Auth.signUp({ 
-        username: email, 
-        password: password,
-        attributes: {
-          name: name,
-          phone_number: phoneNumber,
-        }
-      }).then(() => {
-        setSignedUp(true);
-        setSuccessMsg("Account created, please enter the confirmation code.");
-        setErrorMsg("");
-        setUserName(name);
-      }).catch((error) => {
-        setErrorMsg(error.message);
-      });
+      try {
+        unverifiedUser = await Cognito.signUp(email, password, [
+          {
+            Name: 'name',
+            Value: name,
+          },
+          {
+            Name: 'phone_number',
+            Value: phoneNumber,
+          },
+        ]);
+      } catch (err) {
+        setErrorMsg(err.message);
+      }
+
+      setUnverifiedUser(unverifiedUser);
+      setSignedUp(true);
+      setSuccessMsg("Account created, please enter the confirmation code.");
+      setErrorMsg("");
+      setUserName(name);
     } else {
       setErrorMsg("Account info is incomplete.");
     }
@@ -77,8 +88,11 @@ function PortalSignUp(props) {
     let email = emailInput.current.value;
     let code = codeInput.current.value;
 
+    let unverifiedUser = getUnverifiedUser();
+
     if (email.length > 0 && code.length > 0) {
-      await Auth.confirmSignUp(email, code)
+      await Cognito.confirmRegistration(unverifiedUser.userSub, code);
+      // await Auth.confirmSignUp(email, code)
         // setSignedUp(true);
       // }).catch((error) => {
       //   setErrorMsg(error.message);
@@ -142,32 +156,35 @@ function PortalSignUp(props) {
         password: password,
       };
       console.log(user);
-      const result = await Auth.signIn(user); //.then(() => {
+
+      const result = await Cognito.authenticateUser(email, password);
+      // const result = await Auth.signIn(user); //.then(() => {
       console.log("auth sign in", result);
-      setCurrentUser(result);
+      setTokens(result);
 
-      const currentUser = await Auth.currentAuthenticatedUser();
+      const currentUser = await Cognito.getCurrentUserAttributes();
 
-        const restaurant = {
-          name: "Your Restaurant Name",
-          userId: currentUser.attributes.sub,
-          address: "Your Address",
-          city: "Your City",
-          description: "Your Restaurant Description",
-          lat: 100.0,
-          long: 100.0,
-          phoneNumber: '+15105132142',
-          state: "Your State",
-          zip_code: "Your Zip Code",
-          isOpen: "true",
-        };
+        // const restaurant = {
+        //   name: "Your Restaurant Name",
+        //   userId: currentUser.attributes.sub,
+        //   address: "Your Address",
+        //   city: "Your City",
+        //   description: "Your Restaurant Description",
+        //   lat: 100.0,
+        //   long: 100.0,
+        //   phoneNumber: '+15105132142',
+        //   state: "Your State",
+        //   zip_code: "Your Zip Code",
+        //   isOpen: "true",
+        // };
         
-        await API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant));
+        // await API.graphql(graphqlOperation(customMutations.createRestaurant, restaurant));
 
         const userWithSub = {
           ...user,
-          cognitoId: currentUser.attributes.sub,
+          cognitoId: currentUser[0].Value,
         };
+        setCurrentUser(userWithSub);
       //   .then(createRestaurantResp => {
       //     console.log('Create Restaurant', createRestaurantResp);
       //     setErrorMsg('');

@@ -28,9 +28,10 @@ import logoutIcon from '../assets/images/portal-logout-icon.svg';
 Amplify.configure(awsConfig);
 
 function Portal(props) {
+  const { Cognito } = props;
+
   const [portalSelection, setPortalSelection] = useState(window.location.href.slice(window.location.href.indexOf("/portal/") + "/portal/".length));
   const [loggedIn, setLoggedIn] = useState(getCurrentUser() != null);
-  const [restaurant, setRestaurant] = useState({});
   const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
@@ -38,33 +39,12 @@ function Portal(props) {
     console.log("U", props.user)
   }, []);
 
-  let { data: vendorData, error: vendorError, loading: vendorLoading } = useQuery(customQueries.getVendor);
-  if (vendorData) {
-    console.log("vendor", vendorData)
-  }
-  if (vendorError) console.log("vendorerror", vendorError);
+  let { data: vendorData, error: vendorError, loading: vendorLoading } = useQuery(customQueries.GET_RESTAURANT_BY_OWNER);
 
-  // async function getData() {
-  //   // await props.setUser(getCurrentUser());
-  //   // console.log("PU", props.user)
-  //   // console.log("PU", getCurrentUser())
-  //   // if (getCurrentUser().hasOwnProperty("username")) {
-  //     // await login();
-  //     console.log("GD")
-  //     const userId = await getCurrentUser() == null ? props.user.sub : await getCurrentUser().cognitoId;
-  //     console.log("GET RESTU", userId)
-  //     const restaurantsResponse = await API.graphql(graphqlOperation(customQueries.getRestaurantByOwner, { userId }));
-  //     console.log("HELOOOOOOO");
-  //     console.log("Set restaurant resp", restaurantsResponse);
-  //     const restaurant = restaurantsResponse.data.getRestaurantByOwner;
-  //     setRestaurant(restaurant);
-  //     console.log("Set restaurant props", restaurant);
-  //   // }
-  // }
+  let restaurant;
 
-  async function login() {
-    console.log("LOGIN");
-    // await Auth.signIn(getCurrentUser());
+  if (vendorData?.getRestaurantByOwner) {
+    restaurant = vendorData.getRestaurantByOwner;
   }
 
   function toggleSideBar() {
@@ -72,29 +52,26 @@ function Portal(props) {
     console.log("toggle", sideBar);
   }
 
-  function logout() {
-    Auth.signOut().then(() => {
-      setLoggedIn(false);
-      clearSession("user");
-      clearSession("page");
-      props.toggleShowHeader(true);
-    }).catch((error) => {
-      console.log("Error signing out", error);
-    });
+  async function logout() {
+    await Cognito.signOut();
+    setLoggedIn(false);
+    clearSession("user");
+    clearSession("page");
+    props.toggleShowHeader(true);
   }
   if (vendorLoading) return null;
   if (vendorError) {
     console.log('error', vendorError);
     return null;
   }
-  console.log("vendorrrrr", vendorData.getVendor.restaurant);
+
   return (
     <section className="portal-login-container">
       {loggedIn ?
         <article className="portal-container">
-          <div>
+          {/* <div>
             <button style={{position: "absolute", marginLeft: "20px"}} className="orange" onClick={() => toggleSideBar()}>Toggle Sidebar</button>
-          </div>
+          </div> */}
           {sideBar ? 
             <nav>
               <Link to="/"><img className="portal-toppings-logo" src={logo} /></Link>
@@ -116,12 +93,12 @@ function Portal(props) {
 
           <main>
             <Switch>
-              <Route path="/portal/dashboard" component={() => <PortalDashboard restaurant={vendorData.getVendor.restaurant} />} />
-              <Route path="/portal/orders" component={() => <PortalOrders vendor={vendorData} />} />
-              <Route path="/portal/terms-of-service" component={() => <PortalTermsService restaurant={vendorData.getVendor.restaurant} />} />
-              <Route path="/portal/menu" component={() => <PortalMenu vendor={vendorData} />} />
-              <Route path="/portal/rewards" component={() => <PortalRewards vendor={vendorData} />} />
-              <Route path="/portal/settings" component={() => <PortalSettings restaurant={vendorData.getVendor.restaurant} />} />
+              <Route path="/portal/dashboard" component={() => <PortalDashboard restaurant={restaurant} />} />
+              <Route path="/portal/orders" component={() => <PortalOrders restaurant={restaurant} />} />
+              <Route path="/portal/terms-of-service" component={() => <PortalTermsService restaurant={restaurant} />} />
+              <Route path="/portal/menu" component={() => <PortalMenu vendor={restaurant} />} />
+              <Route path="/portal/rewards" component={() => <PortalRewards vendor={restaurant} />} />
+              <Route path="/portal/settings" component={() => <PortalSettings restaurant={restaurant} />} />
             </Switch>
           </main>
         </article>

@@ -6,7 +6,7 @@ class CognitoClient {
     const userPoolParams = {
       UserPoolId: 'local_08k2xaAy',
       ClientId: 'd0fw03t1cu3pq3726kyyg4mn5',
-      endpoint: __DEV__ ? 'http://localhost:9229/' : undefined,
+      endpoint: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'http://localhost:9229/' : undefined,
     };
 
     const userPool = new CognitoUserPool(userPoolParams);
@@ -65,7 +65,7 @@ class CognitoClient {
       this.poolUser = user;
     }
 
-    if (__DEV__) {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       this.poolUser.setAuthenticationFlowType('USER_PASSWORD_AUTH');
     }
 
@@ -113,10 +113,10 @@ class CognitoClient {
   }
 
   async getCurrentUser() {
-    const syncStorage = promisify(this.userPool.storage.sync.bind(this.userPool));
-    const syncRes = await syncStorage();
+    // const syncStorage = promisify(this.userPool.storage.sync.bind(this.userPool));
+    // const syncRes = await syncStorage();
 
-    if (syncRes !== 'SUCCESS') return;
+    // if (syncRes !== 'SUCCESS') return;
 
     const currentUser = this.userPool.getCurrentUser();
 
@@ -133,10 +133,11 @@ class CognitoClient {
   }
 
   async getCurrentUserAttributes() {
-    const syncStorage = promisify(this.userPool.storage.sync.bind(this.userPool));
-    const syncRes = await syncStorage();
+    // console.log('🤬', this.userPool.storage.sync);
+    // const syncStorage = promisify(this.userPool.storage.sync.bind(this.userPool));
+    // const syncRes = await syncStorage();
 
-    if (syncRes !== 'SUCCESS') return;
+    // if (syncRes !== 'SUCCESS') return;
 
     const currentUser = this.userPool.getCurrentUser();
 

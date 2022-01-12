@@ -13,6 +13,7 @@ import { ApolloProvider } from '@apollo/client';
 
 import { getCurrentUser, setupSession, clearSession, getCurrentPage } from './utils/session';
 import client from './client';
+import CognitoClient from './utils/CognitoClient';
 
 import logo from './assets/images/logo-white.png';
 import Portal from './pages/Portal';
@@ -22,11 +23,13 @@ function App() {
   const [showHeader, toggleShowHeader] = useState(true);
   const [user, setUser] = useState({});
 
+  const Cognito = new CognitoClient();
+
   return (
     <ApolloProvider client={client}>
       <div className="wrapper">
         <Route exact path="/portal/:selection" render={() => <Portal toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
-        <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} />} />
+        <Route exact path="/portal-auth/:selection" render={() => <PortalAuthentication toggleShowHeader={toggleShowHeader} user={user} setUser={setUser} Cognito={Cognito} />} />
         
         <Redirect to={`/portal-auth/sign-in`} />
         {showHeader ?

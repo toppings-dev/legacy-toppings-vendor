@@ -1,5 +1,119 @@
 import { gql } from '@apollo/client';
 
+export const LIST_ORDERS_BY_RESTAURANT = gql`
+  query ListOrdersByRestaurant($restaurantId: String!) {
+    listOrdersByRestaurant(restaurantId: $restaurantId) {
+      id
+      party {
+        id
+      }
+      items {
+        name
+        price
+        points
+        boughtWithPoints
+        isReward
+        description
+        comment
+        quantity
+        foodOptions {
+          name
+          options {
+            name
+          }
+        }
+      }
+      customer {
+        id
+        pfp
+        name
+        phoneNumber
+        username
+      }
+      deliverer {
+        id
+        pfp
+        name
+        phoneNumber
+        username
+      }
+      restaurant {
+        id
+        name
+      }
+      estimatedDeliveryTimeWindow {
+        begin
+        end
+      }
+      priceBeforeDiscount
+      priceAfterDiscount
+      discount
+      tax
+      tip
+      totalPrice
+      isPaid
+      status
+      comment
+    }
+  }
+`;
+
+export const GET_RESTAURANT_BY_OWNER = gql`
+  query GetRestaurantByOwner {
+    getRestaurantByOwner {
+      id
+      name
+      description
+      address
+      city
+      state
+      phoneNumber
+      emoji
+      hours {
+        open
+        close
+      }
+      thumbnail
+      menu {
+        name
+        menuItems {
+          name
+          description
+          price
+          points
+          numOrders
+          image
+          foodOptions {
+            name
+            numChoices
+            options {
+              name
+              price
+              points
+            }
+          }
+        }
+      }
+      rewardItems {
+        name
+        description
+        price
+        points
+        numOrders
+        foodOptions {
+          name
+          numChoices
+          options {
+            name
+            price
+            points
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getMenu = /* GraphQL */ `
   query GetMenu($id: ID!) {
     getMenu(id: $id) {
