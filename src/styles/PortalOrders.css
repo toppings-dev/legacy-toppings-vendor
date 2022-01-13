@@ -1,3 +1,130 @@
+.divider {
+  width: 100%;
+  height: 4px;
+  border-width: 0px;
+  background-color: #000000;
+  margin: 20px 0px 20px 0px;
+}
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.item-name {
+  font-family: 'Cabin';
+  font-size: 48px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.item-option-name {
+  font-family: 'Cabin';
+  font-size: 36px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.item-price {
+  font-family: 'SourceCodePro';
+  font-size: 48px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.item-name-gray {
+  font-family: 'Cabin';
+  font-size: 48px;
+  font-weight: 500;
+  color: #747474;
+}
+
+.item-price-gray {
+  font-family: 'SourceCodePro';
+  font-size: 48px;
+  font-weight: 500;
+  color: #747474;
+}
+
+.item-name-left {
+  font-family: 'Cabin';
+  font-size: 48px;
+  font-weight: 500;
+  color: #000000;
+  align-self: flex-start;
+}
+
+.item-name-left-small {
+  font-family: 'Cabin';
+  font-size: 36px;
+  font-weight: 500;
+  color: #000000;
+  align-self: flex-start;
+}
+
+.item-name-left-big {
+  font-family: 'Cabin';
+  font-size: 56px;
+  font-weight: 700;
+  color: #0082FF;
+  align-self: flex-start;
+  margin: 10px 0px 10px 0px;
+}
+
+.time-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.time-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 120px;
+  border-radius: 10px;
+  background-color: #0082FF;
+  margin: 20px 0px 20px 0px;
+  cursor: pointer;
+}
+
+.time-container div span {
+  font-family: 'Cabin';
+  font-size: 64px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.selected-order-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.split-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 10px 0px 10px 0px;
+}
+
+.orderer-name {
+  font-family: 'Raleway';
+  font-size: 64px;
+  font-weight: 900;
+  color: #000000;  
+}
+
+.order-date {
+  font-family: 'Cabin';
+  font-size: 36px;
+  font-weight: 700;
+  color: #747474;
+}
+
 .portal-orders-subcontainer {
   height: 100vh;
   margin: 0rem -4rem;
@@ -8,7 +135,7 @@
 .orders-list {
   border-right: 4px solid #747474;
   text-align: left;
-  padding-left: 30;
+  padding: 60px 30px;
 }
 
 .party-orders-container {
@@ -17,38 +144,55 @@
   cursor: pointer;
 }
 
+.group-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.down-arrow-button {
+  margin-right: 20px;
+}
+
 .party-orders-container span {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 36;
+  font-size: 36px;
   color: #747474;
 }
 
-.party-orders-container span.expanded {
+.party-orders-container span.viewed {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 36;
+  font-size: 36px;
   color: #0082FF;
 }
 
-.party-orders-container div.party-orders-list {
+.party-orders-list {
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: center;
+  align-items: center;
 }
 
-.party-orders-container div.party-orders-list p {
+.party-orders-list p {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 36;
+  font-size: 36px;
+  color: #747474;
+}
+
+.party-orders-list p.selected {
+  font-family: 'Raleway';
+  font-weight: 900;
+  font-size: 36px;
   color: #0082FF;
 }
 
-.party-orders-container div.party-orders-list p.selected {
+.party-orders-list p.viewed {
   font-family: 'Raleway';
-  font-weight: 900;
-  font-size: 36;
+  font-weight: 500;
+  font-size: 36px;
   color: #0082FF;
 }
 

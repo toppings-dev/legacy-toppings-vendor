@@ -1,5 +1,33 @@
 import { gql } from '@apollo/client';
 
+export const UPDATE_ORDER_ETA = gql`
+  mutation UpdateOrderETA($orderId: String!, $partyId: String!, $orderFinishedPreparingMinutes: Int!) {
+    updateOrderETA(orderId: $orderId, partyId: $partyId, orderFinishedPreparingMinutes: $orderFinishedPreparingMinutes) {
+      id
+      party {
+        id
+        estimatedDeliveryTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingTimeWindow {
+          begin
+          end
+        } 
+      }
+      estimatedDeliveryTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingMinutes
+    }
+  }
+`;
+
 export const updateDriverLocation = /* GraphQL */ `
   mutation UpdateDriverLocation($id: ID!, $lat: Float!, $long: Float!) {
     updateDriverLocation(id: $id, lat: $lat, long: $long) {

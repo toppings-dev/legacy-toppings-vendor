@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import dayjs from 'dayjs';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 
@@ -17,9 +18,11 @@ import whiteCheckmark from '../assets/images/white-checkmark.svg';
 import grayCheckmark from '../assets/images/gray-checkmark.svg';
 import ding from '../assets/audio/ding.mp3';
 import { ConsoleLogger } from '@aws-amplify/core';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import PartyContainer from '../components/PartyContainer';
+
+dayjs().format();
 
 function PortalOrders(props) {
   const { restaurant } = props;
@@ -30,11 +33,12 @@ function PortalOrders(props) {
   const deliveredOrderTimeStamp = 0;
   const cancelledOrderTimeStamp = -1;
   const dingTimer = 5000;
+  const orderTimes = [10, 15, 20, 25, 30];
 
   const audio = new Audio(ding);
   const [loading, setLoading] = useState(false);
   //const [audio] = useState(new Audio(ding));
-  const [selectedOrder, selectOrder] = useState(null); 
+  const [selectedOrder, setSelectedOrder] = useState(null); 
   const [receivingOrders, setReceivingOrders] = useState(true);
   const [hasNew, setHasNew] = useState(false);
 
@@ -50,6 +54,7 @@ function PortalOrders(props) {
     },
     skip: !(restaurant?.id)
   });
+  let [updateOrderETA, { error: updateOrderETAError }] = useMutation(customMutations.UPDATE_ORDER_ETA);
 
   let ordersByParty = {};
   if (ordersData?.listOrdersByRestaurant) {
@@ -59,14 +64,26 @@ function PortalOrders(props) {
       if (!ordersByParty[order.deliverer.id]) {
         ordersByParty[order.deliverer.id] = {
           delivererName: order.deliverer.name,
+          partyViewed: true,
           orders: [],
         };
       }
       ordersByParty[order.deliverer.id].orders.push(order);
     }
+
+    for (const [key, value] of Object.entries(ordersByParty)) {
+      console.log(key, value);
+      for (const order of value.orders) {
+        if (!order.restaurantFinishedPreparingTimeWindow) {
+          ordersByParty[key].partyViewed = false;
+          break;
+        }
+      }
+    }
     console.log(ordersByParty);
   }
 
+  console.log(selectedOrder?.orderSentTime);
 
   return (
     <article className="portal-orders-container">
@@ -84,7 +101,7 @@ function PortalOrders(props) {
             <div className="orders-list">
               <div>
                 {Object.entries(ordersByParty).map(([delivererId, partyOrders]) => 
-                  <PartyContainer key={delivererId} partyOrders={partyOrders} />
+                  <PartyContainer key={delivererId} partyOrders={partyOrders} setSelectedOrder={setSelectedOrder}/>
                 )}
               </div>
               {/* <div>
@@ -105,7 +122,91 @@ function PortalOrders(props) {
                 </div>
               </div>*/}
             </div>
-            
+            {!selectedOrder ? (
+              <div>
+                <p>
+                  Click an order
+                </p>
+              </div>
+            ) : (
+              <div className="selected-order-container">
+                <div className="split-row">
+                  <span className="orderer-name">
+                    {selectedOrder.customer.name}
+                  </span>
+                  <span className="order-date">
+                    {dayjs(selectedOrder.orderSentTime).format('MM/DD/YY hh:mmA')}
+                  </span>
+                </div>
+
+                <hr className="divider" />
+
+                {selectedOrder.items.map(item => 
+                  <div className="split-row">
+                    <div className="item-container">
+                      <span className="item-name">
+                        {item.name}
+                      </span>
+                      {item.foodOptions.map(foodOption => {
+                        foodOption.options.map(option => <span className="item-option-name">{option.name}</span>)
+                      })}
+                    </div>
+                    <span className="item-price">
+                      {(item.price / 100).toFixed(2)}
+                    </span>
+                  </div>
+                )}
+                <div className='split-row'>
+                  <span className='item-name-gray'>
+                    Tax
+                  </span>
+                  <span className='item-price-gray'>
+                    {(selectedOrder.tax / 100).toFixed(2)}
+                  </span>
+                </div>
+                <div className='split-row'>
+                  <span className='item-name-gray'>
+                    Tip
+                  </span>
+                  <span className='item-price-gray'>
+                    {(selectedOrder.tip / 100).toFixed(2)}
+                  </span>
+                </div>
+                <div className='split-row'>
+                  <span className='item-name'>
+                    Total
+                  </span>
+                  <span className='item-price'>
+                    ${(selectedOrder.totalPrice / 100).toFixed(2)}
+                  </span>
+                </div>
+
+                <hr className='divider' />
+                
+                <span className='item-name-left'>
+                  Order Time (min)
+                </span>
+                <span className='item-name-left-small'>
+                  Click to select
+                </span>
+
+                {selectedOrder.restaurantFinishedPreparingMinutes ? (
+                  <span className='item-name-left-big'>
+                    You have selected {selectedOrder.restaurantFinishedPreparingMinutes} minutes.
+                  </span>
+                ) : (
+                  <div className='time-container'>
+                    {orderTimes.map(orderTime =>
+                      <div onClick={() => updateOrderETA({ variables: { partyId: selectedOrder.party.id, orderId: selectedOrder.id, orderFinishedPreparingMinutes: orderTime } })}>
+                        <span>
+                          {orderTime}
+                        </span>
+                      </div>  
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         :
           <header>
