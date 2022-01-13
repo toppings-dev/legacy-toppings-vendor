@@ -123,7 +123,7 @@ function PortalOrders(props) {
               </div>*/}
             </div>
             {!selectedOrder ? (
-              <div>
+              <div className='selected-order-container'>
                 <p className='click-order-text'>
                   Click on an order in a group to view
                 </p>
