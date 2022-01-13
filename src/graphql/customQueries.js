@@ -6,6 +6,14 @@ export const LIST_ORDERS_BY_RESTAURANT = gql`
       id
       party {
         id
+        estimatedDeliveryTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingTimeWindow {
+          begin
+          end
+        }
       }
       items {
         name
@@ -45,6 +53,11 @@ export const LIST_ORDERS_BY_RESTAURANT = gql`
         begin
         end
       }
+      restaurantFinishedPreparingTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingMinutes
       priceBeforeDiscount
       priceAfterDiscount
       discount
@@ -54,6 +67,7 @@ export const LIST_ORDERS_BY_RESTAURANT = gql`
       isPaid
       status
       comment
+      orderSentTime
     }
   }
 `;
