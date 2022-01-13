@@ -52,7 +52,8 @@ function PortalOrders(props) {
     variables: {
       restaurantId: restaurant?.id,
     },
-    skip: !(restaurant?.id)
+    skip: !(restaurant?.id),
+    pollInterval: 60 * 1000,
   });
   let [updateOrderETA, { error: updateOrderETAError }] = useMutation(customMutations.UPDATE_ORDER_ETA);
 
