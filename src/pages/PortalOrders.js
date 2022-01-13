@@ -101,7 +101,7 @@ function PortalOrders(props) {
             <div className="orders-list">
               <div>
                 {Object.entries(ordersByParty).map(([delivererId, partyOrders]) => 
-                  <PartyContainer key={delivererId} partyOrders={partyOrders} setSelectedOrder={setSelectedOrder}/>
+                  <PartyContainer key={delivererId} partyOrders={partyOrders} selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder}/>
                 )}
               </div>
               {/* <div>
@@ -187,17 +187,19 @@ function PortalOrders(props) {
                   Order Time (min)
                 </span>
                 <span className='item-name-left-small'>
-                  Click to select
+                  Click a button to select
                 </span>
 
                 {selectedOrder.restaurantFinishedPreparingMinutes ? (
-                  <span className='item-name-left-big'>
+                  <span className='item-name-center-big'>
                     You have selected {selectedOrder.restaurantFinishedPreparingMinutes} minutes.
                   </span>
                 ) : (
                   <div className='time-container'>
-                    {orderTimes.map(orderTime =>
-                      <div onClick={() => updateOrderETA({ variables: { partyId: selectedOrder.party.id, orderId: selectedOrder.id, orderFinishedPreparingMinutes: orderTime } })}>
+                    {orderTimes.map((orderTime, index) =>
+                      <div 
+                        className={index === 0 || index === 4 ? (index === 0 ? 'left' : 'right') : undefined}
+                        onClick={() => updateOrderETA({ variables: { partyId: selectedOrder.party.id, orderId: selectedOrder.id, orderFinishedPreparingMinutes: orderTime } })}>
                         <span>
                           {orderTime}
                         </span>

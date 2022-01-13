@@ -66,16 +66,17 @@
   font-family: 'Cabin';
   font-size: 36px;
   font-weight: 500;
-  color: #000000;
+  color: #747474;
   align-self: flex-start;
+  margin-bottom: 50px;
 }
 
-.item-name-left-big {
+.item-name-center-big {
   font-family: 'Cabin';
   font-size: 56px;
   font-weight: 700;
   color: #0082FF;
-  align-self: flex-start;
+  align-self: center;
   margin: 10px 0px 10px 0px;
 }
 
@@ -89,11 +90,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
   height: 80px;
-  width: 120px;
   border-radius: 10px;
   background-color: #0082FF;
-  margin: 20px 0px 20px 0px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.time-container div.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #0082FF;
+  margin: 20px 10px 20px 0px;
+  cursor: pointer;
+}
+
+.time-container div.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 80px;
+  border-radius: 10px;
+  background-color: #0082FF;
+  margin: 20px 0px 20px 10px;
   cursor: pointer;
 }
 
@@ -156,6 +181,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .down-arrow-button {
@@ -181,23 +207,25 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
+  padding-right: 60px;
 }
 
-.party-orders-list p {
+.party-orders-list span {
   font-family: 'Raleway';
   font-weight: 600;
   font-size: 36px;
   color: #747474;
+  margin: 8px 0px 8px 0px;
 }
 
-.party-orders-list p.selected {
+.party-orders-list span.selected {
   font-family: 'Raleway';
   font-weight: 900;
   font-size: 36px;
   color: #0082FF;
 }
 
-.party-orders-list p.viewed {
+.party-orders-list span.viewed {
   font-family: 'Raleway';
   font-weight: 500;
   font-size: 36px;

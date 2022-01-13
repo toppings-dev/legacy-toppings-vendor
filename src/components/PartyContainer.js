@@ -7,7 +7,7 @@ import downArrowGray from '../assets/images/down-arrow-gray.png';
 dayjs().format();
 
 function PartyContainer(props) {
-  const { partyOrders, setSelectedOrder } = props;
+  const { partyOrders, selectedOrder, setSelectedOrder } = props;
 
   const [expanded, setExpanded] = useState(false);
 
@@ -38,7 +38,7 @@ function PartyContainer(props) {
       {expanded &&
         <div className='party-orders-list'>
           {partyOrders.orders.map(order => 
-            <p key={order.id} className={order.restaurantFinishedPreparingTimeWindow ? 'viewed' : undefined} onClick={(e) => handleSelectOrder(e, order)}>{order.customer.name}</p>
+            <span key={order.id} className={order.restaurantFinishedPreparingTimeWindow ? 'viewed' : undefined} style={selectedOrder?.id === order.id ? { fontWeight: 900 } : { fontWeight: 500 }}onClick={(e) => handleSelectOrder(e, order)}>{order.customer.name}</span>
           )}
         </div>
       }
