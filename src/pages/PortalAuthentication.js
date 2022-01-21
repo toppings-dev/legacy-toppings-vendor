@@ -67,6 +67,10 @@ function PortalSignUp(props) {
             Name: 'phone_number',
             Value: phoneNumber,
           },
+          {
+            Name: 'custom:isUser',
+            Value: '0',
+          }
         ]);
       } catch (err) {
         setErrorMsg(err.message);

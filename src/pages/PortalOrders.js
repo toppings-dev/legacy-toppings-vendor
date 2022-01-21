@@ -55,7 +55,17 @@ function PortalOrders(props) {
     skip: !(restaurant?.id),
     pollInterval: 60 * 1000,
   });
-  let [updateOrderETA, { error: updateOrderETAError }] = useMutation(customMutations.UPDATE_ORDER_ETA);
+  let [updateOrderETA, { error: updateOrderETAError }] = useMutation(customMutations.UPDATE_ORDER_ETA, {
+    onCompleted(data) {
+      // console.log('👾', data.updateOrderETA);
+      // const oldSelectedOrder = JSON.parse(JSON.stringify(selectedOrder));
+      // oldSelectedOrder.party = data.updateOrderETA.party;
+      // oldSelectedOrder.estimatedDeliveryTimeWindow = data.updateOrderETA.estimatedDeliveryTimeWindow;
+      // oldSelectedOrder.restaurantFinishedPreparingTimeWindow = data.updateOrderETA.restaurantFinishedPreparingTimeWindow;
+      // oldSelectedOrder.restaurantFinishedPreparingMinutes = data.updateOrderETA.restaurantFinishedPreparingMinutes;
+      // setSelectedOrder(oldSelectedOrder);
+    }
+  });
 
   let ordersByParty = {};
   if (ordersData?.listOrdersByRestaurant) {
@@ -84,7 +94,16 @@ function PortalOrders(props) {
     console.log(ordersByParty);
   }
 
-  console.log(selectedOrder?.orderSentTime);
+  useEffect(() => {
+    if (ordersData?.listOrdersByRestaurant) {
+      for (const order of ordersData.listOrdersByRestaurant) {
+        if (order.id === selectedOrder?.id) {
+          setSelectedOrder(order);
+          break;
+        }
+      }
+    }
+  }, [ordersData, selectedOrder]);
 
   return (
     <article className="portal-orders-container">

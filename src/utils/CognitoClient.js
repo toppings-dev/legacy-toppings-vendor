@@ -3,12 +3,20 @@ import { promisify } from 'util';
 
 class CognitoClient {
   constructor() {
-    const userPoolParams = {
-      UserPoolId: 'local_08k2xaAy',
-      ClientId: 'd0fw03t1cu3pq3726kyyg4mn5',
-      endpoint: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'http://localhost:9229/' : undefined,
-    };
-
+    let userPoolParams;
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      userPoolParams = {
+        UserPoolId: 'local_08k2xaAy',
+        ClientId: 'd0fw03t1cu3pq3726kyyg4mn5',
+        endpoint: 'http://localhost:9229/',
+      };
+    } else {
+      userPoolParams = {
+        UserPoolId: 'us-east-1_BZrR4rdM5',
+        ClientId: '68aj8nbksgd001o2bd00gds65r',
+        endpoint: 'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_BZrR4rdM5',
+      };
+    }
     const userPool = new CognitoUserPool(userPoolParams);
 
     this.userPool = userPool;
