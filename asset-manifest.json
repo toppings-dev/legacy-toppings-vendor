@@ -1,17 +1,16 @@
 {
   "files": {
-    "main.css": "/toppings-vendor/static/css/main.90382b68.chunk.css",
-    "main.js": "/toppings-vendor/static/js/main.83ad9343.chunk.js",
-    "main.js.map": "/toppings-vendor/static/js/main.83ad9343.chunk.js.map",
+    "main.css": "/toppings-vendor/static/css/main.936b282d.chunk.css",
+    "main.js": "/toppings-vendor/static/js/main.d3e2d793.chunk.js",
+    "main.js.map": "/toppings-vendor/static/js/main.d3e2d793.chunk.js.map",
     "runtime-main.js": "/toppings-vendor/static/js/runtime-main.819c3fe4.js",
     "runtime-main.js.map": "/toppings-vendor/static/js/runtime-main.819c3fe4.js.map",
-    "static/js/2.e24c8c07.chunk.js": "/toppings-vendor/static/js/2.e24c8c07.chunk.js",
-    "static/js/2.e24c8c07.chunk.js.map": "/toppings-vendor/static/js/2.e24c8c07.chunk.js.map",
+    "static/js/2.c8a591f9.chunk.js": "/toppings-vendor/static/js/2.c8a591f9.chunk.js",
+    "static/js/2.c8a591f9.chunk.js.map": "/toppings-vendor/static/js/2.c8a591f9.chunk.js.map",
     "index.html": "/toppings-vendor/index.html",
-    "static/css/main.90382b68.chunk.css.map": "/toppings-vendor/static/css/main.90382b68.chunk.css.map",
-    "static/js/2.e24c8c07.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/2.e24c8c07.chunk.js.LICENSE.txt",
-    "static/js/main.83ad9343.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/main.83ad9343.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/toppings-vendor/static/media/FatFrank-Regular.532265e9.otf",
+    "static/css/main.936b282d.chunk.css.map": "/toppings-vendor/static/css/main.936b282d.chunk.css.map",
+    "static/js/2.c8a591f9.chunk.js.LICENSE.txt": "/toppings-vendor/static/js/2.c8a591f9.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/toppings-vendor/static/media/SourceCodePro-Medium.8187bd79.ttf",
     "static/media/bubble-icon-1.59b54bba.svg": "/toppings-vendor/static/media/bubble-icon-1.59b54bba.svg",
     "static/media/bubble-icon-2.7af7e509.svg": "/toppings-vendor/static/media/bubble-icon-2.7af7e509.svg",
     "static/media/clock-icon.d3af5bbb.svg": "/toppings-vendor/static/media/clock-icon.d3af5bbb.svg",
@@ -36,8 +35,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.819c3fe4.js",
-    "static/js/2.e24c8c07.chunk.js",
-    "static/css/main.90382b68.chunk.css",
-    "static/js/main.83ad9343.chunk.js"
+    "static/js/2.c8a591f9.chunk.js",
+    "static/css/main.936b282d.chunk.css",
+    "static/js/main.d3e2d793.chunk.js"
   ]
 }
