@@ -28,7 +28,7 @@
 
 .item-option-name {
   font-family: 'Cabin';
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 500;
   color: #000000;
 }
@@ -192,14 +192,14 @@
   font-family: 'Raleway';
   font-weight: 600;
   font-size: 36px;
-  color: #747474;
+  color: #0082FF;
 }
 
 .party-orders-container span.viewed {
   font-family: 'Raleway';
   font-weight: 600;
   font-size: 36px;
-  color: #0082FF;
+  color: #747474;
 }
 
 .party-orders-list {
@@ -214,7 +214,7 @@
   font-family: 'Raleway';
   font-weight: 600;
   font-size: 36px;
-  color: #747474;
+  color: #0082FF;
   margin: 8px 0px 8px 0px;
 }
 
@@ -229,7 +229,7 @@
   font-family: 'Raleway';
   font-weight: 500;
   font-size: 36px;
-  color: #0082FF;
+  color: #747474;
 }
 
 .orders-list header {

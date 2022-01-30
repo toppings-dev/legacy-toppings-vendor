@@ -70,16 +70,17 @@ function PortalOrders(props) {
   let ordersByParty = {};
   if (ordersData?.listOrdersByRestaurant) {
     let orders = ordersData.listOrdersByRestaurant;
-    
+    console.log('🤬', orders);
+
     for (const order of orders) {
-      if (!ordersByParty[order.deliverer.id]) {
-        ordersByParty[order.deliverer.id] = {
+      if (!ordersByParty[order.party.id]) {
+        ordersByParty[order.party.id] = {
           delivererName: order.deliverer.name,
           partyViewed: true,
           orders: [],
         };
       }
-      ordersByParty[order.deliverer.id].orders.push(order);
+      ordersByParty[order.party.id].orders.push(order);
     }
 
     for (const [key, value] of Object.entries(ordersByParty)) {
@@ -120,8 +121,8 @@ function PortalOrders(props) {
           <div className="portal-orders-subcontainer">
             <div className="orders-list">
               <div>
-                {Object.entries(ordersByParty).map(([delivererId, partyOrders]) => 
-                  <PartyContainer key={delivererId} partyOrders={partyOrders} selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder}/>
+                {Object.entries(ordersByParty).map(([party, partyOrders]) => 
+                  <PartyContainer key={party} partyOrders={partyOrders} selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder}/>
                 )}
               </div>
               {/* <div>
@@ -167,9 +168,9 @@ function PortalOrders(props) {
                       <span className="item-name">
                         {item.name}
                       </span>
-                      {item.foodOptions.map(foodOption => {
+                      {item.foodOptions.map(foodOption => (
                         foodOption.options.map(option => <span className="item-option-name">{option.name}</span>)
-                      })}
+                      ))}
                     </div>
                     <span className="item-price">
                       {(item.price / 100).toFixed(2)}

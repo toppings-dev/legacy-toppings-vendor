@@ -29,9 +29,9 @@ function PartyContainer(props) {
     <div className={"party-orders-container"} onClick={handleToggleExpand}>
       <div className='group-name-container'>
         {partyOrders.partyViewed ? (
-          <img src={downArrowBlue} className='down-arrow-button' alt="Click to expand viewed group" width="28px" height="14px" />
+          <img src={downArrowGray} className='down-arrow-button' alt="Click to expand viewed group" width="28px" height="14px" />
         ): (
-          <img src={downArrowGray} className='down-arrow-button' alt="Click to expand unviewed group" width="28px" height="14px" />
+          <img src={downArrowBlue} className='down-arrow-button' alt="Click to expand unviewed group" width="28px" height="14px" />
         )}
         <span className={partyOrders.partyViewed ? 'viewed' : undefined}>{partyOrders.delivererName}'s Group</span>
       </div>
