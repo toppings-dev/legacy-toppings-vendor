@@ -33,82 +33,110 @@ function PortalOrders(props) {
   const deliveredOrderTimeStamp = 0;
   const cancelledOrderTimeStamp = -1;
   const dingTimer = 5000;
-  const orderTimes = [10, 15, 20, 25, 30];
+  const orderTimes = [10, 15, 20, 25, 30, 45, 60, 75];
 
   const audio = new Audio(ding);
   const [loading, setLoading] = useState(false);
   //const [audio] = useState(new Audio(ding));
-  const [selectedOrder, setSelectedOrder] = useState(null); 
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedRun, setSelectedRun] = useState(null);
   const [receivingOrders, setReceivingOrders] = useState(true);
   const [hasNew, setHasNew] = useState(false);
 
   let timerId;
 
-  useInterval(() => {
-    audio.play();
-  }, hasNew ? dingTimer : null);
+  const itemNameWithOptions = item => {
+    let ret = `${item.name}`;
+    if (item.foodOptions) {
+      let allOptions = [];
+      item.foodOptions.map(foodOption => {
+        foodOption.options.map(option => allOptions.push(option.name));
+      });
+      ret += allOptions.sort().join(',');
+    }
+    return ret;
+  };
+  const assembleSelectedRun = party => {
+    let allOrderItems = [];
+    let totalTax = 0;
+    let totalTip = 0;
+    let totalTotal = 0;
+    party.orders.map(order => {
+      order.items.map(item => {
+        let itemIndex = allOrderItems.findIndex(orderItem => itemNameWithOptions(orderItem) === itemNameWithOptions(item));
+        if (itemIndex === -1) {
+          allOrderItems.push(item);
+        } else {
+          allOrderItems[itemIndex].quantity += item.quantity;
+        }
+      });
+      totalTax += order.tax;
+      totalTip += order.tip;
+      totalTotal += order.totalPrice;
+    });
+    setSelectedRun({
+      ...party,
+      orderItems: allOrderItems,
+      totalTax,
+      totalTip,
+      totalTotal,
+    });
+  };
 
-  let { data: ordersData, loading: ordersLoading, error: ordersError } = useQuery(customQueries.LIST_ORDERS_BY_RESTAURANT, {
+  let { data: partiesData, loading: partiesLoading, error: partiesError } = useQuery(customQueries.LIST_PARTIES_BY_RESTAURANT, {
     variables: {
       restaurantId: restaurant?.id,
     },
     skip: !(restaurant?.id),
     pollInterval: 60 * 1000,
   });
-  let [updateOrderETA, { error: updateOrderETAError }] = useMutation(customMutations.UPDATE_ORDER_ETA, {
+  let [updatePartyETA, { error: updatePartyError }] = useMutation(customMutations.UPDATE_PARTY_ETA, {
     onCompleted(data) {
-      // console.log('👾', data.updateOrderETA);
-      // const oldSelectedOrder = JSON.parse(JSON.stringify(selectedOrder));
-      // oldSelectedOrder.party = data.updateOrderETA.party;
-      // oldSelectedOrder.estimatedDeliveryTimeWindow = data.updateOrderETA.estimatedDeliveryTimeWindow;
-      // oldSelectedOrder.restaurantFinishedPreparingTimeWindow = data.updateOrderETA.restaurantFinishedPreparingTimeWindow;
-      // oldSelectedOrder.restaurantFinishedPreparingMinutes = data.updateOrderETA.restaurantFinishedPreparingMinutes;
-      // setSelectedOrder(oldSelectedOrder);
-    }
+      let newParty = JSON.parse(JSON.stringify(data.updatePartyETA));
+      let oldParty = JSON.parse(JSON.stringify(selectedRun));
+      
+      if (selectedRun?.id === newParty.id) {
+        setSelectedRun({
+          ...oldParty,
+          ...newParty,
+        });
+      }
+    },
   });
 
-  let ordersByParty = {};
-  if (ordersData?.listOrdersByRestaurant) {
-    let orders = ordersData.listOrdersByRestaurant;
-    console.log('🤬', orders);
+  const handleUpdatePartyETA = selectedMinutes => {
+    updatePartyETA({ 
+      variables: { partyId: selectedRun.id, partyFinishedPreparingMinutes: selectedMinutes },
+      onQueryUpdated(observableQuery) {
+        console.log(observableQuery);
+      },
+    });
+  };
 
-    for (const order of orders) {
-      if (!ordersByParty[order.party.id]) {
-        ordersByParty[order.party.id] = {
-          delivererName: order.deliverer.name,
-          partyViewed: true,
-          orders: [],
-        };
-      }
-      ordersByParty[order.party.id].orders.push(order);
-    }
+  let parties = [];
+  let hasUnviewed = false;
 
-    for (const [key, value] of Object.entries(ordersByParty)) {
-      console.log(key, value);
-      for (const order of value.orders) {
-        if (!order.restaurantFinishedPreparingTimeWindow) {
-          ordersByParty[key].partyViewed = false;
-          break;
-        }
+  if (partiesData?.listPartiesByRestaurant) {
+    parties = partiesData.listPartiesByRestaurant;
+    console.log(parties);
+
+    hasUnviewed = false;
+
+    for (const party of parties) {
+      if (!party.restaurantFinishedPreparingMinutes) {
+        hasUnviewed = true;
+        break;
       }
     }
-    console.log(ordersByParty);
   }
 
-  useEffect(() => {
-    if (ordersData?.listOrdersByRestaurant) {
-      for (const order of ordersData.listOrdersByRestaurant) {
-        if (order.id === selectedOrder?.id) {
-          setSelectedOrder(order);
-          break;
-        }
-      }
-    }
-  }, [ordersData, selectedOrder]);
+  useInterval(() => {
+    audio.play();
+  }, hasUnviewed ? dingTimer : null);
 
   return (
     <article className="portal-orders-container">
-    {ordersLoading || !ordersByParty ? 
+    {partiesLoading ? 
       <div>
         <header>
           <img className="portal-empty-image" src={loadingBubbleIcon} />
@@ -117,12 +145,20 @@ function PortalOrders(props) {
       </div>  
     :
       <div>
-        {Object.keys(ordersByParty).length > 0 ?
+        {parties.length > 0 ?
           <div className="portal-orders-subcontainer">
             <div className="orders-list">
               <div>
-                {Object.entries(ordersByParty).map(([party, partyOrders]) => 
-                  <PartyContainer key={party} partyOrders={partyOrders} selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder}/>
+                {parties.map((party) => 
+                  <PartyContainer 
+                    key={party.id}
+                    party={party}
+                    selectedOrder={selectedOrder}
+                    setSelectedOrder={setSelectedOrder}
+                    selectedRun={selectedRun}
+                    setSelectedRun={setSelectedRun}
+                    assembleSelectedRun={assembleSelectedRun}
+                  />
                 )}
               </div>
               {/* <div>
@@ -143,13 +179,100 @@ function PortalOrders(props) {
                 </div>
               </div>*/}
             </div>
-            {!selectedOrder ? (
-              <div className='selected-order-container'>
-                <p className='click-order-text'>
-                  Click on an order in a group to view
-                </p>
+            {(!selectedOrder && !selectedRun) && (
+            <div className='selected-order-container'>
+              <p className='click-order-text'>
+                Click on a group to view all orders in the group<br />
+                OR<br />
+                Click on an order in a group to view that order
+              </p>
+            </div>
+            )}
+            {selectedRun && (
+              <div className="selected-order-container">
+                <div className="split-row">
+                  <span className="orderer-name">
+                    {selectedRun.deliverer.name}'s Group
+                  </span>
+                  <span className="order-date">
+                    {dayjs(selectedRun.orders[0].orderSentTime).format('MM/DD/YY hh:mmA')}
+                  </span>
+                </div>
+
+                <hr className="divider" />
+
+                {selectedRun.orderItems.map(item => (
+                  <div className="split-row" key={item.id}>
+                    <div className="item-container">
+                      <span className="item-name">
+                        {item.quantity > 1 && `${item.quantity}x `}
+                        {item.name}
+                      </span>
+                      {item.foodOptions.map(foodOption => (
+                        foodOption.options.map(option => <span className="item-option-name">{option.name}</span>)
+                      ))}
+                    </div>
+                    <span className="item-price">
+                      {(item.quantity * item.price / 100).toFixed(2)}
+                    </span>
+                  </div>
+                ))}
+
+                <div className='split-row'>
+                  <span className='item-name-gray'>
+                    Tax
+                  </span>
+                  <span className='item-price-gray'>
+                    {(selectedRun.totalTax / 100).toFixed(2)}
+                  </span>
+                </div>
+                <div className='split-row'>
+                  <span className='item-name-gray'>
+                    Tip
+                  </span>
+                  <span className='item-price-gray'>
+                    {(selectedRun.totalTip / 100).toFixed(2)}
+                  </span>
+                </div>
+                <div className='split-row'>
+                  <span className='item-name'>
+                    Total
+                  </span>
+                  <span className='item-price'>
+                    ${(selectedRun.totalTotal / 100).toFixed(2)}
+                  </span>
+                </div>
+
+
+                <hr className='divider' />
+                
+                <span className='item-name-left'>
+                  Order Time (min)
+                </span>
+                <span className='item-name-left-small'>
+                  Click a button to select
+                </span>
+
+                {selectedRun.restaurantFinishedPreparingMinutes ? (
+                  <span className='item-name-center-big'>
+                    You have selected {selectedRun.restaurantFinishedPreparingMinutes} minutes.
+                  </span>
+                ) : (
+                  <div className='time-container'>
+                    {orderTimes.map((orderTime, index) =>
+                      <div 
+                        className={index === 0 || index === 7 ? (index === 0 ? 'left' : 'right') : undefined}
+                        onClick={() => handleUpdatePartyETA(orderTime)}>
+                        <span>
+                          {orderTime}
+                        </span>
+                      </div>  
+                    )}
+                  </div>
+                )}
               </div>
-            ) : (
+            )}
+            {selectedOrder && (
               <div className="selected-order-container">
                 <div className="split-row">
                   <span className="orderer-name">
@@ -163,9 +286,10 @@ function PortalOrders(props) {
                 <hr className="divider" />
 
                 {selectedOrder.items.map(item => 
-                  <div className="split-row">
+                  <div className="split-row" key={item.id}>
                     <div className="item-container">
                       <span className="item-name">
+                        {item.quantity > 1 && `${item.quantity}x `}
                         {item.name}
                       </span>
                       {item.foodOptions.map(foodOption => (
@@ -173,7 +297,7 @@ function PortalOrders(props) {
                       ))}
                     </div>
                     <span className="item-price">
-                      {(item.price / 100).toFixed(2)}
+                      {(item.quantity * item.price / 100).toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -201,33 +325,6 @@ function PortalOrders(props) {
                     ${(selectedOrder.totalPrice / 100).toFixed(2)}
                   </span>
                 </div>
-
-                <hr className='divider' />
-                
-                <span className='item-name-left'>
-                  Order Time (min)
-                </span>
-                <span className='item-name-left-small'>
-                  Click a button to select
-                </span>
-
-                {selectedOrder.restaurantFinishedPreparingMinutes ? (
-                  <span className='item-name-center-big'>
-                    You have selected {selectedOrder.restaurantFinishedPreparingMinutes} minutes.
-                  </span>
-                ) : (
-                  <div className='time-container'>
-                    {orderTimes.map((orderTime, index) =>
-                      <div 
-                        className={index === 0 || index === 4 ? (index === 0 ? 'left' : 'right') : undefined}
-                        onClick={() => updateOrderETA({ variables: { partyId: selectedOrder.party.id, orderId: selectedOrder.id, orderFinishedPreparingMinutes: orderTime } })}>
-                        <span>
-                          {orderTime}
-                        </span>
-                      </div>  
-                    )}
-                  </div>
-                )}
               </div>
             )}
           </div>

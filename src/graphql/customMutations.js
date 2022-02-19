@@ -1,5 +1,34 @@
 import { gql } from '@apollo/client';
 
+export const UPDATE_PARTY_ETA = gql`
+  mutation updatePartyETA($partyId: String!, $partyFinishedPreparingMinutes: Int!) {
+    updatePartyETA(partyId: $partyId, partyFinishedPreparingMinutes: $partyFinishedPreparingMinutes) {
+      id
+      estimatedDeliveryTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingMinutes
+      orders {
+        id
+        estimatedDeliveryTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingMinutes
+      }
+    }
+  }
+`;
+
 export const UPDATE_ORDER_ETA = gql`
   mutation UpdateOrderETA($orderId: String!, $partyId: String!, $orderFinishedPreparingMinutes: Int!) {
     updateOrderETA(orderId: $orderId, partyId: $partyId, orderFinishedPreparingMinutes: $orderFinishedPreparingMinutes) {

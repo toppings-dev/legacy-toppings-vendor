@@ -1,6 +1,6 @@
 .click-order-text {
   font-family: 'Raleway';
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 900;
   color: #000000;
 }
@@ -21,7 +21,7 @@
 
 .item-name {
   font-family: 'Cabin';
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 500;
   color: #000000;
 }
@@ -35,28 +35,28 @@
 
 .item-price {
   font-family: 'SourceCodePro';
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 500;
   color: #000000;
 }
 
 .item-name-gray {
   font-family: 'Cabin';
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 500;
   color: #747474;
 }
 
 .item-price-gray {
   font-family: 'SourceCodePro';
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 500;
   color: #747474;
 }
 
 .item-name-left {
   font-family: 'Cabin';
-  font-size: 48px;
+  font-size: 30px;
   font-weight: 500;
   color: #000000;
   align-self: flex-start;
@@ -64,7 +64,7 @@
 
 .item-name-left-small {
   font-family: 'Cabin';
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 500;
   color: #747474;
   align-self: flex-start;
@@ -73,7 +73,7 @@
 
 .item-name-center-big {
   font-family: 'Cabin';
-  font-size: 56px;
+  font-size: 36px;
   font-weight: 700;
   color: #0082FF;
   align-self: center;
@@ -91,7 +91,7 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 80px;
+  height: 60px;
   border-radius: 10px;
   background-color: #0082FF;
   margin: 20px;
@@ -103,7 +103,7 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 80px;
+  height: 60px;
   border-radius: 10px;
   background-color: #0082FF;
   margin: 20px 10px 20px 0px;
@@ -115,7 +115,7 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 80px;
+  height: 60px;
   border-radius: 10px;
   background-color: #0082FF;
   margin: 20px 0px 20px 10px;
@@ -124,7 +124,7 @@
 
 .time-container div span {
   font-family: 'Cabin';
-  font-size: 64px;
+  font-size: 40px;
   font-weight: 700;
   color: #FFFFFF;
 }
@@ -146,7 +146,7 @@
 
 .orderer-name {
   font-family: 'Raleway';
-  font-size: 64px;
+  font-size: 40px;
   font-weight: 900;
   color: #000000;  
 }
@@ -191,14 +191,14 @@
 .party-orders-container span {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   color: #0082FF;
 }
 
 .party-orders-container span.viewed {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   color: #747474;
 }
 
@@ -213,7 +213,7 @@
 .party-orders-list span {
   font-family: 'Raleway';
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   color: #0082FF;
   margin: 8px 0px 8px 0px;
 }
@@ -221,14 +221,14 @@
 .party-orders-list span.selected {
   font-family: 'Raleway';
   font-weight: 900;
-  font-size: 36px;
+  font-size: 30px;
   color: #0082FF;
 }
 
 .party-orders-list span.viewed {
   font-family: 'Raleway';
   font-weight: 500;
-  font-size: 36px;
+  font-size: 30px;
   color: #747474;
 }
 
