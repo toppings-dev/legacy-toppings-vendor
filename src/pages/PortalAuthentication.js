@@ -4,9 +4,11 @@ import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import { setUnverifiedUser, getUnverifiedUser } from '../utils/session';
 import CognitoClient from '../utils/CognitoClient';
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
+import { useMutation } from '@apollo/client';
 import awsConfig from '../utils/awsConfig';
 import * as queries from '../graphql/queries';
 import * as mutations from '../graphql/mutations';
+import * as customQueries from '../graphql/customQueries';
 import * as customMutations from '../graphql/customMutations';
 
 import { getCurrentUser, setCurrentUser, getCurrentPage, setCurrentPage, clearSession, setTokens } from '../utils/session';
@@ -19,6 +21,7 @@ function PortalSignUp(props) {
   const nameInput = useRef();
   const emailInput = useRef();
   const passwordInput = useRef();
+  const restaurantIdInput = useRef();
   const phoneNumberInput = useRef();
   const codeInput = useRef();
 
@@ -28,6 +31,19 @@ function PortalSignUp(props) {
   const [confirmed, setConfirmed] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+
+  let [createRestaurantOwner] = useMutation(customMutations.CREATE_RESTAURANT_OWNER, {
+    update(cache, { data: { createRestaurantOwner } }) {
+      cache.writeQuery({
+        query: customQueries.GET_RESTAURANT_BY_OWNER,
+        data: {
+          getRestaurantByOwner: createRestaurantOwner,
+        },
+      });
+    },
+  });
 
   useEffect(() => {
     props.toggleShowHeader(true);
@@ -81,6 +97,8 @@ function PortalSignUp(props) {
       setSuccessMsg("Account created, please enter the confirmation code.");
       setErrorMsg("");
       setUserName(name);
+      setUserEmail(email);
+      setUserPassword(password);
     } else {
       setErrorMsg("Account info is incomplete.");
     }
@@ -89,13 +107,36 @@ function PortalSignUp(props) {
   async function confirmSignUp(e) {
     e.preventDefault();
     let name = userName;
-    let email = emailInput.current.value;
+    // let email = emailInput.current.value;
     let code = codeInput.current.value;
+    let restaurantId = restaurantIdInput.current.value;
 
     let unverifiedUser = getUnverifiedUser();
 
-    if (email.length > 0 && code.length > 0) {
+    if (code.length > 0) {
       await Cognito.confirmRegistration(unverifiedUser.userSub, code);
+      const user = {
+        username: userEmail,
+        password: userPassword,
+      };
+      const result = await Cognito.authenticateUser(userEmail, userPassword);
+      setTokens(result);
+
+      const currentUser = await Cognito.getCurrentUserAttributes();
+      if (restaurantId) {
+        await createRestaurantOwner({
+          variables: {
+            restaurantId: restaurantId,
+            email: userEmail,
+          },
+        });
+      }
+
+      const userWithSub = {
+        ...user,
+        cognitoId: currentUser[0].Value,
+      };
+      setCurrentUser(userWithSub);
       // await Auth.confirmSignUp(email, code)
         // setSignedUp(true);
       // }).catch((error) => {
@@ -113,8 +154,13 @@ function PortalSignUp(props) {
       // });
       setConfirmed(true);
       setErrorMsg("");
-      setSuccessMsg("Account confirmed, please sign in.");
+      
+      if (getCurrentPage() == null) {
+        setCurrentPage("orders");
+      }
 
+      props.setUser(userWithSub);
+      setLoggedIn(true);
       // const restaurant = {
       //   name: "Your Restaurant Name",
       //   email: email,
@@ -229,7 +275,7 @@ function PortalSignUp(props) {
                   <form onSubmit={signUp}>
                     {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
                     <label htmlFor="name">Name</label><input className="text-input" type="text" ref={nameInput} />
-                    <label htmlFor="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                    <label htmlFor="email">Email Addresss</label><input className="text-input" type="email" ref={emailInput} />
                     <label htmlFor="phone">Phone Number</label><input className="text-input" type="tel" ref={phoneNumberInput} defaultValue="" />
                     <label htmlFor="password">Password</label><input className="text-input" type="password" ref={passwordInput} />
                     <input className="submit-button" type="submit" value="Submit" />
@@ -238,7 +284,7 @@ function PortalSignUp(props) {
                   <form onSubmit={confirmSignUp}>
                     {errorMsg == "" && successMsg != "" ? <span className="login-message success">{successMsg}</span> : ""}
                     {errorMsg != "" ? <span className="login-message">{errorMsg}</span> : ""}
-                    <label htmlFor="email">Email Address</label><input className="text-input" type="email" ref={emailInput} />
+                    <label htmlFor="restaurantId">Restaurant Id</label><input className="text-input" type="text" ref={restaurantIdInput} />
                     <label htmlFor="code">Confirmation Code</label><input className="text-input" type="text" ref={codeInput} />
                     <input className="submit-button" type="submit" value="Submit" />
                   </form>

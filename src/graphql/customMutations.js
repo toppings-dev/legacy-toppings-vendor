@@ -1,5 +1,76 @@
 import { gql } from '@apollo/client';
 
+export const CREATE_RESTAURANT_OWNER = gql`
+  mutation CreateRestaurantOwner($restaurantId: String!, $email: String!) {
+    createRestaurantOwner(restaurantId: $restaurantId, email: $email) {
+      id
+      name
+      description
+      address
+      city
+      state
+      phoneNumber
+      emoji
+      hours {
+        open
+        close
+      }
+      thumbnail
+      averagePickupTime {
+        begin
+        end
+      }
+      menu {
+        name
+        menuItems {
+          id
+          name
+          description
+          price
+          reward {
+            points
+            discount
+            discountText
+          }
+          numOrders
+          image
+          foodOptions {
+            name
+            numChoices
+            options {
+              name
+              price
+              points
+            }
+          }
+          itemChoices {
+            id
+            name
+            description
+            price
+            reward {
+              points
+              discount
+              discountText
+            }
+            numOrders
+            image
+            foodOptions {
+              name
+              numChoices
+              options {
+                name
+                price
+                points
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const UPDATE_PARTY_ETA = gql`
   mutation updatePartyETA($partyId: String!, $partyFinishedPreparingMinutes: Int!) {
     updatePartyETA(partyId: $partyId, partyFinishedPreparingMinutes: $partyFinishedPreparingMinutes) {

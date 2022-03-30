@@ -30,6 +30,7 @@ Amplify.configure(awsConfig);
 function Portal(props) {
   const { Cognito } = props;
 
+  const currentUser = getCurrentUser();
   const [portalSelection, setPortalSelection] = useState(window.location.href.slice(window.location.href.indexOf("/portal/") + "/portal/".length));
   const [loggedIn, setLoggedIn] = useState(getCurrentUser() != null);
   const [sideBar, setSideBar] = useState(false);
@@ -39,12 +40,17 @@ function Portal(props) {
     console.log("U", props.user)
   }, []);
 
-  let { data: vendorData, error: vendorError, loading: vendorLoading } = useQuery(customQueries.GET_RESTAURANT_BY_OWNER);
+  let { data: vendorData, error: vendorError, loading: vendorLoading } = useQuery(customQueries.GET_RESTAURANT_BY_OWNER, {
+    skip: currentUser.username === 'all@gmail.com',
+  });
 
   let restaurant;
 
   if (vendorData?.getRestaurantByOwner) {
     restaurant = vendorData.getRestaurantByOwner;
+  }
+  if (vendorError) {
+    console.log('🚣');
   }
 
   function toggleSideBar() {

@@ -19,13 +19,17 @@ import grayCheckmark from '../assets/images/gray-checkmark.svg';
 import ding from '../assets/audio/ding.mp3';
 import { ConsoleLogger } from '@aws-amplify/core';
 import { useQuery, useMutation } from '@apollo/client';
-
+import { getCurrentUser } from '../utils/session';
 import PartyContainer from '../components/PartyContainer';
 
 dayjs().format();
 
 function PortalOrders(props) {
   const { restaurant } = props;
+  console.log('🤬');
+
+  const currentUser = getCurrentUser();
+  console.log(currentUser);
 
   const newOrderTimeStamp = 30;
   const preparingOrderTimeStamp = 15;
@@ -90,12 +94,21 @@ function PortalOrders(props) {
     skip: !(restaurant?.id),
     pollInterval: 60 * 1000,
   });
+  let { data: allPartiesData, loading: allPartiesLoading, error: allPartiesError } = useQuery(customQueries.LIST_IN_PROGRESS_PARTIES, {
+    skip: currentUser.username !== 'all@gmail.com',
+    pollInterval: 60 * 1000,
+  });
+
   let [updatePartyETA, { error: updatePartyError }] = useMutation(customMutations.UPDATE_PARTY_ETA, {
     onCompleted(data) {
       let newParty = JSON.parse(JSON.stringify(data.updatePartyETA));
       let oldParty = JSON.parse(JSON.stringify(selectedRun));
       
       if (selectedRun?.id === newParty.id) {
+        console.log({
+          ...oldParty,
+          ...newParty,
+        });
         setSelectedRun({
           ...oldParty,
           ...newParty,
@@ -107,17 +120,17 @@ function PortalOrders(props) {
   const handleUpdatePartyETA = selectedMinutes => {
     updatePartyETA({ 
       variables: { partyId: selectedRun.id, partyFinishedPreparingMinutes: selectedMinutes },
-      onQueryUpdated(observableQuery) {
-        console.log(observableQuery);
-      },
     });
   };
 
   let parties = [];
   let hasUnviewed = false;
 
-  if (partiesData?.listPartiesByRestaurant) {
-    parties = partiesData.listPartiesByRestaurant;
+  if (partiesData?.listPartiesByRestaurant || allPartiesData?.listInProgressParties) {
+    parties = partiesData?.listPartiesByRestaurant;
+    if (allPartiesData?.listInProgressParties) {
+      parties = allPartiesData.listInProgressParties;
+    }
     console.log(parties);
 
     hasUnviewed = false;
@@ -158,6 +171,7 @@ function PortalOrders(props) {
                     selectedRun={selectedRun}
                     setSelectedRun={setSelectedRun}
                     assembleSelectedRun={assembleSelectedRun}
+                    isAll={currentUser.username === 'all@gmail.com'}
                   />
                 )}
               </div>
@@ -192,7 +206,7 @@ function PortalOrders(props) {
               <div className="selected-order-container">
                 <div className="split-row">
                   <span className="orderer-name">
-                    {selectedRun.deliverer.name}'s Group
+                    {selectedRun.deliverer.name}'s Group {currentUser.username === 'all@gmail.com' ? `at ${selectedRun.restaurant.name}` : ''}
                   </span>
                   <span className="order-date">
                     {dayjs(selectedRun.orders[0].orderSentTime).format('MM/DD/YY hh:mmA')}
@@ -206,7 +220,7 @@ function PortalOrders(props) {
                     <div className="item-container">
                       <span className="item-name">
                         {item.quantity > 1 && `${item.quantity}x `}
-                        {item.name}
+                        {item.menuItem.name}
                       </span>
                       {item.foodOptions.map(foodOption => (
                         foodOption.options.map(option => <span className="item-option-name">{option.name}</span>)
@@ -262,7 +276,9 @@ function PortalOrders(props) {
                     {orderTimes.map((orderTime, index) =>
                       <div 
                         className={index === 0 || index === 7 ? (index === 0 ? 'left' : 'right') : undefined}
-                        onClick={() => handleUpdatePartyETA(orderTime)}>
+                        onClick={() => handleUpdatePartyETA(orderTime)}
+                        key={orderTime}
+                      >
                         <span>
                           {orderTime}
                         </span>
@@ -276,7 +292,7 @@ function PortalOrders(props) {
               <div className="selected-order-container">
                 <div className="split-row">
                   <span className="orderer-name">
-                    {selectedOrder.customer.name}
+                    {selectedOrder.customer.name}  {currentUser.username === 'all@gmail.com' ? `at ${selectedOrder.restaurant.name}` : ''}
                   </span>
                   <span className="order-date">
                     {dayjs(selectedOrder.orderSentTime).format('MM/DD/YY hh:mmA')}
@@ -290,7 +306,7 @@ function PortalOrders(props) {
                     <div className="item-container">
                       <span className="item-name">
                         {item.quantity > 1 && `${item.quantity}x `}
-                        {item.name}
+                        {item.menuItem.name}
                       </span>
                       {item.foodOptions.map(foodOption => (
                         foodOption.options.map(option => <span className="item-option-name">{option.name}</span>)

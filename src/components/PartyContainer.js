@@ -7,7 +7,7 @@ import downArrowGray from '../assets/images/down-arrow-gray.png';
 dayjs().format();
 
 function PartyContainer(props) {
-  const { party, selectedOrder, setSelectedOrder, selectedRun, setSelectedRun, assembleSelectedRun } = props;
+  const { party, selectedOrder, setSelectedOrder, selectedRun, setSelectedRun, assembleSelectedRun, isAll } = props;
 
   let partyViewed = party.restaurantFinishedPreparingMinutes ? true : false;
 
@@ -41,7 +41,7 @@ function PartyContainer(props) {
           className={partyViewed ? 'viewed' : undefined}
           style={selectedRun?.id === party.id ? { fontWeight: 900 } : { fontWeight: 500 }}
         >
-          {party.deliverer.name}'s Group
+          {party.deliverer.name}'s Group {isAll ? `at ${party.restaurant.name}` : ''}
         </span>
       </div>
       {expanded &&

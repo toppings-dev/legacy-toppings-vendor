@@ -1,5 +1,142 @@
 import { gql } from '@apollo/client';
 
+export const LIST_IN_PROGRESS_PARTIES = gql`
+  query ListInProgressParties {
+    listInProgressParties {
+      id
+      windowOpenTime
+      windowCloseTime
+      dropoffLocations
+      isPublic
+      usersOpenTo {
+        id
+        name
+        pfp
+        username
+        phoneNumber
+      }
+      groupsOpenTo {
+        id
+        name
+        image
+      }
+      isClaimed
+      deliverer {
+        id
+        name
+        pfp
+        username
+        phoneNumber
+      }
+      status
+      estimatedDeliveryTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingTimeWindow {
+        begin
+        end
+      }
+      restaurantFinishedPreparingMinutes
+      maxOrders
+      totalCost
+      orders {
+        id
+        customer {
+          id
+          name
+          pfp
+          phoneNumber
+          username
+        }
+        deliverer {
+          id
+          name
+          pfp
+          phoneNumber
+          username
+        }
+        items {
+          id
+          menuItem {
+            id
+            name
+            description
+            price
+            reward {
+              points
+              discount
+              discountText
+            }
+            numOrders
+            image
+            foodOptions {
+              name
+              numChoices
+              options {
+                name
+                price
+                points
+              }
+            }
+          }
+          discount
+          price
+          points
+          comment
+          quantity
+          foodOptions {
+            name
+            options {
+              name
+              price
+              points
+            }
+          }
+        }
+        restaurant {
+          id
+          name
+          thumbnail
+          averagePickupTime {
+            begin
+            end
+          }
+        }
+        estimatedDeliveryTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingTimeWindow {
+          begin
+          end
+        }
+        restaurantFinishedPreparingMinutes
+        priceBeforeDiscount
+        priceAfterDiscount
+        discount
+        tax
+        tip
+        totalPrice
+        isPaid
+        status
+        comment
+        orderSentTime
+        dropoffLocation
+      }
+      restaurant {
+        id
+        name
+        thumbnail
+        averagePickupTime {
+          begin
+          end
+        }
+      }
+    }
+  }
+`;
+
 export const LIST_PARTIES_BY_RESTAURANT = gql`
   query ListPartiesByRestaurant($restaurantId: String!) {
     listPartiesByRestaurant(restaurantId: $restaurantId) {
@@ -58,20 +195,39 @@ export const LIST_PARTIES_BY_RESTAURANT = gql`
         }
         items {
           id
-          menuItemId
-          name
-          priceBeforeDiscount
+          menuItem {
+            id
+            name
+            description
+            price
+            reward {
+              points
+              discount
+              discountText
+            }
+            numOrders
+            image
+            foodOptions {
+              name
+              numChoices
+              options {
+                name
+                price
+                points
+              }
+            }
+          }
+          discount
           price
           points
-          boughtWithPoints
-          isReward
-          description
           comment
           quantity
           foodOptions {
             name
             options {
               name
+              price
+              points
             }
           }
         }
@@ -134,10 +290,15 @@ export const LIST_ORDERS_BY_RESTAURANT = gql`
         }
       }
       items {
+        id
+        menuItemId
         name
+        priceBeforeDiscount
+        discount
         price
         points
         boughtWithPoints
+        pointsSpent
         isReward
         description
         comment
@@ -146,6 +307,8 @@ export const LIST_ORDERS_BY_RESTAURANT = gql`
           name
           options {
             name
+            price
+            points
           }
         }
       }
@@ -206,13 +369,22 @@ export const GET_RESTAURANT_BY_OWNER = gql`
         close
       }
       thumbnail
+      averagePickupTime {
+        begin
+        end
+      }
       menu {
         name
         menuItems {
+          id
           name
           description
           price
-          points
+          reward {
+            points
+            discount
+            discountText
+          }
           numOrders
           image
           foodOptions {
@@ -224,21 +396,27 @@ export const GET_RESTAURANT_BY_OWNER = gql`
               points
             }
           }
-        }
-      }
-      rewardItems {
-        name
-        description
-        price
-        points
-        numOrders
-        foodOptions {
-          name
-          numChoices
-          options {
+          itemChoices {
+            id
             name
+            description
             price
-            points
+            reward {
+              points
+              discount
+              discountText
+            }
+            numOrders
+            image
+            foodOptions {
+              name
+              numChoices
+              options {
+                name
+                price
+                points
+              }
+            }
           }
         }
       }
