@@ -134,6 +134,11 @@
   flex-direction: column;
   padding: 40px;
   background-color: #FFFFFF;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 25vw;
 }
 
 .split-row {
@@ -162,7 +167,8 @@
   height: 100vh;
   margin: 0rem -4rem;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  /* grid-template-columns: 1fr 3fr; */
+  width: 25vw;
 } 
 
 .orders-list {

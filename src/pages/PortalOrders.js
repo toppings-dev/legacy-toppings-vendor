@@ -50,8 +50,8 @@ function PortalOrders(props) {
   let timerId;
 
   const itemNameWithOptions = item => {
-    let ret = `${item.name}`;
-    if (item.foodOptions) {
+    let ret = `${item.menuItem.name}`;
+    if (item.foodOptions?.length > 0) {
       let allOptions = [];
       item.foodOptions.map(foodOption => {
         foodOption.options.map(option => allOptions.push(option.name));
@@ -67,9 +67,11 @@ function PortalOrders(props) {
     let totalTotal = 0;
     party.orders.map(order => {
       order.items.map(item => {
-        let itemIndex = allOrderItems.findIndex(orderItem => itemNameWithOptions(orderItem) === itemNameWithOptions(item));
+        let itemIndex = allOrderItems.findIndex(orderItem => {
+          return itemNameWithOptions(orderItem) === itemNameWithOptions(item)
+        });
         if (itemIndex === -1) {
-          allOrderItems.push(item);
+          allOrderItems.push(JSON.parse(JSON.stringify(item)));
         } else {
           allOrderItems[itemIndex].quantity += item.quantity;
         }
@@ -127,11 +129,11 @@ function PortalOrders(props) {
   let hasUnviewed = false;
 
   if (partiesData?.listPartiesByRestaurant || allPartiesData?.listInProgressParties) {
-    parties = partiesData?.listPartiesByRestaurant;
+    let rawParties = partiesData?.listPartiesByRestaurant;
     if (allPartiesData?.listInProgressParties) {
-      parties = allPartiesData.listInProgressParties;
+      rawParties = allPartiesData.listInProgressParties;
     }
-    console.log(parties);
+    parties = JSON.parse(JSON.stringify(rawParties));
 
     hasUnviewed = false;
 
@@ -141,6 +143,16 @@ function PortalOrders(props) {
         break;
       }
     }
+
+    parties = parties.sort((a, b) => {
+      if (a.restaurantFinishedPreparingMinutes && !b.restaurantFinishedPreparingMinutes) {
+        return 1;
+      } else if (!a.restaurantFinishedPreparingMinutes && b.restaurantFinishedPreparingMinutes) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
   }
 
   useInterval(() => {
