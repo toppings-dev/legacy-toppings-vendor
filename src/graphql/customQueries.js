@@ -6,7 +6,7 @@ export const LIST_IN_PROGRESS_PARTIES = gql`
       id
       windowOpenTime
       windowCloseTime
-      dropoffLocations
+      dropoffLocation
       isPublic
       usersOpenTo {
         id
@@ -27,6 +27,9 @@ export const LIST_IN_PROGRESS_PARTIES = gql`
         pfp
         username
         phoneNumber
+        school {
+          name
+        }
       }
       status
       estimatedDeliveryTimeWindow {
