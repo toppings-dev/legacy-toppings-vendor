@@ -21,13 +21,14 @@ import { ConsoleLogger } from '@aws-amplify/core';
 import { useQuery, useMutation } from '@apollo/client';
 import { getCurrentUser } from '../utils/session';
 import PartyContainer from '../components/PartyContainer';
+import axios from 'axios';
+import { API_URL } from '../env';
 
 dayjs().format();
 
 function PortalOrders(props) {
   const { restaurant } = props;
-  console.log('🤬');
-
+  const [manualOrderUrl, setManualOrdeUrl]  = useState('');
   const currentUser = getCurrentUser();
   console.log(currentUser);
 
@@ -44,6 +45,21 @@ function PortalOrders(props) {
   //const [audio] = useState(new Audio(ding));
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [selectedRun, setSelectedRun] = useState(null);
+
+  useEffect(()=> {
+    async function makeRequest() {
+      const config = {
+          method: 'get',
+          url: API_URL + 'get-restaurant-order-url?restaurantId=' + selectedRun?.restaurant?.id
+      }
+  
+      let res = await axios(config)
+      setManualOrdeUrl(res.data.manualOrderUrl)
+    }
+  
+    makeRequest();
+  }, [selectedRun]);
+
   const [receivingOrders, setReceivingOrders] = useState(true);
   const [hasNew, setHasNew] = useState(false);
 
@@ -219,12 +235,16 @@ function PortalOrders(props) {
                 <div className="split-row">
                   <span className="orderer-name">
                     {selectedRun.deliverer.name}'s Group {currentUser.username === 'all@gmail.com' ? `at ${selectedRun.restaurant.name}` : ''}
+                  <div className="order-date">
+                    {selectedRun.deliverer.school.name ? `School: ${selectedRun.deliverer.school.name}` : ''}
+                  </div>
                   </span>
                   <span className="order-date">
                     {dayjs(selectedRun.orders[0].orderSentTime).format('MM/DD/YY hh:mmA')}
                   </span>
                 </div>
-
+                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                <a href={manualOrderUrl} target="_blank" style={{color:"#000"}}>{manualOrderUrl ? 'Click here to manually start an order' : 'No manual order link found'}</a>
                 <hr className="divider" />
 
                 {selectedRun.orderItems.map(item => (
